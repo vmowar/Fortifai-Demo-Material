@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>fortifai · Confidential Partner Briefing Portal (KPMG)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D1520;
+    --navy-card: #131F30;
+    --blue: #2E5A8A;
+    --blue-light: #3B82F6;
+    --ink: #1E293B;
+    --muted: #64748B;
+    --border: #CBD5E1;
+    --bg: #F8FAFC;
+    --white: #FFFFFF;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  body {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--navy);
+    color: var(--white);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Block printing / Save-as-PDF of the portal */
+  @media print {
+    body { display: none !important; }
+  }
+
+  /* Top Header */
+  .topbar {
+    background: rgba(13, 21, 32, 0.95);
+    border-bottom: 1px solid rgba(147, 197, 253, 0.18);
+    padding: 14px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .wordmark {
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--white);
+  }
+  .badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #93C5FD;
+    background: rgba(46, 90, 138, 0.35);
+    border: 1px solid rgba(147, 197, 253, 0.3);
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+  .viewer-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: #94A3B8;
+  }
+
+  /* Gate Modal Screen */
+  #gate-screen {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+  }
+  .gate-card {
+    max-width: 540px;
+    width: 100%;
+    background: var(--navy-card);
+    border: 1px solid rgba(147, 197, 253, 0.25);
+    border-top: 3px solid var(--blue-light);
+    border-radius: 8px;
+    padding: 32px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  }
+  .gate-card h1 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--white);
+  }
+  .gate-card p.sub {
+    font-size: 13px;
+    color: #CBD5E1;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  .form-group {
+    margin-bottom: 16px;
+  }
+  .form-group label {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #93C5FD;
+    margin-bottom: 6px;
+  }
+  .form-group input {
+    width: 100%;
+    padding: 10px 12px;
+    background: #090F17;
+    border: 1px solid #334155;
+    border-radius: 5px;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13.5px;
+    user-select: text;
+    -webkit-user-select: text;
+  }
+  .form-group input:focus {
+    outline: none;
+    border-color: var(--blue-light);
+  }
+
+  /* Terms Box */
+  .terms-box {
+    background: #090F17;
+    border: 1px solid #1E293B;
+    border-radius: 5px;
+    padding: 12px 14px;
+    height: 135px;
+    overflow-y: auto;
+    font-size: 11.5px;
+    line-height: 1.55;
+    color: #94A3B8;
+    margin-bottom: 14px;
+  }
+  .terms-box strong { color: #E2E8F0; }
+
+  .checkbox-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 12.5px;
+    color: #E2E8F0;
+    line-height: 1.45;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+  .checkbox-row input {
+    margin-top: 3px;
+    cursor: pointer;
+  }
+
+  .btn-unlock {
+    width: 100%;
+    padding: 12px;
+    background: var(--blue-light);
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .btn-unlock:hover {
+    background: #2563EB;
+  }
+  .error-msg {
+    color: #F87171;
+    font-size: 12px;
+    margin-top: 10px;
+    display: none;
+  }
+
+  /* Main Data Room Content (Hidden until unlocked) */
+  #portal-content {
+    display: none;
+    flex: 1;
+    flex-direction: column;
+    max-width: 1160px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 24px 32px 48px;
+  }
+
+  .nav-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #1E293B;
+    padding-bottom: 12px;
+  }
+  .tab-btn {
+    background: #131F30;
+    color: #94A3B8;
+    border: 1px solid #334155;
+    padding: 9px 18px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .tab-btn.active {
+    background: var(--blue);
+    color: var(--white);
+    border-color: #60A5FA;
+  }
+
+  /* Viewer Frame with Dynamic Watermark */
+  .viewer-container {
+    position: relative;
+    background: #090F17;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    overflow: hidden;
+    min-height: 620px;
+  }
+  .watermark-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 50;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    opacity: 0.14;
+    overflow: hidden;
+  }
+  .wm-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: #FFFFFF;
+    transform: rotate(-24deg);
+    padding: 60px;
+    white-space: nowrap;
+  }
+
+  video, iframe {
+    width: 100%;
+    height: 640px;
+    border: none;
+    display: block;
+  }
+</style>
+</head>
+<body oncontextmenu="return false;">
+
+<!-- Top Bar -->
+<header class="topbar">
+  <div class="brand">
+    <span class="wordmark">fortifai</span>
+    <span class="badge">Confidential Partner Data Room</span>
+  </div>
+  <div class="viewer-tag" id="session-badge">Status: Awaiting Verification</div>
+</header>
+
+<!-- STEP 1: Clickwrap Confidentiality & Terms Gate -->
+<main id="gate-screen">
+  <div class="gate-card">
+    <h1>KPMG Executive Briefing Portal</h1>
+    <p class="sub">Access to the Fortifai SARA Platform Walkthrough and Multi-Agent Architecture Brief is restricted to authorized recipients under the Confidentiality &amp; Evaluation Terms below.</p>
+
+    <form id="gate-form" onsubmit="unlockPortal(event)">
+      <div class="form-group">
+        <label>Full Name &amp; Title</label>
+        <input type="text" id="viewer-name" placeholder="e.g., Partner, Forensic / Risk Advisory" required />
+      </div>
+
+      <div class="form-group">
+        <label>Official Work Email (@kpmg.com)</label>
+        <input type="email" id="viewer-email" placeholder="name@kpmg.com" required />
+      </div>
+
+      <div class="form-group">
+        <label>Partner Access Code</label>
+        <input type="password" id="access-code" placeholder="Enter access code provided in email" required />
+      </div>
+
+      <div class="terms-box">
+        <strong>CONFIDENTIALITY, PROPRIETARY IP &amp; NON-REPLICATION TERMS</strong><br><br>
+        1. <strong>Proprietary Material:</strong> All platform demonstrations, multi-agent architectures (including SARA, Kuber, Veritas, Aegis, Crystal, Surge, Conduit, Vigil, and D7), 4-Rung Precedence Waterfall methodologies, and brochures contained in this portal are the confidential and proprietary intellectual property of Fortifai Inc.<br><br>
+        2. <strong>Permitted Use:</strong> Access is granted solely to the named recipient at KPMG for evaluating a potential strategic, co-sourcing, or client-delivery partnership with Fortifai Inc.<br><br>
+        3. <strong>Strict Non-Distribution &amp; Non-Replication:</strong> Recipient agrees not to download, screen-record, capture, forward, distribute, or share these materials outside the authorized evaluation team, nor use any UI workflows, rule taxonomies, or architectural designs for internal software development, benchmarking, or competitive replication.<br><br>
+        4. <strong>Session Audit Log:</strong> Access to this portal is dynamically watermarked and logged with the viewer's identity, email address, and timestamp.
+      </div>
+
+      <label class="checkbox-row">
+        <input type="checkbox" id="accept-terms" required />
+        <span>I confirm that I am an authorized representative and agree to the Confidentiality, Non-Distribution &amp; Non-Replication Terms above.</span>
+      </label>
+
+      <button type="submit" class="btn-unlock">Accept Terms &amp; View Briefing</button>
+      <div class="error-msg" id="error-msg">Please enter a valid @kpmg.com email address and the correct access code.</div>
+    </form>
+  </div>
+</main>
+
+<!-- STEP 2: Unlocked Portal Content -->
+<section id="portal-content">
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('video', this)">1. Platform Walkthrough Video (4:42)</button>
+    <button class="tab-btn" onclick="switchTab('brochure-cfo', this)">2. CFO &amp; Control Tower Brief</button>
+    <button class="tab-btn" onclick="switchTab('brochure-cco', this)">3. CCO &amp; General Counsel Brief</button>
+  </div>
+
+  <div class="viewer-container">
+    <!-- Dynamic Watermark Layer -->
+    <div class="watermark-overlay" id="watermark-layer"></div>
+
+        <!-- Tab 1: Video Player (Download & PIP Disabled) -->
+    <div id="tab-video">
+      <iframe id="video-frame" src="" data-src="https://drive.google.com/file/d/1rV9ob1Gl9o_KoVVspGfbnwQvJqVWpSxZgmb4V3jXP6s/preview"></iframe>
+    </div>
+   
+        <div id="tab-brochure-cfo" style="display:none;">
+      <iframe src="./brochure-cfo.html"></iframe>
+    </div>
+
+    <!-- Tab 3: CCO/GC Brochure Embed -->
+    <div id="tab-brochure-cco" style="display:none;">
+      <iframe src="./brochure-cco-gc.html"></iframe>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Configure your Access Code & Optional Webhook URL (e.g. Formspree / Make.com)
+  const ACCESS_CODE = "KPMG2026";
+  const LOG_WEBHOOK_URL = ""; // Optional: Paste a Formspree/Make webhook URL here to get instant email alerts
+
+  function unlockPortal(e) {
+    e.preventDefault();
+    const name = document.getElementById('viewer-name').value.trim();
+    const email = document.getElementById('viewer-email').value.trim().toLowerCase();
+    const code = document.getElementById('access-code').value.trim();
+    const err = document.getElementById('error-msg');
+
+    // Allow @kpmg.com or @fortifai.io (for your own testing)
+    const validDomain = email.endsWith('@kpmg.com') || email.endsWith('@fortifai.io');
+
+    if (!validDomain || code !== ACCESS_CODE) {
+      err.style.display = 'block';
+      return;
+    }
+
+    err.style.display = 'none';
+    const timestamp = new Date().toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+
+    // 1. Update Header Session Badge
+    document.getElementById('session-badge').textContent = `Licensed Session: ${email} · ${timestamp}`;
+
+    // 2. Populate Dynamic Watermarks across the Video & Brochures
+    const wmLayer = document.getElementById('watermark-layer');
+    wmLayer.innerHTML = '';
+    for (let i = 0; i < 12; i++) {
+      const span = document.createElement('div');
+      span.className = 'wm-text';
+      span.textContent = `CONFIDENTIAL · ${email} · ${timestamp}`;
+      wmLayer.appendChild(span);
+    }
+
+    // 3. Optional: Send instant access log notification to your inbox
+    if (LOG_WEBHOOK_URL) {
+      fetch(LOG_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, timestamp, termsAccepted: true })
+      }).catch(() => {});
+    }
+
+    // 4. Reveal Data Room & Load Video Only After Login
+    document.getElementById('gate-screen').style.display = 'none';
+    document.getElementById('portal-content').style.display = 'flex';
+    const vf = document.getElementById('video-frame');
+    if (vf && !vf.getAttribute('src')) vf.src = vf.getAttribute('data-src');
+  }
+
+  function switchTab(tabId, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const videoEl = document.getElementById('demo-video');
+    if (tabId !== 'video' && videoEl) videoEl.pause();
+
+    document.getElementById('tab-video').style.display = tabId === 'video' ? 'block' : 'none';
+    document.getElementById('tab-brochure-cfo').style.display = tabId === 'brochure-cfo' ? 'block' : 'none';
+    document.getElementById('tab-brochure-cco').style.display = tabId === 'brochure-cco' ? 'block' : 'none';
+  }
+
+  // Block keyboard shortcuts for Save (Cmd+S), Print (Cmd+P), and View Source (Cmd+U)
+  document.addEventListener('keydown', function(e) {
+    if ((e.metaKey || e.ctrlKey) && ['s', 'p', 'u'].includes(e.key.toLowerCase())) {
+      e.preventDefault();
+    }
+  });
+</script>
+
+</body>
+</html>
