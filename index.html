@@ -330,26 +330,26 @@
     <!-- Dynamic Watermark Layer -->
     <div class="watermark-overlay" id="watermark-layer"></div>
 
-    <!-- Tab 1: Video Player (Download & PIP Disabled) -->
-    <div id="tab-video">
-      <iframe id="video-frame" src="" data-src="https://drive.google.com/file/d/1rV9ob1Gl9o_KoVVspGfbnwQvJqVWpSxZgmb4V3jXP6s/preview"></iframe>
+    <!-- Tab 1: Video Player -->
+    <div id="tab-video" style="display:block;">
+      <iframe id="video-frame" src="" data-src="https://drive.google.com/file/d/1rV9ob1Gl9o_KoVVspGfbnwQvJqVWpSxZgmb4V3jXP6s/preview" allow="autoplay"></iframe>
     </div>
 
     <!-- Tab 2: Platform Overview Brochure -->
     <div id="tab-overview" style="display:none;">
-      <iframe src="./Fortifai-brochure-v4.html"></iframe>
+      <iframe src="Fortifai-brochure-v4.html" style="background:#FFFFFF;"></iframe>
     </div>
 
     <!-- Tab 3: Multi-Agent Architecture -->
     <div id="tab-architecture" style="display:none;">
-      <iframe src="./fortifai-architecture-v3.html"></iframe>
+      <iframe src="fortifai-architecture-v3.html" style="background:#FFFFFF;"></iframe>
     </div>
   </div>
 </section>
+
 <script>
-  // Configure your Access Code & Optional Webhook URL (e.g. Formspree / Make.com)
   const ACCESS_CODE = "KPMG2026";
-  const LOG_WEBHOOK_URL = ""; // Optional: Paste a Formspree/Make webhook URL here to get instant email alerts
+  const LOG_WEBHOOK_URL = "";
 
   function unlockPortal(e) {
     e.preventDefault();
@@ -358,7 +358,6 @@
     const code = document.getElementById('access-code').value.trim();
     const err = document.getElementById('error-msg');
 
-    // Allow @kpmg.com or @fortifai.io (for your own testing)
     const validDomain = email.endsWith('@kpmg.com') || email.endsWith('@fortifai.io');
 
     if (!validDomain || code !== ACCESS_CODE) {
@@ -369,10 +368,8 @@
     err.style.display = 'none';
     const timestamp = new Date().toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
 
-    // 1. Update Header Session Badge
     document.getElementById('session-badge').textContent = `Licensed Session: ${email} · ${timestamp}`;
 
-    // 2. Populate Dynamic Watermarks across the Video & Brochures
     const wmLayer = document.getElementById('watermark-layer');
     wmLayer.innerHTML = '';
     for (let i = 0; i < 12; i++) {
@@ -382,7 +379,6 @@
       wmLayer.appendChild(span);
     }
 
-    // 3. Optional: Send instant access log notification to your inbox
     if (LOG_WEBHOOK_URL) {
       fetch(LOG_WEBHOOK_URL, {
         method: 'POST',
@@ -391,7 +387,6 @@
       }).catch(() => {});
     }
 
-    // 4. Reveal Data Room & Load Video Only After Login
     document.getElementById('gate-screen').style.display = 'none';
     document.getElementById('portal-content').style.display = 'flex';
     const vf = document.getElementById('video-frame');
@@ -402,15 +397,11 @@
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
-    const videoEl = document.getElementById('demo-video');
-    if (tabId !== 'video' && videoEl) videoEl.pause();
-
-    document.getElementById('tab-video').style.display = tabId === 'video' ? 'block' : 'none';
-    document.getElementById('tab-brochure-cfo').style.display = tabId === 'brochure-cfo' ? 'block' : 'none';
-    document.getElementById('tab-brochure-cco').style.display = tabId === 'brochure-cco' ? 'block' : 'none';
+    document.getElementById('tab-video').style.display = (tabId === 'video') ? 'block' : 'none';
+    document.getElementById('tab-overview').style.display = (tabId === 'overview') ? 'block' : 'none';
+    document.getElementById('tab-architecture').style.display = (tabId === 'architecture') ? 'block' : 'none';
   }
 
-  // Block keyboard shortcuts for Save (Cmd+S), Print (Cmd+P), and View Source (Cmd+U)
   document.addEventListener('keydown', function(e) {
     if ((e.metaKey || e.ctrlKey) && ['s', 'p', 'u'].includes(e.key.toLowerCase())) {
       e.preventDefault();
