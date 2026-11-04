@@ -349,7 +349,7 @@
 
 <script>
   const ACCESS_CODE = "KPMG2026";
-  const LOG_WEBHOOK_URL = "";
+  const LOG_WEBHOOK_URL = "https://formspree.io/f/myeeodjv";
 
   function unlockPortal(e) {
     e.preventDefault();
@@ -379,14 +379,20 @@
       wmLayer.appendChild(span);
     }
 
-    if (LOG_WEBHOOK_URL) {
-      fetch(LOG_WEBHOOK_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, timestamp, termsAccepted: true })
-      }).catch(() => {});
-    }
-
+   if (LOG_WEBHOOK_URL) {
+   fetch(LOG_WEBHOOK_URL, {
+     method: 'POST',
+     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+     body: JSON.stringify({
+       event: "KPMG_PORTAL_LOGIN",
+       name,
+       email,
+       timestamp,
+       termsAccepted: true,
+       userAgent: navigator.userAgent
+     })
+   }).catch(() => {});
+ }
     document.getElementById('gate-screen').style.display = 'none';
     document.getElementById('portal-content').style.display = 'flex';
     const vf = document.getElementById('video-frame');
