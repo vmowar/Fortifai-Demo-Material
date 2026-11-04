@@ -455,35 +455,10 @@
   }
   .footer .certs { display: flex; gap: 10px; }
 
-  @media print {
-    body { background: var(--white); padding: 0; margin: 0; }
-    .print-dock { display: none !important; }
-    .page {
-      width: 100%;
-      height: auto;
-      margin: 0;
-      box-shadow: none;
-      border-radius: 0;
-      page-break-after: always;
-      break-after: page;
-      page-break-inside: avoid;
-      break-inside: avoid;
-    }
-    .page:last-child {
-      page-break-after: auto;
-      break-after: auto;
-    }
-  }
-  @page { size: A4 portrait; margin: 8mm; }
+  @media print { body { display: none !important; } }
 </style>
 </head>
 <body>
-
-<div class="print-dock">
-  <span>Check "Background graphics" in Print Dialog</span>
-  <button class="print-btn" onclick="window.print()">Save as PDF</button>
-</div>
-
 <!-- =====================================================================
      PAGE 1 - THE BUSINESS PROBLEM, SOLUTION & EXECUTIVE CONTROL TOWER
      ===================================================================== -->
