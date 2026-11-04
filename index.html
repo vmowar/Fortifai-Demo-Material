@@ -321,31 +321,31 @@
 <!-- STEP 2: Unlocked Portal Content -->
 <section id="portal-content">
   <div class="nav-tabs">
-    <button class="tab-btn active" onclick="switchTab('video', this)">1. Platform Walkthrough Video (4:42)</button>
-    <button class="tab-btn" onclick="switchTab('brochure-cfo', this)">2. Fortifai Platform Solution Overview</button>
-    <button class="tab-btn" onclick="switchTab('brochure-cco', this)">3. Fortifai Platform Aerchitecture</button>
+    <button class="tab-btn active" onclick="switchTab('video', this)">1. Platform Walkthrough Video</button>
+    <button class="tab-btn" onclick="switchTab('overview', this)">2. Platform Overview Brochure</button>
+    <button class="tab-btn" onclick="switchTab('architecture', this)">3. Multi-Agent Architecture</button>
   </div>
 
   <div class="viewer-container">
     <!-- Dynamic Watermark Layer -->
     <div class="watermark-overlay" id="watermark-layer"></div>
 
-        <!-- Tab 1: Video Player (Download & PIP Disabled) -->
+    <!-- Tab 1: Video Player (Download & PIP Disabled) -->
     <div id="tab-video">
       <iframe id="video-frame" src="" data-src="https://drive.google.com/file/d/1rV9ob1Gl9o_KoVVspGfbnwQvJqVWpSxZgmb4V3jXP6s/preview"></iframe>
     </div>
-   
-        <div id="tab-brochure-cfo" style="display:none;">
-      <iframe src="./brochure-cfo.html"></iframe>
+
+    <!-- Tab 2: Platform Overview Brochure -->
+    <div id="tab-overview" style="display:none;">
+      <iframe src="./Fortifai-brochure-v4.html"></iframe>
     </div>
 
-    <!-- Tab 3: CCO/GC Brochure Embed -->
-    <div id="tab-brochure-cco" style="display:none;">
-      <iframe src="./brochure-cco-gc.html"></iframe>
+    <!-- Tab 3: Multi-Agent Architecture -->
+    <div id="tab-architecture" style="display:none;">
+      <iframe src="./fortifai-architecture-v3.html"></iframe>
     </div>
   </div>
 </section>
-
 <script>
   // Configure your Access Code & Optional Webhook URL (e.g. Formspree / Make.com)
   const ACCESS_CODE = "KPMG2026";
