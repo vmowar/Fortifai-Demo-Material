@@ -10,7 +10,6 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* Official Fortifai Design System v2.0 Tokens */
     --nav: #0D1520;
     --navy-card: #111C2B;
     --brand-blue: #6699CC;
@@ -45,12 +44,10 @@
     font-variant-numeric: tabular-nums;
   }
 
-  /* Block printing / Save-as-PDF of the portal */
   @media print {
     body { display: none !important; }
   }
 
-  /* Top Header — Official #0D1520 (--nav) */
   .topbar {
     background: var(--nav);
     border-bottom: 1px solid rgba(102, 153, 204, 0.22);
@@ -105,7 +102,6 @@
     font-variant-numeric: tabular-nums;
   }
 
-  /* Gate Modal Screen — Sized to fit 100% in viewport without scrolling */
   #gate-screen {
     flex: 1;
     display: flex;
@@ -164,7 +160,6 @@
     border-color: var(--brand-blue);
   }
 
-  /* Terms Box */
   .terms-box {
     background: var(--nav);
     border: 1px solid #1E2D40;
@@ -224,7 +219,6 @@
     display: none;
   }
 
-  /* Main Data Room Content (Hidden until unlocked) */
   #portal-content {
     display: none;
     flex: 1;
@@ -259,7 +253,6 @@
     font-weight: 600;
   }
 
-  /* Viewer Frame with Dynamic Watermark */
   .viewer-container {
     position: relative;
     background: var(--nav);
@@ -299,7 +292,6 @@
 </head>
 <body oncontextmenu="return false;">
 
-<!-- Top Bar with Official Fortifai Trapezoid Mark + Wordmark -->
 <header class="topbar">
   <div class="brand">
     <span class="logo-lockup">
@@ -311,7 +303,6 @@
   <div class="viewer-tag" id="session-badge">Status: Awaiting Verification</div>
 </header>
 
-<!-- STEP 1: Clickwrap Confidentiality & Terms Gate -->
 <main id="gate-screen">
   <div class="gate-card">
     <h1>Partner Briefing Portal</h1>
@@ -324,4 +315,126 @@
       </div>
 
       <div class="form-group">
-        <label>Official Work Email </
+        <label>Official Work Email</label>
+        <input type="email" id="viewer-email" placeholder="name@company.com" required />
+      </div>
+
+      <div class="form-group">
+        <label>Partner Access Code</label>
+        <input type="password" id="access-code" placeholder="Enter access code provided in email" required />
+      </div>
+
+      <div class="terms-box">
+        <strong>CONFIDENTIALITY, PROPRIETARY IP &amp; NON-REPLICATION TERMS</strong><br><br>
+        1. <strong>Proprietary Material:</strong> All platform demonstrations, multi-agent architectures (including SARA, Kuber, Veritas, Aegis, Crystal, Surge, Conduit, Vigil, and D7), 4-Rung Precedence Waterfall methodologies, and brochures contained in this portal are the confidential and proprietary intellectual property of Fortifai Inc.<br><br>
+        2. <strong>Permitted Use:</strong> Access is granted solely to the named recipient for evaluating a potential strategic, co-sourcing, or client-delivery partnership with Fortifai Inc.<br><br>
+        3. <strong>Strict Non-Distribution &amp; Non-Replication:</strong> Recipient agrees not to download, screen-record, capture, forward, distribute, or share these materials outside the authorized evaluation team, nor use any UI workflows, rule taxonomies, or architectural designs for internal software development, benchmarking, or competitive replication.<br><br>
+        4. <strong>Session Audit Log:</strong> Access to this portal is dynamically watermarked and logged with the viewer's identity, email address, and timestamp.
+      </div>
+
+      <label class="checkbox-row">
+        <input type="checkbox" id="accept-terms" required />
+        <span>I confirm that I am an authorized representative and agree to the Confidentiality, Non-Distribution &amp; Non-Replication Terms above.</span>
+      </label>
+
+      <button type="submit" class="btn-unlock">Accept Terms &amp; View Briefing</button>
+      <div class="error-msg" id="error-msg">Please enter a valid email address and the correct access code.</div>
+    </form>
+  </div>
+</main>
+
+<section id="portal-content">
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('video', this)">1. Platform Walkthrough Video</button>
+    <button class="tab-btn" onclick="switchTab('overview', this)">2. Platform Overview Brochure</button>
+    <button class="tab-btn" onclick="switchTab('architecture', this)">3. Multi-Agent Architecture</button>
+  </div>
+
+  <div class="viewer-container">
+    <div class="watermark-overlay" id="watermark-layer"></div>
+
+    <div id="tab-video" style="display:block;">
+      <iframe id="video-frame" src="" data-src="https://drive.google.com/file/d/1UqQGIbiY3TcqyVymN_uk7sh3j-sZduSE/preview" allow="autoplay"></iframe>
+    </div>
+
+    <div id="tab-overview" style="display:none;">
+      <iframe src="Fortifai-brochure-v4.html" style="background:#FFFFFF;"></iframe>
+    </div>
+
+    <div id="tab-architecture" style="display:none;">
+      <iframe src="fortifai-architecture-v3.html" style="background:#FFFFFF;"></iframe>
+    </div>
+  </div>
+</section>
+
+<script>
+  const ACCESS_CODE = "KPMG2026";
+  const LOG_WEBHOOK_URL = "https://formspree.io/f/myeeodjv";
+
+  function unlockPortal(e) {
+    e.preventDefault();
+    const name = document.getElementById('viewer-name').value.trim();
+    const email = document.getElementById('viewer-email').value.trim().toLowerCase();
+    const code = document.getElementById('access-code').value.trim();
+    const err = document.getElementById('error-msg');
+
+    const validDomain = email.endsWith('@kpmg.com') || email.endsWith('@fortifai.io');
+
+    if (!validDomain || code !== ACCESS_CODE) {
+      err.style.display = 'block';
+      return;
+    }
+
+    err.style.display = 'none';
+    const timestamp = new Date().toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+
+    document.getElementById('session-badge').textContent = `Licensed Session: ${email} · ${timestamp}`;
+
+    const wmLayer = document.getElementById('watermark-layer');
+    wmLayer.innerHTML = '';
+    for (let i = 0; i < 12; i++) {
+      const span = document.createElement('div');
+      span.className = 'wm-text';
+      span.textContent = `CONFIDENTIAL · ${email} · ${timestamp}`;
+      wmLayer.appendChild(span);
+    }
+
+    if (LOG_WEBHOOK_URL) {
+      fetch(LOG_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          event: "KPMG_PORTAL_LOGIN",
+          name,
+          email,
+          timestamp,
+          termsAccepted: true,
+          userAgent: navigator.userAgent
+        })
+      }).catch(() => {});
+    }
+
+    document.getElementById('gate-screen').style.display = 'none';
+    document.getElementById('portal-content').style.display = 'flex';
+    const vf = document.getElementById('video-frame');
+    if (vf && !vf.getAttribute('src')) vf.src = vf.getAttribute('data-src');
+  }
+
+  function switchTab(tabId, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    document.getElementById('tab-video').style.display = (tabId === 'video') ? 'block' : 'none';
+    document.getElementById('tab-overview').style.display = (tabId === 'overview') ? 'block' : 'none';
+    document.getElementById('tab-architecture').style.display = (tabId === 'architecture') ? 'block' : 'none';
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if ((e.metaKey || e.ctrlKey) && ['s', 'p', 'u'].includes(e.key.toLowerCase())) {
+      e.preventDefault();
+    }
+  });
+</script>
+
+</body>
+</html>
