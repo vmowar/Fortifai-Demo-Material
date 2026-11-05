@@ -368,19 +368,20 @@
 </section>
 
 <script>
-  const ACCESS_CODE = "KPMG2026";
+  const VALID_CODES = ["FORTIFAI2026", "PARTNER2026", "KPMG2026", "DELOITTE2026", "EY2026", "PWC2026"];
   const LOG_WEBHOOK_URL = "https://formspree.io/f/myeeodjv";
 
   function unlockPortal(e) {
     e.preventDefault();
     const name = document.getElementById('viewer-name').value.trim();
     const email = document.getElementById('viewer-email').value.trim().toLowerCase();
-    const code = document.getElementById('access-code').value.trim();
+    const code = document.getElementById('access-code').value.trim().toUpperCase();
     const err = document.getElementById('error-msg');
 
-    const validDomain = email.endsWith('@kpmg.com') || email.endsWith('@fortifai.io');
+    const blockedDomains = ['@gmail.com', '@yahoo.com', '@hotmail.com', '@outlook.com', '@icloud.com', '@aol.com', '@protonmail.com'];
+    const validDomain = email.includes('@') && email.includes('.') && !blockedDomains.some(d => email.endsWith(d));
 
-    if (!validDomain || code !== ACCESS_CODE) {
+    if (!validDomain || !VALID_CODES.includes(code)) {
       err.style.display = 'block';
       return;
     }
@@ -404,9 +405,10 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
-          event: "KPMG_PORTAL_LOGIN",
+          event: "PARTNER_PORTAL_LOGIN",
           name,
           email,
+          accessCodeUsed: code,
           timestamp,
           termsAccepted: true,
           userAgent: navigator.userAgent
@@ -424,9 +426,9 @@
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
-    document.getElementById('tab-video').style.display = (tabId === 'video') ? 'block' : 'none';
-    document.getElementById('tab-overview').style.display = (tabId === 'overview') ? 'block' : 'none';
-    document.getElementById('tab-architecture').style.display = (tabId === 'architecture') ? 'block' : 'none';
+    document.querySelectorAll('[id^="tab-"]').forEach(panel => {
+      panel.style.display = (panel.id === 'tab-' + tabId) ? 'block' : 'none';
+    });
   }
 
   document.addEventListener('keydown', function(e) {
@@ -435,6 +437,3 @@
     }
   });
 </script>
-
-</body>
-</html>
