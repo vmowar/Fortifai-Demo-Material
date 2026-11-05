@@ -384,25 +384,11 @@
   const VALID_CODES = ["FORTIFAI2026", "PARTNER2026", "KPMG2026", "DELOITTE2026", "EY2026", "PWC2026"];
   const LOG_WEBHOOK_URL = "https://formspree.io/f/myeeodjv";
 
-  function unlockPortal(e) {
-    e.preventDefault();
-    const name = document.getElementById('viewer-name').value.trim();
-    const email = document.getElementById('viewer-email').value.trim().toLowerCase();
-    const code = document.getElementById('access-code').value.trim().toUpperCase();
-    const err = document.getElementById('error-msg');
-
-    const blockedDomains = ['@gmail.com', '@yahoo.com', '@hotmail.com', '@outlook.com', '@icloud.com', '@aol.com', '@protonmail.com'];
-    const validDomain = email.includes('@') && email.includes('.') && !blockedDomains.some(d => email.endsWith(d));
-
-    if (!validDomain || !VALID_CODES.includes(code)) {
-      err.style.display = 'block';
-      return;
-    }
-
-    err.style.display = 'none';
+  function openDataRoom(email, isInternal, name, code) {
     const timestamp = new Date().toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
-
-    document.getElementById('session-badge').textContent = `Licensed Session: ${email} · ${timestamp}`;
+    document.getElementById('session-badge').textContent = isInternal
+      ? `Internal Session: ${email} · ${timestamp}`
+      : `Licensed Session: ${email} · ${timestamp}`;
 
     const wmLayer = document.getElementById('watermark-layer');
     wmLayer.innerHTML = '';
@@ -413,7 +399,8 @@
       wmLayer.appendChild(span);
     }
 
-    if (LOG_WEBHOOK_URL) {
+    // Only log to Formspree if the viewer is NOT an internal @fortifai.io user
+    if (LOG_WEBHOOK_URL && !isInternal) {
       fetch(LOG_WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -435,6 +422,56 @@
     if (vf && !vf.getAttribute('src')) vf.src = vf.getAttribute('data-src');
   }
 
+  // 1. Auto-unlock immediately if ?internal=true is in URL or saved from a prior @fortifai.io visit
+  window.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('internal') === 'true') {
+      localStorage.setItem('fortifai_internal_user', 'internal@fortifai.io');
+    }
+    const savedInternal = localStorage.getItem('fortifai_internal_user');
+    if (savedInternal && savedInternal.endsWith('@fortifai.io')) {
+      openDataRoom(savedInternal, true, 'Fortifai Internal', 'INTERNAL_BYPASS');
+    }
+
+    // 2. If user types @fortifai.io in the email field, make Name, Code & Checkbox optional
+    const emailInput = document.getElementById('viewer-email');
+    if (emailInput) {
+      emailInput.addEventListener('input', () => {
+        const isFortifai = emailInput.value.trim().toLowerCase().endsWith('@fortifai.io');
+        document.getElementById('viewer-name').required = !isFortifai;
+        document.getElementById('access-code').required = !isFortifai;
+        document.getElementById('accept-terms').required = !isFortifai;
+      });
+    }
+  });
+
+  function unlockPortal(e) {
+    e.preventDefault();
+    const name = document.getElementById('viewer-name').value.trim();
+    const email = document.getElementById('viewer-email').value.trim().toLowerCase();
+    const code = document.getElementById('access-code').value.trim().toUpperCase();
+    const err = document.getElementById('error-msg');
+
+    // Internal @fortifai.io bypass: no access code required, no Formspree webhook sent, remembered in browser
+    if (email.endsWith('@fortifai.io')) {
+      err.style.display = 'none';
+      localStorage.setItem('fortifai_internal_user', email);
+      openDataRoom(email, true, name || 'Fortifai Team', 'INTERNAL_BYPASS');
+      return;
+    }
+
+    const blockedDomains = ['@gmail.com', '@yahoo.com', '@hotmail.com', '@outlook.com', '@icloud.com', '@aol.com', '@protonmail.com'];
+    const validDomain = email.includes('@') && email.includes('.') && !blockedDomains.some(d => email.endsWith(d));
+
+    if (!validDomain || !VALID_CODES.includes(code)) {
+      err.style.display = 'block';
+      return;
+    }
+
+    err.style.display = 'none';
+    openDataRoom(email, false, name, code);
+  }
+
   function switchTab(tabId, btn) {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
@@ -450,6 +487,6 @@
     }
   });
 </script>
-
+  
 </body>
 </html>
