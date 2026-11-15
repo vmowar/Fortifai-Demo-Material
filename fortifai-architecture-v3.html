@@ -424,7 +424,7 @@
         <text class="ts" x="36" y="40" fill="var(--light)">On-premise or AWS / Azure / GCP · 100% read-only ERP access · zero outbound data egress</text>
 
         <!-- Layer 1 -->
-        <text class="sec-label" x="40" y="59">1 · Enterprise source systems &amp; external intelligence</text>
+        <text class="sec-label" x="40" y="59">Enterprise source systems &amp; external intelligence</text>
         <g>
           <rect x="40" y="65" width="142" height="40" rx="6" fill="var(--blue-f)" stroke="var(--blue-s)" stroke-width="0.6"/>
           <text class="th" x="111" y="79" text-anchor="middle" dominant-baseline="central" fill="var(--blue-t)">Core ERP</text>
@@ -432,24 +432,24 @@
         </g>
         <g>
           <rect x="192" y="65" width="142" height="40" rx="6" fill="var(--blue-f)" stroke="var(--blue-s)" stroke-width="0.6"/>
-          <text class="th" x="263" y="79" text-anchor="middle" dominant-baseline="central" fill="var(--blue-t)">Procurement &amp; T&amp;E</text>
-          <text class="ts" x="263" y="94" text-anchor="middle" dominant-baseline="central" fill="var(--blue-s)">Ariba · Coupa · Concur</text>
+          <text class="th" x="263" y="79" text-anchor="middle" dominant-baseline="central" fill="var(--blue-t)">Satellite Systems</text>
+          <text class="ts" x="263" y="94" text-anchor="middle" dominant-baseline="central" fill="var(--blue-s)">Ariba · DMS/CRM · Concur</text>
         </g>
         <g>
           <rect x="344" y="65" width="142" height="40" rx="6" fill="var(--blue-f)" stroke="var(--blue-s)" stroke-width="0.6"/>
-          <text class="th" x="415" y="79" text-anchor="middle" dominant-baseline="central" fill="var(--blue-t)">Dealer &amp; Logistics</text>
-          <text class="ts" x="415" y="94" text-anchor="middle" dominant-baseline="central" fill="var(--blue-s)">DMS · TMS · Weighbridge</text>
+          <text class="th" x="415" y="79" text-anchor="middle" dominant-baseline="central" fill="var(--blue-t)">Unstructured Data</text>
+          <text class="ts" x="415" y="94" text-anchor="middle" dominant-baseline="central" fill="var(--blue-s)">PDF · Excel · Emails</text>
         </g>
         <g>
           <rect x="496" y="65" width="144" height="40" rx="6" fill="var(--teal-f)" stroke="var(--teal-s)" stroke-width="0.6"/>
           <text class="th" x="568" y="79" text-anchor="middle" dominant-baseline="central" fill="var(--teal-t)">External Feeds</text>
-          <text class="ts" x="568" y="94" text-anchor="middle" dominant-baseline="central" fill="var(--teal-s)">LME · ICIS · Tax &amp; Registry</text>
+          <text class="ts" x="568" y="94" text-anchor="middle" dominant-baseline="central" fill="var(--teal-s)">LME · ICIS · 3rd-Party intel</text>
         </g>
 
         <line x1="340" y1="105" x2="340" y2="121" stroke="var(--light)" stroke-width="1.4" marker-end="url(#arr3)"/>
 
         <!-- Layer 2 -->
-        <text class="sec-label" x="40" y="134">2 · Read-only ingestion &amp; data reliability audit</text>
+        <text class="sec-label" x="40" y="134">Read-only ingestion &amp; data reliability audit</text>
         <g>
           <rect x="40" y="140" width="190" height="40" rx="6" fill="var(--gray-f)" stroke="var(--gray-s)" stroke-width="0.6"/>
           <text class="th" x="135" y="154" text-anchor="middle" dominant-baseline="central" fill="var(--gray-t)">Pluggable Connectors</text>
@@ -469,21 +469,21 @@
         <line x1="340" y1="180" x2="340" y2="196" stroke="var(--light)" stroke-width="1.4" marker-end="url(#arr3)"/>
 
         <!-- Layer 3 -->
-        <text class="sec-label" x="40" y="209">3 · Commercial normalisation &amp; enrichment layer (source-neutral)</text>
+        <text class="sec-label" x="40" y="209">Data normalisation &amp; enrichment layer</text>
         <g>
           <rect x="40" y="215" width="600" height="54" rx="8" fill="var(--teal-f)" stroke="var(--teal-s)" stroke-width="1"/>
           <text class="th" x="340" y="230" text-anchor="middle" dominant-baseline="central" fill="var(--teal-t)">Maps diverse ERP tables into one unified commercial &amp; risk data model</text>
-          <text class="ts" x="340" y="245" text-anchor="middle" dominant-baseline="central" fill="var(--teal-s)">Normalises prices across payment terms, freight incoterms &amp; units of measure · filters routine operational noise</text>
-          <text class="ts" x="340" y="259" text-anchor="middle" dominant-baseline="central" fill="var(--teal-s)">Enriches suppliers and customers with external statutory, workforce &amp; commodity benchmark intelligence</text>
+          <text class="ts" x="340" y="245" text-anchor="middle" dominant-baseline="central" fill="var(--teal-s)">Normalises data to filter out routine operational noise and false positves</text>
+          <text class="ts" x="340" y="259" text-anchor="middle" dominant-baseline="central" fill="var(--teal-s)">Enriches counterparty with external intelligence &amp; commodity benchmark intelligence</text>
         </g>
 
         <line x1="340" y1="269" x2="340" y2="285" stroke="var(--light)" stroke-width="1.4" marker-end="url(#arr3)"/>
 
         <!-- Layer 4 -->
-        <text class="sec-label" x="40" y="298">4 · PostgreSQL storage spine (5 logical schemas + vector memory)</text>
+        <text class="sec-label" x="40" y="298">PostgreSQL storage spine (5 logical schemas + vector memory)</text>
         <g>
           <rect x="40" y="304" width="600" height="62" rx="8" fill="var(--blue-f)" stroke="var(--blue-s)" stroke-width="0.6"/>
-          <text class="th" x="56" y="320" dominant-baseline="central" fill="var(--blue-t)">Single PostgreSQL Instance · Logical Schema Separation + pgvector Decision Memory</text>
+          <text class="th" x="56" y="320" dominant-baseline="central" fill="var(--blue-t)">Single PostgreSQL Instance</text>
         </g>
         <g>
           <rect x="56" y="330" width="108" height="30" rx="5" fill="var(--gray-f)" stroke="var(--gray-s)" stroke-width="0.5"/>
@@ -514,7 +514,7 @@
         <line x1="340" y1="366" x2="340" y2="382" stroke="var(--light)" stroke-width="1.4" marker-end="url(#arr3)"/>
 
         <!-- Layer 5 -->
-        <text class="sec-label" x="40" y="395">5 · Asynchronous detection, statistical pattern &amp; cognitive AI engine</text>
+        <text class="sec-label" x="40" y="395">Asynchronous detection, statistical pattern &amp; cognitive AI engine</text>
         <g>
           <rect x="40" y="401" width="292" height="40" rx="6" fill="var(--purp-f)" stroke="var(--purp-s)" stroke-width="0.6"/>
           <text class="th" x="186" y="415" text-anchor="middle" dominant-baseline="central" fill="var(--purp-t)">Tier 1 · Deterministic Rule Engine</text>
@@ -539,7 +539,7 @@
         <line x1="340" y1="529" x2="340" y2="545" stroke="var(--light)" stroke-width="1.4" marker-end="url(#arr3)"/>
 
         <!-- Layer 6 -->
-        <text class="sec-label" x="40" y="558">6 · Domain agent workbenches (functional execution)</text>
+        <text class="sec-label" x="40" y="558">Domain agent workbenches (functional execution)</text>
         <g>
           <rect x="40" y="564" width="142" height="52" rx="6" fill="var(--teal-f)" stroke="var(--teal-s)" stroke-width="0.6"/>
           <text class="th" x="111" y="579" text-anchor="middle" dominant-baseline="central" fill="var(--teal-t)">Kuber · AEWAC</text>
@@ -568,7 +568,7 @@
         <line x1="340" y1="616" x2="340" y2="632" stroke="var(--light)" stroke-width="1.4" marker-end="url(#arr3)"/>
 
         <!-- Layer 7 -->
-        <text class="sec-label" x="40" y="645">7 · Executive synthesis &amp; consumption</text>
+        <text class="sec-label" x="40" y="645">Executive synthesis &amp; consumption</text>
         <g>
           <rect x="40" y="651" width="600" height="56" rx="8" fill="var(--blue-f)" stroke="var(--blue-s)" stroke-width="1"/>
           <text class="th" x="340" y="667" text-anchor="middle" dominant-baseline="central" fill="var(--blue-t)">Enterprise Risk &amp; Margin Control Tower (SARA) → CFO · CPO · CAE · CRO · General Counsel</text>
