@@ -685,7 +685,7 @@ body {
         <div class="spine-title">Unified Platform Architecture</div>
         <div class="spine-metrics">
           <div class="sm-item">
-            <div class="sm-val">15 Agents</div>
+            <div class="sm-val">16 Agents</div>
             <div class="sm-lbl">Zero Functional Overlap</div>
           </div>
           <div class="sm-item">
@@ -727,7 +727,28 @@ body {
 
   // Consolidated 15-Agent Enterprise Portfolio (Customer & Partner Facing)
   var PRODUCTS = [
-    // ── 0. EXECUTIVE CONTROL TOWER SPINE (1) ──────────────────
+    
+    {
+      id: "custos",
+      prefix: "Third-Party Risk",
+      name: "Custos",
+      absorbs: "Continuous Counterparty Monitoring & ERP Exposure Triangulation",
+      suite: ["audit", "proc"],
+      persona: "CCO · CPO · General Counsel",
+      lineage: "SAP LFA1 / KNA1 · EKKO / RBKP · VBAK / VBRK · BSEG Special GL · D7 Spine",
+      objective: "Continuous Third-Party Risk Monitoring & Live ERP Exposure Triangulation",
+      tagline: "Monitor every onboarded supplier, JV, and customer continuously across sanctions, UBO shifts, and live ERP transactions.",
+      boundary: "Point-in-time onboarding checks expire after approval; Custos continuously re-rates counterparties and triangulates Medium/High/Severe risk against live SAP Purchases, Sales, Advances, and Loans.",
+      artifact: "ERP Exposure Triangulation Matrix · In-Flight F110 Hold Queue · Embedded D7 Dossiers",
+      desc: "Continuously tracks 100% of your active third-party book and triangulates Medium, High, and Severe entities against SAP P2P purchases, O2C sales, vendor advances, and inter-corporate loans.",
+      us: "DOJ ECCP Continuous Monitoring · FCPA / UKBA / Sapin II SOE & KMP Attribution · OFAC 50% Rule & FATF UBO Traceability · Read-only SELECT ingestion (Consume, Do Not Reproduce)",
+      benefits: [
+        "Continuously monitors 100% of active suppliers, JVs, LLCs, and customers with automated hard-gate overrides and floor rules",
+        "Triangulates Medium, High, and Severe counterparties against live ERP Purchases, Sales, Advances, and Loans/ICDs",
+        "Flags dual-role counterparties (Vendor + Customer), state-owned/sanctioned UBO chains, and pre-payout F110 holds"
+      ]
+    },
+// ── 0. EXECUTIVE CONTROL TOWER SPINE (1) ──────────────────
     {
       id: "sara-apex",
       prefix: "Control Tower",
@@ -1200,7 +1221,7 @@ body {
     // Filter Bar
     buf.push('<div class="filterbar">');
     var filters = [
-      { f: 'all',   l: 'All 15 Consolidated Agents' },
+      { f: 'all',   l: 'All 16 Consolidated Agents' },
       { f: 'proc',  l: 'Procurement & Supply Chain' },
       { f: 'fin',   l: 'Finance & Working Capital' },
       { f: 'sales', l: 'Sales & Revenue (O2C)' },
@@ -1244,17 +1265,12 @@ body {
         var isOpen = !!expanded[p.id];
         var badges = p.suite.map(function(s) { return SUITE_HTML[s] || ''; }).join(' ');
         buf.push('<div class="product-card' + (isOpen ? ' expanded' : '') + '" id="card-' + p.id + '">');
-        buf.push('<div class="labels-row"><div class="badge-group">' + badges + '</div><span class="persona-tag">' + esc(p.persona) + '</span></div>');
         buf.push('<div>');
         buf.push('<div class="card-head"><div class="card-name">' + esc(p.name) + '</div><span class="card-id-prefix">' + esc(p.prefix) + '</span></div>');
         buf.push('<div class="card-obj">' + esc(p.objective) + '</div>');
-        buf.push('<div style="margin-top:5px"><span class="fl fl-absorbs">Includes: ' + esc(p.absorbs) + '</span></div>');
         buf.push('</div>');
         buf.push('<div class="card-tag">' + esc(p.tagline) + '</div>');
-        buf.push('<div class="boundary-strip"><span class="boundary-lbl">Permit Boundary Thesis (Consume, Do Not Reproduce)</span>' + esc(p.boundary) + '</div>');
-        buf.push('<div class="artifact-strip"><span class="artifact-lbl">Deliverables:</span><span>' + esc(p.artifact) + '</span></div>');
         buf.push('<div class="card-div"></div>');
-        buf.push('<div class="card-desc' + (isOpen ? ' open' : '') + '">' + esc(p.desc) + '</div>');
 
         if (isOpen) {
           var benHtml = p.benefits.map(function(b) { return '<li>' + esc(b) + '</li>'; }).join('');
@@ -1267,7 +1283,6 @@ body {
 
         buf.push('<div class="card-foot">');
         buf.push('<button class="xbtn" data-toggle="' + p.id + '">' + (isOpen ? '▲ Hide full specification' : '▼ Outcomes, regulatory basis &amp; guardrails') + '</button>');
-        buf.push('<span class="sap-lineage">' + esc(p.lineage) + '</span>');
         buf.push('</div>');
         buf.push('</div>');
       });
