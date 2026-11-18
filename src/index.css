@@ -1,0 +1,312 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "DM Sans", sans-serif;
+  --font-mono: "DM Mono", monospace;
+}
+
+:root {
+  --canvas: #F6F7F9;
+  --surface: #FFFFFF;
+  --border-hairline: #E5E7EB;
+  --border-subnav: #F1F5F9;
+  --border-input: #D1D5DB;
+  --heading-arch-blue: #163B66;
+  --accent-deep-blue: #2E5A8A;
+  --accent-brand-blue: #6699CC;
+  --accent-steel-blue: #99AFBC;
+  --accent-dark-navy: #0D1520;
+  --pill-soft-bg: #E8F0F8;
+  --text-body: #4B5B6E;
+  --text-muted: #64748B;
+  --error-bg: #FDECEC;
+  --error-text: #8B1A1A;
+}
+
+@layer base {
+  html,
+  body {
+    font-family: "DM Sans", sans-serif;
+    background-color: #F6F7F9;
+    color: #4B5B6E;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Fortifai v2.0 Heading Hierarchy — Strictly weight 500 (never 700 bold) in #163B66 */
+  h1 {
+    color: #163B66;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    color: #163B66;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.25;
+    letter-spacing: -0.018em;
+  }
+
+  h3 {
+    color: #163B66;
+    font-weight: 500;
+    font-size: 14.5px;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+  }
+
+  b,
+  strong {
+    font-weight: 600;
+  }
+}
+
+.font-mono-tabular {
+  font-family: "DM Mono", monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.fortifai-pill {
+  font-family: "DM Mono", monospace;
+  font-variant-numeric: tabular-nums;
+  background-color: #E8F0F8;
+  color: #2E5A8A;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.fortifai-card-shadow {
+  box-shadow: 0 8px 30px rgba(13, 21, 32, 0.04);
+}
+
+.fortifai-gate-glow {
+  background: radial-gradient(
+    640px circle at 50% 38%,
+    rgba(102, 153, 204, 0.1) 0%,
+    rgba(102, 153, 204, 0.03) 48%,
+    rgba(246, 247, 249, 0) 76%
+  );
+}
+
+/* Subtle custom scrollbar */
+.fortifai-scroll::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.fortifai-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.fortifai-scroll::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 9999px;
+}
+
+.fortifai-scroll::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* ==========================================================================
+   3D SARA Architecture Studio — Isometric Glass Stack & Data Flow System
+   ========================================================================== */
+
+.sara-dot-stage {
+  background-color: #FFFFFF;
+  background-image:
+    radial-gradient(circle at 66% 48%, rgba(102, 153, 204, 0.11) 0%, rgba(255, 255, 255, 0) 60%),
+    radial-gradient(#CBD5E1 1px, transparent 1px);
+  background-size: 100% 100%, 18px 18px;
+}
+
+.sara-perspective-viewport {
+  perspective: 1400px;
+}
+
+.sara-iso-assembly {
+  transform-style: preserve-3d;
+  transform: rotateX(52deg) rotateZ(-32deg);
+}
+
+.sara-iso-plate {
+  transform-style: preserve-3d;
+  transition:
+    transform 360ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 240ms ease,
+    box-shadow 280ms ease,
+    background-color 280ms ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Base Z-elevation positions calibrated for 480px stage with zero clipping */
+.sara-plate-z-4-base {
+  transform: translateZ(102px);
+}
+.sara-plate-z-3-base {
+  transform: translateZ(34px);
+}
+.sara-plate-z-2-base {
+  transform: translateZ(-34px);
+}
+.sara-plate-z-1-base {
+  transform: translateZ(-102px);
+}
+
+/* Separated Z-elevation states when a specific layer is active/hovered */
+.sara-stack-focus-4 .sara-plate-4 {
+  transform: translateZ(114px) scale(1.02);
+}
+.sara-stack-focus-4 .sara-plate-3 {
+  transform: translateZ(26px);
+}
+.sara-stack-focus-4 .sara-plate-2 {
+  transform: translateZ(-42px);
+}
+.sara-stack-focus-4 .sara-plate-1 {
+  transform: translateZ(-108px);
+}
+
+.sara-stack-focus-3 .sara-plate-4 {
+  transform: translateZ(114px);
+}
+.sara-stack-focus-3 .sara-plate-3 {
+  transform: translateZ(40px) scale(1.02);
+}
+.sara-stack-focus-3 .sara-plate-2 {
+  transform: translateZ(-44px);
+}
+.sara-stack-focus-3 .sara-plate-1 {
+  transform: translateZ(-108px);
+}
+
+.sara-stack-focus-2 .sara-plate-4 {
+  transform: translateZ(110px);
+}
+.sara-stack-focus-2 .sara-plate-3 {
+  transform: translateZ(44px);
+}
+.sara-stack-focus-2 .sara-plate-2 {
+  transform: translateZ(-30px) scale(1.02);
+}
+.sara-stack-focus-2 .sara-plate-1 {
+  transform: translateZ(-110px);
+}
+
+.sara-stack-focus-1 .sara-plate-4 {
+  transform: translateZ(108px);
+}
+.sara-stack-focus-1 .sara-plate-3 {
+  transform: translateZ(42px);
+}
+.sara-stack-focus-1 .sara-plate-2 {
+  transform: translateZ(-26px);
+}
+.sara-stack-focus-1 .sara-plate-1 {
+  transform: translateZ(-98px) scale(1.02);
+}
+
+/* Plate illumination states */
+.sara-plate-active-light {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.94) 0%,
+    rgba(232, 240, 248, 0.92) 55%,
+    rgba(102, 153, 204, 0.28) 100%
+  );
+  border: 1.5px solid #2E5A8A;
+  box-shadow:
+    -6px 6px 0 rgba(46, 90, 138, 0.16),
+    -14px 18px 34px rgba(22, 59, 102, 0.18),
+    inset 0 0 22px rgba(102, 153, 204, 0.25);
+}
+
+.sara-plate-inactive-light {
+  background: linear-gradient(
+    135deg,
+    rgba(248, 250, 252, 0.85) 0%,
+    rgba(232, 240, 248, 0.72) 100%
+  );
+  border: 1px solid rgba(153, 175, 188, 0.65);
+  box-shadow:
+    -4px 4px 0 rgba(153, 175, 188, 0.2),
+    -10px 14px 24px rgba(13, 21, 32, 0.07);
+}
+
+.sara-plate-active-navy {
+  background: linear-gradient(
+    135deg,
+    rgba(22, 59, 102, 0.96) 0%,
+    rgba(13, 21, 32, 0.96) 100%
+  );
+  border: 1.5px solid #6699CC;
+  box-shadow:
+    -6px 6px 0 rgba(13, 21, 32, 0.45),
+    -16px 20px 36px rgba(13, 21, 32, 0.26),
+    inset 0 0 24px rgba(102, 153, 204, 0.32);
+}
+
+.sara-plate-inactive-navy {
+  background: linear-gradient(
+    135deg,
+    rgba(22, 59, 102, 0.84) 0%,
+    rgba(13, 21, 32, 0.88) 100%
+  );
+  border: 1px solid rgba(102, 153, 204, 0.45);
+  box-shadow:
+    -5px 5px 0 rgba(13, 21, 32, 0.3),
+    -12px 16px 26px rgba(13, 21, 32, 0.14);
+}
+
+/* Animated Vertical Data Channels (Layer 01 -> Layer 04) */
+@keyframes saraDataFlowUp {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.95;
+  }
+  80% {
+    opacity: 0.95;
+  }
+  100% {
+    transform: translateY(-120%);
+    opacity: 0;
+  }
+}
+
+.sara-flow-particle {
+  animation: saraDataFlowUp 2.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.sara-flow-delay-1 {
+  animation-delay: 0.65s;
+}
+
+.sara-flow-delay-2 {
+  animation-delay: 1.3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sara-iso-plate,
+  .sara-flow-particle {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Strict Print Media Suppression */
+@media print {
+  body {
+    display: none !important;
+  }
+}

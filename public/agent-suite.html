@@ -1,1169 +1,564 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex, nofollow">
-<title>fortifai · Enterprise AI Agent Suite</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root {
-  --navy: #0D1520;
-  --navy-mid: #111F36;
-  --deep: #2E5A8A;
-  --brand: #6699CC;
-  --teal: #0F766E;
-  --teal-bg: #F0FDFA;
-  --amber: #B45309;
-  --amber-bg: #FFFBEB;
-  --purple: #4338CA;
-  --purple-bg: #EEF2FF;
-  --charcoal: #1E293B;
-  --dg: #334155;
-  --mg: #64748B;
-  --border: #E2E8F0;
-  --bg: #F5F5F7;
-  --white: #FFFFFF;
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
-  background: var(--bg);
-  color: var(--charcoal);
-  min-height: 100vh;
-  -webkit-user-select: none;
-  user-select: none;
-  position: relative;
-  overflow-x: hidden;
-  font-variant-numeric: tabular-nums;
-}
-
-@media print {
-  body { display: none !important; }
-}
-
-/* Executive Hero Banner */
-.hero {
-  background: linear-gradient(135deg, #0D1520 0%, #112240 60%, #1B365D 100%);
-  color: #FFFFFF;
-  padding: 26px 32px;
-  border-bottom: 1px solid rgba(102, 153, 204, 0.25);
-}
-.hero-inner {
-  max-width: 1380px;
-  margin: 0 auto;
-}
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.55fr 1fr;
-  gap: 32px;
-  align-items: center;
-}
-.hero h1 {
-  font-size: 26px;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-  margin-bottom: 8px;
-}
-.hero p {
-  font-size: 13.5px;
-  color: rgba(255, 255, 255, 0.82);
-  line-height: 1.5;
-  max-width: 680px;
-}
-.spine-banner {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 8px;
-  padding: 14px 16px;
-}
-.spine-metrics {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-.sm-item {
-  border-left: 2px solid var(--brand);
-  padding-left: 10px;
-}
-.sm-val {
-  font-family: 'DM Mono', monospace;
-  font-size: 14px;
-  font-weight: 500;
-  color: #FFFFFF;
-}
-.sm-lbl {
-  font-size: 10.5px;
-  color: rgba(255, 255, 255, 0.72);
-  margin-top: 2px;
-}
-
-/* Main Container */
-.container {
-  max-width: 1380px;
-  margin: 0 auto;
-  padding: 22px 32px 48px;
-}
-
-/* Suite Architecture Drawers */
-.arch-bar {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-bottom: 14px;
-  flex-wrap: wrap;
-}
-.arch-toggles {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.arch-btn {
-  font-family: inherit;
-  font-size: 11.5px;
-  font-weight: 500;
-  padding: 6px 12px;
-  border-radius: 6px;
-  border: 1px solid #CBD5E1;
-  background: var(--white);
-  color: var(--navy-mid);
-  cursor: pointer;
-  transition: all 0.12s;
-}
-.arch-btn:hover {
-  border-color: var(--deep);
-  color: var(--deep);
-}
-.arch-btn.on {
-  background: var(--deep);
-  color: #FFFFFF;
-  border-color: var(--deep);
-}
-.arch-drawer {
-  display: none;
-  background: var(--white);
-  border: 1px solid var(--deep);
-  border-radius: 8px;
-  padding: 18px 20px;
-  margin-bottom: 18px;
-}
-.arch-drawer.open {
-  display: block;
-}
-.drawer-title {
-  font-size: 13.5px;
-  font-weight: 600;
-  color: var(--navy-mid);
-  margin-bottom: 4px;
-}
-.drawer-sub {
-  font-size: 12px;
-  color: var(--mg);
-  margin-bottom: 14px;
-}
-.interlock-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-}
-.il-card {
-  background: #F8FAFC;
-  border: 1px solid var(--border);
-  border-top: 3px solid var(--deep);
-  border-radius: 6px;
-  padding: 12px 13px;
-}
-.il-title {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--charcoal);
-  margin-bottom: 4px;
-}
-.il-desc {
-  font-size: 11.5px;
-  color: var(--dg);
-  line-height: 1.48;
-}
-
-/* Suite Pillar Count Cards */
-.count-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
-  margin-bottom: 18px;
-}
-.cc {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 13px 15px;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.cc:hover {
-  border-color: var(--brand);
-  transform: translateY(-1px);
-}
-.cc.sel {
-  border-color: var(--deep);
-  background: #F8FAFC;
-}
-.cc-top {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-}
-.cc-num {
-  font-family: 'DM Mono', monospace;
-  font-size: 23px;
-  font-weight: 500;
-  line-height: 1;
-}
-.cc-persona {
-  font-family: 'DM Mono', monospace;
-  font-size: 9.5px;
-  color: var(--mg);
-  background: var(--bg);
-  padding: 2px 6px;
-  border-radius: 4px;
-}
-.cc-lbl {
-  font-size: 12px;
-  font-weight: 600;
-  margin-top: 6px;
-}
-.cc-sub {
-  font-size: 10.5px;
-  color: var(--mg);
-  margin-top: 2px;
-  line-height: 1.35;
-}
-.cc-proc { border-top: 3px solid var(--deep); }
-.cc-proc .cc-num, .cc-proc .cc-lbl { color: #1E3A5F; }
-.cc-fin { border-top: 3px solid var(--purple); }
-.cc-fin .cc-num, .cc-fin .cc-lbl { color: #312E81; }
-.cc-sales { border-top: 3px solid var(--teal); }
-.cc-sales .cc-num, .cc-sales .cc-lbl { color: #115E59; }
-.cc-audit { border-top: 3px solid var(--amber); }
-.cc-audit .cc-num, .cc-audit .cc-lbl { color: #78350F; }
-.cc-tower { border-top: 3px solid var(--navy-mid); }
-.cc-tower .cc-num, .cc-tower .cc-lbl { color: var(--navy-mid); }
-
-/* Filter & Search Bar */
-.filterbar {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  flex-wrap: wrap;
-  margin-bottom: 18px;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 12px 0;
-}
-.fc {
-  font-size: 11.5px;
-  font-weight: 500;
-  padding: 5px 13px;
-  border-radius: 20px;
-  border: 1px solid var(--border);
-  cursor: pointer;
-  color: var(--dg);
-  background: var(--white);
-  transition: all 0.12s;
-}
-.fc:hover {
-  border-color: var(--brand);
-  color: var(--navy-mid);
-}
-.fc.on {
-  background: var(--navy-mid);
-  color: #FFFFFF;
-  border-color: var(--navy-mid);
-}
-.search-wrap {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.view-btn {
-  font-family: inherit;
-  font-size: 11.5px;
-  font-weight: 500;
-  padding: 6px 12px;
-  border-radius: 6px;
-  border: 1px solid var(--border);
-  background: var(--white);
-  color: var(--dg);
-  cursor: pointer;
-}
-.view-btn.active {
-  background: var(--navy-mid);
-  color: #FFFFFF;
-  border-color: var(--navy-mid);
-}
-.search-box {
-  font-family: inherit;
-  font-size: 12px;
-  padding: 6px 12px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  background: var(--white);
-  color: var(--charcoal);
-  width: 220px;
-  outline: none;
-  user-select: text;
-  -webkit-user-select: text;
-}
-.search-box:focus {
-  border-color: var(--deep);
-}
-
-/* Agent Grid */
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(390px, 1fr));
-  gap: 14px;
-}
-.product-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 18px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  transition: border-color 0.15s;
-}
-.product-card:hover {
-  border-color: var(--brand);
-}
-.product-card.expanded {
-  border-color: var(--deep);
-}
-
-/* Badges */
-.fl {
-  display: inline-block;
-  font-family: 'DM Mono', monospace;
-  font-size: 9.5px;
-  font-weight: 500;
-  padding: 2.5px 7px;
-  border-radius: 4px;
-  letter-spacing: 0.03em;
-}
-.fl-proc { background: #E8F0F8; color: #1E3A5F; }
-.fl-fin { background: var(--purple-bg); color: var(--purple); }
-.fl-sales { background: var(--teal-bg); color: var(--teal); }
-.fl-audit { background: var(--amber-bg); color: var(--amber); }
-.fl-tower { background: var(--navy-mid); color: #FFFFFF; }
-.fl-absorbs {
-  background: #F1F5F9;
-  color: #475569;
-  border: 1px solid #CBD5E1;
-}
-
-/* Card Typography */
-.card-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-}
-.card-name {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 17px;
-  font-weight: 600;
-  color: var(--navy-mid);
-  line-height: 1.2;
-}
-.card-id-prefix {
-  font-family: 'DM Mono', monospace;
-  font-size: 10px;
-  color: var(--deep);
-  background: #E8F0F8;
-  padding: 2px 7px;
-  border-radius: 4px;
-  white-space: nowrap;
-}
-.card-tag {
-  font-size: 13px;
-  font-weight: 400;
-  color: var(--dg);
-  line-height: 1.5;
-}
-
-.card-div {
-  height: 1px;
-  background: var(--border);
-}
-
-/* Expanded Sections */
-.card-extra {
-  display: none;
-  flex-direction: column;
-  gap: 8px;
-}
-.card-extra.open {
-  display: flex;
-}
-.xs {
-  border-radius: 6px;
-  padding: 10px 12px;
-}
-.xs-lbl {
-  font-family: 'DM Mono', monospace;
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  margin-bottom: 5px;
-}
-.xs-body {
-  font-size: 11.5px;
-  line-height: 1.5;
-  color: var(--dg);
-}
-.xs-ben {
-  background: #F8FAFF;
-  border: 1px solid #E0E7FF;
-}
-.xs-ben .xs-lbl { color: var(--navy-mid); }
-.xs-us {
-  background: #F4F7EE;
-  border: 1px solid #DCE6C8;
-}
-.xs-us .xs-lbl { color: #3A4400; }
-.xs-feat {
-  background: var(--bg);
-  border: 1px solid var(--border);
-}
-.xs-feat .xs-lbl { color: var(--mg); }
-
-.feat-list, .ben-list {
-  padding-left: 15px;
-}
-.feat-list li, .ben-list li {
-  font-size: 11.5px;
-  color: var(--dg);
-  line-height: 1.48;
-  margin-bottom: 3px;
-}
-
-.card-foot {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: auto;
-  padding-top: 2px;
-}
-.xbtn {
-  font-size: 11.5px;
-  font-weight: 600;
-  color: var(--deep);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  font-family: inherit;
-}
-.xbtn:hover {
-  text-decoration: underline;
-}
-
-/* Executive Matrix View Table */
-.matrix-wrap {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  overflow-x: auto;
-}
-.matrix-tbl {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 11.5px;
-}
-.matrix-tbl th {
-  background: #F8FAFC;
-  font-family: 'DM Mono', monospace;
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  color: var(--mg);
-  text-align: left;
-  padding: 11px 14px;
-  border-bottom: 1px solid var(--border);
-}
-.matrix-tbl td {
-  padding: 12px 14px;
-  border-bottom: 1px solid var(--border);
-  vertical-align: top;
-  color: var(--dg);
-  line-height: 1.45;
-}
-.matrix-tbl tr:hover td {
-  background: #FAFBFD;
-}
-.m-agent {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13.5px;
-  font-weight: 600;
-  color: var(--navy-mid);
-}
-
-.empty {
-  text-align: center;
-  padding: 48px;
-  color: var(--mg);
-  font-size: 13px;
-}
-
-@media (max-width: 1080px) {
-  .hero-grid { grid-template-columns: 1fr; }
-  .count-grid { grid-template-columns: repeat(2, 1fr); }
-  .interlock-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 680px) {
-  .count-grid, .interlock-grid, .product-grid { grid-template-columns: 1fr; }
-}
-</style>
-</head>
-<body oncontextmenu="return false;">
-
-<!-- Executive Hero Section -->
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-grid">
-      <div>
-        <h1>Fortifai Enterprise AI Agent Suite</h1>
-        <p>18 specialized AI agents operating on a single, zero-egress ERP integration inside your private cloud—delivering continuous margin recovery, working capital optimization, and audit-grade compliance across 100% of transactions.</p>
-      </div>
-      <div class="spine-banner">
-        <div class="spine-metrics">
-          <div class="sm-item">
-            <div class="sm-val">18 Agents</div>
-            <div class="sm-lbl">Zero Functional Overlap</div>
-          </div>
-          <div class="sm-item">
-            <div class="sm-val">100% Txns</div>
-            <div class="sm-lbl">Full-Population Coverage</div>
-          </div>
-          <div class="sm-item">
-            <div class="sm-val">Zero Egress</div>
-            <div class="sm-lbl">Client VPC / On-Premises</div>
-          </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fortifai® — Active Domain Agent Suite</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --canvas: #F6F7F9;
+        --surface: #FFFFFF;
+        --border: #E5E7EB;
+        --heading-blue: #163B66;
+        --deep-blue: #2E5A8A;
+        --brand-blue: #6699CC;
+        --pill-bg: #E8F0F8;
+        --body-text: #4B5B6E;
+        --muted-text: #64748B;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        background: var(--canvas);
+        color: var(--body-text);
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+        padding: 18px 18px 40px;
+      }
+      .mono {
+        font-family: 'DM Mono', ui-monospace, SFMono-Regular, monospace;
+        font-variant-numeric: tabular-nums;
+      }
+      .container {
+        max-width: 1180px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .header-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        box-shadow: 0 8px 30px rgba(13, 21, 32, 0.04);
+        padding: 16px 20px;
+      }
+      .brand-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+      }
+      .eyebrow-pill {
+        display: inline-flex;
+        align-items: center;
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        color: var(--deep-blue);
+        background: var(--pill-bg);
+        padding: 3px 8px;
+        border-radius: 5px;
+        text-transform: uppercase;
+      }
+      h1 {
+        font-size: 21px;
+        font-weight: 500;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        color: var(--heading-blue);
+        margin-top: 8px;
+      }
+      .subtitle {
+        margin-top: 4px;
+        max-width: 800px;
+        color: var(--body-text);
+        font-size: 13px;
+        line-height: 1.52;
+      }
+      .controls-bar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 14px;
+        padding-top: 12px;
+        border-top: 1px solid var(--border);
+      }
+      .filter-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+      .filter-btn {
+        border: 1px solid var(--border);
+        background: #F8FAFC;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 11.5px;
+        font-weight: 500;
+        color: var(--body-text);
+        padding: 4px 10px;
+        border-radius: 7px;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: all 0.15s ease;
+      }
+      .filter-btn:hover {
+        border-color: var(--brand-blue);
+        background: #FFFFFF;
+        color: var(--heading-blue);
+      }
+      .filter-btn.active {
+        background: var(--heading-blue);
+        color: #FFFFFF;
+        border-color: var(--heading-blue);
+      }
+      .search-input {
+        height: 34px;
+        width: 265px;
+        max-width: 100%;
+        border-radius: 7px;
+        border: 1px solid #D1D5DB;
+        padding: 0 11px;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 12.5px;
+        color: #0D1520;
+        background: #FFFFFF;
+      }
+      .search-input::placeholder {
+        color: #94A3B8;
+      }
+      .search-input:focus {
+        outline: none;
+        border-color: var(--deep-blue);
+        box-shadow: 0 0 0 2px rgba(46, 90, 138, 0.18);
+      }
+      .agents-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      .agent-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        box-shadow: 0 8px 30px rgba(13, 21, 32, 0.04);
+        padding: 15px 17px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: border-color 0.15s ease;
+      }
+      .agent-card:hover {
+        border-color: rgba(102, 153, 204, 0.7);
+      }
+      .agent-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+      }
+      .agent-suite-tag {
+        font-size: 9.5px;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        background: var(--pill-bg);
+        color: var(--deep-blue);
+        padding: 3px 8px;
+        border-radius: 5px;
+        text-transform: uppercase;
+      }
+      .agent-index {
+        font-size: 10px;
+        font-weight: 500;
+        color: var(--deep-blue);
+        background: #F8FAFC;
+        border: 1px solid var(--border);
+        padding: 2px 6px;
+        border-radius: 5px;
+      }
+      .agent-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--heading-blue);
+        margin-top: 9px;
+        line-height: 1.3;
+      }
+      .agent-desc {
+        font-size: 12.5px;
+        color: var(--body-text);
+        margin-top: 6px;
+        line-height: 1.52;
+      }
+      .agent-footer {
+        margin-top: 12px;
+        padding-top: 10px;
+        border-top: 1px solid var(--border);
+        font-size: 11.5px;
+        line-height: 1.45;
+        color: var(--muted-text);
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .agent-footer span {
+        color: var(--heading-blue);
+        font-weight: 500;
+      }
+      .empty-state {
+        display: none;
+        background: #FFFFFF;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        box-shadow: 0 8px 30px rgba(13, 21, 32, 0.04);
+        padding: 30px 20px;
+        text-align: center;
+      }
+      .reset-btn {
+        margin-top: 8px;
+        border: 0;
+        border-radius: 7px;
+        background: var(--heading-blue);
+        color: #FFFFFF;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        padding: 6px 12px;
+        cursor: pointer;
+      }
+      .reset-btn:hover {
+        background: var(--deep-blue);
+      }
+      @media (max-width: 980px) {
+        .agents-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 660px) {
+        .agents-grid {
+          grid-template-columns: 1fr;
+        }
+        .header-card {
+          padding: 18px;
+        }
+        .search-input {
+          width: 100%;
+        }
+      }
+      @media print {
+        body {
+          display: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body oncontextmenu="return false;">
+    <div class="container">
+      <section class="header-card">
+        <div class="brand-row">
+          <svg
+            width="96"
+            height="23"
+            viewBox="32 99 565 136"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Fortifai"
+          >
+            <image
+              href="./assets/aistudio/Fortifai_Logo_color_58c63f6f.png"
+              x="0"
+              y="0"
+              width="640"
+              height="324"
+              preserveAspectRatio="xMidYMid meet"
+            />
+          </svg>
+          <span class="mono eyebrow-pill">FORTIFAI SARA · SPECIALIZED AGENT CATALOGUE</span>
         </div>
+
+        <h1>Active Domain Agent Suite</h1>
+        <p class="subtitle">
+          Specialized domain agents executing natively inside your private cloud on Fortifai SARA—combining deterministic verification, Fortifai D7 external corroboration, and plain-English audit dossiers.
+        </p>
+
+        <div class="controls-bar">
+          <div class="filter-group" role="tablist" aria-label="Filter by domain suite">
+            <button type="button" class="filter-btn active" onclick="filterSuite('ALL', this)">All Suites</button>
+            <button type="button" class="filter-btn" onclick="filterSuite('PROCUREMENT', this)">Procurement &amp; Supply Chain</button>
+            <button type="button" class="filter-btn" onclick="filterSuite('REVENUE', this)">Revenue &amp; O2C</button>
+            <button type="button" class="filter-btn" onclick="filterSuite('FINANCE', this)">Finance &amp; Working Capital</button>
+            <button type="button" class="filter-btn" onclick="filterSuite('COMPLIANCE', this)">Compliance &amp; Legal</button>
+            <button type="button" class="filter-btn" onclick="filterSuite('AUDIT', this)">Internal Audit</button>
+          </div>
+
+          <input
+            id="agent-search"
+            type="search"
+            class="search-input"
+            placeholder="Filter by risk, workflow, or signal..."
+            aria-label="Filter by risk, workflow, or signal"
+            oninput="applyFilters()"
+          />
+        </div>
+      </section>
+
+      <section id="agents-grid" class="agents-grid"></section>
+
+      <div id="empty-state" class="empty-state">
+        <p style="font-weight: 500; color: #163B66; font-size: 15px;">No matching domain agents found</p>
+        <p style="margin-top: 4px; font-size: 13px; color: #64748B;">Clear your search filter or switch back to All Suites.</p>
+        <button type="button" class="reset-btn" onclick="resetFilters()">Reset Filters</button>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- Main Content Area -->
-<main class="container" id="ca"></main>
+    <script>
+      const AGENTS = [
+        {
+          indexBadge: '01',
+          suite: 'PROCUREMENT',
+          suiteLabel: 'Procurement & Supply Chain',
+          title: 'Procurement Cost',
+          description: 'Monitors 100% of supplier invoices against master contracts, payment terms, commodity indices, and volume-rebate tiers to stop overpayments before disbursement.',
+          signals: 'Signed Contracts · PO & Invoice Line Items · Commodity Indices · Payment Terms',
+          output: 'Pre-payment hold & quantified overcharge recovery pack'
+        },
+        {
+          indexBadge: '02',
+          suite: 'PROCUREMENT',
+          suiteLabel: 'Procurement & Supply Chain',
+          title: 'Pass-Through Vendor',
+          description: 'Exposes zero-substance intermediaries and trading shells inserting unearned 20–40% markups between your plants and Tier-2 OEM manufacturers.',
+          signals: 'Cross-Plant PO Pricing · Fortifai D7 Substance & Headcount · Tax/HSN Scope',
+          output: 'OEM disintermediation & direct-sourcing savings dossier'
+        },
+        {
+          indexBadge: '03',
+          suite: 'PROCUREMENT',
+          suiteLabel: 'Procurement & Supply Chain',
+          title: 'Third-Party Due Diligence',
+          description: 'Autonomous pure-play external counterparty vetting powered by Fortifai D7 across 11 risk dimensions—delivering a scored onboarding verdict in hours without ERP integration.',
+          signals: 'Global UBO Registries · Sanctions & PEP · Financial Health · Litigation & Adverse Media · ESG',
+          output: '11-dimension counterparty risk score & onboarding verdict'
+        },
+        {
+          indexBadge: '04',
+          suite: 'PROCUREMENT',
+          suiteLabel: 'Procurement & Supply Chain',
+          title: 'Vendor Risk Monitoring',
+          description: 'Continuous post-onboarding vendor surveillance that triangulates Fortifai D7 external ownership shifts with live ERP spend behavior and employee master records.',
+          signals: 'Fortifai D7 Risk Graph · ERP Vendor Master & Payments · HR/Employee Records',
+          output: 'Undisclosed related-party, employee-conflict & vendor drift alert'
+        },
+        {
+          indexBadge: '05',
+          suite: 'PROCUREMENT',
+          suiteLabel: 'Procurement & Supply Chain',
+          title: 'Freight & Inventory',
+          description: 'Reconciles weighbridge logs, goods receipts, stock movements, and carrier rate cards to catch phantom deliveries, shrinkage, and duplicate freight billing.',
+          signals: 'Goods Receipts · Weighbridge Logs · Carrier Invoices · Inventory Movements',
+          output: 'Verified logistics recovery & inventory discrepancy report'
+        },
+        {
+          indexBadge: '06',
+          suite: 'PROCUREMENT',
+          suiteLabel: 'Procurement & Supply Chain',
+          title: 'Tender & Bid Risk',
+          description: 'Screens pre-award RFQs, vendor quotes, and split requisitions to detect bid rotation, specification tailoring, and approval-threshold bypasses before PO award.',
+          signals: 'RFQ Bid Submissions · Purchase Requisitions · Bidder Metadata · Price Spreads',
+          output: 'Pre-award bid integrity & split-order intervention alert'
+        },
+        {
+          indexBadge: '07',
+          suite: 'PROCUREMENT',
+          suiteLabel: 'Procurement & Supply Chain',
+          title: 'Procurement Controls',
+          description: 'Continuously audits three-way match tolerances, retroactive POs, maverick spend, and segregation-of-duties breaches across every procure-to-pay step.',
+          signals: 'PO-to-GRN-to-Invoice Chains · Tolerance Tables · User Access & Approval Logs',
+          output: 'Real-time P2P control breach & configuration fix pack'
+        },
+        {
+          indexBadge: '08',
+          suite: 'REVENUE',
+          suiteLabel: 'Revenue & O2C',
+          title: 'Discounting Risk',
+          description: 'Tracks manual price overrides, off-policy sales discounts, and unapproved customer rebates eroding gross-to-net margin across regions and reps.',
+          signals: 'Sales Orders · Pricing Condition Overrides · Rebate Accruals · Customer Master',
+          output: 'Gross-to-net margin leakage & pricing governance dossier'
+        },
+        {
+          indexBadge: '09',
+          suite: 'REVENUE',
+          suiteLabel: 'Revenue & O2C',
+          title: 'Revenue Cut-Off',
+          description: 'Detects quarter-end channel stuffing, unverified proof-of-delivery billings, and post-period credit-memo washes under ASC 606.',
+          signals: 'Period-End Shipments · Proof-of-Delivery Logs · Post-Close Credit Memos & Returns',
+          output: 'ASC 606 cut-off exception & revenue assurance pack'
+        },
+        {
+          indexBadge: '10',
+          suite: 'REVENUE',
+          suiteLabel: 'Revenue & O2C',
+          title: 'Demand & Order Risk',
+          description: 'Isolates artificial quarter-end order spikes, non-binding bookings, and manual allocation overrides that distort S&OP demand baselines.',
+          signals: 'Order Backlog · Modification Logs · Historical Sell-Through · Credit Overrides',
+          output: 'Sanitized true-demand baseline & order-integrity alert'
+        },
+        {
+          indexBadge: '11',
+          suite: 'FINANCE',
+          suiteLabel: 'Finance & Working Capital',
+          title: 'Working Capital',
+          description: 'Intercepts fuzzy-matched duplicate invoices, early payments ahead of contracted terms, and unapplied vendor credits prior to the payment run.',
+          signals: 'Open AP Subledger · Payment Proposals · Contracted Terms · Vendor Credit Memos',
+          output: 'Pre-payment block queue & DPO cash-release schedule'
+        },
+        {
+          indexBadge: '12',
+          suite: 'FINANCE',
+          suiteLabel: 'Finance & Working Capital',
+          title: 'Balance Sheet Close',
+          description: 'Auto-triages routine GL account reconciliations while isolating unsubstantiated accruals, aged GR/IR balances, and high-risk top-side manual journal entries.',
+          signals: 'General Ledger Postings · Top-Side Manual JEs · Subledger Tie-Outs · GR/IR Aging',
+          output: 'Auto-cleared reconciliation pack & close anomaly workpaper'
+        },
+        {
+          indexBadge: '13',
+          suite: 'COMPLIANCE',
+          suiteLabel: 'Compliance & Legal',
+          title: 'Bribery & T&E Risk',
+          description: 'Continuously tests 100% of third-party payments, offshore consulting retainers, and employee T&E claims against FCPA, UKBA, and ISO 37001 indicators.',
+          signals: 'Non-PO Disbursements · T&E & Attendee Logs · High-CPI Conduits · Government Tenders',
+          output: 'Privileged legal review signal ("Signals, Not Verdicts")'
+        },
+        {
+          indexBadge: '14',
+          suite: 'COMPLIANCE',
+          suiteLabel: 'Compliance & Legal',
+          title: 'Trade Diversion Risk',
+          description: 'Monitors controlled shipments after initial trade-compliance clearance to catch mid-flight destination flips, transshipment hubs, and front-company masking.',
+          signals: 'Controlled Orders (ECCN) · Post-Clearance Route Edits · Freight Forwarders · Fortifai D7 Screening',
+          output: 'Pre-shipment export hold & BIS/OFAC/EAR evidence file'
+        },
+        {
+          indexBadge: '15',
+          suite: 'COMPLIANCE',
+          suiteLabel: 'Compliance & Legal',
+          title: 'Forensic Case Investigations',
+          description: 'Clusters multi-rule anomalies and whistleblower tips across ERP chains and entity graphs into court- and regulator-defensible investigation files.',
+          signals: 'Cross-Rule Convergence · Whistleblower Intake · Bank/Address Links · Audit Logs',
+          output: 'Cryptographically sealed forensic investigation dossier'
+        },
+        {
+          indexBadge: '16',
+          suite: 'AUDIT',
+          suiteLabel: 'Internal Audit',
+          title: 'Control Testing',
+          description: 'Replaces 25-row quarterly sampling with continuous 100% population SOX and ICFR control testing mapped to COSO 2013 and PCAOB AS 1105 completeness checks.',
+          signals: 'Full ERP Transaction Population · User Roles & SoD Matrix · System Change Logs',
+          output: '100% population ICFR workpaper & Audit Committee pack'
+        },
+        {
+          indexBadge: '17',
+          suite: 'AUDIT',
+          suiteLabel: 'Internal Audit',
+          title: 'Document Forensics',
+          description: 'Screens incoming supplier PDFs, bank-change letters, and supporting vouchers prior to posting for digital tampering, cloned templates, and altered metadata.',
+          signals: 'Invoice & Bank Letter PDFs · Pixel & Font Metadata · Cross-Vendor Document Hashes',
+          output: 'Pre-posting forged document quarantine alert'
+        }
+      ];
 
-<script>
-(function() {
-  document.addEventListener('keydown', function(e) {
-    if ((e.ctrlKey || e.metaKey) && ['p', 's', 'u'].includes(e.key.toLowerCase())) {
-      e.preventDefault();
-    }
-  });
+      let activeSuite = 'ALL';
 
-  // Concise Platform Guardrails
-  var SF = [
-    "Reconciles subledgers to the General Ledger and normalizes units, payment terms, and currencies before rules run",
-    "Builds on existing ERP and screening controls—surfacing post-clearance and commercial risks they do not test",
-    "100% deterministic financial math paired with behavioral pattern AI—zero LLM calculation guesswork",
-    "4-Rung Economic Precedence Waterfall deduplicates overlapping findings so two agents never double-count savings",
-    "Objective evidentiary framing mapped to COSO 2013 and two-person Maker-Checker approval with sealed audit logs",
-    "QuantumQuery copilot for read-only natural-language Q&A plus self-learning false-positive memory"
-  ];
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
 
-  // Consolidated 18-Agent Enterprise Portfolio (No Eyebrows, Plain-English Copy)
-  var PRODUCTS = [
-    // ── 0. EXECUTIVE CONTROL TOWER SPINE (1) ──────────────────
-    {
-      id: "sara-apex",
-      prefix: "Control Tower",
-      name: "SARA Control Tower",
-      absorbs: "Apex Value Engine & QuantumQuery Copilot",
-      suite: ["tower"],
-      persona: "CEO · CFO · CPO · CAE",
-      lineage: "General Ledger · Subledgers · Cross-Agent Insights",
-      tagline: "Unifies every agent finding into one boardroom cockpit—ranking stoppable cash leakage and EBITDA recovery by dollar exposure.",
-      boundary: " syntheses cross-functional financial exposure across ERP domains and enforces platform-wide savings deduplication.",
-      artifact: "Prioritized Pre-Payment Hold Queue · 30/60/90-Day EBITDA Waterfall · Data Reliability Scorecard",
-      us: "Supports SEC MD&A risk reporting, SOX 302/404 internal control assertions, and PCAOB AS 1105 completeness verification.",
-      benefits: [
-        "Consolidates all domain agents into one view of stoppable cash leakage and net hard EBITDA recovery",
-        "Prioritizes pre-disbursement payment holds by dollar exposure before payment runs execute",
-        "Continuously audits underlying ERP data completeness, linkage, and master-data hygiene",
-        "Includes QuantumQuery for instant, read-only natural-language Q&A across all governed findings"
-      ]
-    },
+      function renderAgents(list) {
+        const grid = document.getElementById('agents-grid');
+        const empty = document.getElementById('empty-state');
 
-    // ── 1. PROCUREMENT & SUPPLY CHAIN SUITE (4) ───────────────
-    {
-      id: "kuber",
-      prefix: "Procurement ROI",
-      name: "Kuber",
-      absorbs: "Price Variance & Surplus Stock Intercept",
-      suite: ["proc", "fin"],
-      persona: "CPO · CFO · Sourcing CoE",
-      lineage: "Purchase Orders · Invoices · Inventory · Commodity Indices",
-      tagline: "Turns hidden price variance, commodity index lags, tail fragmentation, and redundant ordering into hard EBITDA.",
-      boundary: "Goes beyond standard 3-way match tolerances to catch commercial overpayment against commodity indices, credit terms, and sister-plant stock.",
-      artifact: "Pre-Drafted Debit Memos · Supplier Renegotiation Briefs · Inter-Plant Stock Transfer Queue",
-      us: "Supports COGS accuracy and inventory valuation under ASC 330 and SEC MD&A margin governance.",
-      benefits: [
-        "Delivers 3.5% to 5.0% addressable spend opportunity (typically 2% to 3% net hard EBITDA impact)",
-        "Normalizes credit terms, freight, and units into an apples-to-apples effective price",
-        "Checks open unpaid supplier balances and pre-drafts debit memos for immediate set-off recovery",
-        "Intercepts redundant purchase orders where surplus stock already sits in sister plants"
-      ]
-    },
-    {
-      id: "conduit",
-      prefix: "Supply Chain",
-      name: "Conduit",
-      absorbs: "Pass-Through & Channel Arbitrage Engine",
-      suite: ["proc", "audit"],
-      persona: "CPO · General Counsel · CCO",
-      lineage: "Vendor Master · PO & Invoice History · D7 Registry",
-      tagline: "Unmasks zero-substance middlemen and captures the direct-to-manufacturer margin spread.",
-      boundary: "Goes beyond legal entity onboarding to detect approved vendors acting as zero-substance pass-through traders.",
-      artifact: "Audited Re-Pricing Quantum · 5-Stage Convergence Shortlist · Direct-to-OEM Pairing Brief",
-      us: "Mitigates FCPA third-party intermediary markup exposure and aligns with DOJ supply-chain integrity standards.",
-      benefits: [
-        "Sizes the exact dollar spread between interposed traders and direct manufacturers for immediate RFQs",
-        "Correlates zero inventory dwell and shared bank/address links against statutory factory headcount",
-        "Pairs flagged intermediaries with verified OEMs already supplying peer plants",
-        "Retains exception memory for authorized distributors with tripwires for bank or scope drift"
-      ]
-    },
-    {
-      id: "vantage",
-      prefix: "P2P Governance",
-      name: "Vantage",
-      absorbs: "Split-PO · RFP Bid Integrity · Vendor Master Guard",
-      suite: ["proc", "audit"],
-      persona: "CPO · AP Head · Internal Audit",
-      lineage: "Requisitions · Purchase Orders · Vendor Master & Bank Logs",
-      tagline: "Enforces procurement discipline across split orders, maverick spend, bid rotation, and pre-payment bank changes.",
-      boundary: "Catches split-order structuring, retroactive orders, bid rings, and bank flips that bypass static approval limits.",
-      artifact: "Split-PO Cluster Evidence · RFP Bid-Ring Graph · Pre-Payment Bank-Flip Alert",
-      us: "Supports public and commercial procurement compliance, False Claims Act defenses, and OFAC screening.",
-      benefits: [
-        "Intercepts split purchase orders structured just below approval thresholds before payment clears",
-        "Flags vendor bank account modifications within 10 days of a payment run to prevent payee diversion",
-        "Quantifies non-PO maverick spend and off-contract call-offs by plant, category, and buyer",
-        "Identifies RFP bid rotation and retrofitted quotes submitted after order release"
-      ]
-    },
-    {
-      id: "manifest",
-      prefix: "Logistics & GRN",
-      name: "Manifest",
-      absorbs: "Inbound Logistics, Weighbridge & Movement Integrity",
-      suite: ["proc", "fin"],
-      persona: "COO · Supply Chain & Logistics Head",
-      lineage: "Material Movements · Goods Receipts · Weighbridge / GPS Feeds",
-      tagline: "Reconciles every physical weighbridge slip, freight bill, and material movement against ERP records.",
-      boundary: "Cross-checks gate receipt entries against physical weighbridge tare weights, GPS trips, and contracted lane tariffs.",
-      artifact: "Weighbridge Discrepancy Log · Lane Tariff Benchmark · Short-Supply Claim Pack",
-      us: "Supports ASC 330 inventory existence assertions and physical receipt verification controls.",
-      benefits: [
-        "Stops short-supply and phantom receipt leakage by matching physical net weight against billed quantities",
-        "Benchmarks freight corridor tariffs across carriers to eliminate routing and detention overcharges",
-        "Detects contracted primary carriers defaulting on lanes so spot-market affiliates bill at a premium",
-        "Pre-stages short-supply vendor debit claims backed by timestamped weighbridge logs"
-      ]
-    },
-
-    // ── 2. FINANCE & WORKING CAPITAL SUITE (3) ────────────────
-    {
-      id: "crystal",
-      prefix: "Close & R2R",
-      name: "Crystal",
-      absorbs: "Balance Sheet Reconciliations & Inventory Reserve Guard",
-      suite: ["fin", "audit"],
-      persona: "CFO · Corporate Controller · R2R Lead",
-      lineage: "General Ledger · Manual Journals · Trial Balance · Inventory",
-      tagline: "Auto-clears routine account reconciliations and isolates top-side close adjustments and inventory write-off risk.",
-      boundary: "Detects unbilled top-side manual journal overrides, reserve manipulation, and unprovided inventory shrinkage.",
-      artifact: "Auto-Cleared Account Pack · Top-Side Journal Forensic Queue · NRV Provisioning Pack",
-      us: "Directly supports SOX 302/404 financial close controls, PCAOB AS 2401 journal testing, and ASC 330 inventory reserves.",
-      benefits: [
-        "Cuts period-end close review effort by 40%+ by auto-clearing routine, low-risk account reconciliations",
-        "Isolates high-risk manual top-side journals, weekend postings, and split threshold entries",
-        "Identifies unprovided slow-moving stock and unauthorized scrap write-offs before external audit",
-        "Tracks real-time close health and breached account exposure with full ledger lineage"
-      ]
-    },
-    {
-      id: "moneta",
-      prefix: "AP & Cash Flow",
-      name: "Moneta",
-      absorbs: "AP Disbursement & Duplicate Payment Guard",
-      suite: ["fin", "proc"],
-      persona: "CFO · Group Treasurer · AP Head",
-      lineage: "Payment Run Proposals · Open & Cleared Payables · Terms Master",
-      tagline: "Stops early payments, duplicate disbursements, and missed cash discounts before funds leave the bank.",
-      boundary: "Intercepts premature payments ahead of contracted due dates, cross-entity fuzzy duplicates, and unadjusted vendor advances.",
-      artifact: "Early-Settlement Hold Queue · Duplicate Recovery Dossier · DPO Yield Optimization Brief",
-      us: "Addresses SOX Section 13(b) cash disbursement controls and FCPA books-and-records accuracy.",
-      benefits: [
-        "Halts premature supplier payments before automated payment runs execute",
-        "Captures forfeited early-payment cash discounts and extends effective Days Payable Outstanding (DPO)",
-        "Catches cross-entity and fuzzy-matched duplicate invoices before settlement clears the bank",
-        "Segregates working-capital cash release cleanly from P&L EBITDA savings"
-      ]
-    },
-    {
-      id: "tenor",
-      prefix: "AR & Credit",
-      name: "Tenor",
-      absorbs: "Receivables Aging, Short-Payment & Credit-Risk Guard",
-      suite: ["fin", "sales"],
-      persona: "CFO · Credit Controller · Treasurer",
-      lineage: "Open & Cleared Receivables · Credit Limits · Order Change Logs",
-      tagline: "Protects cash realization by catching habitual customer short-payments and unauthorized credit-block overrides.",
-      boundary: "Correlates customer receivables with credit-limit overrides and deduction codes to stop unauthorized order releases.",
-      artifact: "Short-Payment Recovery Queue · Bad-Debt Provisioning Stress-Test · Credit Override Log",
-      us: "Supports ASC 310 receivables disclosures and ASC 326 Current Expected Credit Losses (CECL) accuracy.",
-      benefits: [
-        "Recovers systematic customer short-payments and unauthorized deduction write-offs",
-        "Flags sales orders released to delinquent customers via manual credit-block overrides",
-        "Improves Days Sales Outstanding (DSO) and strengthens bad-debt reserve accuracy"
-      ]
-    },
-
-    // ── 3. SALES & REVENUE ASSURANCE SUITE (5) ────────────────
-    {
-      id: "surge",
-      prefix: "Revenue Integrity",
-      name: "Surge",
-      absorbs: "Channel Stuffing, Cut-Off & Returns Integrity",
-      suite: ["sales", "audit"],
-      persona: "CRO · CFO · Corporate Controller · Audit Committee",
-      lineage: "Sales Orders · Billing Documents · Delivery Logs · Credit Memos",
-      tagline: "Unmasks period-end rep quota stuffing, subsidiary overrides, unbilled deliveries, and returnless credit washes.",
-      boundary: "Detects quarter-end pull-forwards, credit-block overrides, shipped-but-unbilled deliveries, and post-period credit washes.",
-      artifact: "Channel Stuffing Dossier · Corporate-Routed Override Alert · Cut-Off & Clawback Pack",
-      us: "Anchored to ASC 606 revenue recognition rules, SEC SAB 99 materiality, and executive compensation clawback governance.",
-      benefits: [
-        "Isolates premature revenue recognition and cut-off errors before period-end close",
-        "Catches both rep-level quarter-end stuffing and subsidiary-level credit-block overrides",
-        "Recovers earned revenue from shipped-but-unbilled deliveries and stops returnless credit notes",
-        "Routes sensitive subsidiary management overrides directly to Corporate Internal Audit"
-      ]
-    },
-    {
-      id: "pricing-integrity",
-      prefix: "Commercial Pricing",
-      name: "Pricing Integrity Agent",
-      absorbs: "List-Price Realization, Surcharge & Contract Rate Guard",
-      suite: ["sales", "fin"],
-      persona: "CRO · VP Commercial Finance · Pricing CoE",
-      lineage: "Billing Documents · Pricing Condition Records · Master Price Lists",
-      tagline: "Ensures every customer invoice honors contracted rate cards, index escalators, and freight surcharges.",
-      boundary: "Audits live billing conditions against executed customer contracts and cost bases to prevent silent price erosion.",
-      artifact: "Contract Price-Drift Ledger · Deleted Surcharge Alert Queue · Below-Cost Billing Report",
-      us: "Supports ASC 606 transaction-price accuracy and gross-margin reporting governance.",
-      benefits: [
-        "Catches unbilled contractual price escalators, index pass-throughs, and minimum-order surcharges",
-        "Flags manual price overrides and deleted freight or fuel conditions at invoice creation",
-        "Alerts commercial finance immediately when net invoice realization drops below standard product cost"
-      ]
-    },
-    {
-      id: "discounting-risk",
-      prefix: "Commercial Governance",
-      name: "Discounting Risk Agent",
-      absorbs: "Off-Policy Discounting, Rebate Stacking & Side-Deal Guard",
-      suite: ["sales", "audit"],
-      persona: "CRO · CFO · Internal Audit",
-      lineage: "Sales Orders · Discount Conditions · Rebate Accruals · Credit Notes",
-      tagline: "Stops unauthorized discount stacking, split-order threshold gaming, and retroactive off-invoice rebates.",
-      boundary: "Detects multi-layer discount stacking, approval-limit splitting, and post-sale rebate giveaways missed by static price checks.",
-      artifact: "Rep Discount Waterfall · Stacked Rebate Leakage Report · Approval-Bypass Audit Log",
-      us: "Supports ASC 606 variable-consideration constraints and gross-to-net revenue governance.",
-      benefits: [
-        "Prevents double-dipping where promotional discounts stack on top of contracted tier rebates",
-        "Detects orders split across lines or dates to stay below commercial discount approval limits",
-        "Quantifies gross-to-net margin leakage by sales rep, distributor tier, and region"
-      ]
-    },
-    {
-      id: "horizon",
-      prefix: "Demand & S&OP",
-      name: "Horizon",
-      absorbs: "Clean-Baseline Demand & Revenue Predictability",
-      suite: ["sales"],
-      persona: "CRO · Commercial Finance · S&OP Lead",
-      lineage: "Order Backlog · Delivery Schedules · Macro & Commodity Feeds",
-      tagline: "Strips artificial sales distortions from your order book to deliver risk-adjusted revenue forecasts.",
-      boundary: "Removes Surge-flagged channel stuffing and cancel-rebill spikes from historical billings to reveal true underlying demand.",
-      artifact: "Sanitized Demand Baseline · Silent Customer Churn Alert · Commodity Pass-Through Model",
-      us: "Supports forward-looking revenue guidance reliability, ASC 606 backlog disclosures, and inventory planning.",
-      benefits: [
-        "Eliminates S&OP bullwhip distortions by stripping stuffed and reversed orders from the baseline",
-        "Provides early warning on silent customer churn when distributor order cadence decays",
-        "Models commodity index pass-through elasticity to protect gross margin during cost swings"
-      ]
-    },
-    {
-      id: "margin",
-      prefix: "Gross-to-Net",
-      name: "Margin",
-      absorbs: "Sell-Side Realization & Pocket-Margin Analytics",
-      suite: ["sales", "fin"],
-      persona: "CRO · VP Commercial Finance · CFO",
-      lineage: "Billing Documents · Rebate & Freight Conditions · Standard Cost",
-      tagline: "Tracks pocket-margin realization from list price down to net collected cash across every customer and SKU.",
-      boundary: "Unifies invoice pricing, off-invoice rebates, freight absorption, and payment terms into a single pocket-margin view.",
-      artifact: "Pocket-Margin Waterfall · Negative-Margin SKU Queue · Customer Profitability Matrix",
-      us: "Supports gross-to-net revenue disclosures and commercial margin accountability.",
-      benefits: [
-        "Exposes unprofitable customer-SKU combinations hidden behind high top-line volume",
-        "Quantifies freight, extended credit terms, and promotional allowances eroding pocket margin",
-        "Ranks commercial recovery actions by immediate gross-margin lift"
-      ]
-    },
-
-    // ── 4. AUDIT, RISK & COMPLIANCE SUITE (6) ─────────────────
-    {
-      id: "custos",
-      prefix: "Third-Party Risk",
-      name: "Custos",
-      absorbs: "Continuous Counterparty Monitoring & ERP Exposure Triangulation",
-      suite: ["audit", "proc"],
-      persona: "CCO · CPO · General Counsel",
-      lineage: "Vendor & Customer Masters · Purchases · Sales · Advances & Loans",
-      tagline: "Monitors every active supplier, JV, and customer continuously across sanctions, ownership shifts, and live ERP exposure.",
-      boundary: "Replaces point-in-time onboarding checks with continuous risk re-rating triangulated against live purchases, sales, advances, and loans.",
-      artifact: "ERP Exposure Triangulation Matrix · In-Flight Payment Hold Queue · Counterparty Risk Dossiers",
-      us: "Supports DOJ continuous monitoring expectations, FCPA/UKBA ownership attribution, and OFAC 50% rule compliance.",
-      benefits: [
-        "Continuously monitors 100% of active suppliers, JVs, and customers with automated hard-gate risk overrides",
-        "Triangulates Medium, High, and Severe counterparties against live purchases, sales, advances, and loans",
-        "Flags dual-role entities (Vendor + Customer), state-owned UBO chains, and pre-payout holds"
-      ]
-    },
-    {
-      id: "aegis",
-      prefix: "Trade Compliance",
-      name: "Aegis",
-      absorbs: "Post-Clearance Export Control & Trade Diversion Sentinel",
-      suite: ["audit"],
-      persona: "General Counsel · CCO · Trade Compliance",
-      lineage: "Sales Orders · Export Shipping Logs · Partner Addresses · D7",
-      tagline: "Monitors permitted export orders after initial screening to catch mid-flight routing flips and transshipment diversion.",
-      boundary: "Sits downstream of point-of-sale trade screening to detect post-clearance Ship-To modifications and transshipment rings.",
-      artifact: "Sealed Diversion Evidence Dossier · Transshipment Network Graph · Counsel Review Pack",
-      us: "Supports US EAR, ITAR, OFAC sanctions evasion controls, and BIS Red Flag compliance inside zero-egress boundaries.",
-      benefits: [
-        "Closes the post-clearance blind spot after point-of-sale screening stamps an order permitted",
-        "Detects mid-flight Ship-To address and country modifications before shipment departure",
-        "Maps multi-account transshipment hub rings and shared freight-forwarder drops",
-        "Routes escalations under two-person Maker-Checker approval with cryptographically sealed dossiers"
-      ]
-    },
-    {
-      id: "veritas",
-      prefix: "ABAC & FCPA",
-      name: "Veritas",
-      absorbs: "Global Anti-Bribery, FCPA & T&E Corruption Surveillance",
-      suite: ["audit"],
-      persona: "General Counsel · CCO · Audit Committee",
-      lineage: "Vendor Payments · Manual Journals · T&E Expenses · D7 PEP/Sanctions",
-      tagline: "Surveils third-party intermediaries, high-risk corridors, and T&E hospitality for bribery and corruption red flags.",
-      boundary: "Correlates live disbursements, manual journals, and T&E hospitality around tender award dates and PEP links.",
-      artifact: "ABAC Risk Register · Counsel Investigation Evidence Pack · Third-Party Red-Flag Dossier",
-      us: "Maps directly to FCPA anti-bribery and books-and-records provisions, UK Bribery Act, DOJ ECCP, and ISO 37001.",
-      benefits: [
-        "Correlates vendor payments, manual journals, and T&E hospitality against tender award timelines",
-        "Eliminates alert fatigue via calibrated indicator tiering and composite entity risk scoring",
-        "Assembles attorney-client privileged investigation dossiers supporting regulatory cooperation",
-        "Monitors sponsorships, donations, and customs broker markups across high-risk jurisdictions"
-      ]
-    },
-    {
-      id: "argus",
-      prefix: "Forensics",
-      name: "Argus",
-      absorbs: "Multi-Process Fraud Clustering & Whistleblower Workbench",
-      suite: ["audit", "proc"],
-      persona: "CAE · Head of Internal Audit · Forensics Lead",
-      lineage: "Full 8-Dimension Forensic Spine · HR Master · Vendor Master",
-      tagline: "Turns whistleblower tips and multi-signal anomalies into court-ready forensic investigation dossiers in one click.",
-      boundary: "Deterministically resolves employee-vendor identity links across HR and ERP records to assemble immutable case files.",
-      artifact: "Forensic Investigation Report (Word/PDF) · Employee-Vendor Collusion Graph · ROI Waterfall",
-      us: "Aligned with AICPA forensic standards, PCAOB evidentiary rules, SOX 301 whistleblower mandates, and DOJ criteria.",
-      benefits: [
-        "Auto-generates structured forensic reports mapping COSO root causes and Fraud Triangle indicators",
-        "Exposes employee-vendor bank, address, and phone collisions across HR and vendor records",
-        "Traces flagged items end-to-end from purchase order through goods receipt, invoice, and payment",
-        "Preserves whistleblower anonymity while testing allegations against millions of records in seconds"
-      ]
-    },
-    {
-      id: "d7",
-      prefix: "3rd-Party Intelligence",
-      name: "D7",
-      absorbs: "8-Dimension Counterparty & Statutory Substance Engine",
-      suite: ["audit", "proc"],
-      persona: "CCO · CPO · Third-Party Risk Management",
-      lineage: "Statutory, Tax, Factory Headcount, Sanctions, UBO & Litigation Feeds",
-      tagline: "Delivers outside-in counterparty substance intelligence—powering onboarding and every Fortifai agent.",
-      boundary: "Delivers scored 8-dimension substance verdicts inside your VPC via signed encrypted bundles so vendor lists never leave.",
-      artifact: "8-Dimension Counterparty Verdict Report · Statutory Substance Certificate",
-      us: "Supports OFAC sanctions compliance, DOJ third-party diligence standards, and litigation screening.",
-      benefits: [
-        "Delivers a scored 8-dimension counterparty verdict in hours rather than weeks",
-        "Exposes shell vendors by verifying statutory employee headcount, tax scope, and physical operations",
-        "Feeds structured external intelligence locally into Kuber, Conduit, Custos, Aegis, and Veritas",
-        "Triggers automated re-assessment when adverse litigation or ownership changes occur"
-      ]
-    },
-    {
-      id: "pulse",
-      prefix: "Continuous Audit",
-      name: "Pulse (Vigil & Codex)",
-      absorbs: "100% SOX Control Automation & Pre-Posting PDF Forensics",
-      suite: ["audit", "fin"],
-      persona: "CAE · Chief Risk Officer · SOX Director",
-      lineage: "170+ Enterprise Control Models · Incoming Invoice & Bid PDF Streams",
-      tagline: "Replaces quarterly audit sampling with continuous 100% population testing across 170+ SOX controls and PDF forensics.",
-      boundary: "Tests 100% of transactions continuously and screens incoming invoice and bid PDFs for tampering before ERP posting.",
-      artifact: "COSO 2013 Control Breach Register · Audit Reliance Pack · PDF Tampering & M&A Diligence Pack",
-      us: "Aligns with COSO 2013, SOX 302/404, PCAOB AS 2201 audit reliance standards, and M&A forensic diligence.",
-      benefits: [
-        "Tests 100% of transactions continuously—eliminating sampling gaps across P2P, O2C, Inventory, and GL",
-        "Reduces external audit substantive testing hours with documented, repeatable control evidence",
-        "Blocks fabricated invoices and collusive bids sharing identical PDF metadata before ERP posting",
-        "Accelerates M&A Quality of Earnings (QoE) and successor-liability forensic diligence"
-      ]
-    }
-  ];
-
-  var SUITE_HTML = {
-    tower: '<span class="fl fl-tower">Control Tower Spine</span>',
-    proc:  '<span class="fl fl-proc">Procurement &amp; Supply Chain</span>',
-    fin:   '<span class="fl fl-fin">Finance &amp; Working Capital</span>',
-    sales: '<span class="fl fl-sales">Sales &amp; Revenue (O2C)</span>',
-    audit: '<span class="fl fl-audit">Audit, Risk &amp; Compliance</span>'
-  };
-
-  var cf = 'all', sq = '', expanded = {}, allOpen = false, viewMode = 'cards', activeDrawer = null;
-
-  function esc(s) {
-    return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-  }
-
-  function getCounts() {
-    var fc = { proc: 0, fin: 0, sales: 0, audit: 0, tower: 0 };
-    PRODUCTS.forEach(function(p) {
-      p.suite.forEach(function(s) { if (fc[s] !== undefined) fc[s]++; });
-    });
-    return fc;
-  }
-
-  function getFiltered() {
-    return PRODUCTS.filter(function(p) {
-      var fm = cf === 'all' || p.suite.indexOf(cf) > -1;
-      var sm = !sq ||
-        p.name.toLowerCase().indexOf(sq) > -1 ||
-        p.absorbs.toLowerCase().indexOf(sq) > -1 ||
-        p.tagline.toLowerCase().indexOf(sq) > -1 ||
-        p.persona.toLowerCase().indexOf(sq) > -1 ||
-        p.lineage.toLowerCase().indexOf(sq) > -1 ||
-        p.artifact.toLowerCase().indexOf(sq) > -1;
-      return fm && sm;
-    });
-  }
-
-  function toggleCard(id) {
-    expanded[id] = !expanded[id];
-    render();
-  }
-
-  function toggleAll() {
-    allOpen = !allOpen;
-    PRODUCTS.forEach(function(p) { expanded[p.id] = allOpen; });
-    render();
-  }
-
-  function toggleDrawer(d) {
-    activeDrawer = (activeDrawer === d) ? null : d;
-    render();
-  }
-
-  function setFilter(f) { cf = f; render(); }
-  function setSearch(v) { sq = v.toLowerCase(); render(); }
-  function setView(v) { viewMode = v; render(); }
-
-  function render() {
-    var fc = getCounts();
-    var vis = getFiltered();
-    var buf = [];
-
-    // Top Interactive Drawers
-    buf.push('<div class="arch-bar">');
-    buf.push('<div class="arch-toggles">');
-    buf.push('<button class="arch-btn' + (activeDrawer === 'interlock' ? ' on' : '') + '" data-drawer="interlock">⇄ Cross-Agent Interlock Map</button>');
-    buf.push('<button class="arch-btn' + (activeDrawer === 'waterfall' ? ' on' : '') + '" data-drawer="waterfall">▤ 4-Rung Economic Precedence Waterfall</button>');
-    buf.push('</div>');
-    buf.push('</div>');
-
-    // Drawer 1: Cross-Agent Interlock Map
-    if (activeDrawer === 'interlock') {
-      buf.push('<div class="arch-drawer open">');
-      buf.push('<div class="drawer-title">How Fortifai Agents Interlock on the Unified Data Spine</div>');
-      buf.push('<div class="drawer-sub">Every agent reads and writes to the shared Case &amp; Insights Store so commercial recommendations automatically respect upstream compliance and risk flags:</div>');
-      buf.push('<div class="interlock-grid">');
-      buf.push('<div class="il-card"><div class="il-title">1 · Sourcing Award Veto Gate</div><div class="il-desc">Before <strong>Kuber</strong> recommends awarding volume to a supplier, it verifies the vendor is not flagged as a shell trader in <strong>Conduit</strong>, a high-risk entity in <strong>Custos</strong>, or a bribery risk in <strong>Veritas</strong>.</div></div>');
-      buf.push('<div class="il-card"><div class="il-title">2 · Clean-Demand Sanitization</div><div class="il-desc"><strong>Horizon</strong> ingests <strong>Surge\'s</strong> channel-stuffing and cancel-rebill flags and strips those quarter-end spikes out of historical sales before running demand forecasts.</div></div>');
-      buf.push('<div class="il-card"><div class="il-title">3 · Dual Revenue Assurance Boundary</div><div class="il-desc"><strong>Surge</strong>, <strong>Pricing Integrity</strong>, and <strong>Discounting Risk</strong> guard order-to-cash billing, while <strong>Crystal</strong> catches top-side manual ledger adjustments—ensuring 100% revenue coverage.</div></div>');
-      buf.push('<div class="il-card"><div class="il-title">4 · Signed In-VPC Enrichment</div><div class="il-desc"><strong>D7</strong> delivers signed statutory snapshots (factory headcount, tax scope, sanctions, UBO graphs) inside your VPC—consumed locally by <strong>Kuber, Conduit, Custos, Aegis, and Veritas</strong>.</div></div>');
-      buf.push('</div></div>');
-    }
-
-    // Drawer 2: 4-Rung Economic Precedence Waterfall
-    if (activeDrawer === 'waterfall') {
-      buf.push('<div class="arch-drawer open">');
-      buf.push('<div class="drawer-title">The 4-Rung Economic Precedence Waterfall (Zero Double-Counted Savings)</div>');
-      buf.push('<div class="drawer-sub">When multiple Procurement and Finance agents flag the same transaction line, Fortifai applies a strict 4-step precedence waterfall so claimed savings never overlap:</div>');
-      buf.push('<div class="interlock-grid">');
-      buf.push('<div class="il-card"><div class="il-title">1 · Disbursement &amp; Invoice Clawback</div><div class="il-desc">Claims duplicate invoices (<strong>Moneta</strong>), weighbridge short-supply breaks (<strong>Manifest</strong>), and invoice-above-PO overbilling (<strong>Kuber</strong>) first via debit-memo set-off.</div></div>');
-      buf.push('<div class="il-card"><div class="il-title">2 · Contract &amp; OEM Disintermediation</div><div class="il-desc">On the remaining valid order price, claims pass-through trader markup down to the direct manufacturer rate (<strong>Conduit</strong>) or active contract rate (<strong>Kuber</strong>).</div></div>');
-      buf.push('<div class="il-card"><div class="il-title">3 · Commodity Index Reset</div><div class="il-desc">On uncontracted direct spend, claims the spread between terms-adjusted order price and landed commodity benchmarks (<strong>Kuber</strong>).</div></div>');
-      buf.push('<div class="il-card"><div class="il-title">4 · Volume Consolidation &amp; DPO Yield</div><div class="il-desc">Applies tail consolidation and RFQ discounts (<strong>Kuber</strong>) strictly to residual un-benchmarked spend, while <strong>Moneta</strong> tracks working-capital DPO release separately.</div></div>');
-      buf.push('</div></div>');
-    }
-
-    // 5 Suite Pillar Cards
-    buf.push('<div class="count-grid">');
-    var ccDefs = [
-      { k: 'proc',  c: 'cc-proc',  p: 'CPO · COO',        l: 'Procurement & Supply Chain', s: 'Kuber · Conduit · Vantage · Manifest' },
-      { k: 'fin',   c: 'cc-fin',   p: 'CFO · Controller', l: 'Finance & Working Capital',  s: 'Crystal · Moneta · Tenor' },
-      { k: 'sales', c: 'cc-sales', p: 'CRO · Comm Fin',   l: 'Sales & Revenue (O2C)',      s: 'Surge · Pricing · Discounting · Horizon · Margin' },
-      { k: 'audit', c: 'cc-audit', p: 'CAE · GC · CCO',   l: 'Audit, Risk & Compliance',   s: 'Custos · Aegis · Veritas · Argus · D7 · Pulse' },
-      { k: 'tower', c: 'cc-tower', p: 'CEO · Board',      l: 'Executive Control Tower',    s: 'SARA Control Tower · QuantumQuery' }
-    ];
-    ccDefs.forEach(function(d) {
-      var sel = cf === d.k ? ' sel' : '';
-      buf.push('<div class="cc ' + d.c + sel + '" data-filter="' + d.k + '">');
-      buf.push('<div class="cc-top"><div class="cc-num">' + fc[d.k] + '</div><span class="cc-persona">' + d.p + '</span></div>');
-      buf.push('<div class="cc-lbl">' + d.l + '</div>');
-      buf.push('<div class="cc-sub">' + d.s + '</div>');
-      buf.push('</div>');
-    });
-    buf.push('</div>');
-
-    // Filter Bar
-    buf.push('<div class="filterbar">');
-    var filters = [
-      { f: 'all',   l: 'All 18 Agents' },
-      { f: 'proc',  l: 'Procurement & Supply Chain' },
-      { f: 'fin',   l: 'Finance & Working Capital' },
-      { f: 'sales', l: 'Sales & Revenue (O2C)' },
-      { f: 'audit', l: 'Audit, Risk & Compliance' },
-      { f: 'tower', l: 'Executive Control Tower' }
-    ];
-    filters.forEach(function(d) {
-      buf.push('<div class="fc' + (cf === d.f ? ' on' : '') + '" data-filter="' + d.f + '">' + d.l + '</div>');
-    });
-    buf.push('<div class="search-wrap">');
-    buf.push('<button class="view-btn' + (viewMode === 'cards' ? ' active' : '') + '" data-view="cards">⊞ Card View</button>');
-    buf.push('<button class="view-btn' + (viewMode === 'matrix' ? ' active' : '') + '" data-view="matrix">☰ Executive Matrix</button>');
-    if (viewMode === 'cards') {
-      buf.push('<button class="view-btn" id="expand-all-btn">' + (allOpen ? '▲ Collapse Specs' : '▼ Expand All Specs') + '</button>');
-    }
-    buf.push('<input class="search-box" type="text" placeholder="Search agent, role, domain..." id="search-input" value="' + esc(sq) + '">');
-    buf.push('</div>');
-    buf.push('</div>');
-
-    // Render View Mode
-    if (!vis.length) {
-      buf.push('<div class="empty">No AI agents match this filter or search query.</div>');
-    } else if (viewMode === 'matrix') {
-      buf.push('<div class="matrix-wrap"><table class="matrix-tbl">');
-      buf.push('<thead><tr><th>Agent &amp; Focus</th><th>Suite &amp; Scope</th><th>What It Catches Beyond Standard Controls</th><th>Data Domains</th><th>Key Deliverables</th></tr></thead><tbody>');
-      vis.forEach(function(p) {
-        var badges = p.suite.map(function(s) { return SUITE_HTML[s] || ''; }).join(' ');
-        buf.push('<tr>');
-        buf.push('<td><div class="m-agent">' + esc(p.name) + '</div><div style="font-family:\'DM Mono\',monospace;font-size:10px;color:var(--mg);margin-top:2px">' + esc(p.prefix) + ' · ' + esc(p.persona) + '</div></td>');
-        buf.push('<td><div style="margin-bottom:4px">' + badges + '</div><span class="fl fl-absorbs">' + esc(p.absorbs) + '</span></td>');
-        buf.push('<td>' + esc(p.boundary) + '</td>');
-        buf.push('<td style="font-family:\'DM Mono\',monospace;font-size:10.5px">' + esc(p.lineage) + '</td>');
-        buf.push('<td>' + esc(p.artifact) + '</td>');
-        buf.push('</tr>');
-      });
-      buf.push('</tbody></table></div>');
-    } else {
-      var featHtml = SF.map(function(f) { return '<li>' + esc(f) + '</li>'; }).join('');
-      buf.push('<div class="product-grid">');
-      vis.forEach(function(p) {
-        var isOpen = !!expanded[p.id];
-        buf.push('<div class="product-card' + (isOpen ? ' expanded' : '') + '" id="card-' + p.id + '">');
-        buf.push('<div class="card-head"><div class="card-name">' + esc(p.name) + '</div><span class="card-id-prefix">' + esc(p.prefix) + '</span></div>');
-        buf.push('<div class="card-tag">' + esc(p.tagline) + '</div>');
-        buf.push('<div class="card-div"></div>');
-
-        if (isOpen) {
-          var benHtml = p.benefits.map(function(b) { return '<li>' + esc(b) + '</li>'; }).join('');
-          buf.push('<div class="card-extra open">');
-          buf.push('<div class="xs xs-ben"><div class="xs-lbl">Key Outcomes</div><ul class="ben-list">' + benHtml + '</ul></div>');
-          buf.push('<div class="xs xs-us"><div class="xs-lbl">Regulatory &amp; Audit Alignment</div><div class="xs-body">' + esc(p.us) + '</div></div>');
-          buf.push('<div class="xs xs-feat"><div class="xs-lbl">Built-In Platform Guardrails</div><ul class="feat-list">' + featHtml + '</ul></div>');
-          buf.push('</div>');
+        if (list.length === 0) {
+          grid.style.display = 'none';
+          empty.style.display = 'block';
+          return;
         }
 
-        buf.push('<div class="card-foot">');
-        buf.push('<button class="xbtn" data-toggle="' + p.id + '">' + (isOpen ? '▲ Hide details' : '▼ Outcomes &amp; guardrails') + '</button>');
-        buf.push('</div>');
-        buf.push('</div>');
-      });
-      buf.push('</div>');
-    }
+        grid.style.display = 'grid';
+        empty.style.display = 'none';
 
-    var el = document.getElementById('ca');
-    el.innerHTML = buf.join('');
+        grid.innerHTML = list
+          .map(
+            (agent) => `
+          <article class="agent-card">
+            <div>
+              <div class="agent-meta mono">
+                <span class="agent-suite-tag">${escapeHtml(agent.suiteLabel)}</span>
+                <span class="agent-index">${escapeHtml(agent.indexBadge)}</span>
+              </div>
+              <h2 class="agent-title">${escapeHtml(agent.title)}</h2>
+              <p class="agent-desc">${escapeHtml(agent.description)}</p>
+            </div>
+            <div class="agent-footer">
+              <div><span>Signals:</span> ${escapeHtml(agent.signals)}</div>
+              <div><span>Output:</span> ${escapeHtml(agent.output)}</div>
+            </div>
+          </article>
+        `
+          )
+          .join('');
+      }
 
-    el.querySelectorAll('[data-filter]').forEach(function(btn) {
-      btn.addEventListener('click', function() { setFilter(btn.getAttribute('data-filter')); });
-    });
-    el.querySelectorAll('[data-toggle]').forEach(function(btn) {
-      btn.addEventListener('click', function() { toggleCard(btn.getAttribute('data-toggle')); });
-    });
-    el.querySelectorAll('[data-drawer]').forEach(function(btn) {
-      btn.addEventListener('click', function() { toggleDrawer(btn.getAttribute('data-drawer')); });
-    });
-    el.querySelectorAll('[data-view]').forEach(function(btn) {
-      btn.addEventListener('click', function() { setView(btn.getAttribute('data-view')); });
-    });
-    var expBtn = document.getElementById('expand-all-btn');
-    if (expBtn) expBtn.addEventListener('click', toggleAll);
+      function filterSuite(suite, btn) {
+        activeSuite = suite;
+        document.querySelectorAll('.filter-btn').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        applyFilters();
+      }
 
-    var si = document.getElementById('search-input');
-    if (si) {
-      si.addEventListener('input', function() {
-        var pos = si.selectionStart;
-        setSearch(si.value);
-        var newSi = document.getElementById('search-input');
-        if (newSi) { newSi.focus(); newSi.setSelectionRange(pos, pos); }
-      });
-    }
-  }
+      function resetFilters() {
+        activeSuite = 'ALL';
+        const searchEl = document.getElementById('agent-search');
+        if (searchEl) searchEl.value = '';
+        const buttons = document.querySelectorAll('.filter-btn');
+        buttons.forEach((b, i) => {
+          if (i === 0) b.classList.add('active');
+          else b.classList.remove('active');
+        });
+        renderAgents(AGENTS);
+      }
 
-  render();
-})();
-</script>
-</body>
+      function applyFilters() {
+        const query = (document.getElementById('agent-search').value || '').trim().toLowerCase();
+        const filtered = AGENTS.filter((a) => {
+          const matchesSuite = activeSuite === 'ALL' || a.suite === activeSuite;
+          if (!matchesSuite) return false;
+          if (!query) return true;
+          const haystack = `${a.indexBadge} ${a.suiteLabel} ${a.title} ${a.description} ${a.signals} ${a.output}`.toLowerCase();
+          return haystack.includes(query);
+        });
+        renderAgents(filtered);
+      }
+
+      renderAgents(AGENTS);
+    </script>
+  </body>
 </html>

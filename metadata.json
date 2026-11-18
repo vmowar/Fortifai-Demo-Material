@@ -1,0 +1,6 @@
+{
+  "name": "Fortifai Executive Briefing & Partner Data Room",
+  "description": "Confidential executive briefing and partner data room for overview.fortifai.io — interactive platform walkthrough, Fortifai SARA 3D multi-agent VPC architecture, and the specialized domain agent suite.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
