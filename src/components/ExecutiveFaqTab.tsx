@@ -37,7 +37,7 @@ function renderFormattedInline(text: string): React.ReactNode[] {
   return segments.map((seg, idx) => {
     if (seg.startsWith('**') && seg.endsWith('**') && seg.length > 4) {
       return (
-        <strong key={idx} className="font-semibold text-[#163B66]">
+        <strong key={idx} className="font-semibold text-[#0F172A]">
           {seg.slice(2, -2)}
         </strong>
       );
@@ -46,7 +46,7 @@ function renderFormattedInline(text: string): React.ReactNode[] {
       return (
         <code
           key={idx}
-          className="rounded-[4px] bg-[#EEF2F7] px-1 py-0.5 font-mono-tabular text-[11px] font-medium text-[#163B66]"
+          className="rounded-[5px] bg-[#F5F5F7] border border-[#E5E7EB] px-1.5 py-0.5 font-mono-tabular text-[13px] font-medium text-[#163B66]"
         >
           {seg.slice(1, -1)}
         </code>
@@ -85,16 +85,16 @@ function renderFormattedAnswer(answer: string): React.ReactNode {
   }
 
   return (
-    <div className="space-y-2 text-[12.5px] sm:text-[13px] leading-[1.58] text-[#4B5B6E]">
+    <div className="space-y-3 text-[14.5px] leading-[1.65] text-[#334155]">
       {blocks.map((block, bIdx) => {
         if (block.type === 'bullets') {
           return (
-            <ul key={bIdx} className="space-y-1.5 pl-0.5">
+            <ul key={bIdx} className="space-y-2 pl-1">
               {block.items.map((bullet, iIdx) => (
-                <li key={iIdx} className="flex items-start gap-2">
+                <li key={iIdx} className="flex items-start gap-2.5">
                   <span
                     aria-hidden="true"
-                    className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#2E5A8A] shrink-0"
+                    className="mt-2 h-1.5 w-1.5 rounded-full bg-[#163B66] shrink-0"
                   />
                   <span>{renderFormattedInline(bullet)}</span>
                 </li>
@@ -189,30 +189,30 @@ export const ExecutiveFaqTab: React.FC<ExecutiveFaqTabProps> = ({
   };
 
   return (
-    <div className="mx-auto max-w-[1120px] px-4 sm:px-6 pt-4 pb-10 space-y-4">
+    <div className="mx-auto max-w-[1240px] px-5 sm:px-8 pt-8 pb-16 space-y-8">
       {/* Editorial Header */}
-      <header className="flex flex-col md:flex-row md:items-end justify-between gap-3">
-        <div className="space-y-1 max-w-[740px]">
-          <span className="inline-flex items-center gap-1.5 rounded-[5px] px-2 py-0.5 fortifai-pill uppercase">
-            <HelpCircle className="w-3 h-3 text-[#2E5A8A] shrink-0" />
+      <header className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div className="space-y-2 max-w-[780px]">
+          <span className="inline-flex items-center gap-1.5 rounded-[6px] px-2.5 py-1 fortifai-pill">
+            <HelpCircle className="w-3.5 h-3.5 text-[#163B66] shrink-0" />
             <span>{config.pillLabel}</span>
           </span>
-          <h1 className="text-[21px] sm:text-[22px] font-medium leading-[1.2] tracking-[-0.02em] text-[#163B66] text-balance">
+          <h1 className="text-[clamp(26px,2.6vw,32px)] font-medium leading-[1.18] tracking-[-0.02em] text-[#163B66] text-balance">
             {config.headline}
           </h1>
-          <p className="text-[13px] leading-[1.52] text-[#4B5B6E]">
+          <p className="text-[15px] leading-[1.6] text-[#475569]">
             {config.subtitle}
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2 shrink-0">
+        <div className="flex flex-wrap items-center gap-2.5 shrink-0">
           {showLiveCmsButton && (
             <button
               type="button"
               onClick={onOpenCmsFaq}
-              className="inline-flex items-center gap-1.5 rounded-[7px] bg-[#E8F0F8] hover:bg-[#DCE8F5] border border-[#6699CC]/35 px-2.5 py-1.5 font-mono-tabular text-[10.5px] font-medium text-[#163B66] whitespace-nowrap transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-[8px] bg-[#FFFFFF] hover:bg-[#F5F5F7] border border-[#E5E7EB] px-3.5 py-2 font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] uppercase text-[#163B66] whitespace-nowrap transition-colors cursor-pointer"
             >
-              <Plus className="w-3 h-3 text-[#2E5A8A]" />
+              <Plus className="w-3.5 h-3.5 text-[#163B66]" />
               <span>Add / Edit FAQ in Live CMS</span>
             </button>
           )}
@@ -221,10 +221,10 @@ export const ExecutiveFaqTab: React.FC<ExecutiveFaqTabProps> = ({
             href={bookDemoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-[7px] bg-[#163B66] hover:bg-[#2E5A8A] text-[#FFFFFF] px-3 py-1.5 text-[12px] font-medium whitespace-nowrap transition-colors"
+            className="inline-flex items-center gap-1.5 rounded-[8px] bg-[#163B66] hover:bg-[#2E5A8A] text-[#FFFFFF] px-4 py-2 text-[14px] font-medium whitespace-nowrap transition-colors"
           >
             <span>Schedule Committee Briefing</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
+            <ArrowUpRight className="w-4 h-4" />
           </a>
         </div>
       </header>
@@ -232,41 +232,41 @@ export const ExecutiveFaqTab: React.FC<ExecutiveFaqTabProps> = ({
       {/* Search + Expand/Collapse Controls + 7 Category Filter Pills */}
       <section
         aria-label="Search and Filter Buyer Committee FAQ"
-        className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-[12px] p-3.5 sm:p-4 fortifai-card-shadow space-y-2.5"
+        className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-[14px] p-6 sm:p-7 fortifai-card-shadow space-y-5"
       >
         {/* Top Row: Live Keyword Search + Count + Expand All / Collapse All */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
-          <div className="relative flex-1 max-w-[560px]">
-            <Search className="w-3.5 h-3.5 text-[#64748B] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="relative flex-1 max-w-[600px]">
+            <Search className="w-4 h-4 text-[#64748B] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
               type="search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search questions by keyword, e.g., SAP, BOOT, privilege, customization..."
               aria-label="Search questions by keyword"
-              className="w-full h-[34px] rounded-[7px] border border-[#D1D5DB] bg-[#FFFFFF] pl-8 pr-8 text-[12.5px] text-[#0D1520] placeholder:text-[#94A3B8] focus:outline-none focus:border-[#2E5A8A] focus:ring-2 focus:ring-[#2E5A8A]/15"
+              className="w-full h-[42px] rounded-[8px] border border-[#D1D5DB] bg-[#FFFFFF] pl-10 pr-9 text-[14.5px] text-[#0F172A] placeholder:text-[#64748B] focus:outline-none focus:border-[#163B66] focus:ring-2 focus:ring-[#163B66]/15"
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => setSearchQuery('')}
                 aria-label="Clear search query"
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#64748B] hover:text-[#163B66] cursor-pointer"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#64748B] hover:text-[#163B66] cursor-pointer"
               >
-                <X className="w-3.5 h-3.5" />
+                <X className="w-4 h-4" />
               </button>
             )}
           </div>
 
-          <div className="flex items-center justify-between sm:justify-end gap-2.5 shrink-0">
-            <span className="font-mono-tabular text-[10.5px] font-medium text-[#64748B]">
+          <div className="flex items-center justify-between sm:justify-end gap-3 shrink-0">
+            <span className="font-mono-tabular text-[12px] font-medium tracking-[0.05em] uppercase text-[#64748B]">
               {filteredIndexedItems.length} OF {config.items.length} QUESTIONS
             </span>
             <button
               type="button"
               onClick={handleToggleExpandAll}
               disabled={filteredIndexedItems.length === 0}
-              className="rounded-[7px] bg-[#F8FAFC] hover:bg-[#E8F0F8] border border-[#E5E7EB] px-2.5 py-1 font-mono-tabular text-[11px] font-medium text-[#163B66] whitespace-nowrap transition-colors cursor-pointer disabled:opacity-45"
+              className="rounded-[8px] bg-[#F5F5F7] hover:bg-[#E8F0F8] border border-[#E5E7EB] px-3.5 py-1.5 font-mono-tabular text-[12px] font-medium tracking-[0.04em] uppercase text-[#163B66] whitespace-nowrap transition-colors cursor-pointer disabled:opacity-45"
             >
               {allFilteredOpen ? 'Collapse All' : 'Expand All'}
             </button>
@@ -277,7 +277,7 @@ export const ExecutiveFaqTab: React.FC<ExecutiveFaqTabProps> = ({
         <div
           role="tablist"
           aria-label="FAQ Category Filter"
-          className="flex flex-wrap items-center gap-1.5 pt-2.5 border-t border-[#F1F5F9]"
+          className="flex flex-wrap items-center gap-2 pt-4 border-t border-[#E5E7EB]"
         >
           {FAQ_FILTER_PILLS.map((pill) => {
             const isActive = selectedCategory === pill;
@@ -288,10 +288,10 @@ export const ExecutiveFaqTab: React.FC<ExecutiveFaqTabProps> = ({
                 role="tab"
                 aria-selected={isActive}
                 onClick={() => setSelectedCategory(pill)}
-                className={`rounded-[7px] px-2.5 py-1 text-[11.5px] font-medium whitespace-nowrap transition-colors cursor-pointer border ${
+                className={`rounded-[8px] px-3.5 py-1.5 text-[14px] whitespace-nowrap transition-colors cursor-pointer border ${
                   isActive
-                    ? 'bg-[#163B66] text-[#FFFFFF] border-[#163B66]'
-                    : 'bg-[#F8FAFC] text-[#4B5B6E] border-[#E5E7EB] hover:border-[#6699CC] hover:text-[#163B66]'
+                    ? 'bg-[#163B66] text-[#FFFFFF] border-[#163B66] font-semibold'
+                    : 'bg-[#FFFFFF] text-[#475569] border-[#E5E7EB] hover:bg-[#F5F5F7] hover:border-[#6699CC] hover:text-[#163B66] font-medium'
                 }`}
               >
                 {pill}
@@ -301,11 +301,11 @@ export const ExecutiveFaqTab: React.FC<ExecutiveFaqTabProps> = ({
         </div>
       </section>
 
-      {/* Grouped Accordion Q&A Sections */}
-      <div className="space-y-5">
+      {/* Grouped Accordion Q&A Sections — Unified #FFFFFF Hairline Sheets per Category */}
+      <div className="space-y-8">
         {groupedSections.length === 0 ? (
-          <div className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-[12px] p-6 text-center space-y-2 fortifai-card-shadow">
-            <p className="text-[13px] text-[#4B5B6E]">
+          <div className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-[14px] p-10 text-center space-y-3 fortifai-card-shadow">
+            <p className="text-[15px] text-[#475569]">
               No buyer diligence questions match your search or category filter.
             </p>
             <button
@@ -314,7 +314,7 @@ export const ExecutiveFaqTab: React.FC<ExecutiveFaqTabProps> = ({
                 setSelectedCategory('All Questions');
                 setSearchQuery('');
               }}
-              className="rounded-[7px] bg-[#163B66] hover:bg-[#2E5A8A] text-[#FFFFFF] px-3 py-1.5 text-[12px] font-medium cursor-pointer transition-colors"
+              className="rounded-[8px] bg-[#163B66] hover:bg-[#2E5A8A] text-[#FFFFFF] px-4 py-2 text-[14px] font-medium cursor-pointer transition-colors"
             >
               Reset Search &amp; Filters
             </button>
@@ -324,61 +324,65 @@ export const ExecutiveFaqTab: React.FC<ExecutiveFaqTabProps> = ({
             <section
               key={group.category}
               aria-label={group.category}
-              className="space-y-2"
+              className="space-y-3"
             >
               {/* Category Group Header */}
-              <div className="flex items-center justify-between gap-2.5 px-0.5">
-                <h2 className="text-[13.5px] font-semibold leading-[1.3] tracking-[-0.01em] text-[#163B66]">
+              <div className="flex items-center justify-between gap-4 px-1">
+                <h3 className="text-[17.5px] font-semibold leading-[1.3] tracking-[-0.01em] text-[#163B66]">
                   {group.category}
-                </h2>
+                </h3>
                 <div className="flex-1 h-[1px] bg-[#E5E7EB]" />
-                <span className="font-mono-tabular text-[10.5px] font-medium text-[#64748B] whitespace-nowrap">
+                <span className="font-mono-tabular text-[12px] font-medium tracking-[0.05em] uppercase text-[#64748B] whitespace-nowrap">
                   {group.entries.length}{' '}
                   {group.entries.length === 1 ? 'Q&A' : 'Q&As'}
                 </span>
               </div>
 
-              {/* Category Accordion Cards — Clean Row Without Repeated Category Eyebrow */}
-              <div className="space-y-1.5">
+              {/* Unified #FFFFFF Hairline Accordion Sheet (Zero Repeated Category Eyebrows) */}
+              <div className="rounded-[14px] bg-[#FFFFFF] border border-[#E5E7EB] fortifai-card-shadow divide-y divide-[#E5E7EB] overflow-hidden">
                 {group.entries.map(({ item, canonicalNumber }) => {
                   const isOpen = Boolean(openIds[item.id]);
                   return (
                     <article
                       key={item.id}
-                      className={`rounded-[10px] bg-[#FFFFFF] border transition-colors fortifai-card-shadow overflow-hidden ${
-                        isOpen ? 'border-[#2E5A8A]' : 'border-[#E5E7EB]'
-                      }`}
+                      className={
+                        isOpen ? 'bg-[#F8FAFC]/45' : 'bg-[#FFFFFF] hover:bg-[#F8FAFC]/50 transition-colors'
+                      }
                     >
                       <button
                         type="button"
                         onClick={() => handleToggleItem(item.id)}
                         aria-expanded={isOpen}
-                        className="w-full px-4 py-2.5 sm:py-3 flex items-center justify-between gap-3 text-left cursor-pointer"
+                        className="w-full px-6 sm:px-7 py-5 flex items-center justify-between gap-4 text-left cursor-pointer"
                       >
-                        <div className="flex items-center gap-3 min-w-0">
+                        <div className="flex items-center gap-4 min-w-0">
                           <span
-                            className={`h-6 w-6 rounded-[6px] font-mono-tabular text-[10.5px] font-medium flex items-center justify-center shrink-0 transition-colors ${
+                            className={`rounded-[6px] px-2 py-0.5 font-mono-tabular text-[12px] font-medium tracking-[0.05em] shrink-0 transition-colors ${
                               isOpen
                                 ? 'bg-[#163B66] text-[#FFFFFF]'
-                                : 'bg-[#E8F0F8] text-[#2E5A8A]'
+                                : 'bg-[#F5F5F7] border border-[#E5E7EB] text-[#64748B]'
                             }`}
                           >
                             {canonicalNumber}
                           </span>
-                          <h3 className="text-[13.5px] sm:text-[14px] font-medium leading-[1.35] text-[#163B66]">
+                          <h3
+                            className={`text-[17.5px] font-semibold leading-[1.35] tracking-[-0.01em] ${
+                              isOpen ? 'text-[#163B66]' : 'text-[#0F172A]'
+                            }`}
+                          >
                             {item.question}
                           </h3>
                         </div>
 
                         <ChevronDown
-                          className={`w-3.5 h-3.5 text-[#64748B] shrink-0 transition-transform duration-200 ${
-                            isOpen ? 'rotate-180 text-[#2E5A8A]' : ''
+                          className={`w-4 h-4 text-[#64748B] shrink-0 transition-transform duration-200 ${
+                            isOpen ? 'rotate-180 text-[#163B66]' : ''
                           }`}
                         />
                       </button>
 
                       {isOpen && (
-                        <div className="px-4 pb-3.5 pt-2 sm:pl-[52px] border-t border-[#F1F5F9]">
+                        <div className="px-6 sm:px-7 pb-6 pt-3 sm:pl-[68px] border-t border-[#E5E7EB]/75">
                           {renderFormattedAnswer(item.answer)}
                         </div>
                       )}

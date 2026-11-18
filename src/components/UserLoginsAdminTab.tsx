@@ -400,9 +400,9 @@ export const UserLoginsAdminTab: React.FC<UserLoginsAdminTabProps> = ({
 
   if (checkingAuth) {
     return (
-      <div className="mx-auto max-w-[1200px] px-4 sm:px-6 pt-16 pb-12 flex flex-col items-center justify-center gap-2.5">
-        <div className="h-6 w-6 rounded-full border-2 border-[#2E5A8A] border-t-transparent animate-spin" />
-        <span className="font-mono-tabular text-[11px] font-medium tracking-[0.05em] text-[#2E5A8A]">
+      <div className="mx-auto max-w-[1240px] px-5 sm:px-8 pt-16 pb-16 flex flex-col items-center justify-center gap-3">
+        <div className="h-6 w-6 rounded-full border-2 border-[#163B66] border-t-transparent animate-spin" />
+        <span className="font-mono-tabular text-[12px] font-medium tracking-[0.05em] uppercase text-[#163B66]">
           VERIFYING @FORTIFAI.IO ADMIN SESSION…
         </span>
       </div>
@@ -412,17 +412,17 @@ export const UserLoginsAdminTab: React.FC<UserLoginsAdminTabProps> = ({
   // UNVERIFIED SUPABASE AUTH STATE — Render Daylight Editorial Admin Verification Card
   if (!verifiedAdminEmail) {
     return (
-      <div className="mx-auto max-w-[1200px] px-4 sm:px-6 pt-10 pb-14 flex items-center justify-center">
+      <div className="mx-auto max-w-[1240px] px-5 sm:px-8 pt-12 pb-16 flex items-center justify-center">
         <section
           aria-labelledby="admin-verify-heading"
-          className="w-full max-w-[480px] bg-[#FFFFFF] border border-[#E5E7EB] rounded-[16px] p-6 sm:p-8 fortifai-card-shadow space-y-4"
+          className="w-full max-w-[520px] bg-[#FFFFFF] border border-[#E5E7EB] rounded-[16px] p-7 sm:p-9 fortifai-card-shadow space-y-5"
         >
           <div className="flex items-center justify-between gap-3">
-            <span className="inline-flex items-center gap-1.5 rounded-[6px] px-2.5 py-1 fortifai-pill uppercase">
-              <Lock className="w-3.5 h-3.5 text-[#2E5A8A]" />
+            <span className="inline-flex items-center gap-1.5 rounded-[6px] px-2.5 py-1 fortifai-pill">
+              <Lock className="w-3.5 h-3.5 text-[#163B66]" />
               <span>INTERNAL RLS ENCLAVE</span>
             </span>
-            <span className="font-mono-tabular text-[10.5px] font-medium text-[#64748B]">
+            <span className="font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] uppercase text-[#64748B]">
               @FORTIFAI.IO ONLY
             </span>
           </div>
@@ -430,17 +430,21 @@ export const UserLoginsAdminTab: React.FC<UserLoginsAdminTabProps> = ({
           <div>
             <h1
               id="admin-verify-heading"
-              className="text-[24px] font-medium leading-[1.2] tracking-[-0.02em] text-[#163B66]"
+              className="text-[clamp(26px,2.6vw,32px)] font-medium leading-[1.18] tracking-[-0.02em] text-[#163B66]"
             >
               Admin Verification Required
             </h1>
-            <p className="mt-1.5 text-[14px] leading-[1.55] text-[#4B5B6E]">
-              Sign in with your <span className="font-mono-tabular text-[#163B66]">@fortifai.io</span> credentials to decrypt partner access logs.
+            <p className="mt-2 text-[15px] leading-[1.6] text-[#475569]">
+              Sign in with your{' '}
+              <span className="font-mono-tabular text-[#163B66]">
+                @fortifai.io
+              </span>{' '}
+              credentials to decrypt partner access logs.
             </p>
           </div>
 
           {/* Auth Mode Switcher */}
-          <div className="grid grid-cols-2 gap-1.5 rounded-[9px] bg-[#F8FAFC] border border-[#E5E7EB] p-1">
+          <div className="grid grid-cols-2 gap-1.5 rounded-[10px] bg-[#F5F5F7] border border-[#E5E7EB] p-1.5">
             <button
               type="button"
               onClick={() => {
@@ -448,13 +452,13 @@ export const UserLoginsAdminTab: React.FC<UserLoginsAdminTabProps> = ({
                 setAuthError(null);
                 setAuthNotice(null);
               }}
-              className={`inline-flex items-center justify-center gap-1.5 rounded-[7px] py-1.5 text-[12.5px] font-medium transition-colors cursor-pointer ${
+              className={`inline-flex items-center justify-center gap-2 rounded-[8px] py-2 text-[14px] transition-colors cursor-pointer ${
                 authMethod === 'password'
-                  ? 'bg-[#FFFFFF] text-[#163B66] border border-[#E5E7EB] shadow-[0_1px_2px_rgba(13,21,32,0.04)]'
-                  : 'text-[#4B5B6E] hover:text-[#163B66]'
+                  ? 'bg-[#FFFFFF] text-[#163B66] font-semibold border border-[#E5E7EB] shadow-[0_1px_2px_rgba(13,21,32,0.04)]'
+                  : 'text-[#475569] font-medium hover:text-[#163B66]'
               }`}
             >
-              <KeyRound className="w-3.5 h-3.5 text-[#2E5A8A]" />
+              <KeyRound className="w-4 h-4 text-[#163B66]" />
               <span>Password Sign-In</span>
             </button>
 
@@ -464,13 +468,13 @@ export const UserLoginsAdminTab: React.FC<UserLoginsAdminTabProps> = ({
                 setAuthMethod('otp');
                 setAuthError(null);
               }}
-              className={`inline-flex items-center justify-center gap-1.5 rounded-[7px] py-1.5 text-[12.5px] font-medium transition-colors cursor-pointer ${
+              className={`inline-flex items-center justify-center gap-2 rounded-[8px] py-2 text-[14px] transition-colors cursor-pointer ${
                 authMethod === 'otp'
-                  ? 'bg-[#FFFFFF] text-[#163B66] border border-[#E5E7EB] shadow-[0_1px_2px_rgba(13,21,32,0.04)]'
-                  : 'text-[#4B5B6E] hover:text-[#163B66]'
+                  ? 'bg-[#FFFFFF] text-[#163B66] font-semibold border border-[#E5E7EB] shadow-[0_1px_2px_rgba(13,21,32,0.04)]'
+                  : 'text-[#475569] font-medium hover:text-[#163B66]'
               }`}
             >
-              <Mail className="w-3.5 h-3.5 text-[#2E5A8A]" />
+              <Mail className="w-4 h-4 text-[#163B66]" />
               <span>One-Time Email Code</span>
             </button>
           </div>
@@ -478,26 +482,26 @@ export const UserLoginsAdminTab: React.FC<UserLoginsAdminTabProps> = ({
           {authError && (
             <div
               role="alert"
-              className="flex items-start gap-2 rounded-[10px] bg-[#FDECEC] border border-[#F3C5C5] px-3 py-2 text-[12.5px] leading-[1.45] text-[#8B1A1A]"
+              className="flex items-start gap-2.5 rounded-[10px] bg-[#FDECEC] border border-[#F3C5C5] px-3.5 py-2.5 text-[14px] leading-[1.55] text-[#8B1A1A]"
             >
-              <AlertCircle className="w-4 h-4 text-[#8B1A1A] shrink-0 mt-0.5" />
+              <AlertCircle className="w-4 h-4 text-[#8B1A1A] shrink-0 mt-1" />
               <span>{authError}</span>
             </div>
           )}
 
           {authNotice && (
-            <div className="flex items-start gap-2 rounded-[10px] bg-[#E8F0F8] border border-[#6699CC]/40 px-3 py-2 text-[12.5px] leading-[1.45] text-[#163B66]">
-              <CheckCircle2 className="w-4 h-4 text-[#2E5A8A] shrink-0 mt-0.5" />
+            <div className="flex items-start gap-2.5 rounded-[10px] bg-[#E8F0F8] border border-[#6699CC]/45 px-3.5 py-2.5 text-[14px] leading-[1.55] text-[#163B66]">
+              <CheckCircle2 className="w-4 h-4 text-[#163B66] shrink-0 mt-1" />
               <span>{authNotice}</span>
             </div>
           )}
 
           {authMethod === 'password' ? (
-            <form onSubmit={handlePasswordSignIn} className="space-y-3">
+            <form onSubmit={handlePasswordSignIn} className="space-y-4">
               <div>
                 <label
                   htmlFor="admin-auth-email"
-                  className="block text-[12px] font-medium text-[#163B66] mb-1"
+                  className="block text-[14px] font-medium text-[#0F172A] mb-1.5"
                 >
                   Fortifai Team Email
                 </label>
@@ -509,14 +513,14 @@ export const UserLoginsAdminTab: React.FC<UserLoginsAdminTabProps> = ({
                   placeholder="name@fortifai.io"
                   value={adminEmail}
                   onChange={(e) => setAdminEmail(e.target.value)}
-                  className="w-full h-[38px] rounded-[8px] border border-[#D1D5DB] bg-[#FFFFFF] px-3 text-[13.5px] text-[#0D1520] focus:outline-none focus:border-[#2E5A8A] focus:ring-2 focus:ring-[#2E5A8A]/20"
+                  className="w-full h-[42px] rounded-[8px] border border-[#D1D5DB] bg-[#FFFFFF] px-3.5 text-[14.5px] text-[#0F172A] placeholder:text-[#64748B] focus:outline-none focus:border-[#163B66] focus:ring-2 focus:ring-[#163B66]/15"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="admin-auth-password"
-                  className="block text-[12px] font-medium text-[#163B66] mb-1"
+                  className="block text-[14px] font-medium text-[#0F172A] mb-1.5"
                 >
                   Password
                 </label>
@@ -528,24 +532,26 @@ export const UserLoginsAdminTab: React.FC<UserLoginsAdminTabProps> = ({
                   placeholder="Enter admin password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full h-[38px] rounded-[8px] border border-[#D1D5DB] bg-[#FFFFFF] px-3 text-[13.5px] text-[#0D1520] focus:outline-none focus:border-[#2E5A8A] focus:ring-2 focus:ring-[#2E5A8A]/20"
+                  className="w-full h-[42px] rounded-[8px] border border-[#D1D5DB] bg-[#FFFFFF] px-3.5 text-[14.5px] text-[#0F172A] placeholder:text-[#64748B] focus:outline-none focus:border-[#163B66] focus:ring-2 focus:ring-[#163B66]/15"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={authLoading}
-                className="w-full h-[40px] rounded-[10px] bg-[#163B66] hover:bg-[#2E5A8A] text-[#FFFFFF] text-[13.5px] font-medium transition-colors cursor-pointer disabled:opacity-60"
+                className="w-full h-[44px] rounded-[10px] bg-[#163B66] hover:bg-[#2E5A8A] text-[#FFFFFF] text-[14.5px] font-medium transition-colors cursor-pointer disabled:opacity-60"
               >
-                {authLoading ? 'Verifying Credentials…' : 'Decrypt Partner Access Logs →'}
+                {authLoading
+                  ? 'Verifying Credentials…'
+                  : 'Decrypt Partner Access Logs →'}
               </button>
             </form>
           ) : !otpSent ? (
-            <form onSubmit={handleSendOtp} className="space-y-3">
+            <form onSubmit={handleSendOtp} className="space-y-4">
               <div>
                 <label
                   htmlFor="admin-otp-email"
-                  className="block text-[12px] font-medium text-[#163B66] mb-1"
+                  className="block text-[14px] font-medium text-[#0F172A] mb-1.5"
                 >
                   Fortifai Team Email
                 </label>
@@ -557,24 +563,26 @@ export const UserLoginsAdminTab: React.FC<UserLoginsAdminTabProps> = ({
                   placeholder="name@fortifai.io"
                   value={adminEmail}
                   onChange={(e) => setAdminEmail(e.target.value)}
-                  className="w-full h-[38px] rounded-[8px] border border-[#D1D5DB] bg-[#FFFFFF] px-3 text-[13.5px] text-[#0D1520] focus:outline-none focus:border-[#2E5A8A] focus:ring-2 focus:ring-[#2E5A8A]/20"
+                  className="w-full h-[42px] rounded-[8px] border border-[#D1D5DB] bg-[#FFFFFF] px-3.5 text-[14.5px] text-[#0F172A] placeholder:text-[#64748B] focus:outline-none focus:border-[#163B66] focus:ring-2 focus:ring-[#163B66]/15"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={authLoading}
-                className="w-full h-[40px] rounded-[10px] bg-[#163B66] hover:bg-[#2E5A8A] text-[#FFFFFF] text-[13.5px] font-medium transition-colors cursor-pointer disabled:opacity-60"
+                className="w-full h-[44px] rounded-[10px] bg-[#163B66] hover:bg-[#2E5A8A] text-[#FFFFFF] text-[14.5px] font-medium transition-colors cursor-pointer disabled:opacity-60"
               >
-                {authLoading ? 'Sending One-Time Code…' : 'Send One-Time Email Code'}
+                {authLoading
+                  ? 'Sending One-Time Code…'
+                  : 'Send One-Time Email Code'}
               </button>
             </form>
           ) : (
-            <form onSubmit={handleVerifyOtp} className="space-y-3">
+            <form onSubmit={handleVerifyOtp} className="space-y-4">
               <div>
                 <label
                   htmlFor="admin-otp-token"
-                  className="block text-[12px] font-medium text-[#163B66] mb-1"
+                  className="block text-[14px] font-medium text-[#0F172A] mb-1.5"
                 >
                   One-Time Verification Code
                 </label>
@@ -587,11 +595,11 @@ export const UserLoginsAdminTab: React.FC<UserLoginsAdminTabProps> = ({
                   placeholder="Enter 6-digit code"
                   value={otpToken}
                   onChange={(e) => setOtpToken(e.target.value)}
-                  className="w-full h-[38px] rounded-[8px] border border-[#D1D5DB] bg-[#FFFFFF] px-3 font-mono-tabular text-[14px] tracking-[0.12em] text-[#0D1520] focus:outline-none focus:border-[#2E5A8A] focus:ring-2 focus:ring-[#2E5A8A]/20"
+                  className="w-full h-[42px] rounded-[8px] border border-[#D1D5DB] bg-[#FFFFFF] px-3.5 font-mono-tabular text-[15px] tracking-[0.12em] text-[#0F172A] placeholder:font-sans placeholder:tracking-normal placeholder:text-[#64748B] focus:outline-none focus:border-[#163B66] focus:ring-2 focus:ring-[#163B66]/15"
                 />
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2.5">
                 <button
                   type="button"
                   onClick={() => {
@@ -599,14 +607,14 @@ export const UserLoginsAdminTab: React.FC<UserLoginsAdminTabProps> = ({
                     setOtpToken('');
                     setAuthNotice(null);
                   }}
-                  className="h-[40px] rounded-[10px] bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E5E7EB] px-3.5 text-[13px] font-medium text-[#4B5B6E] cursor-pointer"
+                  className="h-[44px] rounded-[10px] bg-[#F5F5F7] hover:bg-[#E8F0F8] border border-[#E5E7EB] px-4 text-[14px] font-medium text-[#475569] cursor-pointer"
                 >
                   Back
                 </button>
                 <button
                   type="submit"
                   disabled={authLoading}
-                  className="flex-1 h-[40px] rounded-[10px] bg-[#163B66] hover:bg-[#2E5A8A] text-[#FFFFFF] text-[13.5px] font-medium transition-colors cursor-pointer disabled:opacity-60"
+                  className="flex-1 h-[44px] rounded-[10px] bg-[#163B66] hover:bg-[#2E5A8A] text-[#FFFFFF] text-[14.5px] font-medium transition-colors cursor-pointer disabled:opacity-60"
                 >
                   {authLoading ? 'Verifying Code…' : 'Verify & Unlock Logs →'}
                 </button>
@@ -620,33 +628,33 @@ export const UserLoginsAdminTab: React.FC<UserLoginsAdminTabProps> = ({
 
   // VERIFIED SUPABASE @FORTIFAI.IO ADMIN DASHBOARD
   return (
-    <div className="mx-auto max-w-[1200px] px-4 sm:px-6 pt-4 pb-10 space-y-4">
+    <div className="mx-auto max-w-[1240px] px-5 sm:px-8 pt-8 pb-16 space-y-8">
       {/* Header & Utility Actions */}
-      <section className="flex flex-col md:flex-row md:items-end justify-between gap-3">
-        <div className="space-y-1">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-[5px] px-2 py-0.5 fortifai-pill uppercase">
-              <ShieldCheck className="w-3 h-3 text-[#2E5A8A]" />
+      <section className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div className="space-y-2">
+          <div className="flex flex-wrap items-center gap-2.5">
+            <span className="inline-flex items-center gap-1.5 rounded-[6px] px-2.5 py-1 fortifai-pill">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#163B66]" />
               <span>RLS DECRYPTED · {verifiedAdminEmail}</span>
             </span>
-            <span className="font-mono-tabular text-[10px] font-medium text-[#64748B]">
+            <span className="font-mono-tabular text-[12px] font-medium tracking-[0.05em] uppercase text-[#64748B]">
               · PUBLIC.PORTAL_ACCESS_LOGS (LATEST 500)
             </span>
           </div>
-          <h1 className="text-[21px] sm:text-[22px] font-medium leading-[1.2] tracking-[-0.02em] text-[#163B66]">
+          <h1 className="text-[clamp(26px,2.6vw,32px)] font-medium leading-[1.18] tracking-[-0.02em] text-[#163B66]">
             Partner &amp; Executive Access Logs
           </h1>
         </div>
 
-        <div className="flex flex-wrap items-center gap-1.5 shrink-0">
+        <div className="flex flex-wrap items-center gap-2.5 shrink-0">
           <button
             type="button"
             onClick={() => void fetchAuditLogs()}
             disabled={logsLoading}
-            className="inline-flex items-center gap-1.5 rounded-[7px] bg-[#FFFFFF] hover:bg-[#F8FAFC] border border-[#E5E7EB] px-2.5 py-1.5 text-[12px] font-medium text-[#163B66] transition-colors cursor-pointer disabled:opacity-60"
+            className="inline-flex items-center gap-2 rounded-[8px] bg-[#FFFFFF] hover:bg-[#F5F5F7] border border-[#E5E7EB] px-3.5 py-2 text-[14px] font-medium text-[#163B66] transition-colors cursor-pointer disabled:opacity-60"
           >
             <RefreshCw
-              className={`w-3.5 h-3.5 text-[#2E5A8A] ${
+              className={`w-4 h-4 text-[#163B66] ${
                 logsLoading ? 'animate-spin' : ''
               }`}
             />
@@ -657,76 +665,76 @@ export const UserLoginsAdminTab: React.FC<UserLoginsAdminTabProps> = ({
             type="button"
             onClick={handleExportCsv}
             disabled={filteredLogs.length === 0}
-            className="inline-flex items-center gap-1.5 rounded-[7px] bg-[#163B66] hover:bg-[#2E5A8A] text-[#FFFFFF] px-3 py-1.5 text-[12px] font-medium transition-colors cursor-pointer disabled:opacity-50"
+            className="inline-flex items-center gap-2 rounded-[8px] bg-[#163B66] hover:bg-[#2E5A8A] text-[#FFFFFF] px-4 py-2 text-[14px] font-medium transition-colors cursor-pointer disabled:opacity-50"
           >
-            <Download className="w-3.5 h-3.5" />
+            <Download className="w-4 h-4" />
             <span>Export CSV</span>
           </button>
 
           <button
             type="button"
             onClick={() => void handleLockAdminLogs()}
-            className="inline-flex items-center gap-1 rounded-[7px] bg-transparent hover:bg-[#E8F0F8]/60 border border-transparent hover:border-[#E5E7EB] px-2 py-1.5 text-[11.5px] font-medium text-[#4B5B6E] hover:text-[#163B66] transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 rounded-[8px] bg-transparent hover:bg-[#FFFFFF] border border-transparent hover:border-[#E5E7EB] px-3 py-2 text-[14px] font-medium text-[#475569] hover:text-[#163B66] transition-colors cursor-pointer"
             title="Sign out of Supabase RLS session"
           >
-            <Lock className="w-3.5 h-3.5 text-[#64748B]" />
+            <Lock className="w-4 h-4 text-[#64748B]" />
             <span>Lock</span>
           </button>
         </div>
       </section>
 
-      {/* 4 Crisp White KPI Summary Cards */}
+      {/* Unified 4-Column #FFFFFF Hairline KPI Summary Strip */}
       <section
         aria-label="Portal Access Summary Metrics"
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3"
+        className="rounded-[14px] bg-[#FFFFFF] border border-[#E5E7EB] fortifai-card-shadow overflow-hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-[#E5E7EB]"
       >
-        <div className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-[12px] fortifai-card-shadow px-4 py-3 flex flex-col justify-between">
-          <span className="font-mono-tabular text-[10px] font-medium tracking-[0.04em] text-[#2E5A8A] uppercase">
+        <div className="px-7 py-6 flex flex-col justify-between gap-2">
+          <span className="font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] text-[#64748B] uppercase">
             TOTAL EXTERNAL LOGINS
           </span>
-          <span className="mt-1.5 font-mono-tabular text-[22px] font-medium leading-none tracking-[-0.03em] text-[#163B66]">
+          <span className="font-mono-tabular text-[30px] font-semibold leading-none tracking-[-0.03em] text-[#163B66]">
             {kpiSummary.totalExternalLogins}
           </span>
-          <span className="mt-1 text-[11.5px] text-[#4B5B6E]">
+          <span className="text-[14px] text-[#475569]">
             {kpiSummary.totalEvents} total tracked events
           </span>
         </div>
 
-        <div className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-[12px] fortifai-card-shadow px-4 py-3 flex flex-col justify-between">
-          <span className="font-mono-tabular text-[10px] font-medium tracking-[0.04em] text-[#2E5A8A] uppercase">
+        <div className="px-7 py-6 flex flex-col justify-between gap-2">
+          <span className="font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] text-[#64748B] uppercase">
             UNIQUE CORPORATE DOMAINS
           </span>
-          <span className="mt-1.5 font-mono-tabular text-[22px] font-medium leading-none tracking-[-0.03em] text-[#163B66]">
+          <span className="font-mono-tabular text-[30px] font-semibold leading-none tracking-[-0.03em] text-[#163B66]">
             {kpiSummary.uniqueCorporateDomains}
           </span>
-          <span className="mt-1 text-[11.5px] text-[#4B5B6E]">
+          <span className="text-[14px] text-[#475569]">
             Distinct external organizations
           </span>
         </div>
 
-        <div className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-[12px] fortifai-card-shadow px-4 py-3 flex flex-col justify-between">
-          <span className="font-mono-tabular text-[10px] font-medium tracking-[0.04em] text-[#2E5A8A] uppercase">
+        <div className="px-7 py-6 flex flex-col justify-between gap-2">
+          <span className="font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] text-[#64748B] uppercase">
             LOGINS (LAST 7 DAYS)
           </span>
-          <span className="mt-1.5 font-mono-tabular text-[22px] font-medium leading-none tracking-[-0.03em] text-[#163B66]">
+          <span className="font-mono-tabular text-[30px] font-semibold leading-none tracking-[-0.03em] text-[#163B66]">
             {kpiSummary.loginsLast7Days}
           </span>
-          <span className="mt-1 text-[11.5px] text-[#4B5B6E]">
+          <span className="text-[14px] text-[#475569]">
             Rolling 7-day gate unlocks
           </span>
         </div>
 
-        <div className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-[12px] fortifai-card-shadow px-4 py-3 flex flex-col justify-between">
-          <span className="font-mono-tabular text-[10px] font-medium tracking-[0.04em] text-[#2E5A8A] uppercase">
+        <div className="px-7 py-6 flex flex-col justify-between gap-2">
+          <span className="font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] text-[#64748B] uppercase">
             MOST ACTIVE COMPANY
           </span>
           <span
             title={kpiSummary.mostActiveCompany}
-            className="mt-1.5 font-mono-tabular text-[17px] font-medium leading-[1.2] tracking-[-0.02em] text-[#163B66] truncate"
+            className="font-mono-tabular text-[20px] font-semibold leading-[1.25] tracking-[-0.02em] text-[#163B66] truncate"
           >
             {kpiSummary.mostActiveCompany}
           </span>
-          <span className="mt-1 text-[11.5px] text-[#4B5B6E]">
+          <span className="text-[14px] text-[#475569]">
             {kpiSummary.mostActiveCompanyEvents > 0
               ? `${kpiSummary.mostActiveCompanyEvents} recorded events`
               : 'Awaiting external activity'}
@@ -737,32 +745,32 @@ export const UserLoginsAdminTab: React.FC<UserLoginsAdminTabProps> = ({
       {logsError && (
         <div
           role="alert"
-          className="flex items-start gap-2 rounded-[10px] bg-[#FDECEC] border border-[#F3C5C5] px-3.5 py-2.5 text-[12px] text-[#8B1A1A]"
+          className="flex items-start gap-2.5 rounded-[12px] bg-[#FDECEC] border border-[#F3C5C5] px-4 py-3 text-[14px] text-[#8B1A1A]"
         >
-          <AlertCircle className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+          <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
           <span>{logsError}</span>
         </div>
       )}
 
-      {/* Searchable, Filterable Audit Table Card */}
-      <section className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-[12px] fortifai-card-shadow overflow-hidden">
+      {/* Searchable, Filterable Audit Table Sheet */}
+      <section className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-[14px] fortifai-card-shadow overflow-hidden">
         {/* Filter Bar */}
-        <div className="px-4 py-3 border-b border-[#E5E7EB] flex flex-col lg:flex-row lg:items-center justify-between gap-2.5">
+        <div className="px-6 py-4 border-b border-[#E5E7EB] flex flex-col lg:flex-row lg:items-center justify-between gap-3.5">
           {/* Search Input */}
-          <div className="relative flex-1 max-w-[400px]">
-            <Search className="w-3.5 h-3.5 text-[#64748B] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <div className="relative flex-1 max-w-[440px]">
+            <Search className="w-4 h-4 text-[#64748B] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
               type="search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search email, full name, or company domain…"
-              className="w-full h-[34px] rounded-[7px] border border-[#D1D5DB] bg-[#FFFFFF] pl-8 pr-3 text-[12.5px] text-[#0D1520] placeholder:text-[#94A3B8] focus:outline-none focus:border-[#2E5A8A]"
+              className="w-full h-[42px] rounded-[8px] border border-[#D1D5DB] bg-[#FFFFFF] pl-10 pr-3.5 text-[14.5px] text-[#0F172A] placeholder:text-[#64748B] focus:outline-none focus:border-[#163B66]"
             />
           </div>
 
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2.5">
             {/* Event Type Segmented Pills */}
-            <div className="inline-flex items-center rounded-[7px] bg-[#F8FAFC] border border-[#E5E7EB] p-0.5">
+            <div className="inline-flex items-center rounded-[8px] bg-[#F5F5F7] border border-[#E5E7EB] p-1">
               {(
                 [
                   { id: 'ALL', label: 'All' },
@@ -777,10 +785,10 @@ export const UserLoginsAdminTab: React.FC<UserLoginsAdminTabProps> = ({
                     key={pill.id}
                     type="button"
                     onClick={() => setEventFilter(pill.id)}
-                    className={`px-2 py-0.5 rounded-[5px] text-[11.5px] font-medium transition-colors cursor-pointer ${
+                    className={`px-3 py-1 rounded-[6px] text-[13.5px] transition-colors cursor-pointer ${
                       active
-                        ? 'bg-[#163B66] text-[#FFFFFF]'
-                        : 'text-[#4B5B6E] hover:text-[#163B66]'
+                        ? 'bg-[#163B66] text-[#FFFFFF] font-semibold'
+                        : 'text-[#475569] font-medium hover:text-[#163B66]'
                     }`}
                   >
                     {pill.label}
@@ -794,7 +802,7 @@ export const UserLoginsAdminTab: React.FC<UserLoginsAdminTabProps> = ({
               aria-label="Filter by Partner Access Code"
               value={accessCodeFilter}
               onChange={(e) => setAccessCodeFilter(e.target.value)}
-              className="h-[32px] rounded-[7px] border border-[#D1D5DB] bg-[#FFFFFF] px-2 font-mono-tabular text-[11.5px] font-medium text-[#163B66] focus:outline-none focus:border-[#2E5A8A] cursor-pointer"
+              className="h-[40px] rounded-[8px] border border-[#D1D5DB] bg-[#FFFFFF] px-3 font-mono-tabular text-[12px] font-medium text-[#163B66] focus:outline-none focus:border-[#163B66] cursor-pointer"
             >
               <option value="ALL">All Access Codes</option>
               {availableAccessCodes.map((code) => (
@@ -804,7 +812,7 @@ export const UserLoginsAdminTab: React.FC<UserLoginsAdminTabProps> = ({
               ))}
             </select>
 
-            <span className="font-mono-tabular text-[10.5px] font-medium text-[#64748B]">
+            <span className="font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] uppercase text-[#64748B]">
               {filteredLogs.length} {filteredLogs.length === 1 ? 'ROW' : 'ROWS'}
             </span>
           </div>
@@ -814,21 +822,25 @@ export const UserLoginsAdminTab: React.FC<UserLoginsAdminTabProps> = ({
         <div className="overflow-x-auto fortifai-scroll">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-[#F8FAFC] border-b border-[#E5E7EB] font-mono-tabular text-[10px] font-medium tracking-[0.04em] text-[#2E5A8A] uppercase">
-                <th className="py-2.5 px-3.5 whitespace-nowrap">Timestamp (IST &amp; UTC)</th>
-                <th className="py-2.5 px-3.5 whitespace-nowrap">Full Name</th>
-                <th className="py-2.5 px-3.5 whitespace-nowrap">Work Email</th>
-                <th className="py-2.5 px-3.5 whitespace-nowrap">Company Domain</th>
-                <th className="py-2.5 px-3.5 whitespace-nowrap">Access Code</th>
-                <th className="py-2.5 px-3.5 whitespace-nowrap">Event / Tab Viewed</th>
+              <tr className="bg-[#F8FAFC] border-b border-[#E5E7EB] font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] text-[#64748B] uppercase">
+                <th className="py-3.5 px-5 whitespace-nowrap">
+                  Timestamp (IST &amp; UTC)
+                </th>
+                <th className="py-3.5 px-5 whitespace-nowrap">Full Name</th>
+                <th className="py-3.5 px-5 whitespace-nowrap">Work Email</th>
+                <th className="py-3.5 px-5 whitespace-nowrap">Company Domain</th>
+                <th className="py-3.5 px-5 whitespace-nowrap">Access Code</th>
+                <th className="py-3.5 px-5 whitespace-nowrap">
+                  Event / Tab Viewed
+                </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#F1F5F9] text-[12px]">
+            <tbody className="divide-y divide-[#E5E7EB] text-[14px]">
               {logsLoading && logs.length === 0 ? (
                 <tr>
                   <td
                     colSpan={6}
-                    className="py-10 px-4 text-center font-mono-tabular text-[11px] text-[#64748B]"
+                    className="py-12 px-5 text-center font-mono-tabular text-[12px] tracking-[0.05em] text-[#64748B]"
                   >
                     LOADING PORTAL ACCESS LOGS…
                   </td>
@@ -837,7 +849,7 @@ export const UserLoginsAdminTab: React.FC<UserLoginsAdminTabProps> = ({
                 <tr>
                   <td
                     colSpan={6}
-                    className="py-10 px-4 text-center text-[12.5px] text-[#64748B]"
+                    className="py-12 px-5 text-center text-[14.5px] text-[#475569]"
                   >
                     No matching access log entries found.
                   </td>
@@ -851,58 +863,58 @@ export const UserLoginsAdminTab: React.FC<UserLoginsAdminTabProps> = ({
                       key={String(row.id)}
                       className="hover:bg-[#F8FAFC]/80 transition-colors"
                     >
-                      <td className="py-2.5 px-3.5 whitespace-nowrap">
-                        <div className="font-mono-tabular text-[11.5px] font-medium text-[#163B66]">
+                      <td className="py-3.5 px-5 whitespace-nowrap">
+                        <div className="font-mono-tabular text-[13px] font-medium text-[#0F172A]">
                           {formatIstTimestamp(row.created_at)}
                         </div>
-                        <div className="font-mono-tabular text-[10px] text-[#64748B]">
+                        <div className="font-mono-tabular text-[11.5px] text-[#64748B]">
                           {formatUtcTimestampDetailed(row.created_at)}
                         </div>
                       </td>
 
-                      <td className="py-2.5 px-3.5 font-medium text-[#163B66] whitespace-nowrap">
+                      <td className="py-3.5 px-5 font-medium text-[#0F172A] whitespace-nowrap">
                         {row.full_name || '—'}
                       </td>
 
-                      <td className="py-2.5 px-3.5 font-mono-tabular text-[11.5px] text-[#4B5B6E] whitespace-nowrap">
+                      <td className="py-3.5 px-5 font-mono-tabular text-[13.5px] text-[#334155] whitespace-nowrap">
                         {row.email}
                       </td>
 
-                      <td className="py-2.5 px-3.5 whitespace-nowrap">
+                      <td className="py-3.5 px-5 whitespace-nowrap">
                         <span className="inline-block rounded-[5px] px-2 py-0.5 fortifai-pill">
                           {domain}
                         </span>
                       </td>
 
-                      <td className="py-2.5 px-3.5 whitespace-nowrap">
-                        <span className="inline-block rounded-[5px] bg-[#F8FAFC] border border-[#E5E7EB] px-1.5 py-0.5 font-mono-tabular text-[10.5px] font-medium text-[#163B66]">
+                      <td className="py-3.5 px-5 whitespace-nowrap">
+                        <span className="inline-block rounded-[5px] bg-[#F5F5F7] border border-[#E5E7EB] px-2 py-0.5 font-mono-tabular text-[11.5px] font-medium text-[#163B66]">
                           {row.access_code || '—'}
                         </span>
                       </td>
 
-                      <td className="py-2.5 px-3.5 whitespace-nowrap">
+                      <td className="py-3.5 px-5 whitespace-nowrap">
                         {isGateLogin ? (
-                          <span className="inline-flex items-center gap-1 rounded-[5px] bg-[#163B66] text-[#FFFFFF] px-2 py-0.5 font-mono-tabular text-[10px] font-medium">
+                          <span className="inline-flex items-center gap-1 rounded-[5px] bg-[#163B66] text-[#FFFFFF] px-2.5 py-0.5 font-mono-tabular text-[11.5px] font-medium tracking-[0.04em]">
                             GATE_LOGIN
                           </span>
                         ) : row.event_type === 'ROI_SIMULATION' ? (
-                          <div className="flex items-center gap-1.5">
-                            <span className="inline-block rounded-[5px] bg-[#2E5A8A] text-[#FFFFFF] px-1.5 py-0.5 font-mono-tabular text-[10px] font-medium">
+                          <div className="flex items-center gap-2">
+                            <span className="inline-block rounded-[5px] bg-[#2E5A8A] text-[#FFFFFF] px-2 py-0.5 font-mono-tabular text-[11.5px] font-medium tracking-[0.04em]">
                               ROI_SIMULATION
                             </span>
                             {row.tab_viewed && (
-                              <span className="text-[11.5px] text-[#4B5B6E]">
+                              <span className="text-[14px] text-[#334155]">
                                 {row.tab_viewed}
                               </span>
                             )}
                           </div>
                         ) : (
-                          <div className="flex items-center gap-1.5">
-                            <span className="inline-block rounded-[5px] px-1.5 py-0.5 fortifai-pill">
+                          <div className="flex items-center gap-2">
+                            <span className="inline-block rounded-[5px] px-2 py-0.5 fortifai-pill">
                               {row.event_type || 'TAB_VIEW'}
                             </span>
                             {row.tab_viewed && (
-                              <span className="text-[11.5px] text-[#4B5B6E]">
+                              <span className="text-[14px] text-[#334155]">
                                 {row.tab_viewed}
                               </span>
                             )}

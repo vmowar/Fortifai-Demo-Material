@@ -198,320 +198,322 @@ export const ExecutiveWalkthroughTab: React.FC<
 
   return (
     <div
-      className={`mx-auto transition-all duration-300 px-4 sm:px-6 pt-4 pb-10 space-y-4 ${
-        isTheaterMode ? 'max-w-[1340px]' : 'max-w-[1120px]'
+      className={`mx-auto transition-all duration-300 px-5 sm:px-8 pt-8 pb-16 space-y-8 ${
+        isTheaterMode ? 'max-w-[1380px]' : 'max-w-[1240px]'
       }`}
     >
       {/* Clean Editorial Header */}
-      <header className="flex flex-col sm:flex-row sm:items-end justify-between gap-2.5">
-        <div className="space-y-1">
-          <div className="flex items-center gap-2">
-            <span className="inline-flex items-center rounded-[5px] px-2 py-0.5 fortifai-pill uppercase">
+      <header className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        <div className="space-y-2 max-w-[820px]">
+          <div className="flex flex-wrap items-center gap-2.5">
+            <span className="inline-flex items-center rounded-[6px] px-2.5 py-1 fortifai-pill">
               {config.durationBadge}
             </span>
-            <span className="hidden md:inline-block font-mono-tabular text-[10px] font-medium text-[#64748B]">
+            <span className="hidden md:inline-block font-mono-tabular text-[12px] font-medium tracking-[0.05em] uppercase text-[#64748B]">
               · 100% CUSTOMER VPC · DETERMINISTIC ASSURANCE
             </span>
           </div>
-          <h1 className="text-[21px] sm:text-[22px] font-medium leading-[1.2] tracking-[-0.02em] text-[#163B66]">
+          <h1 className="text-[clamp(26px,2.6vw,32px)] font-medium leading-[1.18] tracking-[-0.02em] text-[#163B66]">
             {config.headline}
           </h1>
-          <p className="text-[13px] font-normal leading-[1.52] text-[#4B5B6E]">
+          <p className="text-[15px] font-normal leading-[1.6] text-[#475569]">
             {config.subtitle}
           </p>
         </div>
       </header>
 
-      {/* Crisp #FFFFFF Video Stage Card */}
+      {/* Unified #FFFFFF Video Stage & 4-Chapter Hairline Sheet */}
       <section
         ref={playerCardRef}
         aria-label="Interactive Product Walkthrough Video"
         className={
           isFullScreen
-            ? 'fixed inset-0 z-50 bg-[#FFFFFF] p-4 sm:p-5 flex flex-col justify-between overflow-y-auto'
-            : 'w-full bg-[#FFFFFF] border border-[#E5E7EB] rounded-[14px] p-3.5 fortifai-card-shadow'
+            ? 'fixed inset-0 z-50 bg-[#FFFFFF] p-5 sm:p-7 flex flex-col justify-between overflow-y-auto'
+            : 'w-full bg-[#FFFFFF] border border-[#E5E7EB] rounded-[14px] overflow-hidden fortifai-card-shadow'
         }
       >
-        {/* Top Utility & Mode Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-2 pb-2.5">
-          <div className="flex items-center gap-2 min-w-0">
-            <span className="relative flex h-2 w-2 shrink-0">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#6699CC] opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#2E5A8A]" />
-            </span>
-            <span className="font-mono-tabular text-[10.5px] font-medium tracking-[0.04em] text-[#2E5A8A] uppercase truncate">
-              FORTIFAI SARA · LIVE PLATFORM WALKTHROUGH
-            </span>
-            {activeChapter && (
-              <span className="hidden md:inline-flex items-center rounded-[5px] px-2 py-0.5 fortifai-pill">
-                STAGE {activeChapter.code} · {activeChapter.title}
+        <div className={isFullScreen ? 'flex-1 flex flex-col' : 'p-5 sm:p-7'}>
+          {/* Top Utility & Mode Bar */}
+          <div className="flex flex-wrap items-center justify-between gap-3 pb-4">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <span className="relative flex h-2.5 w-2.5 shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#6699CC] opacity-75" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#163B66]" />
               </span>
-            )}
-          </div>
-
-          <div className="flex items-center gap-1.5 shrink-0">
-            {hasStarted && (
-              <button
-                type="button"
-                onClick={handleResetToCover}
-                className="inline-flex items-center gap-1 rounded-[6px] bg-[#F8FAFC] hover:bg-[#E8F0F8] border border-[#E5E7EB] px-2 py-1 text-[11.5px] font-medium text-[#4B5B6E] hover:text-[#163B66] transition-colors cursor-pointer"
-                title="Return to Fortifai executive cover screen"
-              >
-                <RotateCcw className="w-3 h-3 text-[#2E5A8A]" />
-                <span className="hidden sm:inline">Cover</span>
-              </button>
-            )}
-
-            {!isFullScreen && (
-              <button
-                type="button"
-                onClick={() => setIsTheaterMode((prev) => !prev)}
-                className={`hidden lg:inline-flex items-center gap-1.5 rounded-[6px] border px-2 py-1 text-[11.5px] font-medium transition-colors cursor-pointer ${
-                  isTheaterMode
-                    ? 'bg-[#E8F0F8] border-[#6699CC]/50 text-[#163B66]'
-                    : 'bg-[#F8FAFC] hover:bg-[#F1F5F9] border-[#E5E7EB] text-[#4B5B6E] hover:text-[#163B66]'
-                }`}
-                title="Expand player width for boardroom presentation"
-              >
-                <Monitor className="w-3 h-3 text-[#2E5A8A]" />
-                <span>{isTheaterMode ? 'Standard View' : 'Theater View'}</span>
-              </button>
-            )}
-
-            <button
-              type="button"
-              onClick={toggleFullScreen}
-              className="inline-flex items-center gap-1.5 rounded-[6px] bg-[#F8FAFC] hover:bg-[#E8F0F8] border border-[#E5E7EB] px-2 py-1 text-[11.5px] font-medium text-[#163B66] transition-colors cursor-pointer"
-              title="Toggle Fortifai full-screen presentation mode"
-            >
-              {isFullScreen ? (
-                <>
-                  <Minimize2 className="w-3 h-3 text-[#2E5A8A]" />
-                  <span>Exit Full Screen</span>
-                </>
-              ) : (
-                <>
-                  <Maximize2 className="w-3 h-3 text-[#2E5A8A]" />
-                  <span className="hidden sm:inline">Full Screen</span>
-                </>
-              )}
-            </button>
-
-            <a
-              href={config.trupeerEmbedUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[11.5px] font-medium text-[#2E5A8A] hover:text-[#163B66] hover:underline whitespace-nowrap pl-1 transition-colors"
-            >
-              {config.openExternalLabel}
-            </a>
-          </div>
-        </div>
-
-        {/* 16:9 Architectural Video Viewport */}
-        <div
-          className={`relative w-full aspect-video rounded-[12px] overflow-hidden bg-[#F8FAFC] border border-[#E5E7EB] ${
-            isFullScreen ? 'flex-1 max-h-[calc(100vh-195px)] mx-auto' : ''
-          }`}
-        >
-          {/* ENGINE A: Direct Clean MP4/WebM Native Fortifai Player (Zero 3rd-Party Branding) */}
-          {isNativeVideo ? (
-            <div className="relative h-full w-full bg-[#0D1520] flex flex-col justify-between">
-              <video
-                ref={videoRef}
-                src={config.trupeerEmbedUrl}
-                playsInline
-                onClick={toggleMp4PlayPause}
-                onTimeUpdate={(e) => {
-                  const t = e.currentTarget.currentTime;
-                  setCurrentTime(t);
-                  const matchedIdx = config.chapters.reduce(
-                    (acc, ch, i) => (t >= ch.timestampSec ? i : acc),
-                    0
-                  );
-                  if (matchedIdx !== activeChapterIdx) {
-                    setActiveChapterIdx(matchedIdx);
-                  }
-                }}
-                onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)}
-                onPlay={() => setIsPlayingMp4(true)}
-                onPause={() => setIsPlayingMp4(false)}
-                className="h-full w-full object-contain cursor-pointer"
-              />
-
-              {/* Custom Fortifai Daylight-Navy Native Control Bar */}
-              {hasStarted && (
-                <div className="absolute bottom-0 inset-x-0 z-20 bg-gradient-to-t from-[#0D1520]/90 via-[#0D1520]/65 to-transparent px-4 pt-6 pb-3 flex items-center gap-3 text-[#FFFFFF]">
-                  <button
-                    type="button"
-                    onClick={toggleMp4PlayPause}
-                    className="h-8 w-8 rounded-full bg-[#FFFFFF]/15 hover:bg-[#FFFFFF]/25 flex items-center justify-center cursor-pointer transition-colors shrink-0"
-                    aria-label={isPlayingMp4 ? 'Pause video' : 'Play video'}
-                  >
-                    {isPlayingMp4 ? (
-                      <Pause className="w-4 h-4" />
-                    ) : (
-                      <Play className="w-4 h-4 ml-0.5" />
-                    )}
-                  </button>
-
-                  <span className="font-mono-tabular text-[11px] text-[#E2E8F0] shrink-0">
-                    {formatSeconds(currentTime)} / {formatSeconds(duration)}
-                  </span>
-
-                  <input
-                    type="range"
-                    min={0}
-                    max={duration || 100}
-                    step={0.1}
-                    value={currentTime}
-                    onChange={(e) => {
-                      const next = Number(e.target.value);
-                      setCurrentTime(next);
-                      if (videoRef.current) {
-                        videoRef.current.currentTime = next;
-                      }
-                    }}
-                    aria-label="Seek walkthrough timeline"
-                    className="flex-1 h-1.5 accent-[#6699CC] cursor-pointer"
-                  />
-
-                  <button
-                    type="button"
-                    onClick={cyclePlaybackSpeed}
-                    className="rounded-[6px] bg-[#FFFFFF]/15 hover:bg-[#FFFFFF]/25 px-2 py-1 font-mono-tabular text-[11px] font-medium cursor-pointer shrink-0"
-                    title="Playback speed"
-                  >
-                    {playbackSpeed}x
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={toggleMute}
-                    className="h-8 w-8 rounded-full bg-[#FFFFFF]/15 hover:bg-[#FFFFFF]/25 flex items-center justify-center cursor-pointer shrink-0"
-                    aria-label={isMuted ? 'Unmute' : 'Mute'}
-                  >
-                    {isMuted ? (
-                      <VolumeX className="w-4 h-4" />
-                    ) : (
-                      <Volume2 className="w-4 h-4" />
-                    )}
-                  </button>
-                </div>
+              <span className="font-mono-tabular text-[12px] font-medium tracking-[0.05em] text-[#64748B] uppercase truncate">
+                FORTIFAI SARA · LIVE PLATFORM WALKTHROUGH
+              </span>
+              {activeChapter && (
+                <span className="hidden md:inline-flex items-center rounded-[6px] bg-[#E8F0F8] border border-[#6699CC]/35 px-2.5 py-0.5 font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] uppercase text-[#163B66]">
+                  STAGE {activeChapter.code} · {activeChapter.title}
+                </span>
               )}
             </div>
-          ) : (
-            /* ENGINE B: Preloaded Interactive Embed Stream + Subtle Corner Stamp Shield */
-            <>
-              {hasStarted && !iframeLoaded && (
-                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 bg-[#F8FAFC] px-6 text-center">
-                  <div className="h-6 w-6 rounded-full border-2 border-[#6699CC] border-t-transparent animate-spin" />
-                  <p className="font-mono-tabular text-[11px] font-medium tracking-[0.05em] text-[#2E5A8A]">
-                    STREAMING EXECUTIVE WALKTHROUGH…
-                  </p>
-                </div>
-              )}
 
-              <iframe
-                key={activeEmbedSrc}
-                src={activeEmbedSrc}
-                title={config.headline}
-                onLoad={() => setIframeLoaded(true)}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-                allowFullScreen
-                className={`relative z-10 h-full w-full border-0 transition-transform duration-300 ${
-                  config.maskCornerStamp ? 'scale-[1.012]' : ''
-                }`}
-              />
-
-              {/* Subtle Fortifai Corner Stamp Shield (Masks top-right third-party badge without blocking video controls) */}
-              {hasStarted && config.maskCornerStamp && (
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none select-none absolute top-2.5 right-2.5 z-20 inline-flex items-center gap-1.5 rounded-[7px] bg-[#FFFFFF]/95 backdrop-blur-md border border-[#E5E7EB] px-2.5 py-1 shadow-[0_4px_14px_rgba(13,21,32,0.08)]"
+            <div className="flex items-center gap-2 shrink-0">
+              {hasStarted && (
+                <button
+                  type="button"
+                  onClick={handleResetToCover}
+                  className="inline-flex items-center gap-1.5 rounded-[8px] bg-[#F5F5F7] hover:bg-[#E8F0F8] border border-[#E5E7EB] px-3 py-1.5 text-[13.5px] font-medium text-[#475569] hover:text-[#163B66] transition-colors cursor-pointer"
+                  title="Return to Fortifai executive cover screen"
                 >
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#2E5A8A] shrink-0" />
-                  <span className="font-mono-tabular text-[10.5px] font-medium tracking-[0.04em] text-[#163B66]">
-                    FORTIFAI SARA · VERIFIED TOUR
-                  </span>
-                </div>
+                  <RotateCcw className="w-3.5 h-3.5 text-[#163B66]" />
+                  <span className="hidden sm:inline">Cover</span>
+                </button>
               )}
-            </>
-          )}
 
-          {/* BESPOKE FORTIFAI V2.0 DAYLIGHT EXECUTIVE COVER STAGE (Hides 3rd-Party Start Screen) */}
-          {!hasStarted && (
-            <div
-              role="button"
-              tabIndex={0}
-              onClick={handleLaunchWalkthrough}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  handleLaunchWalkthrough();
-                }
-              }}
-              aria-label={config.coverPlayLabel}
-              className="group absolute inset-0 z-30 sara-dot-stage flex flex-col justify-between p-5 sm:p-8 cursor-pointer select-none"
-            >
-              {/* Top Brand & Sovereign Assurance Strip */}
-              <div className="flex items-center justify-between gap-4">
-                <div className="inline-flex items-center gap-2.5 rounded-[10px] bg-[#FFFFFF]/95 border border-[#E5E7EB] px-3 py-1.5 shadow-[0_2px_10px_rgba(13,21,32,0.04)]">
-                  <FortifaiLogo height={20} />
-                  <span className="hidden sm:inline-block h-3.5 w-[1px] bg-[#E5E7EB]" />
-                  <span className="hidden sm:inline-block font-mono-tabular text-[10.5px] font-medium tracking-[0.04em] text-[#2E5A8A]">
-                    SARA COCKPIT BRIEFING
-                  </span>
-                </div>
+              {!isFullScreen && (
+                <button
+                  type="button"
+                  onClick={() => setIsTheaterMode((prev) => !prev)}
+                  className={`hidden lg:inline-flex items-center gap-1.5 rounded-[8px] border px-3 py-1.5 text-[13.5px] font-medium transition-colors cursor-pointer ${
+                    isTheaterMode
+                      ? 'bg-[#E8F0F8] border-[#6699CC]/55 text-[#163B66]'
+                      : 'bg-[#F5F5F7] hover:bg-[#FFFFFF] border-[#E5E7EB] text-[#475569] hover:text-[#163B66]'
+                  }`}
+                  title="Expand player width for boardroom presentation"
+                >
+                  <Monitor className="w-3.5 h-3.5 text-[#163B66]" />
+                  <span>{isTheaterMode ? 'Standard View' : 'Theater View'}</span>
+                </button>
+              )}
 
-                <span className="inline-flex items-center gap-1.5 rounded-[8px] bg-[#FFFFFF]/95 border border-[#E5E7EB] px-2.5 py-1 font-mono-tabular text-[10.5px] font-medium text-[#163B66] shadow-[0_2px_10px_rgba(13,21,32,0.04)]">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#2E5A8A]" />
-                  <span>0% DATA EGRESS · IN-VPC</span>
-                </span>
-              </div>
+              <button
+                type="button"
+                onClick={toggleFullScreen}
+                className="inline-flex items-center gap-1.5 rounded-[8px] bg-[#F5F5F7] hover:bg-[#E8F0F8] border border-[#E5E7EB] px-3 py-1.5 text-[13.5px] font-medium text-[#163B66] transition-colors cursor-pointer"
+                title="Toggle Fortifai full-screen presentation mode"
+              >
+                {isFullScreen ? (
+                  <>
+                    <Minimize2 className="w-3.5 h-3.5 text-[#163B66]" />
+                    <span>Exit Full Screen</span>
+                  </>
+                ) : (
+                  <>
+                    <Maximize2 className="w-3.5 h-3.5 text-[#163B66]" />
+                    <span className="hidden sm:inline">Full Screen</span>
+                  </>
+                )}
+              </button>
 
-              {/* Centerpiece Play Invitation */}
-              <div className="my-auto mx-auto max-w-[600px] text-center space-y-3 px-2">
-                <span className="inline-flex items-center rounded-full px-2.5 py-0.5 fortifai-pill">
-                  {config.durationBadge}
-                </span>
+              <a
+                href={config.trupeerEmbedUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[14px] font-medium text-[#163B66] hover:text-[#2E5A8A] hover:underline whitespace-nowrap pl-1.5 transition-colors"
+              >
+                {config.openExternalLabel}
+              </a>
+            </div>
+          </div>
 
-                <h2 className="text-[clamp(18px,2.2vw,25px)] font-medium leading-[1.2] tracking-[-0.02em] text-[#163B66] text-balance">
-                  {config.coverHeadline}
-                </h2>
+          {/* 16:9 Architectural Video Viewport */}
+          <div
+            className={`relative w-full aspect-video rounded-[12px] overflow-hidden bg-[#F5F5F7] border border-[#E5E7EB] ${
+              isFullScreen ? 'flex-1 max-h-[calc(100vh-220px)] mx-auto' : ''
+            }`}
+          >
+            {/* ENGINE A: Direct Clean MP4/WebM Native Fortifai Player */}
+            {isNativeVideo ? (
+              <div className="relative h-full w-full bg-[#0D1520] flex flex-col justify-between">
+                <video
+                  ref={videoRef}
+                  src={config.trupeerEmbedUrl}
+                  playsInline
+                  onClick={toggleMp4PlayPause}
+                  onTimeUpdate={(e) => {
+                    const t = e.currentTarget.currentTime;
+                    setCurrentTime(t);
+                    const matchedIdx = config.chapters.reduce(
+                      (acc, ch, i) => (t >= ch.timestampSec ? i : acc),
+                      0
+                    );
+                    if (matchedIdx !== activeChapterIdx) {
+                      setActiveChapterIdx(matchedIdx);
+                    }
+                  }}
+                  onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)}
+                  onPlay={() => setIsPlayingMp4(true)}
+                  onPause={() => setIsPlayingMp4(false)}
+                  className="h-full w-full object-contain cursor-pointer"
+                />
 
-                <div className="pt-0.5 flex items-center justify-center">
-                  <span className="inline-flex items-center gap-2.5 rounded-full bg-[#163B66] group-hover:bg-[#2E5A8A] text-[#FFFFFF] pl-2.5 pr-5 py-2 text-[13px] font-medium shadow-[0_12px_30px_rgba(22,59,102,0.22)] group-hover:scale-[1.02] transition-all duration-200">
-                    <span className="h-8 w-8 rounded-full bg-[#FFFFFF]/15 flex items-center justify-center">
-                      <Play className="w-3.5 h-3.5 fill-current ml-0.5" />
+                {/* Custom Fortifai Daylight-Navy Native Control Bar */}
+                {hasStarted && (
+                  <div className="absolute bottom-0 inset-x-0 z-20 bg-gradient-to-t from-[#0D1520]/90 via-[#0D1520]/65 to-transparent px-5 pt-7 pb-4 flex items-center gap-3.5 text-[#FFFFFF]">
+                    <button
+                      type="button"
+                      onClick={toggleMp4PlayPause}
+                      className="h-9 w-9 rounded-full bg-[#FFFFFF]/15 hover:bg-[#FFFFFF]/25 flex items-center justify-center cursor-pointer transition-colors shrink-0"
+                      aria-label={isPlayingMp4 ? 'Pause video' : 'Play video'}
+                    >
+                      {isPlayingMp4 ? (
+                        <Pause className="w-4 h-4" />
+                      ) : (
+                        <Play className="w-4 h-4 ml-0.5" />
+                      )}
+                    </button>
+
+                    <span className="font-mono-tabular text-[12px] text-[#E2E8F0] shrink-0">
+                      {formatSeconds(currentTime)} / {formatSeconds(duration)}
                     </span>
-                    <span>{config.coverPlayLabel}</span>
-                  </span>
-                </div>
-              </div>
 
-              {/* Bottom Architectural 4-Step Preview Bar */}
-              <div className="hidden md:grid grid-cols-4 gap-2">
-                {config.chapters.slice(0, 4).map((ch) => (
+                    <input
+                      type="range"
+                      min={0}
+                      max={duration || 100}
+                      step={0.1}
+                      value={currentTime}
+                      onChange={(e) => {
+                        const next = Number(e.target.value);
+                        setCurrentTime(next);
+                        if (videoRef.current) {
+                          videoRef.current.currentTime = next;
+                        }
+                      }}
+                      aria-label="Seek walkthrough timeline"
+                      className="flex-1 h-1.5 accent-[#6699CC] cursor-pointer"
+                    />
+
+                    <button
+                      type="button"
+                      onClick={cyclePlaybackSpeed}
+                      className="rounded-[6px] bg-[#FFFFFF]/15 hover:bg-[#FFFFFF]/25 px-2.5 py-1 font-mono-tabular text-[12px] font-medium cursor-pointer shrink-0"
+                      title="Playback speed"
+                    >
+                      {playbackSpeed}x
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={toggleMute}
+                      className="h-9 w-9 rounded-full bg-[#FFFFFF]/15 hover:bg-[#FFFFFF]/25 flex items-center justify-center cursor-pointer shrink-0"
+                      aria-label={isMuted ? 'Unmute' : 'Mute'}
+                    >
+                      {isMuted ? (
+                        <VolumeX className="w-4 h-4" />
+                      ) : (
+                        <Volume2 className="w-4 h-4" />
+                      )}
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              /* ENGINE B: Preloaded Interactive Embed Stream + Subtle Corner Stamp Shield */
+              <>
+                {hasStarted && !iframeLoaded && (
+                  <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2.5 bg-[#F5F5F7] px-6 text-center">
+                    <div className="h-6 w-6 rounded-full border-2 border-[#163B66] border-t-transparent animate-spin" />
+                    <p className="font-mono-tabular text-[12px] font-medium tracking-[0.05em] text-[#163B66]">
+                      STREAMING EXECUTIVE WALKTHROUGH…
+                    </p>
+                  </div>
+                )}
+
+                <iframe
+                  key={activeEmbedSrc}
+                  src={activeEmbedSrc}
+                  title={config.headline}
+                  onLoad={() => setIframeLoaded(true)}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                  allowFullScreen
+                  className={`relative z-10 h-full w-full border-0 transition-transform duration-300 ${
+                    config.maskCornerStamp ? 'scale-[1.012]' : ''
+                  }`}
+                />
+
+                {/* Subtle Fortifai Corner Stamp Shield */}
+                {hasStarted && config.maskCornerStamp && (
                   <div
-                    key={ch.code}
-                    className="rounded-[8px] bg-[#FFFFFF]/92 backdrop-blur-sm border border-[#E5E7EB] px-2.5 py-1.5 flex items-center gap-2 shadow-[0_2px_10px_rgba(13,21,32,0.03)]"
+                    aria-hidden="true"
+                    className="pointer-events-none select-none absolute top-3 right-3 z-20 inline-flex items-center gap-2 rounded-[8px] bg-[#FFFFFF]/95 backdrop-blur-md border border-[#E5E7EB] px-3 py-1.5 shadow-[0_4px_14px_rgba(13,21,32,0.08)]"
                   >
-                    <span className="rounded-[4px] px-1.5 py-0.5 fortifai-pill shrink-0">
-                      {ch.code}
-                    </span>
-                    <span className="text-[11.5px] font-medium text-[#163B66] truncate">
-                      {ch.title}
+                    <ShieldCheck className="w-4 h-4 text-[#163B66] shrink-0" />
+                    <span className="font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] text-[#163B66]">
+                      FORTIFAI SARA · VERIFIED TOUR
                     </span>
                   </div>
-                ))}
+                )}
+              </>
+            )}
+
+            {/* BESPOKE FORTIFAI DAYLIGHT EXECUTIVE COVER STAGE */}
+            {!hasStarted && (
+              <div
+                role="button"
+                tabIndex={0}
+                onClick={handleLaunchWalkthrough}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleLaunchWalkthrough();
+                  }
+                }}
+                aria-label={config.coverPlayLabel}
+                className="group absolute inset-0 z-30 sara-dot-stage flex flex-col justify-between p-6 sm:p-9 cursor-pointer select-none"
+              >
+                {/* Top Brand & Sovereign Assurance Strip */}
+                <div className="flex items-center justify-between gap-4">
+                  <div className="inline-flex items-center gap-3 rounded-[10px] bg-[#FFFFFF]/95 border border-[#E5E7EB] px-3.5 py-2 shadow-[0_2px_10px_rgba(13,21,32,0.04)]">
+                    <FortifaiLogo height={22} />
+                    <span className="hidden sm:inline-block h-4 w-[1px] bg-[#E5E7EB]" />
+                    <span className="hidden sm:inline-block font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] uppercase text-[#64748B]">
+                      SARA COCKPIT BRIEFING
+                    </span>
+                  </div>
+
+                  <span className="inline-flex items-center gap-2 rounded-[8px] bg-[#FFFFFF]/95 border border-[#E5E7EB] px-3 py-1.5 font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] uppercase text-[#163B66] shadow-[0_2px_10px_rgba(13,21,32,0.04)]">
+                    <ShieldCheck className="w-4 h-4 text-[#163B66]" />
+                    <span>0% DATA EGRESS · IN-VPC</span>
+                  </span>
+                </div>
+
+                {/* Centerpiece Play Invitation */}
+                <div className="my-auto mx-auto max-w-[660px] text-center space-y-4 px-2">
+                  <span className="inline-flex items-center rounded-full px-3 py-1 fortifai-pill">
+                    {config.durationBadge}
+                  </span>
+
+                  <h2 className="text-[clamp(22px,2.4vw,30px)] font-medium leading-[1.18] tracking-[-0.02em] text-[#163B66] text-balance">
+                    {config.coverHeadline}
+                  </h2>
+
+                  <div className="pt-1 flex items-center justify-center">
+                    <span className="inline-flex items-center gap-3 rounded-full bg-[#163B66] group-hover:bg-[#2E5A8A] text-[#FFFFFF] pl-3 pr-6 py-2.5 text-[14.5px] font-medium shadow-[0_12px_30px_rgba(22,59,102,0.22)] group-hover:scale-[1.02] transition-all duration-200">
+                      <span className="h-9 w-9 rounded-full bg-[#FFFFFF]/15 flex items-center justify-center">
+                        <Play className="w-4 h-4 fill-current ml-0.5" />
+                      </span>
+                      <span>{config.coverPlayLabel}</span>
+                    </span>
+                  </div>
+                </div>
+
+                {/* Bottom Architectural 4-Step Preview Bar */}
+                <div className="hidden md:grid grid-cols-4 rounded-[10px] bg-[#FFFFFF]/95 border border-[#E5E7EB] divide-x divide-[#E5E7EB] overflow-hidden shadow-[0_2px_10px_rgba(13,21,32,0.03)]">
+                  {config.chapters.slice(0, 4).map((ch) => (
+                    <div
+                      key={ch.code}
+                      className="px-3.5 py-2.5 flex items-center gap-2.5 min-w-0"
+                    >
+                      <span className="font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] text-[#163B66] shrink-0">
+                        {ch.code}
+                      </span>
+                      <span className="text-[13.5px] font-medium text-[#0F172A] truncate">
+                        {ch.title}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
 
-        {/* Integrated 4-Stage Walkthrough Chapter Strip */}
-        <div className="mt-3 pt-3 border-t border-[#F1F5F9] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
+        {/* Unified 4-Column Hairline Chapter Strip */}
+        <div className="border-t border-[#E5E7EB] bg-[#FFFFFF] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-[#E5E7EB]">
           {config.chapters.map((chapter, idx) => {
             const isSelected = activeChapterIdx === idx;
             return (
@@ -519,33 +521,35 @@ export const ExecutiveWalkthroughTab: React.FC<
                 key={`${chapter.code}-${idx}`}
                 type="button"
                 onClick={() => handleSelectChapter(idx)}
-                className={`rounded-[8px] border p-2.5 text-left transition-all cursor-pointer flex flex-col justify-between ${
-                  isSelected
-                    ? 'bg-[#F4F8FC] border-[#6699CC]/65 shadow-[0_2px_10px_rgba(22,59,102,0.04)]'
-                    : 'bg-[#F8FAFC]/70 hover:bg-[#F8FAFC] border-[#E5E7EB]'
+                className={`p-6 sm:p-7 text-left transition-colors cursor-pointer flex flex-col justify-between gap-2.5 ${
+                  isSelected ? 'bg-[#F8FAFC]' : 'bg-[#FFFFFF] hover:bg-[#F8FAFC]/70'
                 }`}
               >
                 <div className="flex items-center justify-between gap-2">
                   <span
-                    className={`rounded-[4px] px-1.5 py-0.5 font-mono-tabular text-[10px] font-medium ${
+                    className={`rounded-[5px] px-2 py-0.5 font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] uppercase ${
                       isSelected
                         ? 'bg-[#163B66] text-[#FFFFFF]'
-                        : 'bg-[#E8F0F8] text-[#2E5A8A]'
+                        : 'bg-[#F5F5F7] border border-[#E5E7EB] text-[#64748B]'
                     }`}
                   >
-                    {chapter.code}
+                    STAGE {chapter.code}
                   </span>
                   {isNativeVideo && (
-                    <span className="font-mono-tabular text-[10px] text-[#64748B]">
+                    <span className="font-mono-tabular text-[12px] font-medium text-[#64748B]">
                       {formatSeconds(chapter.timestampSec)}
                     </span>
                   )}
                 </div>
-                <div className="mt-1.5">
-                  <h3 className="text-[12.5px] font-medium text-[#163B66] leading-[1.3]">
+                <div>
+                  <h3
+                    className={`text-[17.5px] font-semibold leading-[1.3] tracking-[-0.01em] ${
+                      isSelected ? 'text-[#163B66]' : 'text-[#0F172A]'
+                    }`}
+                  >
                     {chapter.title}
                   </h3>
-                  <p className="mt-0.5 text-[11.5px] leading-[1.42] text-[#4B5B6E] line-clamp-2">
+                  <p className="mt-1.5 text-[14.5px] leading-[1.6] text-[#475569]">
                     {chapter.detail}
                   </p>
                 </div>
@@ -555,60 +559,58 @@ export const ExecutiveWalkthroughTab: React.FC<
         </div>
       </section>
 
-      {/* 3 Compact #FFFFFF Hairline Metric Cards */}
+      {/* Unified 3-Column #FFFFFF Hairline Platform Guarantees Strip */}
       <section
         aria-label="Key Platform Guarantees"
-        className="grid grid-cols-1 sm:grid-cols-3 gap-3"
+        className="rounded-[14px] bg-[#FFFFFF] border border-[#E5E7EB] fortifai-card-shadow overflow-hidden grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-[#E5E7EB]"
       >
         {config.metrics.map((item, idx) => (
           <div
             key={`${item.label}-${idx}`}
-            className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-[10px] fortifai-card-shadow px-4 py-3 flex items-start justify-between gap-3"
+            className="p-7 sm:p-8 flex items-start justify-between gap-4"
           >
-            <div>
-              <div className="flex items-baseline gap-2">
-                <span className="font-mono-tabular text-[21px] font-medium leading-none tracking-[-0.03em] text-[#163B66]">
-                  {item.metric}
-                </span>
-                <span className="text-[13px] font-medium leading-[1.3] text-[#163B66]">
-                  {item.label}
-                </span>
+            <div className="space-y-1.5">
+              <div className="font-mono-tabular text-[30px] font-semibold leading-none tracking-[-0.03em] text-[#163B66]">
+                {item.metric}
               </div>
+              <h3 className="text-[17.5px] font-semibold leading-[1.3] tracking-[-0.01em] text-[#0F172A]">
+                {item.label}
+              </h3>
               {item.sublabel && (
-                <p className="mt-1 text-[11.5px] text-[#4B5B6E]">
+                <p className="text-[14.5px] leading-[1.6] text-[#475569]">
                   {item.sublabel}
                 </p>
               )}
             </div>
-            <CheckCircle2 className="w-3.5 h-3.5 text-[#6699CC] shrink-0 mt-0.5" />
+            <CheckCircle2 className="w-4 h-4 text-[#163B66] shrink-0 mt-1" />
           </div>
         ))}
       </section>
 
-      {/* Quiet 1-Line Executive Continuation Bar */}
-      <section className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-[10px] fortifai-card-shadow px-4 py-2.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
-        <p className="text-[12.5px] text-[#4B5B6E]">
+      {/* Executive Continuation Bar */}
+      <section className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-[14px] fortifai-card-shadow px-6 py-5 sm:px-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <p className="text-[14.5px] leading-[1.6] text-[#334155]">
           {config.nextStepPrompt}
         </p>
 
-        <div className="flex items-center gap-2 shrink-0">
+        <div className="flex flex-wrap items-center gap-2.5 shrink-0">
           <button
             type="button"
             onClick={() => onSelectTab('architecture')}
-            className="inline-flex items-center gap-1.5 rounded-[7px] bg-[#F8FAFC] hover:bg-[#E8F0F8] border border-[#E5E7EB] px-3 py-1.5 text-[12px] font-medium text-[#163B66] whitespace-nowrap transition-colors cursor-pointer"
+            className="inline-flex items-center gap-2 rounded-[8px] bg-[#F5F5F7] hover:bg-[#E8F0F8] border border-[#E5E7EB] px-4 py-2 text-[14px] font-medium text-[#163B66] whitespace-nowrap transition-colors cursor-pointer"
           >
             <span>02 · Architecture &amp; Security</span>
-            <ArrowRight className="w-3.5 h-3.5 text-[#2E5A8A]" />
+            <ArrowRight className="w-4 h-4 text-[#163B66]" />
           </button>
 
           <a
             href={bookDemoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 rounded-[7px] bg-[#163B66] hover:bg-[#2E5A8A] text-[#FFFFFF] px-3 py-1.5 text-[12px] font-medium whitespace-nowrap transition-colors"
+            className="inline-flex items-center gap-1.5 rounded-[8px] bg-[#163B66] hover:bg-[#2E5A8A] text-[#FFFFFF] px-4 py-2 text-[14px] font-medium whitespace-nowrap transition-colors"
           >
             <span>Book Live Walkthrough</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
+            <ArrowUpRight className="w-4 h-4" />
           </a>
         </div>
       </section>

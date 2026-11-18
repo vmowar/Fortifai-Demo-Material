@@ -106,6 +106,20 @@ function loadInitialSession(): AuthenticatedSession | null {
         );
         return cleaned;
       }
+
+      // Always enforce organization = 'Fortifai' for @fortifai.io sessions
+      if (isFortifaiEmail(parsed.email) && parsed.organization !== 'Fortifai') {
+        const normalizedInternal: AuthenticatedSession = {
+          ...(parsed as AuthenticatedSession),
+          organization: 'Fortifai',
+        };
+        window.sessionStorage.setItem(
+          SESSION_STORAGE_KEY,
+          JSON.stringify(normalizedInternal)
+        );
+        return normalizedInternal;
+      }
+
       return parsed as AuthenticatedSession;
     }
     return null;
@@ -329,20 +343,26 @@ export default function App() {
   };
 
   const handleAuthenticated = (newSession: AuthenticatedSession) => {
+    const normalizedSession: AuthenticatedSession = isFortifaiEmail(
+      newSession.email
+    )
+      ? { ...newSession, organization: 'Fortifai' }
+      : newSession;
+
     try {
       window.sessionStorage.setItem(
         SESSION_STORAGE_KEY,
-        JSON.stringify(newSession)
+        JSON.stringify(normalizedSession)
       );
     } catch {
       // Proceed in-memory if sessionStorage is restricted
     }
-    setSession(newSession);
+    setSession(normalizedSession);
     setForceGatePreview(false);
     setActiveTab('walkthrough');
 
     // Silently log external corporate visitor GATE_LOGIN to Supabase (skips @fortifai.io automatically)
-    void logPortalEvent(newSession, 'GATE_LOGIN');
+    void logPortalEvent(normalizedSession, 'GATE_LOGIN');
   };
 
   const handleSelectTab = (nextTab: TabId) => {
@@ -396,7 +416,7 @@ export default function App() {
     cmsConfig.tabs.find((tab) => tab.id === 'agents') ?? cmsConfig.tabs[2];
 
   return (
-    <div className="min-h-screen bg-[#F6F7F9] text-[#4B5B6E]">
+    <div className="min-h-screen bg-[#F5F5F7] text-[#334155]">
       {!showDataRoom || !session ? (
         <AccessGate
           gateConfig={cmsConfig.gate}
@@ -425,8 +445,8 @@ export default function App() {
             isFortifaiInternal={isInternalMember}
           />
 
-          {/* Main Tab Content Viewport */}
-          <main className="flex-1 w-full">
+          {/* Main Tab Content Viewport — Normal flow below sticky header with zero overlap */}
+          <main className="relative z-20 flex-1 w-full">
             {activeTab === 'walkthrough' && (
               <ExecutiveWalkthroughTab
                 config={cmsConfig.walkthrough}

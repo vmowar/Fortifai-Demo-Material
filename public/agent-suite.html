@@ -12,14 +12,16 @@
     />
     <style>
       :root {
-        --canvas: #F6F7F9;
+        --canvas: #F5F5F7;
         --surface: #FFFFFF;
         --border: #E5E7EB;
         --heading-blue: #163B66;
+        --title-dark: #0F172A;
         --deep-blue: #2E5A8A;
         --brand-blue: #6699CC;
-        --pill-bg: #E8F0F8;
-        --body-text: #4B5B6E;
+        --pill-bg: #F5F5F7;
+        --body-text: #334155;
+        --secondary-text: #475569;
         --muted-text: #64748B;
       }
       * {
@@ -31,139 +33,148 @@
         font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
         background: var(--canvas);
         color: var(--body-text);
-        font-size: 13px;
+        font-size: 14.5px;
         font-weight: 400;
-        line-height: 1.55;
+        line-height: 1.6;
         -webkit-font-smoothing: antialiased;
-        padding: 18px 18px 40px;
+        padding: 32px 24px 64px;
       }
       .mono {
         font-family: 'DM Mono', ui-monospace, SFMono-Regular, monospace;
         font-variant-numeric: tabular-nums;
       }
       .container {
-        max-width: 1180px;
+        max-width: 1240px;
         margin: 0 auto;
         display: flex;
         flex-direction: column;
-        gap: 14px;
+        gap: 28px;
       }
       .header-card {
         background: var(--surface);
         border: 1px solid var(--border);
-        border-radius: 12px;
-        box-shadow: 0 8px 30px rgba(13, 21, 32, 0.04);
-        padding: 16px 20px;
+        border-radius: 14px;
+        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03), 0 8px 24px rgba(15, 23, 42, 0.035);
+        padding: 28px 32px;
       }
       .brand-row {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-        gap: 10px;
+        gap: 12px;
       }
       .eyebrow-pill {
         display: inline-flex;
         align-items: center;
-        font-size: 10px;
+        font-size: 11.5px;
         font-weight: 500;
-        letter-spacing: 0.04em;
-        color: var(--deep-blue);
+        letter-spacing: 0.05em;
+        color: var(--muted-text);
         background: var(--pill-bg);
-        padding: 3px 8px;
-        border-radius: 5px;
+        border: 1px solid var(--border);
+        padding: 4px 10px;
+        border-radius: 6px;
         text-transform: uppercase;
       }
       h1 {
-        font-size: 21px;
+        font-size: clamp(26px, 2.6vw, 32px);
         font-weight: 500;
-        line-height: 1.2;
+        line-height: 1.18;
         letter-spacing: -0.02em;
         color: var(--heading-blue);
-        margin-top: 8px;
+        margin-top: 12px;
       }
       .subtitle {
-        margin-top: 4px;
-        max-width: 800px;
-        color: var(--body-text);
-        font-size: 13px;
-        line-height: 1.52;
+        margin-top: 8px;
+        max-width: 840px;
+        color: var(--secondary-text);
+        font-size: 15px;
+        line-height: 1.6;
       }
       .controls-bar {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
-        gap: 10px;
-        margin-top: 14px;
-        padding-top: 12px;
+        gap: 16px;
+        margin-top: 24px;
+        padding-top: 20px;
         border-top: 1px solid var(--border);
       }
       .filter-group {
         display: flex;
         flex-wrap: wrap;
-        gap: 5px;
+        gap: 8px;
       }
       .filter-btn {
         border: 1px solid var(--border);
-        background: #F8FAFC;
+        background: #FFFFFF;
         font-family: 'DM Sans', sans-serif;
-        font-size: 11.5px;
+        font-size: 14px;
         font-weight: 500;
-        color: var(--body-text);
-        padding: 4px 10px;
-        border-radius: 7px;
+        color: var(--secondary-text);
+        padding: 6px 14px;
+        border-radius: 8px;
         cursor: pointer;
         white-space: nowrap;
         transition: all 0.15s ease;
       }
       .filter-btn:hover {
         border-color: var(--brand-blue);
-        background: #FFFFFF;
+        background: var(--canvas);
         color: var(--heading-blue);
       }
       .filter-btn.active {
         background: var(--heading-blue);
         color: #FFFFFF;
+        font-weight: 600;
         border-color: var(--heading-blue);
       }
       .search-input {
-        height: 34px;
-        width: 265px;
+        height: 42px;
+        width: 310px;
         max-width: 100%;
-        border-radius: 7px;
+        border-radius: 8px;
         border: 1px solid #D1D5DB;
-        padding: 0 11px;
+        padding: 0 14px;
         font-family: 'DM Sans', sans-serif;
-        font-size: 12.5px;
-        color: #0D1520;
+        font-size: 14.5px;
+        color: var(--title-dark);
         background: #FFFFFF;
       }
       .search-input::placeholder {
-        color: #94A3B8;
+        color: var(--muted-text);
       }
       .search-input:focus {
         outline: none;
-        border-color: var(--deep-blue);
-        box-shadow: 0 0 0 2px rgba(46, 90, 138, 0.18);
+        border-color: var(--heading-blue);
+        box-shadow: 0 0 0 3px rgba(22, 59, 102, 0.14);
       }
       .agents-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 12px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03), 0 8px 24px rgba(15, 23, 42, 0.035);
       }
       .agent-card {
         background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        box-shadow: 0 8px 30px rgba(13, 21, 32, 0.04);
-        padding: 15px 17px;
+        border-bottom: 1px solid var(--border);
+        border-right: 1px solid var(--border);
+        padding: 28px 30px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        transition: border-color 0.15s ease;
+        gap: 22px;
+        transition: background-color 0.15s ease;
+      }
+      .agent-card:nth-child(3n) {
+        border-right: none;
       }
       .agent-card:hover {
-        border-color: rgba(102, 153, 204, 0.7);
+        background: #F8FAFC;
       }
       .agent-meta {
         display: flex;
@@ -172,71 +183,79 @@
         gap: 8px;
       }
       .agent-suite-tag {
-        font-size: 9.5px;
+        font-size: 11.5px;
         font-weight: 500;
-        letter-spacing: 0.04em;
-        background: var(--pill-bg);
-        color: var(--deep-blue);
-        padding: 3px 8px;
-        border-radius: 5px;
+        letter-spacing: 0.05em;
+        color: var(--muted-text);
         text-transform: uppercase;
       }
       .agent-index {
-        font-size: 10px;
+        font-size: 11.5px;
         font-weight: 500;
-        color: var(--deep-blue);
-        background: #F8FAFC;
+        letter-spacing: 0.05em;
+        color: var(--heading-blue);
+        background: var(--canvas);
         border: 1px solid var(--border);
-        padding: 2px 6px;
+        padding: 2px 8px;
         border-radius: 5px;
       }
       .agent-title {
-        font-size: 14px;
+        font-size: 17.5px;
         font-weight: 600;
-        color: var(--heading-blue);
-        margin-top: 9px;
+        color: var(--title-dark);
+        margin-top: 12px;
         line-height: 1.3;
+        letter-spacing: -0.01em;
       }
       .agent-desc {
-        font-size: 12.5px;
+        font-size: 14.5px;
         color: var(--body-text);
-        margin-top: 6px;
-        line-height: 1.52;
+        margin-top: 10px;
+        line-height: 1.6;
       }
       .agent-footer {
-        margin-top: 12px;
-        padding-top: 10px;
+        padding-top: 16px;
         border-top: 1px solid var(--border);
-        font-size: 11.5px;
-        line-height: 1.45;
-        color: var(--muted-text);
+        font-size: 14px;
+        line-height: 1.55;
+        color: var(--secondary-text);
         display: flex;
         flex-direction: column;
-        gap: 4px;
+        gap: 6px;
       }
       .agent-footer span {
-        color: var(--heading-blue);
-        font-weight: 500;
+        color: var(--title-dark);
+        font-weight: 600;
       }
       .empty-state {
         display: none;
         background: #FFFFFF;
         border: 1px solid var(--border);
-        border-radius: 12px;
-        box-shadow: 0 8px 30px rgba(13, 21, 32, 0.04);
-        padding: 30px 20px;
+        border-radius: 14px;
+        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03), 0 8px 24px rgba(15, 23, 42, 0.035);
+        padding: 40px 24px;
         text-align: center;
       }
+      .empty-title {
+        font-weight: 600;
+        color: var(--title-dark);
+        font-size: 17.5px;
+      }
+      .empty-sub {
+        margin-top: 6px;
+        font-size: 14.5px;
+        color: var(--secondary-text);
+      }
       .reset-btn {
-        margin-top: 8px;
+        margin-top: 14px;
         border: 0;
-        border-radius: 7px;
+        border-radius: 8px;
         background: var(--heading-blue);
         color: #FFFFFF;
         font-family: 'DM Sans', sans-serif;
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 500;
-        padding: 6px 12px;
+        padding: 8px 16px;
         cursor: pointer;
       }
       .reset-btn:hover {
@@ -246,13 +265,26 @@
         .agents-grid {
           grid-template-columns: repeat(2, 1fr);
         }
+        .agent-card:nth-child(3n) {
+          border-right: 1px solid var(--border);
+        }
+        .agent-card:nth-child(2n) {
+          border-right: none;
+        }
       }
       @media (max-width: 660px) {
+        body {
+          padding: 24px 16px 56px;
+        }
         .agents-grid {
           grid-template-columns: 1fr;
         }
+        .agent-card {
+          border-right: none !important;
+          padding: 24px;
+        }
         .header-card {
-          padding: 18px;
+          padding: 24px;
         }
         .search-input {
           width: 100%;
@@ -270,8 +302,8 @@
       <section class="header-card">
         <div class="brand-row">
           <svg
-            width="96"
-            height="23"
+            width="108"
+            height="26"
             viewBox="32 99 565 136"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -319,8 +351,8 @@
       <section id="agents-grid" class="agents-grid"></section>
 
       <div id="empty-state" class="empty-state">
-        <p style="font-weight: 500; color: #163B66; font-size: 15px;">No matching domain agents found</p>
-        <p style="margin-top: 4px; font-size: 13px; color: #64748B;">Clear your search filter or switch back to All Suites.</p>
+        <p class="empty-title">No matching domain agents found</p>
+        <p class="empty-sub">Clear your search filter or switch back to All Suites.</p>
         <button type="button" class="reset-btn" onclick="resetFilters()">Reset Filters</button>
       </div>
     </div>

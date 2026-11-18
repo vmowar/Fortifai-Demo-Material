@@ -56,7 +56,7 @@ export const AccessGate: React.FC<AccessGateProps> = ({
       const sessionPayload: AuthenticatedSession = {
         name: trimmedName || emailPrefix,
         email: trimmedEmail,
-        organization: trimmedOrg || 'Fortifai',
+        organization: 'Fortifai',
         accessCode: normalizedCode || 'FORTIFAI_INTERNAL',
         timestamp: now.toISOString(),
         formattedTimestamp: formatUtcTimestamp(now),
@@ -140,18 +140,18 @@ export const AccessGate: React.FC<AccessGateProps> = ({
   };
 
   return (
-    <main className="min-h-screen w-full bg-[#F6F7F9] fortifai-gate-glow flex flex-col items-center justify-center px-4 py-2.5 sm:py-3">
+    <main className="min-h-screen w-full bg-[#F5F5F7] fortifai-gate-glow flex flex-col items-center justify-center px-5 py-8 sm:py-12">
       {/* Centered Crisp White Gate Card */}
       <section
         aria-labelledby="gate-headline"
-        className="w-full max-w-[500px] bg-[#FFFFFF] border border-[#E5E7EB] rounded-[14px] px-5 py-4 sm:px-7 sm:py-5 fortifai-card-shadow"
+        className="w-full max-w-[560px] bg-[#FFFFFF] border border-[#E5E7EB] rounded-[16px] p-7 sm:p-9 fortifai-card-shadow"
       >
         {/* Top Row: Official Fortifai Logo Lockup + Optional NDA Badge Pill */}
-        <div className="flex items-center justify-between gap-4 mb-2">
-          <FortifaiLogo height={24} />
+        <div className="flex items-center justify-between gap-4 mb-4">
+          <FortifaiLogo height={28} />
           {gateConfig.badgeLabel.trim() !== '' && (
-            <span className="inline-flex items-center gap-1.5 rounded-[5px] px-2 py-0.5 fortifai-pill whitespace-nowrap">
-              <ShieldCheck className="w-3 h-3 text-[#2E5A8A] shrink-0" />
+            <span className="inline-flex items-center gap-1.5 rounded-[6px] px-2.5 py-1 fortifai-pill whitespace-nowrap">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#163B66] shrink-0" />
               {gateConfig.badgeLabel}
             </span>
           )}
@@ -159,30 +159,30 @@ export const AccessGate: React.FC<AccessGateProps> = ({
 
         {/* Top Eyebrow */}
         {gateConfig.eyebrow.trim() !== '' && (
-          <p className="font-mono-tabular text-[10px] font-medium tracking-[0.05em] text-[#2E5A8A] uppercase">
+          <p className="font-mono-tabular text-[12px] font-medium tracking-[0.05em] text-[#64748B] uppercase">
             {gateConfig.eyebrow}
           </p>
         )}
 
-        {/* Gate H1 (#163B66, weight 500) */}
+        {/* Gate H1 (#163B66, weight 500, clamp(26px, 2.6vw, 32px)) */}
         <h1
           id="gate-headline"
-          className="mt-1 text-[clamp(21px,2.4vw,26px)] font-medium leading-[1.18] tracking-[-0.022em] text-[#163B66] text-balance"
+          className="mt-1.5 text-[clamp(26px,2.6vw,32px)] font-medium leading-[1.18] tracking-[-0.02em] text-[#163B66] text-balance"
         >
           {gateConfig.headline}
         </h1>
 
         {/* Sub-copy */}
         {gateConfig.subcopy.trim() !== '' && (
-          <p className="mt-1 text-[12.5px] font-normal leading-[1.5] text-[#4B5B6E]">
+          <p className="mt-2 text-[15px] font-normal leading-[1.6] text-[#475569]">
             {gateConfig.subcopy}
           </p>
         )}
 
         {/* Subtle Direct-Access Status Pill for @fortifai.io */}
         {isInternal && (
-          <div className="mt-2 inline-flex items-center gap-1.5 rounded-[7px] bg-[#E8F0F8] border border-[#6699CC]/40 px-2.5 py-1 font-mono-tabular text-[10.5px] font-medium text-[#163B66]">
-            <CheckCircle2 className="w-3.5 h-3.5 text-[#2E5A8A] shrink-0" />
+          <div className="mt-4 inline-flex items-center gap-2 rounded-[8px] bg-[#E8F0F8] border border-[#6699CC]/45 px-3 py-1.5 font-mono-tabular text-[12px] font-medium tracking-[0.04em] text-[#163B66]">
+            <CheckCircle2 className="w-4 h-4 text-[#163B66] shrink-0" />
             <span>Internal Fortifai Team — Direct Access Enabled</span>
           </div>
         )}
@@ -191,21 +191,21 @@ export const AccessGate: React.FC<AccessGateProps> = ({
         {errorMessage && (
           <div
             role="alert"
-            className="mt-2 flex items-start gap-2 rounded-[8px] bg-[#FDECEC] border border-[#F3C5C5] px-2.5 py-1.5 text-[12px] leading-[1.45] text-[#8B1A1A]"
+            className="mt-4 flex items-start gap-2.5 rounded-[10px] bg-[#FDECEC] border border-[#F3C5C5] px-3.5 py-2.5 text-[14px] leading-[1.55] text-[#8B1A1A]"
           >
-            <AlertCircle className="w-3.5 h-3.5 text-[#8B1A1A] shrink-0 mt-0.5" />
+            <AlertCircle className="w-4 h-4 text-[#8B1A1A] shrink-0 mt-1" />
             <span>{errorMessage}</span>
           </div>
         )}
 
         {/* Clickwrap NDA Access Form */}
-        <form onSubmit={validateAndSubmit} noValidate className="mt-2.5 space-y-2">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        <form onSubmit={validateAndSubmit} noValidate className="mt-5 space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* 1. Full Name */}
             <div>
               <label
                 htmlFor="gate-full-name"
-                className="block text-[11.5px] font-medium text-[#163B66] mb-0.5"
+                className="block text-[14px] font-medium text-[#0F172A] mb-1.5"
               >
                 Full Name{' '}
                 {!isInternal && <span className="text-[#8B1A1A]">*</span>}
@@ -216,10 +216,12 @@ export const AccessGate: React.FC<AccessGateProps> = ({
                 type="text"
                 required={!isInternal}
                 autoComplete="name"
-                placeholder={isInternal ? 'Optional for @fortifai.io' : 'Alexandra Vance'}
+                placeholder={
+                  isInternal ? 'Optional for @fortifai.io' : 'Alexandra Vance'
+                }
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full h-[34px] rounded-[7px] border border-[#D1D5DB] bg-[#FFFFFF] px-2.5 text-[12.5px] text-[#0D1520] placeholder:text-[#94A3B8] transition-colors focus:outline-none focus:border-[#2E5A8A] focus:ring-2 focus:ring-[#2E5A8A]/20"
+                className="w-full h-[42px] rounded-[8px] border border-[#D1D5DB] bg-[#FFFFFF] px-3.5 text-[14.5px] text-[#0F172A] placeholder:text-[#64748B] transition-colors focus:outline-none focus:border-[#163B66] focus:ring-2 focus:ring-[#163B66]/15"
               />
             </div>
 
@@ -227,7 +229,7 @@ export const AccessGate: React.FC<AccessGateProps> = ({
             <div>
               <label
                 htmlFor="gate-corporate-email"
-                className="block text-[11.5px] font-medium text-[#163B66] mb-0.5"
+                className="block text-[14px] font-medium text-[#0F172A] mb-1.5"
               >
                 Corporate Email <span className="text-[#8B1A1A]">*</span>
               </label>
@@ -249,7 +251,7 @@ export const AccessGate: React.FC<AccessGateProps> = ({
                     unlockPortal();
                   }
                 }}
-                className="w-full h-[34px] rounded-[7px] border border-[#D1D5DB] bg-[#FFFFFF] px-2.5 text-[12.5px] text-[#0D1520] placeholder:text-[#94A3B8] transition-colors focus:outline-none focus:border-[#2E5A8A] focus:ring-2 focus:ring-[#2E5A8A]/20"
+                className="w-full h-[42px] rounded-[8px] border border-[#D1D5DB] bg-[#FFFFFF] px-3.5 text-[14.5px] text-[#0F172A] placeholder:text-[#64748B] transition-colors focus:outline-none focus:border-[#163B66] focus:ring-2 focus:ring-[#163B66]/15"
               />
             </div>
 
@@ -257,7 +259,7 @@ export const AccessGate: React.FC<AccessGateProps> = ({
             <div className={isInternal ? 'sm:col-span-2' : ''}>
               <label
                 htmlFor="gate-organization"
-                className="block text-[11.5px] font-medium text-[#163B66] mb-0.5"
+                className="block text-[14px] font-medium text-[#0F172A] mb-1.5"
               >
                 Organization / Firm{' '}
                 {!isInternal && <span className="text-[#8B1A1A]">*</span>}
@@ -268,10 +270,11 @@ export const AccessGate: React.FC<AccessGateProps> = ({
                 type="text"
                 required={!isInternal}
                 autoComplete="organization"
-                placeholder={isInternal ? 'Fortifai (auto-filled if blank)' : 'Global Assurance LLP'}
-                value={organization}
+                placeholder={isInternal ? 'Fortifai' : 'Global Assurance LLP'}
+                value={isInternal ? 'Fortifai' : organization}
+                readOnly={isInternal}
                 onChange={(e) => setOrganization(e.target.value)}
-                className="w-full h-[34px] rounded-[7px] border border-[#D1D5DB] bg-[#FFFFFF] px-2.5 text-[12.5px] text-[#0D1520] placeholder:text-[#94A3B8] transition-colors focus:outline-none focus:border-[#2E5A8A] focus:ring-2 focus:ring-[#2E5A8A]/20"
+                className="w-full h-[42px] rounded-[8px] border border-[#D1D5DB] bg-[#FFFFFF] px-3.5 text-[14.5px] text-[#0F172A] placeholder:text-[#64748B] transition-colors focus:outline-none focus:border-[#163B66] focus:ring-2 focus:ring-[#163B66]/15"
               />
             </div>
 
@@ -280,7 +283,7 @@ export const AccessGate: React.FC<AccessGateProps> = ({
               <div>
                 <label
                   htmlFor="gate-access-code"
-                  className="block text-[11.5px] font-medium text-[#163B66] mb-0.5"
+                  className="block text-[14px] font-medium text-[#0F172A] mb-1.5"
                 >
                   Partner / Access Code <span className="text-[#8B1A1A]">*</span>
                 </label>
@@ -294,7 +297,7 @@ export const AccessGate: React.FC<AccessGateProps> = ({
                   placeholder="Enter invitation code"
                   value={accessCode}
                   onChange={(e) => setAccessCode(e.target.value)}
-                  className="w-full h-[34px] rounded-[7px] border border-[#D1D5DB] bg-[#FFFFFF] px-2.5 font-mono-tabular text-[12px] tracking-[0.04em] uppercase text-[#0D1520] placeholder:font-sans placeholder:normal-case placeholder:tracking-normal placeholder:text-[#94A3B8] transition-colors focus:outline-none focus:border-[#2E5A8A] focus:ring-2 focus:ring-[#2E5A8A]/20"
+                  className="w-full h-[42px] rounded-[8px] border border-[#D1D5DB] bg-[#FFFFFF] px-3.5 font-mono-tabular text-[14.5px] tracking-[0.04em] uppercase text-[#0F172A] placeholder:font-sans placeholder:normal-case placeholder:tracking-normal placeholder:text-[#64748B] transition-colors focus:outline-none focus:border-[#163B66] focus:ring-2 focus:ring-[#163B66]/15"
                 />
               </div>
             )}
@@ -304,22 +307,22 @@ export const AccessGate: React.FC<AccessGateProps> = ({
           {!isInternal && (
             <>
               <div>
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-mono-tabular text-[10px] font-medium tracking-[0.04em] text-[#2E5A8A] uppercase">
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className="font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] text-[#163B66] uppercase">
                     {gateConfig.ndaHeaderLabel}
                   </span>
-                  <span className="font-mono-tabular text-[10px] text-[#64748B]">
+                  <span className="font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] text-[#64748B] uppercase">
                     Scroll to review
                   </span>
                 </div>
                 <div
                   tabIndex={0}
                   aria-label="Confidentiality and Non-Disclosure Terms"
-                  className="max-h-[70px] overflow-y-auto fortifai-scroll rounded-[7px] bg-[#F8FAFC] border border-[#E5E7EB] px-2.5 py-1.5 text-[11px] leading-[1.42] text-[#4B5B6E] space-y-1 focus:outline-none focus:border-[#2E5A8A]"
+                  className="max-h-[112px] overflow-y-auto fortifai-scroll rounded-[10px] bg-[#F5F5F7] border border-[#E5E7EB] px-4 py-3 text-[14px] leading-[1.6] text-[#334155] space-y-2 focus:outline-none focus:border-[#163B66]"
                 >
                   {gateConfig.ndaClauses.map((clause, index) => (
                     <p key={`${clause.heading}-${index}`}>
-                      <span className="font-semibold text-[#163B66]">
+                      <span className="font-semibold text-[#0F172A]">
                         {clause.heading}
                       </span>{' '}
                       {clause.body}
@@ -330,16 +333,16 @@ export const AccessGate: React.FC<AccessGateProps> = ({
 
               <label
                 htmlFor="gate-nda-checkbox"
-                className="flex items-start gap-2 cursor-pointer select-none pt-0.5"
+                className="flex items-start gap-2.5 cursor-pointer select-none pt-0.5"
               >
                 <input
                   id="gate-nda-checkbox"
                   type="checkbox"
                   checked={agreedToTerms}
                   onChange={(e) => setAgreedToTerms(e.target.checked)}
-                  className="mt-0.5 h-3.5 w-3.5 rounded border-[#D1D5DB] text-[#163B66] accent-[#163B66] focus:ring-2 focus:ring-[#2E5A8A]/30 cursor-pointer shrink-0"
+                  className="mt-1 h-4 w-4 rounded border-[#D1D5DB] text-[#163B66] accent-[#163B66] focus:ring-2 focus:ring-[#163B66]/25 cursor-pointer shrink-0"
                 />
-                <span className="text-[12px] leading-[1.4] text-[#4B5B6E]">
+                <span className="text-[14.5px] leading-[1.55] text-[#334155]">
                   {gateConfig.checkboxLabel}
                 </span>
               </label>
@@ -350,7 +353,7 @@ export const AccessGate: React.FC<AccessGateProps> = ({
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full h-[36px] rounded-[8px] bg-[#163B66] hover:bg-[#2E5A8A] active:bg-[#163B66] text-[#FFFFFF] text-[13px] font-medium tracking-[-0.01em] transition-colors cursor-pointer disabled:opacity-60 flex items-center justify-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2E5A8A] focus-visible:ring-offset-2"
+            className="w-full h-[44px] rounded-[10px] bg-[#163B66] hover:bg-[#2E5A8A] active:bg-[#163B66] text-[#FFFFFF] text-[14.5px] font-medium tracking-[-0.01em] transition-colors cursor-pointer disabled:opacity-60 flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#163B66] focus-visible:ring-offset-2"
           >
             <span>
               {isInternal
@@ -363,7 +366,7 @@ export const AccessGate: React.FC<AccessGateProps> = ({
 
       {/* Subtle Footer Attribution */}
       {gateConfig.footerAttribution.trim() !== '' && (
-        <footer className="mt-2 text-center font-mono-tabular text-[10px] font-medium tracking-[0.05em] text-[#64748B]">
+        <footer className="mt-4 text-center font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] uppercase text-[#64748B]">
           {gateConfig.footerAttribution}
         </footer>
       )}

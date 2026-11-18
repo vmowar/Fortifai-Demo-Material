@@ -172,29 +172,29 @@ const UsdVolumeControl: React.FC<UsdVolumeControlProps> = ({
   };
 
   return (
-    <div className="rounded-[10px] bg-[#F8FAFC] border border-[#E5E7EB] p-3 space-y-2">
-      <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+    <div className="rounded-[12px] bg-[#FFFFFF] border border-[#E5E7EB] p-5 space-y-3.5">
+      <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1.5">
         <div>
           <label
             htmlFor={id}
-            className="block text-[12px] font-medium text-[#163B66]"
+            className="block text-[14.5px] font-semibold text-[#0F172A]"
           >
             {label}
           </label>
           {sublabel && (
-            <span className="block text-[11px] text-[#64748B]">
+            <span className="block mt-0.5 text-[13.5px] text-[#475569]">
               {sublabel}
             </span>
           )}
         </div>
-        <span className="font-mono-tabular text-[11px] font-medium text-[#2E5A8A]">
+        <span className="font-mono-tabular text-[13px] font-semibold text-[#163B66]">
           {formatCompactUsd(value)} USD
         </span>
       </div>
 
       {/* Formatted USD ($) Numeric Input */}
       <div className="relative flex items-center">
-        <span className="absolute left-2.5 font-mono-tabular text-[12.5px] font-medium text-[#163B66] pointer-events-none">
+        <span className="absolute left-3.5 font-mono-tabular text-[15px] font-medium text-[#163B66] pointer-events-none">
           $
         </span>
         <input
@@ -205,15 +205,15 @@ const UsdVolumeControl: React.FC<UsdVolumeControlProps> = ({
           onChange={handleTextChange}
           onBlur={handleBlur}
           aria-label={label}
-          className="w-full h-[34px] rounded-[7px] border border-[#D1D5DB] bg-[#FFFFFF] pl-6 pr-12 font-mono-tabular text-[12.5px] font-medium text-[#0D1520] focus:outline-none focus:border-[#2E5A8A] focus:ring-2 focus:ring-[#2E5A8A]/15"
+          className="w-full h-[42px] rounded-[8px] border border-[#D1D5DB] bg-[#FFFFFF] pl-8 pr-14 font-mono-tabular text-[15px] font-medium text-[#0F172A] focus:outline-none focus:border-[#163B66] focus:ring-2 focus:ring-[#163B66]/15"
         />
-        <span className="absolute right-2.5 font-mono-tabular text-[10px] font-medium text-[#64748B] pointer-events-none">
+        <span className="absolute right-3.5 font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] text-[#64748B] pointer-events-none">
           USD
         </span>
       </div>
 
       {/* Smooth Range Slider */}
-      <div className="space-y-0.5">
+      <div className="space-y-1">
         <input
           type="range"
           min={min}
@@ -227,14 +227,14 @@ const UsdVolumeControl: React.FC<UsdVolumeControlProps> = ({
           aria-label={`${label} slider`}
           className="w-full h-1.5 accent-[#163B66] cursor-pointer"
         />
-        <div className="flex items-center justify-between font-mono-tabular text-[10px] text-[#64748B]">
+        <div className="flex items-center justify-between font-mono-tabular text-[11.5px] font-medium text-[#64748B]">
           <span>{formatCompactUsd(min)}</span>
           <span>{formatCompactUsd(max)}</span>
         </div>
       </div>
 
       {/* Quick-Select USD Volume Chips */}
-      <div className="flex flex-wrap items-center gap-1">
+      <div className="flex flex-wrap items-center gap-1.5">
         {QUICK_VOLUME_CHIPS.filter(
           (chip) => chip.value >= min && chip.value <= max
         ).map((chip) => {
@@ -247,10 +247,10 @@ const UsdVolumeControl: React.FC<UsdVolumeControlProps> = ({
                 setRawInput(null);
                 onChange(chip.value);
               }}
-              className={`rounded-[5px] px-2 py-0.5 font-mono-tabular text-[10.5px] font-medium transition-colors cursor-pointer border whitespace-nowrap ${
+              className={`rounded-[6px] px-2.5 py-1 font-mono-tabular text-[12px] font-medium transition-colors cursor-pointer border whitespace-nowrap ${
                 isSelected
                   ? 'bg-[#163B66] text-[#FFFFFF] border-[#163B66]'
-                  : 'bg-[#FFFFFF] text-[#2E5A8A] border-[#E5E7EB] hover:border-[#6699CC] hover:text-[#163B66]'
+                  : 'bg-[#F5F5F7] text-[#475569] border-[#E5E7EB] hover:border-[#6699CC] hover:text-[#163B66]'
               }`}
             >
               {chip.label}
@@ -487,27 +487,27 @@ export const BusinessCaseRoiTab: React.FC<BusinessCaseRoiTabProps> = ({
   };
 
   return (
-    <div className="mx-auto max-w-[1200px] px-4 sm:px-6 pt-4 pb-10 space-y-4">
+    <div className="mx-auto max-w-[1240px] px-5 sm:px-8 pt-8 pb-16 space-y-8">
       {/* Editorial Header */}
-      <header className="flex flex-col md:flex-row md:items-end justify-between gap-3">
-        <div className="max-w-[760px] space-y-1">
-          <span className="inline-flex items-center gap-1.5 rounded-[5px] px-2 py-0.5 fortifai-pill">
-            <Calculator className="w-3 h-3 text-[#2E5A8A] shrink-0" />
+      <header className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div className="max-w-[800px] space-y-2">
+          <span className="inline-flex items-center gap-1.5 rounded-[6px] px-2.5 py-1 fortifai-pill">
+            <Calculator className="w-3.5 h-3.5 text-[#163B66] shrink-0" />
             <span>{config.pillLabel}</span>
           </span>
-          <h1 className="text-[21px] sm:text-[22px] font-medium leading-[1.2] tracking-[-0.02em] text-[#163B66] text-balance">
+          <h1 className="text-[clamp(26px,2.6vw,32px)] font-medium leading-[1.18] tracking-[-0.02em] text-[#163B66] text-balance">
             {config.headline}
           </h1>
-          <p className="text-[13px] leading-[1.52] text-[#4B5B6E]">
+          <p className="text-[15px] leading-[1.6] text-[#475569]">
             {config.subtitle}
           </p>
         </div>
 
-        <div className="flex items-center gap-2 shrink-0">
+        <div className="flex flex-wrap items-center gap-2.5 shrink-0">
           <button
             type="button"
             onClick={() => onSelectTab('faq')}
-            className="rounded-[7px] bg-[#FFFFFF] hover:bg-[#F8FAFC] border border-[#E5E7EB] px-3 py-1.5 text-[12px] font-medium text-[#163B66] whitespace-nowrap transition-colors cursor-pointer"
+            className="rounded-[8px] bg-[#FFFFFF] hover:bg-[#F5F5F7] border border-[#E5E7EB] px-4 py-2 text-[14px] font-medium text-[#163B66] whitespace-nowrap transition-colors cursor-pointer"
           >
             05 · Executive FAQ
           </button>
@@ -515,66 +515,70 @@ export const BusinessCaseRoiTab: React.FC<BusinessCaseRoiTabProps> = ({
             href={bookDemoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-[7px] bg-[#163B66] hover:bg-[#2E5A8A] text-[#FFFFFF] px-3 py-1.5 text-[12px] font-medium whitespace-nowrap transition-colors"
+            className="inline-flex items-center gap-1.5 rounded-[8px] bg-[#163B66] hover:bg-[#2E5A8A] text-[#FFFFFF] px-4 py-2 text-[14px] font-medium whitespace-nowrap transition-colors"
           >
             <span>Book Value Assessment</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
+            <ArrowUpRight className="w-4 h-4" />
           </a>
         </div>
       </header>
 
-      {/* Top Live-Deployment Evidence Strip (4 #FFFFFF Cards) */}
+      {/* Unified 4-Column #FFFFFF Hairline Proof Metrics Strip ($24.4M, $146M, 70–80%, 10x+) */}
       <section
         aria-label="Live Deployment Evidence"
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3"
+        className="rounded-[14px] bg-[#FFFFFF] border border-[#E5E7EB] fortifai-card-shadow overflow-hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-[#E5E7EB]"
       >
         {config.evidenceCards.map((card, idx) => (
           <article
             key={`${card.metric}-${idx}`}
-            className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-[12px] p-3.5 sm:p-4 fortifai-card-shadow flex flex-col justify-between gap-1.5"
+            className="px-7 py-6 flex flex-col justify-between gap-2.5"
           >
             <div className="flex items-center justify-between gap-2">
-              <span className="font-mono-tabular text-[22px] font-medium leading-none tracking-[-0.03em] text-[#163B66]">
+              <span className="font-mono-tabular text-[30px] font-semibold leading-none tracking-[-0.03em] text-[#163B66]">
                 {card.metric}
               </span>
-              <TrendingUp className="w-3.5 h-3.5 text-[#6699CC] shrink-0" />
+              <TrendingUp className="w-4 h-4 text-[#163B66] shrink-0" />
             </div>
-            <p className="text-[12px] leading-[1.42] text-[#4B5B6E]">
+            <p className="text-[14px] leading-[1.55] text-[#475569]">
               {card.label}
             </p>
           </article>
         ))}
       </section>
 
-      {/* Interactive USD Volume-to-Savings Simulator (2-Column Split Card) */}
+      {/* Interactive USD Volume-to-Savings Simulator — Unified 2-Column #FFFFFF Hairline Sheet */}
       <section
         aria-label="Interactive USD Volume-to-Savings Simulator"
-        className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-[14px] p-4 sm:p-5 fortifai-card-shadow"
+        className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-[14px] fortifai-card-shadow overflow-hidden"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-[1.04fr_0.96fr] gap-5 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.04fr_0.96fr] divide-y lg:divide-y-0 lg:divide-x divide-[#E5E7EB]">
           {/* LEFT COLUMN: Inputs (Strictly USD $) */}
-          <div className="space-y-3.5">
-            <div className="flex items-center justify-between gap-2 pb-2 border-b border-[#F1F5F9]">
+          <div className="p-7 sm:p-8 space-y-6">
+            <div className="flex items-start sm:items-center justify-between gap-3 pb-4 border-b border-[#E5E7EB]">
               <div>
-                <h2 className="text-[15.5px] font-medium leading-[1.3] text-[#163B66]">
+                <h3 className="text-[17.5px] font-semibold leading-[1.3] tracking-[-0.01em] text-[#0F172A]">
                   1. Configure Scope &amp; Annual Volume (USD $)
-                </h2>
-                <p className="text-[12px] text-[#64748B]">
+                </h3>
+                <p className="mt-1 text-[14.5px] leading-[1.55] text-[#475569]">
                   Select an agent domain or model the full multi-domain suite in
                   USD ($).
                 </p>
               </div>
-              <span className="rounded-[5px] px-2 py-0.5 fortifai-pill whitespace-nowrap">
+              <span className="rounded-[6px] px-2.5 py-1 fortifai-pill whitespace-nowrap">
                 USD ($) ONLY
               </span>
             </div>
 
-            {/* Agent Domain Selector */}
-            <div className="space-y-1.5" role="radiogroup" aria-label="Agent Domain Selector">
-              <span className="block text-[11.5px] font-medium text-[#163B66]">
-                Agent Domain Scope
+            {/* Agent Domain Scope — Spacious 5-Row Unified Hairline Selector */}
+            <div
+              className="space-y-2.5"
+              role="radiogroup"
+              aria-label="Agent Domain Selector"
+            >
+              <span className="block font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] uppercase text-[#64748B]">
+                AGENT DOMAIN SCOPE
               </span>
-              <div className="grid grid-cols-1 gap-1.5">
+              <div className="rounded-[12px] border border-[#E5E7EB] bg-[#FFFFFF] divide-y divide-[#E5E7EB] overflow-hidden">
                 {DOMAIN_DEFINITIONS.map((dom, index) => {
                   const isActive = selectedDomain === dom.id;
                   return (
@@ -584,27 +588,31 @@ export const BusinessCaseRoiTab: React.FC<BusinessCaseRoiTabProps> = ({
                       role="radio"
                       aria-checked={isActive}
                       onClick={() => setSelectedDomain(dom.id)}
-                      className={`w-full rounded-[8px] border px-3 py-2 text-left transition-colors cursor-pointer ${
+                      className={`w-full px-[18px] py-[16px] text-left transition-colors cursor-pointer ${
                         isActive
-                          ? 'bg-[#F4F8FC] border-[#2E5A8A] ring-1 ring-[#2E5A8A]/20'
-                          : 'bg-[#FFFFFF] border-[#E5E7EB] hover:bg-[#F8FAFC] hover:border-[#CBD5E1]'
+                          ? 'bg-[#F4F8FC]'
+                          : 'bg-[#FFFFFF] hover:bg-[#F8FAFC]'
                       }`}
                     >
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="text-[12.5px] font-medium text-[#163B66]">
+                      <div className="flex items-center justify-between gap-3">
+                        <span
+                          className={`text-[16px] font-semibold leading-[1.3] tracking-[-0.01em] ${
+                            isActive ? 'text-[#163B66]' : 'text-[#0F172A]'
+                          }`}
+                        >
                           {dom.title}
                         </span>
                         <span
-                          className={`rounded-[4px] px-1.5 py-0.5 font-mono-tabular text-[10px] font-medium shrink-0 ${
+                          className={`rounded-[5px] px-2 py-0.5 font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] shrink-0 ${
                             isActive
                               ? 'bg-[#163B66] text-[#FFFFFF]'
-                              : 'bg-[#E8F0F8] text-[#2E5A8A]'
+                              : 'bg-[#F5F5F7] border border-[#E5E7EB] text-[#64748B]'
                           }`}
                         >
                           0{index + 1}
                         </span>
                       </div>
-                      <p className="mt-0.5 text-[11px] leading-[1.4] text-[#64748B]">
+                      <p className="mt-1 text-[13.5px] leading-[1.55] text-[#475569]">
                         {dom.agentsLabel}
                       </p>
                     </button>
@@ -654,7 +662,7 @@ export const BusinessCaseRoiTab: React.FC<BusinessCaseRoiTabProps> = ({
             )}
 
             {selectedDomain === 'close_audit_compliance' && (
-              <div className="space-y-2.5">
+              <div className="space-y-4">
                 <UsdVolumeControl
                   id="vol-close-audit"
                   label="Annual Business Volume Processed by Agent(s) (USD)"
@@ -667,15 +675,15 @@ export const BusinessCaseRoiTab: React.FC<BusinessCaseRoiTabProps> = ({
                 />
 
                 {/* Manual Audit / Review Hours Slider */}
-                <div className="rounded-[10px] bg-[#F8FAFC] border border-[#E5E7EB] p-3 space-y-2">
+                <div className="rounded-[12px] bg-[#FFFFFF] border border-[#E5E7EB] p-5 space-y-3.5">
                   <div className="flex items-center justify-between gap-2">
                     <label
                       htmlFor="audit-hours-input"
-                      className="text-[12px] font-medium text-[#163B66]"
+                      className="text-[14.5px] font-semibold text-[#0F172A]"
                     >
                       Annual Manual Audit / Review Hours
                     </label>
-                    <span className="font-mono-tabular text-[11px] font-medium text-[#2E5A8A]">
+                    <span className="font-mono-tabular text-[13px] font-semibold text-[#163B66]">
                       {manualReviewHours.toLocaleString('en-US')} hrs / yr
                     </span>
                   </div>
@@ -693,9 +701,9 @@ export const BusinessCaseRoiTab: React.FC<BusinessCaseRoiTabProps> = ({
                           clampNumber(Number(e.target.value), 500, 25_000)
                         )
                       }
-                      className="w-full h-[34px] rounded-[7px] border border-[#D1D5DB] bg-[#FFFFFF] px-2.5 pr-12 font-mono-tabular text-[12.5px] font-medium text-[#0D1520] focus:outline-none focus:border-[#2E5A8A]"
+                      className="w-full h-[42px] rounded-[8px] border border-[#D1D5DB] bg-[#FFFFFF] px-3.5 pr-14 font-mono-tabular text-[15px] font-medium text-[#0F172A] focus:outline-none focus:border-[#163B66] focus:ring-2 focus:ring-[#163B66]/15"
                     />
-                    <span className="absolute right-2.5 font-mono-tabular text-[10px] font-medium text-[#64748B] pointer-events-none">
+                    <span className="absolute right-3.5 font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] text-[#64748B] pointer-events-none">
                       HRS
                     </span>
                   </div>
@@ -713,7 +721,7 @@ export const BusinessCaseRoiTab: React.FC<BusinessCaseRoiTabProps> = ({
                     className="w-full h-1.5 accent-[#163B66] cursor-pointer"
                   />
 
-                  <div className="flex flex-wrap items-center gap-1">
+                  <div className="flex flex-wrap items-center gap-1.5">
                     {QUICK_AUDIT_HOURS_CHIPS.map((chip) => {
                       const active = manualReviewHours === chip.value;
                       return (
@@ -721,10 +729,10 @@ export const BusinessCaseRoiTab: React.FC<BusinessCaseRoiTabProps> = ({
                           key={chip.value}
                           type="button"
                           onClick={() => setManualReviewHours(chip.value)}
-                          className={`rounded-[5px] px-2 py-0.5 font-mono-tabular text-[10.5px] font-medium border cursor-pointer transition-colors ${
+                          className={`rounded-[6px] px-2.5 py-1 font-mono-tabular text-[12px] font-medium border cursor-pointer transition-colors ${
                             active
                               ? 'bg-[#163B66] text-[#FFFFFF] border-[#163B66]'
-                              : 'bg-[#FFFFFF] text-[#2E5A8A] border-[#E5E7EB] hover:border-[#6699CC]'
+                              : 'bg-[#F5F5F7] text-[#475569] border-[#E5E7EB] hover:border-[#6699CC] hover:text-[#163B66]'
                           }`}
                         >
                           {chip.label}
@@ -737,7 +745,7 @@ export const BusinessCaseRoiTab: React.FC<BusinessCaseRoiTabProps> = ({
             )}
 
             {selectedDomain === 'full_suite' && (
-              <div className="space-y-2.5">
+              <div className="space-y-4">
                 <UsdVolumeControl
                   id="vol-suite-procurement"
                   label="Procurement & Supply Chain Volume (USD)"
@@ -774,18 +782,18 @@ export const BusinessCaseRoiTab: React.FC<BusinessCaseRoiTabProps> = ({
             )}
 
             {/* Realization Basis Toggle */}
-            <div className="space-y-1">
-              <span className="block text-[11.5px] font-medium text-[#163B66]">
-                Realization Basis
+            <div className="space-y-2">
+              <span className="block font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] uppercase text-[#64748B]">
+                REALIZATION BASIS
               </span>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 rounded-[8px] bg-[#F8FAFC] border border-[#E5E7EB] p-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 rounded-[10px] bg-[#F5F5F7] border border-[#E5E7EB] p-1.5">
                 <button
                   type="button"
                   onClick={() => setScenario('conservative')}
-                  className={`rounded-[6px] px-2.5 py-1.5 text-[12px] font-medium transition-colors cursor-pointer whitespace-nowrap ${
+                  className={`rounded-[8px] px-3.5 py-2 text-[14px] transition-colors cursor-pointer whitespace-nowrap ${
                     scenario === 'conservative'
-                      ? 'bg-[#163B66] text-[#FFFFFF]'
-                      : 'text-[#4B5B6E] hover:text-[#163B66]'
+                      ? 'bg-[#163B66] text-[#FFFFFF] font-semibold'
+                      : 'text-[#475569] font-medium hover:text-[#163B66]'
                   }`}
                 >
                   Conservative (CFO Base Case)
@@ -793,10 +801,10 @@ export const BusinessCaseRoiTab: React.FC<BusinessCaseRoiTabProps> = ({
                 <button
                   type="button"
                   onClick={() => setScenario('benchmark')}
-                  className={`rounded-[6px] px-2.5 py-1.5 text-[12px] font-medium transition-colors cursor-pointer whitespace-nowrap ${
+                  className={`rounded-[8px] px-3.5 py-2 text-[14px] transition-colors cursor-pointer whitespace-nowrap ${
                     scenario === 'benchmark'
-                      ? 'bg-[#163B66] text-[#FFFFFF]'
-                      : 'text-[#4B5B6E] hover:text-[#163B66]'
+                      ? 'bg-[#163B66] text-[#FFFFFF] font-semibold'
+                      : 'text-[#475569] font-medium hover:text-[#163B66]'
                   }`}
                 >
                   Typical Delivered Benchmark
@@ -806,65 +814,65 @@ export const BusinessCaseRoiTab: React.FC<BusinessCaseRoiTabProps> = ({
           </div>
 
           {/* RIGHT COLUMN: Live Deduplicated USD Output — Separating P&L from Cash Flow */}
-          <div className="space-y-3">
-            <div className="flex items-center justify-between gap-2 pb-2 border-b border-[#F1F5F9]">
+          <div className="p-7 sm:p-8 space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-[#E5E7EB]">
               <div>
-                <h2 className="text-[15.5px] font-medium leading-[1.3] text-[#163B66]">
+                <h3 className="text-[17.5px] font-semibold leading-[1.3] tracking-[-0.01em] text-[#0F172A]">
                   2. Deduplicated USD Value Projection
-                </h2>
-                <p className="text-[12px] text-[#64748B]">
+                </h3>
+                <p className="mt-1 text-[14.5px] leading-[1.55] text-[#475569]">
                   Strictly separates recurring P&amp;L EBITDA from Working
                   Capital cash release.
                 </p>
               </div>
-              <span className="font-mono-tabular text-[10.5px] font-medium text-[#2E5A8A] whitespace-nowrap">
+              <span className="font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] uppercase text-[#163B66] whitespace-nowrap">
                 {calculation.rateSummaryLabel}
               </span>
             </div>
 
             {/* OUTPUT CARD 1: Primary #163B66 Recurring EBITDA / P&L Highlight Card */}
-            <div className="rounded-[12px] bg-[#163B66] text-[#FFFFFF] p-4 space-y-3">
+            <div className="rounded-[14px] bg-[#163B66] text-[#FFFFFF] p-6 sm:p-7 space-y-4">
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <span className="font-mono-tabular text-[10px] font-medium tracking-[0.04em] text-[#DCE8F5] uppercase">
+                <span className="font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] text-[#E2E8F0] uppercase">
                   ESTIMATED ANNUAL RECURRING EBITDA / P&amp;L IMPACT ($ USD)
                 </span>
-                <span className="rounded-[5px] bg-[#FFFFFF]/12 border border-[#6699CC]/40 px-2 py-0.5 font-mono-tabular text-[10px] font-medium text-[#E8F0F8]">
+                <span className="rounded-[6px] bg-[#FFFFFF]/12 border border-[#6699CC]/45 px-2.5 py-0.5 font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] uppercase text-[#FFFFFF]">
                   {isBenchmark ? 'BENCHMARK CASE' : 'CFO BASE CASE'}
                 </span>
               </div>
 
-              <div className="flex items-baseline gap-2">
-                <span className="font-mono-tabular text-[32px] sm:text-[34px] font-medium leading-none tracking-[-0.03em] text-[#FFFFFF]">
+              <div className="flex items-baseline gap-2.5">
+                <span className="font-mono-tabular text-[32px] font-semibold leading-none tracking-[-0.03em] text-[#FFFFFF]">
                   {formatCompactUsd(calculation.totalEbitda)}
                 </span>
-                <span className="font-mono-tabular text-[12px] text-[#CBD5E1]">
+                <span className="font-mono-tabular text-[14px] text-[#E2E8F0]">
                   / year (USD)
                 </span>
               </div>
 
               {/* Breakout: Pre-Payment Leakage Blocked vs. Price & Margin Recovery */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-0.5">
-                <div className="rounded-[8px] bg-[#FFFFFF]/10 border border-[#6699CC]/30 px-3 py-2">
-                  <span className="block font-mono-tabular text-[9.5px] text-[#CBD5E1] uppercase">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                <div className="rounded-[10px] bg-[#FFFFFF]/10 border border-[#6699CC]/35 px-4 py-3">
+                  <span className="block font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] text-[#E2E8F0] uppercase">
                     Pre-Payment Leakage Blocked
                   </span>
-                  <span className="mt-0.5 block font-mono-tabular text-[15.5px] font-medium text-[#FFFFFF]">
+                  <span className="mt-1 block font-mono-tabular text-[20px] font-semibold text-[#FFFFFF]">
                     {formatCompactUsd(calculation.prePaymentBlocked)}
                   </span>
                 </div>
 
-                <div className="rounded-[8px] bg-[#FFFFFF]/10 border border-[#6699CC]/30 px-3 py-2">
-                  <span className="block font-mono-tabular text-[9.5px] text-[#CBD5E1] uppercase">
+                <div className="rounded-[10px] bg-[#FFFFFF]/10 border border-[#6699CC]/35 px-4 py-3">
+                  <span className="block font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] text-[#E2E8F0] uppercase">
                     Price &amp; Margin Recovery
                   </span>
-                  <span className="mt-0.5 block font-mono-tabular text-[15.5px] font-medium text-[#FFFFFF]">
+                  <span className="mt-1 block font-mono-tabular text-[20px] font-semibold text-[#FFFFFF]">
                     {formatCompactUsd(calculation.priceMarginRecovery)}
                   </span>
                 </div>
               </div>
 
               {calculation.domainBreakdown && (
-                <div className="pt-1.5 border-t border-[#FFFFFF]/15 flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono-tabular text-[10.5px] text-[#DCE8F5]">
+                <div className="pt-2.5 border-t border-[#FFFFFF]/15 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono-tabular text-[12px] text-[#E2E8F0]">
                   <span>
                     Procurement:{' '}
                     {formatCompactUsd(calculation.domainBreakdown.procEbitda)}
@@ -883,102 +891,105 @@ export const BusinessCaseRoiTab: React.FC<BusinessCaseRoiTabProps> = ({
               )}
             </div>
 
-            {/* OUTPUT CARD 2: One-Time Working Capital Cash Release ($ USD) */}
-            <div className="rounded-[12px] bg-[#FFFFFF] border border-[#E5E7EB] p-3.5 sm:p-4 space-y-1.5">
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <h3 className="text-[13.5px] font-medium text-[#163B66]">
-                  One-Time Working Capital Cash Release ($ USD)
-                </h3>
-                <span className="rounded-[5px] px-2 py-0.5 fortifai-pill whitespace-nowrap">
-                  Tracked Separately from P&amp;L EBITDA
-                </span>
+            {/* Unified #FFFFFF Editorial Hairline Sheet for Secondary Outputs & Waterfall */}
+            <div className="rounded-[14px] bg-[#FFFFFF] border border-[#E5E7EB] divide-y divide-[#E5E7EB] overflow-hidden">
+              {/* OUTPUT ROW 2: One-Time Working Capital Cash Release ($ USD) */}
+              <div className="p-6 sm:p-7 space-y-2">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <h3 className="text-[17.5px] font-semibold leading-[1.3] tracking-[-0.01em] text-[#0F172A]">
+                    One-Time Working Capital Cash Release ($ USD)
+                  </h3>
+                  <span className="rounded-[6px] px-2.5 py-0.5 fortifai-pill whitespace-nowrap">
+                    Tracked Separately from P&amp;L EBITDA
+                  </span>
+                </div>
+
+                <div className="flex flex-wrap items-baseline gap-2.5 pt-0.5">
+                  <span className="font-mono-tabular text-[28px] font-semibold leading-none tracking-[-0.03em] text-[#163B66]">
+                    {formatCompactUsd(calculation.workingCapitalCashRelease)}
+                  </span>
+                  {calculation.hasWorkingCapitalComponent && (
+                    <span className="font-mono-tabular text-[12px] font-medium text-[#475569]">
+                      ({isBenchmark ? '3.5%' : '2.0%'} of AP volume)
+                    </span>
+                  )}
+                </div>
+
+                <p className="text-[14.5px] leading-[1.6] text-[#334155]">
+                  {calculation.hasWorkingCapitalComponent
+                    ? 'Balance-sheet cash unlocked via early-payment prevention, payment-term standardization, and DPO alignment—never blended into recurring EBITDA.'
+                    : 'Select Accounts Payable & Working Capital or Full Multi-Domain Enterprise Suite to model balance-sheet DPO cash release (2.0%–3.5%).'}
+                </p>
               </div>
 
-              <div className="flex items-baseline gap-2">
-                <span className="font-mono-tabular text-[22px] font-medium leading-none tracking-[-0.03em] text-[#163B66]">
-                  {formatCompactUsd(calculation.workingCapitalCashRelease)}
-                </span>
-                {calculation.hasWorkingCapitalComponent && (
-                  <span className="font-mono-tabular text-[11px] text-[#2E5A8A]">
-                    ({isBenchmark ? '3.5%' : '2.0%'} of AP volume)
-                  </span>
+              {/* OUTPUT ROW 3: Team Capacity Freed */}
+              <div className="p-6 sm:p-7 space-y-2">
+                <div className="flex items-center justify-between gap-2">
+                  <h3 className="text-[17.5px] font-semibold leading-[1.3] tracking-[-0.01em] text-[#0F172A]">
+                    Team Capacity Freed
+                  </h3>
+                  <Layers className="w-4 h-4 text-[#163B66] shrink-0" />
+                </div>
+
+                {calculation.hoursSaved !== null ? (
+                  <div className="flex flex-wrap items-baseline gap-2.5 pt-0.5">
+                    <span className="font-mono-tabular text-[28px] font-semibold leading-none tracking-[-0.03em] text-[#163B66]">
+                      {calculation.hoursSaved.toLocaleString('en-US')} hrs / yr
+                    </span>
+                    <span className="font-mono-tabular text-[12px] font-medium text-[#475569]">
+                      saved (75% of {manualReviewHours.toLocaleString('en-US')}{' '}
+                      manual review hrs)
+                    </span>
+                  </div>
+                ) : (
+                  <div className="pt-0.5 font-mono-tabular text-[28px] font-semibold leading-none tracking-[-0.03em] text-[#163B66]">
+                    70–80% Effort Reduction
+                  </div>
                 )}
+
+                <p className="text-[14.5px] leading-[1.6] text-[#334155]">
+                  70–80% less manual review effort · 50%+ faster resolution per
+                  finding
+                </p>
               </div>
 
-              <p className="text-[12px] leading-[1.48] text-[#4B5B6E]">
-                {calculation.hasWorkingCapitalComponent
-                  ? 'Balance-sheet cash unlocked via early-payment prevention, payment-term standardization, and DPO alignment—never blended into recurring EBITDA.'
-                  : 'Select Accounts Payable & Working Capital or Full Multi-Domain Enterprise Suite to model balance-sheet DPO cash release (2.0%–3.5%).'}
-              </p>
-            </div>
-
-            {/* OUTPUT CARD 3: Team Capacity Freed */}
-            <div className="rounded-[12px] bg-[#FFFFFF] border border-[#E5E7EB] p-3.5 sm:p-4 space-y-1">
-              <div className="flex items-center justify-between gap-2">
-                <h3 className="text-[13.5px] font-medium text-[#163B66]">
-                  Team Capacity Freed
-                </h3>
-                <Layers className="w-3.5 h-3.5 text-[#2E5A8A] shrink-0" />
-              </div>
-
-              {calculation.hoursSaved !== null ? (
-                <div className="flex flex-wrap items-baseline gap-2">
-                  <span className="font-mono-tabular text-[20px] font-medium leading-none tracking-[-0.02em] text-[#163B66]">
-                    {calculation.hoursSaved.toLocaleString('en-US')} hrs / yr
-                  </span>
-                  <span className="font-mono-tabular text-[11px] text-[#2E5A8A]">
-                    saved (75% of {manualReviewHours.toLocaleString('en-US')}{' '}
-                    manual review hrs)
+              {/* Zero Double-Counting Method Note (4-Rung Economic Precedence Waterfall) */}
+              <div className="p-6 sm:p-7 space-y-2 bg-[#F8FAFC]/60">
+                <div className="flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-[#163B66] shrink-0" />
+                  <span className="font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] text-[#163B66] uppercase">
+                    ZERO DOUBLE-COUNTING · 4-RUNG ECONOMIC PRECEDENCE WATERFALL
                   </span>
                 </div>
-              ) : (
-                <div className="font-mono-tabular text-[19px] font-medium leading-none tracking-[-0.02em] text-[#163B66]">
-                  70–80% Effort Reduction
-                </div>
-              )}
-
-              <p className="text-[12px] font-medium text-[#2E5A8A]">
-                70–80% less manual review effort · 50%+ faster resolution per
-                finding
-              </p>
-            </div>
-
-            {/* Zero Double-Counting Method Note (4-Rung Economic Precedence Waterfall) */}
-            <div className="rounded-[10px] bg-[#F8FAFC] border border-[#E5E7EB] p-3.5 space-y-1.5">
-              <div className="flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#2E5A8A] shrink-0" />
-                <span className="font-mono-tabular text-[10px] font-medium tracking-[0.04em] text-[#163B66] uppercase">
-                  ZERO DOUBLE-COUNTING · 4-RUNG ECONOMIC PRECEDENCE WATERFALL
-                </span>
+                <p className="text-[14.5px] leading-[1.6] text-[#334155]">
+                  Every exception is deduplicated at the invoice line-item level
+                  in strict economic order:{' '}
+                  <span className="font-semibold text-[#0F172A]">
+                    Rung 1 Billing &amp; Quantity Errors → Rung 2 Contract &amp;
+                    Pass-Through Markup → Rung 3 Commodity Index Lag → Rung 4
+                    Tail Consolidation
+                  </span>
+                  , with Working Capital DPO cash release held 100% separate
+                  from recurring P&amp;L EBITDA.
+                </p>
               </div>
-              <p className="text-[12px] leading-[1.5] text-[#4B5B6E]">
-                Every exception is deduplicated at the invoice line-item level
-                in strict economic order:{' '}
-                <span className="font-medium text-[#163B66]">
-                  Rung 1 Billing &amp; Quantity Errors → Rung 2 Contract &amp;
-                  Pass-Through Markup → Rung 3 Commodity Index Lag → Rung 4 Tail
-                  Consolidation
-                </span>
-                , with Working Capital DPO cash release held 100% separate from
-                recurring P&amp;L EBITDA.
-              </p>
             </div>
 
             {/* Copy USD Business Case Summary Action */}
-            <div className="pt-0.5 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+            <div className="pt-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <button
                 type="button"
                 onClick={() => void handleCopyBusinessCaseSummary()}
-                className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-[8px] bg-[#163B66] hover:bg-[#2E5A8A] text-[#FFFFFF] px-3.5 py-2 text-[12.5px] font-medium transition-colors cursor-pointer whitespace-nowrap"
+                className="flex-1 h-[44px] inline-flex items-center justify-center gap-2 rounded-[8px] bg-[#163B66] hover:bg-[#2E5A8A] text-[#FFFFFF] px-4 text-[14px] font-medium transition-colors cursor-pointer whitespace-nowrap"
               >
                 {copiedSummary ? (
                   <>
-                    <Check className="w-3.5 h-3.5" />
+                    <Check className="w-4 h-4" />
                     <span>Copied USD Business Case Summary</span>
                   </>
                 ) : (
                   <>
-                    <Copy className="w-3.5 h-3.5" />
+                    <Copy className="w-4 h-4" />
                     <span>Copy USD Business Case Summary</span>
                   </>
                 )}
@@ -987,10 +998,10 @@ export const BusinessCaseRoiTab: React.FC<BusinessCaseRoiTabProps> = ({
               <button
                 type="button"
                 onClick={() => onSelectTab('faq')}
-                className="inline-flex items-center justify-center gap-1.5 rounded-[8px] bg-[#F8FAFC] hover:bg-[#E8F0F8] border border-[#E5E7EB] px-3.5 py-2 text-[12.5px] font-medium text-[#163B66] transition-colors cursor-pointer whitespace-nowrap"
+                className="h-[44px] inline-flex items-center justify-center gap-2 rounded-[8px] bg-[#F5F5F7] hover:bg-[#E8F0F8] border border-[#E5E7EB] px-4 text-[14px] font-medium text-[#163B66] transition-colors cursor-pointer whitespace-nowrap"
               >
                 <span>05 · Executive FAQ</span>
-                <ArrowRight className="w-3.5 h-3.5 text-[#2E5A8A]" />
+                <ArrowRight className="w-4 h-4 text-[#163B66]" />
               </button>
             </div>
           </div>

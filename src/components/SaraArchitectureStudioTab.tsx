@@ -107,33 +107,33 @@ export const SaraArchitectureStudioTab: React.FC<
     config.layer3Domains[selectedDomainIndex] ?? config.layer3Domains[0];
 
   return (
-    <div className="mx-auto max-w-[1200px] px-4 sm:px-6 pt-4 pb-10 space-y-7">
+    <div className="mx-auto max-w-[1240px] px-5 sm:px-8 pt-8 pb-16 space-y-12">
       {/* ====================================================================
           PART A: 2-COLUMN INTERACTIVE 3D SARA ARCHITECTURE STUDIO
           ==================================================================== */}
-      <div className="space-y-4">
+      <div className="space-y-6">
         {/* Studio Editorial Header */}
-        <section className="flex flex-col md:flex-row md:items-end justify-between gap-3">
-          <div className="max-w-[740px]">
-            <span className="inline-flex items-center gap-1.5 rounded-[5px] px-2 py-0.5 fortifai-pill">
-              <Layers className="w-3 h-3 text-[#2E5A8A] shrink-0" />
+        <section className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div className="max-w-[780px] space-y-2">
+            <span className="inline-flex items-center gap-1.5 rounded-[6px] px-2.5 py-1 fortifai-pill">
+              <Layers className="w-3.5 h-3.5 text-[#163B66] shrink-0" />
               <span>{config.pillLabel}</span>
             </span>
 
-            <h1 className="mt-1.5 text-[21px] sm:text-[22px] font-medium leading-[1.2] tracking-[-0.02em] text-[#163B66] text-balance">
+            <h1 className="text-[clamp(26px,2.6vw,32px)] font-medium leading-[1.18] tracking-[-0.02em] text-[#163B66] text-balance">
               {config.headline}
             </h1>
 
-            <p className="mt-1 text-[13px] font-normal leading-[1.52] text-[#4B5B6E]">
+            <p className="text-[15px] font-normal leading-[1.6] text-[#475569]">
               {config.subcopy}
             </p>
           </div>
 
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex flex-wrap items-center gap-2.5 shrink-0">
             <button
               type="button"
               onClick={() => onSelectTab('agents')}
-              className="rounded-[7px] bg-[#FFFFFF] hover:bg-[#F8FAFC] border border-[#E5E7EB] px-3 py-1.5 text-[12px] font-medium text-[#163B66] whitespace-nowrap transition-colors cursor-pointer"
+              className="rounded-[8px] bg-[#FFFFFF] hover:bg-[#F5F5F7] border border-[#E5E7EB] px-4 py-2 text-[14px] font-medium text-[#163B66] whitespace-nowrap transition-colors cursor-pointer"
             >
               03 · Active Agent Suite
             </button>
@@ -141,27 +141,27 @@ export const SaraArchitectureStudioTab: React.FC<
               href={bookDemoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-[7px] bg-[#163B66] hover:bg-[#2E5A8A] text-[#FFFFFF] px-3 py-1.5 text-[12px] font-medium whitespace-nowrap transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-[8px] bg-[#163B66] hover:bg-[#2E5A8A] text-[#FFFFFF] px-4 py-2 text-[14px] font-medium whitespace-nowrap transition-colors"
             >
               <span>Architecture Deep-Dive</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
+              <ArrowUpRight className="w-4 h-4" />
             </a>
           </div>
         </section>
 
-        {/* 2-COLUMN INTERACTIVE 3D SARA STACK (1.15fr : 0.85fr, gap: 28px, align-items: flex-start) */}
+        {/* 2-COLUMN INTERACTIVE 3D SARA STACK */}
         <section
           aria-label="Interactive 3D SARA Architecture Studio"
-          className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-7 items-start"
+          className="grid grid-cols-1 lg:grid-cols-[1.12fr_0.88fr] gap-8 items-start"
         >
           {/* LEFT COLUMN: Fixed 480px Tall Crisp White Isometric Stage */}
           <div className="h-[480px] w-full rounded-[14px] border border-[#E5E7EB] fortifai-card-shadow sara-dot-stage relative overflow-hidden select-none">
             {/* Subtle Stage Top Header */}
-            <div className="absolute top-3.5 left-4 right-4 z-20 flex items-center justify-between pointer-events-none">
-              <span className="rounded-[5px] px-2 py-0.5 fortifai-pill uppercase">
+            <div className="absolute top-4 left-5 right-5 z-20 flex items-center justify-between pointer-events-none">
+              <span className="rounded-[6px] px-2.5 py-1 fortifai-pill">
                 ISOMETRIC SOVEREIGN STACK · ZERO EGRESS
               </span>
-              <span className="rounded-[5px] px-2 py-0.5 fortifai-pill">
+              <span className="rounded-[6px] bg-[#E8F0F8] border border-[#6699CC]/35 px-2.5 py-1 font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] uppercase text-[#163B66]">
                 LAYER 0{activeLayer} ACTIVE
               </span>
             </div>
@@ -180,10 +180,10 @@ export const SaraArchitectureStudioTab: React.FC<
                       onMouseEnter={() => setHoveredLayer(badge.layer)}
                       onMouseLeave={() => setHoveredLayer(null)}
                       onClick={() => setSelectedLayer(badge.layer)}
-                      className={`px-3 py-1.5 rounded-[8px] font-mono-tabular text-[11px] font-medium tracking-[0.02em] whitespace-nowrap transition-all cursor-pointer border ${
+                      className={`px-3 py-1.5 rounded-[8px] font-mono-tabular text-[11.5px] font-medium tracking-[0.04em] whitespace-nowrap transition-all cursor-pointer border ${
                         isActive
                           ? 'bg-[#163B66] text-[#FFFFFF] border-[#163B66] shadow-[0_6px_18px_rgba(22,59,102,0.22)] translate-x-0.5'
-                          : 'bg-[#FFFFFF]/95 text-[#2E5A8A] border-[#E5E7EB] opacity-85 hover:opacity-100 hover:border-[#6699CC]'
+                          : 'bg-[#FFFFFF]/95 text-[#475569] border-[#E5E7EB] hover:border-[#6699CC] hover:text-[#163B66]'
                       }`}
                     >
                       {badge.label}
@@ -212,7 +212,7 @@ export const SaraArchitectureStudioTab: React.FC<
             </div>
 
             {/* Mobile Compact Layer Selector Bar (< 640px) */}
-            <div className="sm:hidden absolute top-12 left-4 right-4 z-20 flex items-center justify-center gap-1.5">
+            <div className="sm:hidden absolute top-14 left-4 right-4 z-20 flex items-center justify-center gap-2">
               {([4, 3, 2, 1] as const).map((layerNum) => {
                 const isActive = activeLayer === layerNum;
                 return (
@@ -220,10 +220,10 @@ export const SaraArchitectureStudioTab: React.FC<
                     key={layerNum}
                     type="button"
                     onClick={() => setSelectedLayer(layerNum)}
-                    className={`px-2.5 py-1 rounded-[6px] font-mono-tabular text-[11px] font-medium border cursor-pointer ${
+                    className={`px-3 py-1 rounded-[6px] font-mono-tabular text-[12px] font-medium border cursor-pointer ${
                       isActive
                         ? 'bg-[#163B66] text-[#FFFFFF] border-[#163B66]'
-                        : 'bg-[#E8F0F8] text-[#2E5A8A] border-[#E5E7EB]'
+                        : 'bg-[#F5F5F7] text-[#475569] border-[#E5E7EB]'
                     }`}
                   >
                     L0{layerNum}
@@ -485,63 +485,65 @@ export const SaraArchitectureStudioTab: React.FC<
             </div>
 
             {/* Bottom Stage Hint */}
-            <div className="absolute bottom-3.5 left-5 right-5 z-20 flex items-center justify-between text-[11px] font-mono-tabular text-[#64748B] pointer-events-none">
+            <div className="absolute bottom-4 left-5 right-5 z-20 flex items-center justify-between font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] text-[#64748B] pointer-events-none">
               <span>CLICK OR HOVER ANY PLATE TO INSPECT</span>
               <span>SELECT-ONLY · 0% DATA EGRESS</span>
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Synchronized 4-Layer Interactive Accordion Inspector */}
-          <div className="space-y-2.5">
-            {/* LAYER 04 CARD */}
+          {/* RIGHT COLUMN: Unified #FFFFFF 4-Layer Editorial Hairline Sheet */}
+          <div className="rounded-[14px] bg-[#FFFFFF] border border-[#E5E7EB] fortifai-card-shadow divide-y divide-[#E5E7EB] overflow-hidden">
+            {/* LAYER 04 ROW */}
             <div
               onMouseEnter={() => setHoveredLayer(4)}
               onMouseLeave={() => setHoveredLayer(null)}
-              className={`rounded-[12px] bg-[#FFFFFF] border transition-all fortifai-card-shadow overflow-hidden ${
-                activeLayer === 4
-                  ? 'border-[#2E5A8A] ring-1 ring-[#2E5A8A]/20'
-                  : 'border-[#E5E7EB]'
+              className={`transition-colors ${
+                activeLayer === 4 ? 'bg-[#F8FAFC]/60' : 'bg-[#FFFFFF]'
               }`}
             >
               <button
                 type="button"
                 onClick={() => setSelectedLayer(4)}
                 aria-expanded={selectedLayer === 4}
-                className="w-full px-4 py-2.5 flex items-center justify-between gap-2.5 text-left cursor-pointer"
+                className="w-full px-6 py-4 flex items-center justify-between gap-3 text-left cursor-pointer"
               >
-                <div className="flex items-center gap-2.5 min-w-0">
+                <div className="flex items-center gap-3 min-w-0">
                   <span
-                    className={`h-6 w-6 rounded-[6px] font-mono-tabular text-[10.5px] font-medium flex items-center justify-center shrink-0 transition-colors ${
+                    className={`rounded-[6px] px-2 py-0.5 font-mono-tabular text-[12px] font-medium tracking-[0.05em] shrink-0 transition-colors ${
                       activeLayer === 4
                         ? 'bg-[#163B66] text-[#FFFFFF]'
-                        : 'bg-[#E8F0F8] text-[#2E5A8A]'
+                        : 'bg-[#F5F5F7] border border-[#E5E7EB] text-[#64748B]'
                     }`}
                   >
                     04
                   </span>
-                  <h2 className="text-[14px] font-medium text-[#163B66] truncate">
+                  <h3
+                    className={`text-[17.5px] font-semibold leading-[1.3] tracking-[-0.01em] truncate ${
+                      activeLayer === 4 ? 'text-[#163B66]' : 'text-[#0F172A]'
+                    }`}
+                  >
                     {config.layer4Title}
-                  </h2>
+                  </h3>
                 </div>
                 <ChevronDown
-                  className={`w-3.5 h-3.5 text-[#64748B] shrink-0 transition-transform duration-200 ${
-                    selectedLayer === 4 ? 'rotate-180 text-[#2E5A8A]' : ''
+                  className={`w-4 h-4 text-[#64748B] shrink-0 transition-transform duration-200 ${
+                    selectedLayer === 4 ? 'rotate-180 text-[#163B66]' : ''
                   }`}
                 />
               </button>
 
               {selectedLayer === 4 && (
-                <div className="px-4 pb-3.5 pt-1.5 border-t border-[#E5E7EB]/70 space-y-2.5">
-                  <p className="text-[12.5px] leading-[1.55] text-[#4B5B6E]">
+                <div className="px-6 pb-6 pt-2 border-t border-[#E5E7EB]/80 space-y-3.5">
+                  <p className="text-[14.5px] leading-[1.6] text-[#334155]">
                     {config.layer4Summary}
                   </p>
-                  <div className="space-y-1">
+                  <div className="space-y-2 pt-1">
                     {config.layer4Highlights.map((item, idx) => (
                       <div
                         key={`${item}-${idx}`}
-                        className="flex items-center gap-2 text-[12px] font-medium text-[#163B66]"
+                        className="flex items-center gap-2.5 text-[14.5px] font-medium text-[#0F172A]"
                       >
-                        <Sparkles className="w-3 h-3 text-[#2E5A8A] shrink-0" />
+                        <Sparkles className="w-4 h-4 text-[#163B66] shrink-0" />
                         <span>{item}</span>
                       </div>
                     ))}
@@ -550,51 +552,53 @@ export const SaraArchitectureStudioTab: React.FC<
               )}
             </div>
 
-            {/* LAYER 03 CARD — With Interactive Domain Pills */}
+            {/* LAYER 03 ROW — With Interactive Domain Pills */}
             <div
               onMouseEnter={() => setHoveredLayer(3)}
               onMouseLeave={() => setHoveredLayer(null)}
-              className={`rounded-[12px] bg-[#FFFFFF] border transition-all fortifai-card-shadow overflow-hidden ${
-                activeLayer === 3
-                  ? 'border-[#2E5A8A] ring-1 ring-[#2E5A8A]/20'
-                  : 'border-[#E5E7EB]'
+              className={`transition-colors ${
+                activeLayer === 3 ? 'bg-[#F8FAFC]/60' : 'bg-[#FFFFFF]'
               }`}
             >
               <button
                 type="button"
                 onClick={() => setSelectedLayer(3)}
                 aria-expanded={selectedLayer === 3}
-                className="w-full px-4 py-2.5 flex items-center justify-between gap-2.5 text-left cursor-pointer"
+                className="w-full px-6 py-4 flex items-center justify-between gap-3 text-left cursor-pointer"
               >
-                <div className="flex items-center gap-2.5 min-w-0">
+                <div className="flex items-center gap-3 min-w-0">
                   <span
-                    className={`h-6 w-6 rounded-[6px] font-mono-tabular text-[10.5px] font-medium flex items-center justify-center shrink-0 transition-colors ${
+                    className={`rounded-[6px] px-2 py-0.5 font-mono-tabular text-[12px] font-medium tracking-[0.05em] shrink-0 transition-colors ${
                       activeLayer === 3
                         ? 'bg-[#163B66] text-[#FFFFFF]'
-                        : 'bg-[#E8F0F8] text-[#2E5A8A]'
+                        : 'bg-[#F5F5F7] border border-[#E5E7EB] text-[#64748B]'
                     }`}
                   >
                     03
                   </span>
-                  <h2 className="text-[14px] font-medium text-[#163B66] truncate">
+                  <h3
+                    className={`text-[17.5px] font-semibold leading-[1.3] tracking-[-0.01em] truncate ${
+                      activeLayer === 3 ? 'text-[#163B66]' : 'text-[#0F172A]'
+                    }`}
+                  >
                     {config.layer3Title}
-                  </h2>
+                  </h3>
                 </div>
                 <ChevronDown
-                  className={`w-3.5 h-3.5 text-[#64748B] shrink-0 transition-transform duration-200 ${
-                    selectedLayer === 3 ? 'rotate-180 text-[#2E5A8A]' : ''
+                  className={`w-4 h-4 text-[#64748B] shrink-0 transition-transform duration-200 ${
+                    selectedLayer === 3 ? 'rotate-180 text-[#163B66]' : ''
                   }`}
                 />
               </button>
 
               {selectedLayer === 3 && (
-                <div className="px-4 pb-3.5 pt-1.5 border-t border-[#E5E7EB]/70 space-y-2.5">
-                  <p className="text-[12.5px] leading-[1.55] text-[#4B5B6E]">
+                <div className="px-6 pb-6 pt-2 border-t border-[#E5E7EB]/80 space-y-4">
+                  <p className="text-[14.5px] leading-[1.6] text-[#334155]">
                     {config.layer3Summary}
                   </p>
 
                   {/* Interactive Domain Pills */}
-                  <div className="flex flex-wrap gap-1">
+                  <div className="flex flex-wrap gap-1.5">
                     {config.layer3Domains.map((dom, idx) => {
                       const isSelected = selectedDomainIndex === idx;
                       return (
@@ -605,10 +609,10 @@ export const SaraArchitectureStudioTab: React.FC<
                             setSelectedLayer(3);
                             setSelectedDomainIndex(idx);
                           }}
-                          className={`px-2 py-0.5 rounded-[6px] text-[11.5px] font-medium transition-colors cursor-pointer border ${
+                          className={`px-3 py-1.5 rounded-[7px] text-[13.5px] font-medium transition-colors cursor-pointer border ${
                             isSelected
                               ? 'bg-[#163B66] text-[#FFFFFF] border-[#163B66]'
-                              : 'bg-[#E8F0F8]/70 text-[#2E5A8A] border-[#E5E7EB] hover:border-[#6699CC] hover:text-[#163B66]'
+                              : 'bg-[#FFFFFF] text-[#475569] border-[#E5E7EB] hover:border-[#6699CC] hover:text-[#163B66]'
                           }`}
                         >
                           {dom.name}
@@ -618,11 +622,11 @@ export const SaraArchitectureStudioTab: React.FC<
                   </div>
 
                   {activeDomain && (
-                    <div className="rounded-[8px] bg-[#F8FAFC] border border-[#E5E7EB] p-2.5 space-y-1">
-                      <span className="inline-block rounded-[4px] px-1.5 py-0.5 fortifai-pill uppercase">
+                    <div className="pt-3 border-t border-[#E5E7EB] space-y-1.5">
+                      <span className="inline-block rounded-[5px] px-2 py-0.5 fortifai-pill">
                         SHARED SPINE · {activeDomain.signals}
                       </span>
-                      <p className="text-[12.5px] leading-[1.5] text-[#4B5B6E]">
+                      <p className="text-[14.5px] leading-[1.6] text-[#334155]">
                         {activeDomain.detail}
                       </p>
                     </div>
@@ -631,55 +635,57 @@ export const SaraArchitectureStudioTab: React.FC<
               )}
             </div>
 
-            {/* LAYER 02 CARD — 6 Plain-English Engine Layers */}
+            {/* LAYER 02 ROW — 6 Plain-English Engine Layers */}
             <div
               onMouseEnter={() => setHoveredLayer(2)}
               onMouseLeave={() => setHoveredLayer(null)}
-              className={`rounded-[12px] bg-[#FFFFFF] border transition-all fortifai-card-shadow overflow-hidden ${
-                activeLayer === 2
-                  ? 'border-[#2E5A8A] ring-1 ring-[#2E5A8A]/20'
-                  : 'border-[#E5E7EB]'
+              className={`transition-colors ${
+                activeLayer === 2 ? 'bg-[#F8FAFC]/60' : 'bg-[#FFFFFF]'
               }`}
             >
               <button
                 type="button"
                 onClick={() => setSelectedLayer(2)}
                 aria-expanded={selectedLayer === 2}
-                className="w-full px-4 py-2.5 flex items-center justify-between gap-2.5 text-left cursor-pointer"
+                className="w-full px-6 py-4 flex items-center justify-between gap-3 text-left cursor-pointer"
               >
-                <div className="flex items-center gap-2.5 min-w-0">
+                <div className="flex items-center gap-3 min-w-0">
                   <span
-                    className={`h-6 w-6 rounded-[6px] font-mono-tabular text-[10.5px] font-medium flex items-center justify-center shrink-0 transition-colors ${
+                    className={`rounded-[6px] px-2 py-0.5 font-mono-tabular text-[12px] font-medium tracking-[0.05em] shrink-0 transition-colors ${
                       activeLayer === 2
                         ? 'bg-[#163B66] text-[#FFFFFF]'
-                        : 'bg-[#E8F0F8] text-[#2E5A8A]'
+                        : 'bg-[#F5F5F7] border border-[#E5E7EB] text-[#64748B]'
                     }`}
                   >
                     02
                   </span>
-                  <h2 className="text-[14px] font-medium text-[#163B66] truncate">
+                  <h3
+                    className={`text-[17.5px] font-semibold leading-[1.3] tracking-[-0.01em] truncate ${
+                      activeLayer === 2 ? 'text-[#163B66]' : 'text-[#0F172A]'
+                    }`}
+                  >
                     {config.layer2Title}
-                  </h2>
+                  </h3>
                 </div>
                 <ChevronDown
-                  className={`w-3.5 h-3.5 text-[#64748B] shrink-0 transition-transform duration-200 ${
-                    selectedLayer === 2 ? 'rotate-180 text-[#2E5A8A]' : ''
+                  className={`w-4 h-4 text-[#64748B] shrink-0 transition-transform duration-200 ${
+                    selectedLayer === 2 ? 'rotate-180 text-[#163B66]' : ''
                   }`}
                 />
               </button>
 
               {selectedLayer === 2 && (
-                <div className="px-4 pb-3.5 pt-1.5 border-t border-[#E5E7EB]/70 space-y-2.5">
-                  <p className="text-[12.5px] leading-[1.55] text-[#4B5B6E]">
+                <div className="px-6 pb-6 pt-2 border-t border-[#E5E7EB]/80 space-y-3.5">
+                  <p className="text-[14.5px] leading-[1.6] text-[#334155]">
                     {config.layer2Summary}
                   </p>
-                  <div className="grid grid-cols-1 gap-1">
+                  <div className="rounded-[10px] border border-[#E5E7EB] bg-[#FFFFFF] divide-y divide-[#E5E7EB]">
                     {config.layer2Capabilities.map((cap, idx) => (
                       <div
                         key={`${cap}-${idx}`}
-                        className="flex items-center gap-2 rounded-[7px] bg-[#F8FAFC] border border-[#E5E7EB] px-2.5 py-1 text-[12px] font-medium text-[#163B66]"
+                        className="flex items-center gap-2.5 px-4 py-2.5 text-[14.5px] font-medium text-[#0F172A]"
                       >
-                        <Cpu className="w-3 h-3 text-[#2E5A8A] shrink-0" />
+                        <Cpu className="w-4 h-4 text-[#163B66] shrink-0" />
                         <span>{cap}</span>
                       </div>
                     ))}
@@ -688,60 +694,62 @@ export const SaraArchitectureStudioTab: React.FC<
               )}
             </div>
 
-            {/* LAYER 01 CARD — Single Source of Truth & Zero-Egress VPC */}
+            {/* LAYER 01 ROW — Single Source of Truth & Zero-Egress VPC */}
             <div
               onMouseEnter={() => setHoveredLayer(1)}
               onMouseLeave={() => setHoveredLayer(null)}
-              className={`rounded-[12px] bg-[#FFFFFF] border transition-all fortifai-card-shadow overflow-hidden ${
-                activeLayer === 1
-                  ? 'border-[#2E5A8A] ring-1 ring-[#2E5A8A]/20'
-                  : 'border-[#E5E7EB]'
+              className={`transition-colors ${
+                activeLayer === 1 ? 'bg-[#F8FAFC]/60' : 'bg-[#FFFFFF]'
               }`}
             >
               <button
                 type="button"
                 onClick={() => setSelectedLayer(1)}
                 aria-expanded={selectedLayer === 1}
-                className="w-full px-4 py-2.5 flex items-center justify-between gap-2.5 text-left cursor-pointer"
+                className="w-full px-6 py-4 flex items-center justify-between gap-3 text-left cursor-pointer"
               >
-                <div className="flex items-center gap-2.5 min-w-0">
+                <div className="flex items-center gap-3 min-w-0">
                   <span
-                    className={`h-6 w-6 rounded-[6px] font-mono-tabular text-[10.5px] font-medium flex items-center justify-center shrink-0 transition-colors ${
+                    className={`rounded-[6px] px-2 py-0.5 font-mono-tabular text-[12px] font-medium tracking-[0.05em] shrink-0 transition-colors ${
                       activeLayer === 1
                         ? 'bg-[#163B66] text-[#FFFFFF]'
-                        : 'bg-[#E8F0F8] text-[#2E5A8A]'
+                        : 'bg-[#F5F5F7] border border-[#E5E7EB] text-[#64748B]'
                     }`}
                   >
                     01
                   </span>
-                  <h2 className="text-[14px] font-medium text-[#163B66] truncate">
+                  <h3
+                    className={`text-[17.5px] font-semibold leading-[1.3] tracking-[-0.01em] truncate ${
+                      activeLayer === 1 ? 'text-[#163B66]' : 'text-[#0F172A]'
+                    }`}
+                  >
                     {config.layer1Title}
-                  </h2>
+                  </h3>
                 </div>
                 <ChevronDown
-                  className={`w-3.5 h-3.5 text-[#64748B] shrink-0 transition-transform duration-200 ${
-                    selectedLayer === 1 ? 'rotate-180 text-[#2E5A8A]' : ''
+                  className={`w-4 h-4 text-[#64748B] shrink-0 transition-transform duration-200 ${
+                    selectedLayer === 1 ? 'rotate-180 text-[#163B66]' : ''
                   }`}
                 />
               </button>
 
               {selectedLayer === 1 && (
-                <div className="px-4 pb-3.5 pt-1.5 border-t border-[#E5E7EB]/70 space-y-2.5">
-                  <p className="text-[12.5px] leading-[1.55] text-[#4B5B6E]">
+                <div className="px-6 pb-6 pt-2 border-t border-[#E5E7EB]/80 space-y-3.5">
+                  <p className="text-[14.5px] leading-[1.6] text-[#334155]">
                     {config.layer1Summary}
                   </p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
+                  <div className="rounded-[10px] border border-[#E5E7EB] bg-[#FFFFFF] divide-y divide-[#E5E7EB]">
                     {config.layer1Assurances.map((assurance, idx) => (
                       <div
                         key={`${assurance}-${idx}`}
-                        className="flex items-center gap-1.5 rounded-[7px] bg-[#F8FAFC] border border-[#E5E7EB] px-2 py-1 text-[11.5px] font-medium text-[#163B66]"
+                        className="flex items-center gap-2.5 px-4 py-2.5 text-[14.5px] font-medium text-[#0F172A]"
                       >
                         {idx === 3 ? (
-                          <Lock className="w-3 h-3 text-[#2E5A8A] shrink-0" />
+                          <Lock className="w-4 h-4 text-[#163B66] shrink-0" />
                         ) : (
-                          <CheckCircle2 className="w-3 h-3 text-[#6699CC] shrink-0" />
+                          <CheckCircle2 className="w-4 h-4 text-[#163B66] shrink-0" />
                         )}
-                        <span className="truncate">{assurance}</span>
+                        <span>{assurance}</span>
                       </div>
                     ))}
                   </div>
@@ -757,22 +765,22 @@ export const SaraArchitectureStudioTab: React.FC<
           ==================================================================== */}
       <section
         aria-labelledby="trust-security-heading"
-        className="pt-6 border-t border-[#E5E7EB] space-y-4"
+        className="pt-10 border-t border-[#E5E7EB] space-y-7"
       >
         {/* Section Header + 4 Proof Pills */}
-        <div className="flex flex-col xl:flex-row xl:items-end justify-between gap-3">
-          <div className="space-y-1 max-w-[620px]">
-            <span className="inline-flex items-center gap-1.5 rounded-[5px] px-2 py-0.5 fortifai-pill">
-              <ShieldCheck className="w-3 h-3 text-[#2E5A8A] shrink-0" />
+        <div className="flex flex-col xl:flex-row xl:items-end justify-between gap-4">
+          <div className="space-y-2 max-w-[680px]">
+            <span className="inline-flex items-center gap-1.5 rounded-[6px] px-2.5 py-1 fortifai-pill">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#163B66] shrink-0" />
               <span>CISO &amp; AUDIT SECURITY SPECIFICATION</span>
             </span>
             <h2
               id="trust-security-heading"
-              className="text-[18px] font-medium leading-[1.25] tracking-[-0.018em] text-[#163B66]"
+              className="text-[clamp(26px,2.6vw,32px)] font-medium leading-[1.18] tracking-[-0.02em] text-[#163B66]"
             >
               Trust &amp; Security Architecture
             </h2>
-            <p className="text-[13px] leading-[1.52] text-[#4B5B6E]">
+            <p className="text-[15px] leading-[1.6] text-[#475569]">
               100% sovereign execution inside your Customer Private Cloud VPC or
               On-Premises infrastructure—engineered for enterprise InfoSec,
               Internal Audit, and Legal review.
@@ -780,71 +788,71 @@ export const SaraArchitectureStudioTab: React.FC<
           </div>
 
           {/* 4 Proof Pills */}
-          <div className="flex flex-wrap items-center gap-1.5">
-            <span className="inline-flex items-center gap-1.5 rounded-[7px] bg-[#FFFFFF] border border-[#E5E7EB] px-2.5 py-1 font-mono-tabular text-[10.5px] font-medium text-[#163B66] whitespace-nowrap">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center gap-2 rounded-[8px] bg-[#FFFFFF] border border-[#E5E7EB] px-3 py-1.5 font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] uppercase text-[#0F172A] whitespace-nowrap">
               <span
                 aria-hidden="true"
-                className="h-1.5 w-1.5 rounded-full bg-[#16A34A] shrink-0"
+                className="h-2 w-2 rounded-full bg-[#16A34A] shrink-0"
               />
               <span>SOC 2 Type II · Certified</span>
             </span>
 
-            <span className="inline-flex items-center gap-1.5 rounded-[7px] bg-[#FFFFFF] border border-[#E5E7EB] px-2.5 py-1 font-mono-tabular text-[10.5px] font-medium text-[#163B66] whitespace-nowrap">
+            <span className="inline-flex items-center gap-2 rounded-[8px] bg-[#FFFFFF] border border-[#E5E7EB] px-3 py-1.5 font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] uppercase text-[#0F172A] whitespace-nowrap">
               <span
                 aria-hidden="true"
-                className="h-1.5 w-1.5 rounded-full bg-[#16A34A] shrink-0"
+                className="h-2 w-2 rounded-full bg-[#16A34A] shrink-0"
               />
               <span>ISO/IEC 27001 · Certified</span>
             </span>
 
-            <span className="inline-flex items-center rounded-[7px] bg-[#E8F0F8] border border-[#6699CC]/30 px-2.5 py-1 font-mono-tabular text-[10.5px] font-medium text-[#2E5A8A] whitespace-nowrap">
+            <span className="inline-flex items-center rounded-[8px] bg-[#FFFFFF] border border-[#E5E7EB] px-3 py-1.5 font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] uppercase text-[#163B66] whitespace-nowrap">
               0 Bytes · Data Egress
             </span>
 
-            <span className="inline-flex items-center rounded-[7px] bg-[#E8F0F8] border border-[#6699CC]/30 px-2.5 py-1 font-mono-tabular text-[10.5px] font-medium text-[#2E5A8A] whitespace-nowrap">
+            <span className="inline-flex items-center rounded-[8px] bg-[#FFFFFF] border border-[#E5E7EB] px-3 py-1.5 font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] uppercase text-[#163B66] whitespace-nowrap">
               0% · Customer Data in LLM Training
             </span>
           </div>
         </div>
 
         {/* Zero-Egress Perimeter Well (#EEF2F7) */}
-        <div className="rounded-[14px] bg-[#EEF2F7] border border-[#CBD5E1]/90 p-4 sm:p-5 space-y-3.5">
+        <div className="rounded-[14px] bg-[#EEF2F7] border border-[#CBD5E1] p-6 sm:p-8 space-y-6">
           {/* Perimeter Header */}
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-2 pb-3 border-b border-[#CBD5E1]/75">
-            <div className="flex items-start sm:items-center gap-2">
-              <span className="h-6 w-6 rounded-[6px] bg-[#163B66] text-[#FFFFFF] flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
-                <Lock className="w-3 h-3" />
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 pb-4 border-b border-[#CBD5E1]">
+            <div className="flex items-start sm:items-center gap-3">
+              <span className="h-8 w-8 rounded-[8px] bg-[#163B66] text-[#FFFFFF] flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
+                <Lock className="w-4 h-4" />
               </span>
-              <p className="text-[12.5px] sm:text-[13px] font-medium leading-[1.42] text-[#163B66]">
+              <p className="text-[15px] font-medium leading-[1.5] text-[#163B66]">
                 Customer Private Cloud VPC / On-Premises security managed by
                 Customer IT, with default-deny outbound network policies
               </p>
             </div>
-            <span className="font-mono-tabular text-[10.5px] font-medium text-[#2E5A8A] whitespace-nowrap">
+            <span className="font-mono-tabular text-[12px] font-medium tracking-[0.05em] uppercase text-[#163B66] whitespace-nowrap">
               ZERO EXTERNAL DATA EGRESS
             </span>
           </div>
 
           {/* 3 Connected Stage Cards */}
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr_auto_1fr] items-stretch gap-2.5">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr_auto_1fr] items-stretch gap-4">
             {/* Stage 1: Read-Only Source Extraction */}
-            <article className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-[10px] p-3.5 sm:p-4 flex flex-col justify-between gap-2.5">
-              <div className="space-y-1.5">
+            <article className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-[12px] p-7 flex flex-col justify-between gap-5">
+              <div className="space-y-2.5">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="font-mono-tabular text-[10px] font-medium text-[#2E5A8A]">
+                  <span className="font-mono-tabular text-[12px] font-medium tracking-[0.05em] uppercase text-[#64748B]">
                     STAGE 01
                   </span>
-                  <Database className="w-3.5 h-3.5 text-[#2E5A8A] shrink-0" />
+                  <Database className="w-4 h-4 text-[#163B66] shrink-0" />
                 </div>
-                <h3 className="text-[14px] font-medium leading-[1.3] text-[#163B66]">
+                <h3 className="text-[17.5px] font-semibold leading-[1.3] tracking-[-0.01em] text-[#0F172A]">
                   Read-Only Source Extraction
                 </h3>
-                <p className="text-[12.5px] leading-[1.5] text-[#4B5B6E]">
+                <p className="text-[14.5px] leading-[1.6] text-[#334155]">
                   SAP S/4HANA &amp; ECC · Oracle · NetSuite · Dynamics 365 ·
                   Snowflake / Databricks
                 </p>
               </div>
-              <div className="pt-2.5 border-t border-[#F1F5F9] font-mono-tabular text-[10.5px] font-medium text-[#2E5A8A] leading-[1.4]">
+              <div className="pt-4 border-t border-[#E5E7EB] font-mono-tabular text-[12px] font-medium tracking-[0.03em] text-[#163B66] leading-[1.5]">
                 Scheduled read-only batch extraction · Zero unapproved ERP writes
               </div>
             </article>
@@ -852,31 +860,31 @@ export const SaraArchitectureStudioTab: React.FC<
             {/* Connector 1 -> 2 */}
             <div
               aria-hidden="true"
-              className="flex items-center justify-center py-0.5 lg:py-0 text-[#2E5A8A]"
+              className="flex items-center justify-center py-0.5 lg:py-0 text-[#163B66]"
             >
-              <ArrowRight className="hidden lg:block w-3.5 h-3.5" />
-              <ArrowDown className="lg:hidden w-3.5 h-3.5" />
+              <ArrowRight className="hidden lg:block w-4 h-4" />
+              <ArrowDown className="lg:hidden w-4 h-4" />
             </div>
 
             {/* Stage 2: In-VPC Fortifai SARA + D7 Engine */}
-            <article className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-[10px] p-3.5 sm:p-4 flex flex-col justify-between gap-2.5">
-              <div className="space-y-1.5">
+            <article className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-[12px] p-7 flex flex-col justify-between gap-5">
+              <div className="space-y-2.5">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="font-mono-tabular text-[10px] font-medium text-[#2E5A8A]">
+                  <span className="font-mono-tabular text-[12px] font-medium tracking-[0.05em] uppercase text-[#64748B]">
                     STAGE 02
                   </span>
-                  <Cpu className="w-3.5 h-3.5 text-[#2E5A8A] shrink-0" />
+                  <Cpu className="w-4 h-4 text-[#163B66] shrink-0" />
                 </div>
-                <h3 className="text-[14px] font-medium leading-[1.3] text-[#163B66]">
+                <h3 className="text-[17.5px] font-semibold leading-[1.3] tracking-[-0.01em] text-[#0F172A]">
                   In-VPC Fortifai SARA + D7 Engine
                 </h3>
-                <p className="text-[12.5px] leading-[1.5] text-[#4B5B6E]">
+                <p className="text-[14.5px] leading-[1.6] text-[#334155]">
                   Deterministic and validated SQL &amp; rule execution preventing
                   hallucinated figures · Signed in-VPC Fortifai D7 intelligence ·
                   AES-256 + Customer KMS
                 </p>
               </div>
-              <div className="pt-2.5 border-t border-[#F1F5F9] font-mono-tabular text-[10.5px] font-medium text-[#2E5A8A] leading-[1.4]">
+              <div className="pt-4 border-t border-[#E5E7EB] font-mono-tabular text-[12px] font-medium tracking-[0.03em] text-[#163B66] leading-[1.5]">
                 0% LLM financial math · Customer-Managed Encryption Keys
               </div>
             </article>
@@ -884,58 +892,66 @@ export const SaraArchitectureStudioTab: React.FC<
             {/* Connector 2 -> 3 */}
             <div
               aria-hidden="true"
-              className="flex items-center justify-center py-0.5 lg:py-0 text-[#2E5A8A]"
+              className="flex items-center justify-center py-0.5 lg:py-0 text-[#163B66]"
             >
-              <ArrowRight className="hidden lg:block w-3.5 h-3.5" />
-              <ArrowDown className="lg:hidden w-3.5 h-3.5" />
+              <ArrowRight className="hidden lg:block w-4 h-4" />
+              <ArrowDown className="lg:hidden w-4 h-4" />
             </div>
 
             {/* Stage 3: Governance & Audit Integrity */}
-            <article className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-[10px] p-3.5 sm:p-4 flex flex-col justify-between gap-2.5">
-              <div className="space-y-1.5">
+            <article className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-[12px] p-7 flex flex-col justify-between gap-5">
+              <div className="space-y-2.5">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="font-mono-tabular text-[10px] font-medium text-[#2E5A8A]">
+                  <span className="font-mono-tabular text-[12px] font-medium tracking-[0.05em] uppercase text-[#64748B]">
                     STAGE 03
                   </span>
-                  <FileCheck2 className="w-3.5 h-3.5 text-[#2E5A8A] shrink-0" />
+                  <FileCheck2 className="w-4 h-4 text-[#163B66] shrink-0" />
                 </div>
-                <h3 className="text-[14px] font-medium leading-[1.3] text-[#163B66]">
+                <h3 className="text-[17.5px] font-semibold leading-[1.3] tracking-[-0.01em] text-[#0F172A]">
                   Governance &amp; Audit Integrity
                 </h3>
-                <p className="text-[12.5px] leading-[1.5] text-[#4B5B6E]">
+                <p className="text-[14.5px] leading-[1.6] text-[#334155]">
                   SAML 2.0 / OIDC SSO · Two-person Maker-Checker SoD · Isolated
                   Privileged Legal Queue · 7-year immutable logs
                 </p>
               </div>
-              <div className="pt-2.5 border-t border-[#F1F5F9] font-mono-tabular text-[10.5px] font-medium text-[#2E5A8A] leading-[1.4]">
+              <div className="pt-4 border-t border-[#E5E7EB] font-mono-tabular text-[12px] font-medium tracking-[0.03em] text-[#163B66] leading-[1.5]">
                 PCAOB AS 1105 document lineage · Immutable disposition trail
               </div>
             </article>
           </div>
         </div>
 
-        {/* 2x2 Technical Security Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-          {TECHNICAL_SECURITY_PILLARS.map((pillar) => {
+        {/* Unified 2x2 #FFFFFF Editorial Hairline Technical Security Sheet */}
+        <div className="rounded-[14px] bg-[#FFFFFF] border border-[#E5E7EB] fortifai-card-shadow overflow-hidden grid grid-cols-1 md:grid-cols-2">
+          {TECHNICAL_SECURITY_PILLARS.map((pillar, idx) => {
             const IconComponent = pillar.icon;
+            const borderClasses =
+              idx === 0
+                ? 'border-b border-[#E5E7EB] md:border-r'
+                : idx === 1
+                  ? 'border-b border-[#E5E7EB]'
+                  : idx === 2
+                    ? 'border-b md:border-b-0 md:border-r border-[#E5E7EB]'
+                    : '';
             return (
               <article
                 key={pillar.code}
-                className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-[12px] p-4 fortifai-card-shadow space-y-2"
+                className={`p-7 sm:p-8 space-y-3 ${borderClasses}`}
               >
-                <div className="flex items-center justify-between gap-2.5">
-                  <div className="flex items-center gap-2">
-                    <span className="rounded-[5px] px-1.5 py-0.5 fortifai-pill">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    <span className="rounded-[5px] px-2 py-0.5 fortifai-pill">
                       {pillar.code}
                     </span>
-                    <h3 className="text-[14px] font-medium leading-[1.3] text-[#163B66]">
+                    <h3 className="text-[17.5px] font-semibold leading-[1.3] tracking-[-0.01em] text-[#0F172A]">
                       {pillar.title}
                     </h3>
                   </div>
-                  <IconComponent className="w-3.5 h-3.5 text-[#2E5A8A] shrink-0" />
+                  <IconComponent className="w-4 h-4 text-[#163B66] shrink-0" />
                 </div>
 
-                <p className="text-[12.5px] leading-[1.55] text-[#4B5B6E]">
+                <p className="text-[14.5px] leading-[1.6] text-[#334155]">
                   {pillar.body}
                 </p>
               </article>
@@ -944,27 +960,27 @@ export const SaraArchitectureStudioTab: React.FC<
         </div>
 
         {/* Bottom Continuation Bar */}
-        <div className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-[10px] fortifai-card-shadow px-4 py-2.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
-          <p className="text-[12.5px] text-[#4B5B6E]">
-            Next: Explore the 17 domain agents or model deduplicated USD savings
-            for your enterprise volume.
+        <div className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-[14px] fortifai-card-shadow px-6 py-5 sm:px-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <p className="text-[14.5px] leading-[1.6] text-[#334155]">
+            Next: Explore the Active Domain Agent Suite or model deduplicated
+            USD savings for your enterprise volume.
           </p>
-          <div className="flex flex-wrap items-center gap-2 shrink-0">
+          <div className="flex flex-wrap items-center gap-2.5 shrink-0">
             <button
               type="button"
               onClick={() => onSelectTab('agents')}
-              className="inline-flex items-center gap-1.5 rounded-[7px] bg-[#F8FAFC] hover:bg-[#E8F0F8] border border-[#E5E7EB] px-3 py-1.5 text-[12px] font-medium text-[#163B66] whitespace-nowrap transition-colors cursor-pointer"
+              className="inline-flex items-center gap-2 rounded-[8px] bg-[#F5F5F7] hover:bg-[#E8F0F8] border border-[#E5E7EB] px-4 py-2 text-[14px] font-medium text-[#163B66] whitespace-nowrap transition-colors cursor-pointer"
             >
               <span>03 · Active Agent Suite</span>
-              <ArrowRight className="w-3.5 h-3.5 text-[#2E5A8A]" />
+              <ArrowRight className="w-4 h-4 text-[#163B66]" />
             </button>
             <button
               type="button"
               onClick={() => onSelectTab('roi')}
-              className="inline-flex items-center gap-1.5 rounded-[7px] bg-[#163B66] hover:bg-[#2E5A8A] text-[#FFFFFF] px-3 py-1.5 text-[12px] font-medium whitespace-nowrap transition-colors cursor-pointer"
+              className="inline-flex items-center gap-2 rounded-[8px] bg-[#163B66] hover:bg-[#2E5A8A] text-[#FFFFFF] px-4 py-2 text-[14px] font-medium whitespace-nowrap transition-colors cursor-pointer"
             >
               <span>04 · Business Case &amp; ROI</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <ArrowRight className="w-4 h-4" />
             </button>
           </div>
         </div>
