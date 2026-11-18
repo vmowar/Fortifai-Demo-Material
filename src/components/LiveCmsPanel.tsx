@@ -10,6 +10,7 @@ import {
   Plus,
   RotateCcw,
   Save,
+  Search,
   SlidersHorizontal,
   Trash2,
   X,
@@ -22,6 +23,14 @@ import {
   TabId,
   formatCmsConfigAsTypeScript,
 } from '../config/briefingConfig';
+import {
+  AGENT_SUITE_LABELS,
+  AGENT_SUITE_SHORT_LABELS,
+  AgentSuiteId,
+  CanonicalAgent,
+  formatMultiSuiteLabel,
+  getAgentSuites,
+} from '../data/canonicalAgents';
 
 type CmsSection =
   | 'walkthrough'
@@ -108,6 +117,16 @@ export const LiveCmsPanel: React.FC<LiveCmsPanelProps> = ({
   const [newFaqQuestion, setNewFaqQuestion] = useState<string>('');
   const [newFaqAnswer, setNewFaqAnswer] = useState<string>('');
   const [faqAddedNotice, setFaqAddedNotice] = useState<boolean>(false);
+
+  // Agent Cards filter & composer state inside Live CMS (03 · Agents)
+  const [agentCmsFilter, setAgentCmsFilter] = useState<string>('');
+  const [showAddAgentForm, setShowAddAgentForm] = useState<boolean>(false);
+  const [newAgentSuite, setNewAgentSuite] =
+    useState<AgentSuiteId>('PROCUREMENT');
+  const [newAgentTitle, setNewAgentTitle] = useState<string>('');
+  const [newAgentDescription, setNewAgentDescription] = useState<string>('');
+  const [newAgentSignals, setNewAgentSignals] = useState<string>('');
+  const [newAgentOutput, setNewAgentOutput] = useState<string>('');
 
   // Align active editor section with the visible screen whenever the drawer opens
   useEffect(() => {
@@ -304,6 +323,95 @@ export const LiveCmsPanel: React.FC<LiveCmsPanelProps> = ({
     updateFaq({
       items: config.faq.items.filter((item) => item.id !== id),
     });
+  };
+
+  const reindexAgents = (items: CanonicalAgent[]): CanonicalAgent[] =>
+    items.map((item, idx) => ({
+      ...item,
+      indexBadge: String(idx + 1).padStart(2, '0'),
+    }));
+
+  const handleUpdateAgentCard = (
+    indexBadge: string,
+    patch: Partial<CanonicalAgent>
+  ) => {
+    onChange({
+      ...config,
+      agents: config.agents.map((agent) =>
+        agent.indexBadge === indexBadge ? { ...agent, ...patch } : agent
+      ),
+    });
+  };
+
+  const handleToggleAgentSuite = (
+    agent: CanonicalAgent,
+    suiteKey: AgentSuiteId
+  ) => {
+    const currentSuites = getAgentSuites(agent);
+    const exists = currentSuites.includes(suiteKey);
+    if (exists && currentSuites.length <= 1) {
+      return;
+    }
+    const nextSuites = exists
+      ? currentSuites.filter((s) => s !== suiteKey)
+      : [...currentSuites, suiteKey];
+    const primarySuite = nextSuites[0];
+    handleUpdateAgentCard(agent.indexBadge, {
+      suite: primarySuite,
+      suites: nextSuites.length > 1 ? nextSuites : undefined,
+      suiteLabel: formatMultiSuiteLabel(nextSuites),
+    });
+  };
+
+  const handleMoveAgentCard = (index: number, direction: -1 | 1) => {
+    const targetIdx = index + direction;
+    if (targetIdx < 0 || targetIdx >= config.agents.length) return;
+    const next = [...config.agents];
+    const [moved] = next.splice(index, 1);
+    next.splice(targetIdx, 0, moved);
+    onChange({
+      ...config,
+      agents: reindexAgents(next),
+    });
+  };
+
+  const handleDeleteAgentCard = (indexBadge: string) => {
+    if (config.agents.length <= 1) return;
+    onChange({
+      ...config,
+      agents: reindexAgents(
+        config.agents.filter((a) => a.indexBadge !== indexBadge)
+      ),
+    });
+  };
+
+  const handleAddAgentCard = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const trimmedTitle = newAgentTitle.trim();
+    const trimmedDesc = newAgentDescription.trim();
+    if (!trimmedTitle || !trimmedDesc) return;
+
+    const created: CanonicalAgent = {
+      indexBadge: String(config.agents.length + 1).padStart(2, '0'),
+      suite: newAgentSuite,
+      suiteLabel: AGENT_SUITE_LABELS[newAgentSuite],
+      title: trimmedTitle,
+      description: trimmedDesc,
+      signals: newAgentSignals.trim(),
+      output: newAgentOutput.trim(),
+    };
+
+    onChange({
+      ...config,
+      agents: reindexAgents([...config.agents, created]),
+    });
+    void onSaveNow();
+
+    setNewAgentTitle('');
+    setNewAgentDescription('');
+    setNewAgentSignals('');
+    setNewAgentOutput('');
+    setShowAddAgentForm(false);
   };
 
   const walkthroughTab =
@@ -1029,18 +1137,285 @@ export const LiveCmsPanel: React.FC<LiveCmsPanelProps> = ({
                     />
                   </div>
 
-                  <div className="rounded-[8px] bg-[#F8FAFC] border border-[#E5E7EB] p-3 space-y-1">
-                    <span className="block font-mono-tabular text-[10.5px] font-medium text-[#2E5A8A] uppercase">
-                      SYNCHRONIZED 17-AGENT CATALOGUE
-                    </span>
-                    <p className="text-[12px] leading-[1.5] text-[#4B5B6E]">
-                      Renders the canonical 17 Fortifai domain agents natively in
-                      Tab 03 and keeps standalone{' '}
-                      <span className="font-mono-tabular">
-                        /agent-suite.html
-                      </span>{' '}
-                      synchronized for external embeds.
-                    </p>
+                  <div className="pt-3 border-t border-[#E5E7EB] space-y-3">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="font-mono-tabular text-[11px] font-medium text-[#2E5A8A] uppercase">
+                        AGENT CARDS COPY ({config.agents.length})
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => setShowAddAgentForm((prev) => !prev)}
+                        className="inline-flex items-center gap-1 rounded-[6px] bg-[#E8F0F8] hover:bg-[#DCE8F5] border border-[#6699CC]/45 px-2.5 py-1 text-[11.5px] font-medium text-[#163B66] cursor-pointer transition-colors"
+                      >
+                        <Plus className="w-3 h-3" />
+                        <span>{showAddAgentForm ? 'Close' : 'Add Agent'}</span>
+                      </button>
+                    </div>
+
+                    {showAddAgentForm && (
+                      <form
+                        onSubmit={handleAddAgentCard}
+                        className="rounded-[10px] bg-[#F4F8FC] border border-[#6699CC]/45 p-3 space-y-2"
+                      >
+                        <div>
+                          <label className="block text-[11.5px] font-medium text-[#163B66] mb-1">
+                            Domain Suite
+                          </label>
+                          <select
+                            value={newAgentSuite}
+                            onChange={(e) =>
+                              setNewAgentSuite(e.target.value as AgentSuiteId)
+                            }
+                            className="w-full h-[32px] rounded-[6px] border border-[#D1D5DB] bg-[#FFFFFF] px-2 text-[12px] text-[#163B66]"
+                          >
+                            {(
+                              Object.keys(AGENT_SUITE_LABELS) as AgentSuiteId[]
+                            ).map((suiteKey) => (
+                              <option key={suiteKey} value={suiteKey}>
+                                {AGENT_SUITE_LABELS[suiteKey]}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+
+                        <div>
+                          <label className="block text-[11.5px] font-medium text-[#163B66] mb-1">
+                            Agent Title
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            placeholder="e.g., Procurement Cost"
+                            value={newAgentTitle}
+                            onChange={(e) => setNewAgentTitle(e.target.value)}
+                            className="w-full h-[32px] rounded-[6px] border border-[#D1D5DB] bg-[#FFFFFF] px-2.5 text-[12.5px] text-[#0D1520]"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-[11.5px] font-medium text-[#163B66] mb-1">
+                            Agent Description
+                          </label>
+                          <textarea
+                            rows={3}
+                            required
+                            placeholder="Describe what this domain agent monitors and detects…"
+                            value={newAgentDescription}
+                            onChange={(e) =>
+                              setNewAgentDescription(e.target.value)
+                            }
+                            className="w-full rounded-[6px] border border-[#D1D5DB] bg-[#FFFFFF] p-2 text-[12px] leading-[1.45] text-[#0D1520]"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-[11.5px] font-medium text-[#163B66] mb-1">
+                            Signals
+                          </label>
+                          <input
+                            type="text"
+                            placeholder="Signed Contracts · PO & Invoice Line Items…"
+                            value={newAgentSignals}
+                            onChange={(e) => setNewAgentSignals(e.target.value)}
+                            className="w-full h-[32px] rounded-[6px] border border-[#D1D5DB] bg-[#FFFFFF] px-2.5 text-[12px] text-[#0D1520]"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-[11.5px] font-medium text-[#163B66] mb-1">
+                            Output
+                          </label>
+                          <input
+                            type="text"
+                            placeholder="Pre-payment hold & recovery pack…"
+                            value={newAgentOutput}
+                            onChange={(e) => setNewAgentOutput(e.target.value)}
+                            className="w-full h-[32px] rounded-[6px] border border-[#D1D5DB] bg-[#FFFFFF] px-2.5 text-[12px] text-[#0D1520]"
+                          />
+                        </div>
+
+                        <button
+                          type="submit"
+                          className="w-full inline-flex items-center justify-center gap-1.5 rounded-[7px] bg-[#163B66] hover:bg-[#2E5A8A] text-[#FFFFFF] px-3 py-1.5 text-[12px] font-medium transition-colors cursor-pointer"
+                        >
+                          <Plus className="w-3.5 h-3.5" />
+                          <span>Add Agent Card</span>
+                        </button>
+                      </form>
+                    )}
+
+                    {/* Quick Search Filter Inside Live CMS */}
+                    <div className="relative">
+                      <Search className="w-3.5 h-3.5 text-[#64748B] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <input
+                        type="search"
+                        value={agentCmsFilter}
+                        onChange={(e) => setAgentCmsFilter(e.target.value)}
+                        placeholder="Quick-find agent card by title or #..."
+                        className="w-full h-[34px] rounded-[8px] border border-[#D1D5DB] bg-[#FFFFFF] pl-8 pr-3 text-[12.5px] text-[#0D1520] placeholder:text-[#64748B] focus:outline-none focus:border-[#2E5A8A]"
+                      />
+                    </div>
+
+                    <div className="space-y-3">
+                      {config.agents.map((agent, idx) => {
+                        const q = agentCmsFilter.trim().toLowerCase();
+                        if (
+                          q &&
+                          !`${agent.indexBadge} ${agent.suiteLabel} ${agent.title} ${agent.description}`
+                            .toLowerCase()
+                            .includes(q)
+                        ) {
+                          return null;
+                        }
+
+                        return (
+                          <div
+                            key={agent.indexBadge}
+                            className="rounded-[10px] bg-[#F8FAFC] border border-[#E5E7EB] p-3 space-y-2"
+                          >
+                            <div className="flex items-center justify-between gap-2">
+                              <div className="flex items-center gap-2 min-w-0 flex-1">
+                                <span className="inline-flex items-center rounded-[5px] bg-[#FFFFFF] border border-[#E5E7EB] px-2 py-0.5 font-mono-tabular text-[11px] font-medium text-[#163B66] shrink-0">
+                                  {agent.indexBadge}
+                                </span>
+                                <span className="font-mono-tabular text-[11px] font-medium text-[#2E5A8A] truncate uppercase">
+                                  {agent.suiteLabel}
+                                </span>
+                              </div>
+
+                              <div className="flex items-center gap-1 shrink-0">
+                                <button
+                                  type="button"
+                                  disabled={idx === 0}
+                                  onClick={() => handleMoveAgentCard(idx, -1)}
+                                  className="h-6 w-6 rounded-[5px] border border-[#E5E7EB] bg-[#FFFFFF] hover:bg-[#F1F5F9] flex items-center justify-center text-[#4B5B6E] disabled:opacity-35 cursor-pointer"
+                                  title="Move agent up"
+                                >
+                                  <ArrowUp className="w-3 h-3" />
+                                </button>
+                                <button
+                                  type="button"
+                                  disabled={idx === config.agents.length - 1}
+                                  onClick={() => handleMoveAgentCard(idx, 1)}
+                                  className="h-6 w-6 rounded-[5px] border border-[#E5E7EB] bg-[#FFFFFF] hover:bg-[#F1F5F9] flex items-center justify-center text-[#4B5B6E] disabled:opacity-35 cursor-pointer"
+                                  title="Move agent down"
+                                >
+                                  <ArrowDown className="w-3 h-3" />
+                                </button>
+                                <button
+                                  type="button"
+                                  disabled={config.agents.length <= 1}
+                                  onClick={() =>
+                                    handleDeleteAgentCard(agent.indexBadge)
+                                  }
+                                  className="h-6 w-6 rounded-[5px] border border-[#E5E7EB] bg-[#FFFFFF] hover:bg-[#FDECEC] flex items-center justify-center text-[#64748B] hover:text-[#8B1A1A] disabled:opacity-35 cursor-pointer"
+                                  title="Remove agent card"
+                                >
+                                  <Trash2 className="w-3 h-3" />
+                                </button>
+                              </div>
+                            </div>
+
+                            <div>
+                              <span className="block text-[11px] font-medium text-[#475569] mb-1">
+                                Appears in Suites (select one or multiple)
+                              </span>
+                              <div className="flex flex-wrap gap-1">
+                                {(
+                                  Object.keys(
+                                    AGENT_SUITE_LABELS
+                                  ) as AgentSuiteId[]
+                                ).map((suiteKey) => {
+                                  const activeSuites = getAgentSuites(agent);
+                                  const isSelected =
+                                    activeSuites.includes(suiteKey);
+                                  return (
+                                    <button
+                                      key={suiteKey}
+                                      type="button"
+                                      onClick={() =>
+                                        handleToggleAgentSuite(agent, suiteKey)
+                                      }
+                                      className={`rounded-[5px] border px-2 py-0.5 text-[11px] font-medium transition-colors cursor-pointer ${
+                                        isSelected
+                                          ? 'bg-[#163B66] border-[#163B66] text-[#FFFFFF]'
+                                          : 'bg-[#FFFFFF] border-[#E5E7EB] text-[#475569] hover:border-[#6699CC] hover:text-[#163B66]'
+                                      }`}
+                                    >
+                                      {AGENT_SUITE_SHORT_LABELS[suiteKey]}
+                                    </button>
+                                  );
+                                })}
+                              </div>
+                            </div>
+
+                            <div>
+                              <label className="block text-[11px] font-medium text-[#163B66] mb-1">
+                                Agent Title
+                              </label>
+                              <input
+                                type="text"
+                                value={agent.title}
+                                onChange={(e) =>
+                                  handleUpdateAgentCard(agent.indexBadge, {
+                                    title: e.target.value,
+                                  })
+                                }
+                                className="w-full h-[32px] rounded-[6px] border border-[#D1D5DB] bg-[#FFFFFF] px-2.5 text-[12.5px] font-medium text-[#0F172A] focus:outline-none focus:border-[#2E5A8A]"
+                              />
+                            </div>
+
+                            <div>
+                              <label className="block text-[11px] font-medium text-[#163B66] mb-1">
+                                Agent Description
+                              </label>
+                              <textarea
+                                rows={3}
+                                value={agent.description}
+                                onChange={(e) =>
+                                  handleUpdateAgentCard(agent.indexBadge, {
+                                    description: e.target.value,
+                                  })
+                                }
+                                className="w-full rounded-[6px] border border-[#D1D5DB] bg-[#FFFFFF] p-2 text-[12px] leading-[1.5] text-[#334155] focus:outline-none focus:border-[#2E5A8A]"
+                              />
+                            </div>
+
+                            <div>
+                              <label className="block text-[11px] font-medium text-[#475569] mb-1">
+                                Signals
+                              </label>
+                              <input
+                                type="text"
+                                value={agent.signals}
+                                onChange={(e) =>
+                                  handleUpdateAgentCard(agent.indexBadge, {
+                                    signals: e.target.value,
+                                  })
+                                }
+                                className="w-full h-[30px] rounded-[6px] border border-[#D1D5DB] bg-[#FFFFFF] px-2.5 text-[11.5px] text-[#475569] focus:outline-none focus:border-[#2E5A8A]"
+                              />
+                            </div>
+
+                            <div>
+                              <label className="block text-[11px] font-medium text-[#475569] mb-1">
+                                Output
+                              </label>
+                              <input
+                                type="text"
+                                value={agent.output}
+                                onChange={(e) =>
+                                  handleUpdateAgentCard(agent.indexBadge, {
+                                    output: e.target.value,
+                                  })
+                                }
+                                className="w-full h-[30px] rounded-[6px] border border-[#D1D5DB] bg-[#FFFFFF] px-2.5 text-[11.5px] text-[#475569] focus:outline-none focus:border-[#2E5A8A]"
+                              />
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
               )}

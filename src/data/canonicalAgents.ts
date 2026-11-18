@@ -1,14 +1,16 @@
-export type AgentSuiteCategory =
-  | 'ALL'
+export type AgentSuiteId =
   | 'PROCUREMENT'
   | 'REVENUE'
   | 'FINANCE'
   | 'COMPLIANCE'
   | 'AUDIT';
 
+export type AgentSuiteCategory = 'ALL' | AgentSuiteId;
+
 export interface CanonicalAgent {
   indexBadge: string;
-  suite: Exclude<AgentSuiteCategory, 'ALL'>;
+  suite: AgentSuiteId;
+  suites?: AgentSuiteId[];
   suiteLabel: string;
   title: string;
   description: string;
@@ -21,17 +23,76 @@ export interface AgentSuiteFilterOption {
   label: string;
 }
 
+export const AGENT_SUITE_LABELS: Record<AgentSuiteId, string> = {
+  PROCUREMENT: 'Procurement & Supply Chain',
+  REVENUE: 'Revenue & O2C',
+  FINANCE: 'Finance & Working Capital',
+  COMPLIANCE: 'Compliance & Legal',
+  AUDIT: 'Internal Audit',
+};
+
+export const AGENT_SUITE_SHORT_LABELS: Record<AgentSuiteId, string> = {
+  PROCUREMENT: 'Procurement',
+  REVENUE: 'Revenue & O2C',
+  FINANCE: 'Finance',
+  COMPLIANCE: 'Compliance & Legal',
+  AUDIT: 'Internal Audit',
+};
+
+export function getAgentSuites(
+  agent: Pick<CanonicalAgent, 'suite' | 'suites'>
+): AgentSuiteId[] {
+  if (Array.isArray(agent.suites) && agent.suites.length > 0) {
+    return agent.suites;
+  }
+  return [agent.suite];
+}
+
+export function formatMultiSuiteLabel(suites: readonly AgentSuiteId[]): string {
+  if (suites.length === 0) {
+    return AGENT_SUITE_LABELS.PROCUREMENT;
+  }
+  if (suites.length === 1) {
+    return AGENT_SUITE_LABELS[suites[0]];
+  }
+  return suites.map((id) => AGENT_SUITE_SHORT_LABELS[id]).join(' · ');
+}
+
+export function agentMatchesSuite(
+  agent: Pick<CanonicalAgent, 'suite' | 'suites'>,
+  selectedSuite: AgentSuiteCategory
+): boolean {
+  if (selectedSuite === 'ALL') {
+    return true;
+  }
+  return getAgentSuites(agent).includes(selectedSuite);
+}
+
+export function getDisplaySuiteLabel(
+  agent: CanonicalAgent,
+  selectedSuite: AgentSuiteCategory
+): string {
+  const suites = getAgentSuites(agent);
+  if (selectedSuite !== 'ALL' && suites.includes(selectedSuite)) {
+    return AGENT_SUITE_LABELS[selectedSuite];
+  }
+  if (suites.length > 1) {
+    return formatMultiSuiteLabel(suites);
+  }
+  return agent.suiteLabel || AGENT_SUITE_LABELS[agent.suite];
+}
+
 export const AGENT_SUITE_FILTERS: readonly AgentSuiteFilterOption[] = [
   { id: 'ALL', label: 'All Suites' },
-  { id: 'PROCUREMENT', label: 'Procurement & Supply Chain' },
-  { id: 'REVENUE', label: 'Revenue & O2C' },
-  { id: 'FINANCE', label: 'Finance & Working Capital' },
-  { id: 'COMPLIANCE', label: 'Compliance & Legal' },
-  { id: 'AUDIT', label: 'Internal Audit' },
+  { id: 'PROCUREMENT', label: AGENT_SUITE_LABELS.PROCUREMENT },
+  { id: 'REVENUE', label: AGENT_SUITE_LABELS.REVENUE },
+  { id: 'FINANCE', label: AGENT_SUITE_LABELS.FINANCE },
+  { id: 'COMPLIANCE', label: AGENT_SUITE_LABELS.COMPLIANCE },
+  { id: 'AUDIT', label: AGENT_SUITE_LABELS.AUDIT },
 ];
 
 export const CANONICAL_AGENTS: readonly CanonicalAgent[] = [
-  // Procurement & Supply Chain (01–07)
+  // Procurement & Supply Chain (01–07; 03 & 04 also appear in Compliance & Legal)
   {
     indexBadge: '01',
     suite: 'PROCUREMENT',
@@ -57,7 +118,8 @@ export const CANONICAL_AGENTS: readonly CanonicalAgent[] = [
   {
     indexBadge: '03',
     suite: 'PROCUREMENT',
-    suiteLabel: 'Procurement & Supply Chain',
+    suites: ['PROCUREMENT', 'COMPLIANCE'],
+    suiteLabel: 'Procurement · Compliance & Legal',
     title: 'Third-Party Due Diligence',
     description:
       'Autonomous pure-play external counterparty vetting powered by Fortifai D7 across 11 risk dimensions—delivering a scored onboarding verdict in hours without ERP integration.',
@@ -68,7 +130,8 @@ export const CANONICAL_AGENTS: readonly CanonicalAgent[] = [
   {
     indexBadge: '04',
     suite: 'PROCUREMENT',
-    suiteLabel: 'Procurement & Supply Chain',
+    suites: ['PROCUREMENT', 'COMPLIANCE'],
+    suiteLabel: 'Procurement · Compliance & Legal',
     title: 'Vendor Risk Monitoring',
     description:
       'Continuous post-onboarding vendor surveillance that triangulates Fortifai D7 external ownership shifts with live ERP spend behavior and employee master records.',

@@ -1,4 +1,11 @@
 import {
+  AGENT_SUITE_LABELS,
+  AgentSuiteId,
+  CANONICAL_AGENTS,
+  CanonicalAgent,
+  formatMultiSuiteLabel,
+} from '../data/canonicalAgents';
+import {
   PERSISTED_CMS_DATA,
   PERSISTED_CMS_UPDATED_AT,
 } from './cmsPersisted';
@@ -157,6 +164,7 @@ export interface BriefingCmsConfig {
     nextStepPrompt: string;
   };
   architecture: ArchitectureStudioConfig;
+  agents: CanonicalAgent[];
   roi: BusinessCaseRoiConfig;
   faq: ExecutiveFaqConfig;
   tabs: DataRoomTab[];
@@ -696,6 +704,10 @@ export const DEFAULT_CMS_CONFIG: BriefingCmsConfig = {
     layer2Capabilities: [...DEFAULT_ARCHITECTURE_CONFIG.layer2Capabilities],
     layer1Assurances: [...DEFAULT_ARCHITECTURE_CONFIG.layer1Assurances],
   },
+  agents: CANONICAL_AGENTS.map((agent) => ({
+    ...agent,
+    suites: agent.suites ? [...agent.suites] : undefined,
+  })),
   roi: {
     ...DEFAULT_ROI_CONFIG,
     evidenceCards: DEFAULT_ROI_CONFIG.evidenceCards.map((card) => ({
@@ -736,6 +748,13 @@ function isValidFaqCategory(val: unknown): val is FaqCategory {
   return (
     typeof val === 'string' &&
     (FAQ_CATEGORIES as readonly string[]).includes(val)
+  );
+}
+
+function isValidAgentSuiteId(val: unknown): val is AgentSuiteId {
+  return (
+    typeof val === 'string' &&
+    Object.prototype.hasOwnProperty.call(AGENT_SUITE_LABELS, val)
   );
 }
 
@@ -856,6 +875,81 @@ function sanitizeCmsRecord(
           label: c.label,
         }))
     : defaults.roi.evidenceCards;
+
+  const parsedAgents: CanonicalAgent[] = (() => {
+    if (!Array.isArray(parsed.agents)) {
+      return defaults.agents;
+    }
+    const validItems = parsed.agents
+      .filter(
+        (item): item is Record<string, unknown> =>
+          Boolean(item) &&
+          typeof item === 'object' &&
+          typeof (item as Record<string, unknown>).title === 'string' &&
+          typeof (item as Record<string, unknown>).description === 'string'
+      )
+      .map((item, idx) => {
+        const fallbackAgent = defaults.agents[idx];
+        const indexBadge = safeString(
+          item.indexBadge,
+          fallbackAgent?.indexBadge ?? String(idx + 1).padStart(2, '0')
+        );
+        const title = safeString(item.title, fallbackAgent?.title ?? '');
+        const suite: AgentSuiteId = isValidAgentSuiteId(item.suite)
+          ? item.suite
+          : (fallbackAgent?.suite ?? 'PROCUREMENT');
+
+        const explicitSuites = Array.isArray(item.suites)
+          ? Array.from(new Set(item.suites.filter(isValidAgentSuiteId)))
+          : [];
+
+        const isDualProcurementComplianceAgent =
+          /^(third[- ]party due diligence|vendor risk monitoring)/i.test(
+            title.trim()
+          ) ||
+          ((indexBadge === '03' || indexBadge === '04') &&
+            suite === 'PROCUREMENT');
+
+        let suites: AgentSuiteId[] | undefined;
+        if (explicitSuites.length > 0) {
+          suites = explicitSuites;
+        } else if (isDualProcurementComplianceAgent) {
+          suites = ['PROCUREMENT', 'COMPLIANCE'];
+        } else if (fallbackAgent?.suites && fallbackAgent.suites.length > 1) {
+          suites = [...fallbackAgent.suites];
+        }
+
+        const primarySuite = suites && suites.length > 0 ? suites[0] : suite;
+        const computedSuiteLabel =
+          suites && suites.length > 1
+            ? formatMultiSuiteLabel(suites)
+            : AGENT_SUITE_LABELS[primarySuite];
+        const rawSuiteLabel = safeString(item.suiteLabel, '').trim();
+        const suiteLabel =
+          suites &&
+          suites.length > 1 &&
+          (!rawSuiteLabel || rawSuiteLabel === AGENT_SUITE_LABELS[primarySuite])
+            ? computedSuiteLabel
+            : rawSuiteLabel || computedSuiteLabel;
+
+        return {
+          indexBadge,
+          suite: primarySuite,
+          ...(suites && suites.length > 1 ? { suites } : {}),
+          suiteLabel,
+          title,
+          description: safeString(
+            item.description,
+            fallbackAgent?.description ?? ''
+          ),
+          signals: safeString(item.signals, fallbackAgent?.signals ?? ''),
+          output: safeString(item.output, fallbackAgent?.output ?? ''),
+        };
+      })
+      .filter((item) => item.title.trim().length > 0);
+
+    return validItems.length > 0 ? validItems : defaults.agents;
+  })();
 
   const LEGACY_FAQ_IDS = new Set([
     'faq-zero-egress-llm',
@@ -1136,6 +1230,7 @@ function sanitizeCmsRecord(
         defaults.architecture.layer1Assurances
       ),
     },
+    agents: parsedAgents,
     roi: {
       pillLabel: safeString(r.pillLabel, defaults.roi.pillLabel),
       headline: safeString(r.headline, defaults.roi.headline),

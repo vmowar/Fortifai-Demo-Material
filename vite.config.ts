@@ -99,6 +99,73 @@ function writePersistedCmsAtomically(
   fs.renameSync(tmpPath, filePath);
 }
 
+function syncStandaloneAgentSuiteHtml(
+  htmlFilePath: string,
+  config: Record<string, unknown>
+): void {
+  try {
+    if (!Array.isArray(config.agents) || !fs.existsSync(htmlFilePath)) {
+      return;
+    }
+    const cleanAgents = config.agents
+      .filter(
+        (item): item is Record<string, unknown> =>
+          Boolean(item) &&
+          typeof item === 'object' &&
+          typeof (item as Record<string, unknown>).title === 'string' &&
+          typeof (item as Record<string, unknown>).description === 'string'
+      )
+      .map((item, idx) => {
+        const suites = Array.isArray(item.suites)
+          ? item.suites.filter(
+              (s): s is string => typeof s === 'string' && s.trim().length > 0
+            )
+          : undefined;
+        return {
+          indexBadge:
+            typeof item.indexBadge === 'string' && item.indexBadge.trim()
+              ? item.indexBadge
+              : String(idx + 1).padStart(2, '0'),
+          suite:
+            typeof item.suite === 'string' && item.suite.trim()
+              ? item.suite
+              : 'PROCUREMENT',
+          ...(suites && suites.length > 1 ? {suites} : {}),
+          suiteLabel:
+            typeof item.suiteLabel === 'string' && item.suiteLabel.trim()
+              ? item.suiteLabel
+              : 'Procurement & Supply Chain',
+          title: String(item.title),
+          description: String(item.description),
+          signals: typeof item.signals === 'string' ? item.signals : '',
+          output: typeof item.output === 'string' ? item.output : '',
+        };
+      });
+
+    if (cleanAgents.length === 0) {
+      return;
+    }
+
+    const currentHtml = fs.readFileSync(htmlFilePath, 'utf8');
+    const serializedAgents = JSON.stringify(cleanAgents, null, 8)
+      .replace(/</g, '\\u003c')
+      .replace(/\n\]$/, '\n      ]');
+    const replacementBlock = `const AGENTS = ${serializedAgents};`;
+    const updatedHtml = currentHtml.replace(
+      /const AGENTS = \[[\s\S]*?\];(?=\s*(?:const SUITE_LABELS =|let activeSuite =))/,
+      replacementBlock
+    );
+
+    if (updatedHtml !== currentHtml) {
+      const tmpHtmlPath = `${htmlFilePath}.tmp`;
+      fs.writeFileSync(tmpHtmlPath, updatedHtml, 'utf8');
+      fs.renameSync(tmpHtmlPath, htmlFilePath);
+    }
+  } catch {
+    // Never block CMS save if standalone HTML sync encounters an issue
+  }
+}
+
 function sendNoCacheJson(
   res: ServerResponse,
   statusCode: number,
@@ -127,6 +194,10 @@ export default defineConfig(() => {
   const cmsPersistedPath = path.resolve(
     import.meta.dirname,
     'src/config/cmsPersisted.ts'
+  );
+  const standaloneAgentSuitePath = path.resolve(
+    import.meta.dirname,
+    'public/agent-suite.html'
   );
 
   return {
@@ -207,6 +278,10 @@ export default defineConfig(() => {
                   writePersistedCmsAtomically(
                     cmsPersistedPath,
                     nextRevision,
+                    parsed.config
+                  );
+                  syncStandaloneAgentSuiteHtml(
+                    standaloneAgentSuitePath,
                     parsed.config
                   );
                   invalidateCmsModule(server, cmsPersistedPath);

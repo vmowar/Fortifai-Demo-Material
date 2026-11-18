@@ -1,26 +1,62 @@
 import React, { useMemo, useState } from 'react';
-import { Search, X } from 'lucide-react';
+import { Check, Pencil, Search, SlidersHorizontal, X } from 'lucide-react';
 import { DataRoomTab } from '../config/briefingConfig';
 import {
   AGENT_SUITE_FILTERS,
+  AGENT_SUITE_LABELS,
   AgentSuiteCategory,
   CANONICAL_AGENTS,
+  CanonicalAgent,
+  agentMatchesSuite,
+  getAgentSuites,
+  getDisplaySuiteLabel,
 } from '../data/canonicalAgents';
 
 interface ActiveAgentSuiteTabProps {
   tab: DataRoomTab;
+  agents?: CanonicalAgent[];
+  canEditAgents?: boolean;
+  onCommitAgentCard?: (
+    indexBadge: string,
+    patch: Partial<CanonicalAgent>
+  ) => Promise<void> | void;
+  onOpenCmsAgents?: () => void;
+}
+
+interface InlineAgentDraft {
+  title: string;
+  description: string;
+  signals: string;
+  output: string;
 }
 
 /**
- * Tab 03 (03 · Active Agent Suite) — Native Daylight Editorial 17-Agent Catalogue
- * - #F6F7F9 canvas, crisp #FFFFFF cards (1px solid #E5E7EB), suite eyebrow pill,
- *   01–17 index badge, live search input, and suite filter pills with zero hardcoded counts.
+ * Tab 03 (03 · Active Agent Suite) — Native Daylight Editorial Agent Catalogue
+ * - #F5F5F7 canvas, crisp #FFFFFF hairline sheet (1px solid #E5E7EB), suite eyebrow pill,
+ *   01–17 index badge, live search input, suite filter pills, and AI Studio inline + CMS editing.
  */
 export const ActiveAgentSuiteTab: React.FC<ActiveAgentSuiteTabProps> = ({
   tab,
+  agents,
+  canEditAgents = false,
+  onCommitAgentCard,
+  onOpenCmsAgents,
 }) => {
   const [selectedSuite, setSelectedSuite] = useState<AgentSuiteCategory>('ALL');
   const [searchQuery, setSearchQuery] = useState('');
+  const [editingBadge, setEditingBadge] = useState<string | null>(null);
+  const [draft, setDraft] = useState<InlineAgentDraft>({
+    title: '',
+    description: '',
+    signals: '',
+    output: '',
+  });
+  const [recentlySavedBadge, setRecentlySavedBadge] = useState<string | null>(
+    null
+  );
+
+  const sourceAgents: readonly CanonicalAgent[] =
+    agents && agents.length > 0 ? agents : CANONICAL_AGENTS;
 
   const pageEyebrow =
     tab.utilityEyebrow ?? 'FORTIFAI SARA · SPECIALIZED AGENT CATALOGUE';
@@ -31,15 +67,20 @@ export const ActiveAgentSuiteTab: React.FC<ActiveAgentSuiteTabProps> = ({
 
   const filteredAgents = useMemo(() => {
     const normalizedQuery = searchQuery.trim().toLowerCase();
-    return CANONICAL_AGENTS.filter((agent) => {
-      const matchesSuite =
-        selectedSuite === 'ALL' || agent.suite === selectedSuite;
-      if (!matchesSuite) return false;
+    return sourceAgents.filter((agent) => {
+      if (editingBadge === agent.indexBadge) return true;
+
+      if (!agentMatchesSuite(agent, selectedSuite)) return false;
       if (!normalizedQuery) return true;
+
+      const allSuiteNames = getAgentSuites(agent)
+        .map((s) => AGENT_SUITE_LABELS[s])
+        .join(' ');
 
       const searchableText = [
         agent.indexBadge,
         agent.suiteLabel,
+        allSuiteNames,
         agent.title,
         agent.description,
         agent.signals,
@@ -50,7 +91,42 @@ export const ActiveAgentSuiteTab: React.FC<ActiveAgentSuiteTabProps> = ({
 
       return searchableText.includes(normalizedQuery);
     });
-  }, [selectedSuite, searchQuery]);
+  }, [sourceAgents, selectedSuite, searchQuery, editingBadge]);
+
+  const startInlineEdit = (agent: CanonicalAgent) => {
+    setEditingBadge(agent.indexBadge);
+    setDraft({
+      title: agent.title,
+      description: agent.description,
+      signals: agent.signals,
+      output: agent.output,
+    });
+  };
+
+  const cancelInlineEdit = () => {
+    setEditingBadge(null);
+  };
+
+  const saveInlineEdit = async (indexBadge: string) => {
+    const trimmedTitle = draft.title.trim();
+    if (!trimmedTitle || !onCommitAgentCard) {
+      setEditingBadge(null);
+      return;
+    }
+
+    await onCommitAgentCard(indexBadge, {
+      title: trimmedTitle,
+      description: draft.description.trim(),
+      signals: draft.signals.trim(),
+      output: draft.output.trim(),
+    });
+
+    setEditingBadge(null);
+    setRecentlySavedBadge(indexBadge);
+    window.setTimeout(() => {
+      setRecentlySavedBadge((prev) => (prev === indexBadge ? null : prev));
+    }, 2400);
+  };
 
   return (
     <div className="min-h-[calc(100vh-106px)] w-full bg-[#F5F5F7]">
@@ -65,6 +141,17 @@ export const ActiveAgentSuiteTab: React.FC<ActiveAgentSuiteTabProps> = ({
               <span className="inline-flex items-center rounded-[6px] px-2.5 py-1 fortifai-pill">
                 {pageEyebrow}
               </span>
+            )}
+
+            {canEditAgents && onOpenCmsAgents && (
+              <button
+                type="button"
+                onClick={onOpenCmsAgents}
+                className="inline-flex items-center gap-1.5 rounded-[8px] border border-[#E5E7EB] bg-[#F5F5F7] hover:bg-[#E8F0F8] hover:border-[#6699CC] px-3 py-1.5 font-mono-tabular text-[11.5px] font-medium tracking-[0.04em] text-[#163B66] uppercase transition-colors cursor-pointer"
+              >
+                <SlidersHorizontal className="w-3.5 h-3.5 text-[#2E5A8A]" />
+                <span>Edit All Cards in Live CMS</span>
+              </button>
             )}
           </div>
 
@@ -158,47 +245,201 @@ export const ActiveAgentSuiteTab: React.FC<ActiveAgentSuiteTabProps> = ({
             aria-label="Domain Agent Catalogue"
             className="rounded-[14px] bg-[#FFFFFF] border border-[#E5E7EB] fortifai-card-shadow overflow-hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
           >
-            {filteredAgents.map((agent) => (
-              <article
-                key={agent.indexBadge}
-                className="p-7 sm:p-8 flex flex-col justify-between gap-6 border-b border-[#E5E7EB] md:odd:border-r lg:odd:border-r-0 lg:[&:not(:nth-child(3n))]:border-r transition-colors hover:bg-[#F8FAFC]/60"
-              >
-                <div>
-                  {/* Suite Eyebrow + Index Tag */}
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] text-[#64748B] uppercase">
-                      {agent.suiteLabel}
-                    </span>
-                    <span className="inline-flex items-center rounded-[5px] bg-[#F5F5F7] border border-[#E5E7EB] px-2 py-0.5 font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] text-[#163B66]">
-                      {agent.indexBadge}
-                    </span>
-                  </div>
+            {filteredAgents.map((agent) => {
+              const isEditing =
+                canEditAgents && editingBadge === agent.indexBadge;
+              const wasRecentlySaved = recentlySavedBadge === agent.indexBadge;
 
-                  <h3 className="mt-3 text-[17.5px] font-semibold leading-[1.3] tracking-[-0.01em] text-[#0F172A]">
-                    {agent.title}
-                  </h3>
+              return (
+                <article
+                  key={agent.indexBadge}
+                  className={`p-7 sm:p-8 flex flex-col justify-between gap-6 border-b border-[#E5E7EB] md:odd:border-r lg:odd:border-r-0 lg:[&:not(:nth-child(3n))]:border-r transition-colors ${
+                    isEditing
+                      ? 'bg-[#F8FAFC]'
+                      : 'hover:bg-[#F8FAFC]/60'
+                  }`}
+                >
+                  {isEditing ? (
+                    <form
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        void saveInlineEdit(agent.indexBadge);
+                      }}
+                      onKeyDown={(e) => {
+                        if (
+                          (e.metaKey || e.ctrlKey) &&
+                          (e.key === 'Enter' || e.key.toLowerCase() === 's')
+                        ) {
+                          e.preventDefault();
+                          void saveInlineEdit(agent.indexBadge);
+                        } else if (e.key === 'Escape') {
+                          e.preventDefault();
+                          cancelInlineEdit();
+                        }
+                      }}
+                      className="flex flex-col justify-between gap-4 h-full"
+                    >
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] text-[#64748B] uppercase">
+                            {getDisplaySuiteLabel(agent, selectedSuite)}
+                          </span>
+                          <span className="inline-flex items-center rounded-[5px] bg-[#FFFFFF] border border-[#E5E7EB] px-2 py-0.5 font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] text-[#163B66]">
+                            {agent.indexBadge}
+                          </span>
+                        </div>
 
-                  <p className="mt-2.5 text-[14.5px] font-normal leading-[1.6] text-[#334155]">
-                    {agent.description}
-                  </p>
-                </div>
+                        <div>
+                          <label className="block font-mono-tabular text-[11.5px] font-medium tracking-[0.04em] text-[#64748B] uppercase mb-1">
+                            Agent Title
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            value={draft.title}
+                            onChange={(e) =>
+                              setDraft((prev) => ({
+                                ...prev,
+                                title: e.target.value,
+                              }))
+                            }
+                            className="w-full h-[38px] rounded-[8px] border border-[#D1D5DB] bg-[#FFFFFF] px-3 text-[15px] font-semibold text-[#0F172A] focus:outline-none focus:border-[#163B66] focus:ring-2 focus:ring-[#163B66]/15"
+                          />
+                        </div>
 
-                <div className="pt-4 border-t border-[#E5E7EB] space-y-2 text-[14px] leading-[1.55] text-[#475569]">
-                  <div>
-                    <span className="font-semibold text-[#0F172A]">
-                      Signals:
-                    </span>{' '}
-                    {agent.signals}
-                  </div>
-                  <div>
-                    <span className="font-semibold text-[#0F172A]">
-                      Output:
-                    </span>{' '}
-                    {agent.output}
-                  </div>
-                </div>
-              </article>
-            ))}
+                        <div>
+                          <label className="block font-mono-tabular text-[11.5px] font-medium tracking-[0.04em] text-[#64748B] uppercase mb-1">
+                            Agent Description
+                          </label>
+                          <textarea
+                            rows={4}
+                            autoFocus
+                            value={draft.description}
+                            onChange={(e) =>
+                              setDraft((prev) => ({
+                                ...prev,
+                                description: e.target.value,
+                              }))
+                            }
+                            className="w-full rounded-[8px] border border-[#D1D5DB] bg-[#FFFFFF] p-3 text-[14.5px] font-normal leading-[1.55] text-[#334155] focus:outline-none focus:border-[#163B66] focus:ring-2 focus:ring-[#163B66]/15"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block font-mono-tabular text-[11.5px] font-medium tracking-[0.04em] text-[#64748B] uppercase mb-1">
+                            Signals
+                          </label>
+                          <input
+                            type="text"
+                            value={draft.signals}
+                            onChange={(e) =>
+                              setDraft((prev) => ({
+                                ...prev,
+                                signals: e.target.value,
+                              }))
+                            }
+                            className="w-full h-[36px] rounded-[8px] border border-[#D1D5DB] bg-[#FFFFFF] px-3 text-[14px] text-[#334155] focus:outline-none focus:border-[#163B66] focus:ring-2 focus:ring-[#163B66]/15"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block font-mono-tabular text-[11.5px] font-medium tracking-[0.04em] text-[#64748B] uppercase mb-1">
+                            Output
+                          </label>
+                          <input
+                            type="text"
+                            value={draft.output}
+                            onChange={(e) =>
+                              setDraft((prev) => ({
+                                ...prev,
+                                output: e.target.value,
+                              }))
+                            }
+                            className="w-full h-[36px] rounded-[8px] border border-[#D1D5DB] bg-[#FFFFFF] px-3 text-[14px] text-[#334155] focus:outline-none focus:border-[#163B66] focus:ring-2 focus:ring-[#163B66]/15"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="pt-3 border-t border-[#E5E7EB] flex items-center justify-end gap-2">
+                        <button
+                          type="button"
+                          onClick={cancelInlineEdit}
+                          className="rounded-[8px] border border-[#E5E7EB] bg-[#FFFFFF] hover:bg-[#F5F5F7] px-3 py-1.5 text-[14px] font-medium text-[#475569] hover:text-[#0F172A] transition-colors cursor-pointer"
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          type="submit"
+                          className="inline-flex items-center gap-1.5 rounded-[8px] bg-[#163B66] hover:bg-[#2E5A8A] px-3.5 py-1.5 text-[14px] font-medium text-[#FFFFFF] transition-colors cursor-pointer"
+                        >
+                          <Check className="w-4 h-4" />
+                          <span>Save Copy</span>
+                        </button>
+                      </div>
+                    </form>
+                  ) : (
+                    <>
+                      <div>
+                        {/* Suite Eyebrow + Edit Action + Index Tag */}
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] text-[#64748B] uppercase">
+                            {getDisplaySuiteLabel(agent, selectedSuite)}
+                          </span>
+
+                          <div className="flex items-center gap-1.5 shrink-0">
+                            {canEditAgents && wasRecentlySaved && (
+                              <span className="inline-flex items-center gap-1 rounded-[5px] bg-[#ECFDF5] border border-[#A7F3D0] px-2 py-0.5 font-mono-tabular text-[11.5px] font-medium text-[#166534]">
+                                <Check className="w-3 h-3" />
+                                <span>Saved</span>
+                              </span>
+                            )}
+
+                            {canEditAgents && onCommitAgentCard && (
+                              <button
+                                type="button"
+                                onClick={() => startInlineEdit(agent)}
+                                title={`Edit ${agent.title} copy`}
+                                className="inline-flex items-center gap-1 rounded-[5px] bg-[#F5F5F7] hover:bg-[#E8F0F8] border border-[#E5E7EB] hover:border-[#6699CC] px-2 py-0.5 font-mono-tabular text-[11.5px] font-medium tracking-[0.04em] text-[#475569] hover:text-[#163B66] transition-colors cursor-pointer"
+                              >
+                                <Pencil className="w-3 h-3" />
+                                <span>Edit</span>
+                              </button>
+                            )}
+
+                            <span className="inline-flex items-center rounded-[5px] bg-[#F5F5F7] border border-[#E5E7EB] px-2 py-0.5 font-mono-tabular text-[11.5px] font-medium tracking-[0.05em] text-[#163B66]">
+                              {agent.indexBadge}
+                            </span>
+                          </div>
+                        </div>
+
+                        <h3 className="mt-3 text-[17.5px] font-semibold leading-[1.3] tracking-[-0.01em] text-[#0F172A]">
+                          {agent.title}
+                        </h3>
+
+                        <p className="mt-2.5 text-[14.5px] font-normal leading-[1.6] text-[#334155]">
+                          {agent.description}
+                        </p>
+                      </div>
+
+                      <div className="pt-4 border-t border-[#E5E7EB] space-y-2 text-[14px] leading-[1.55] text-[#475569]">
+                        <div>
+                          <span className="font-semibold text-[#0F172A]">
+                            Signals:
+                          </span>{' '}
+                          {agent.signals}
+                        </div>
+                        <div>
+                          <span className="font-semibold text-[#0F172A]">
+                            Output:
+                          </span>{' '}
+                          {agent.output}
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </article>
+              );
+            })}
           </section>
         )}
       </div>

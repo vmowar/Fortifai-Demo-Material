@@ -1,12 +1,12 @@
 // Auto-synced by Fortifai Live CMS Studio inside Google AI Studio.
 // When downloading the ZIP for Git deployment, any edits saved in Live CMS are persisted here automatically.
-export const PERSISTED_CMS_UPDATED_AT = 3;
+export const PERSISTED_CMS_UPDATED_AT = 99;
 
 export const PERSISTED_CMS_DATA: Record<string, unknown> | null = {
   "gate": {
     "badgeLabel": "",
     "eyebrow": "",
-    "headline": "Access the Fortifai Platform Overview",
+    "headline": "Fortifai Platform Overview",
     "subcopy": "",
     "ndaHeaderLabel": "CONFIDENTIALITY & TERMS OF USE",
     "checkboxLabel": "I agree to the above terms.",
@@ -71,11 +71,11 @@ export const PERSISTED_CMS_DATA: Record<string, unknown> | null = {
     "signOutLabel": "Sign Out"
   },
   "walkthrough": {
-    "headline": "Autonomous Risk & Compliance — Platform Walkthrough",
-    "subtitle": "See Fortifai SARA detect leakages, verify controls, and generate audit-ready dossiers across 100% of live transactions.",
-    "durationBadge": "GUIDED PRODUCT TOUR · ~3 MIN",
-    "coverHeadline": "Continuous Risk & Margin Assurance — Live Cockpit Tour",
-    "coverPlayLabel": "Launch Executive Walkthrough",
+    "headline": "Guided platform walkthrough",
+    "subtitle": "",
+    "durationBadge": "",
+    "coverHeadline": "Live Demo",
+    "coverPlayLabel": "",
     "trupeerEmbedUrl": "https://app.trupeer.ai/embed/4NGm1PFPt",
     "maskCornerStamp": true,
     "openExternalLabel": "Open Walkthrough in New Window",
@@ -122,15 +122,15 @@ export const PERSISTED_CMS_DATA: Record<string, unknown> | null = {
         "sublabel": "Isolated deterministic math engine"
       }
     ],
-    "nextStepPrompt": "Ready to evaluate how SARA deploys read-only inside your private cloud?"
+    "nextStepPrompt": ""
   },
   "architecture": {
-    "pillLabel": "Fortifai SARA · Architecture & Sovereign Security",
-    "headline": "Four sovereign layers—engineered for deterministic truth.",
-    "subcopy": "Select or hover any plate in the 3D stack to inspect how data moves inside your Customer Private Cloud VPC or On-Premises environment with zero external egress.",
+    "pillLabel": "",
+    "headline": "Responsible AI enforced through a four-layered architecture ",
+    "subcopy": "Select or hover over any plate in the 3D stack to inspect how data moves inside your secure environment",
     "layer4Badge": "04 · Executive Cockpit & QuantumQuery",
     "layer4Title": "Layer 04 — Executive Cockpit & QuantumQuery",
-    "layer4Summary": "Consolidated boardroom risk & value waterfall, dollar-ranked action queue, and plain-English QuantumQuery copilot (SELECT-only validated queries, zero LLM math).",
+    "layer4Summary": "Consolidated boardroom risk & value waterfall",
     "layer4Highlights": [
       "Boardroom Risk & Verified Value Waterfall",
       "Dollar-Ranked Pre-Payment Action Queue",
@@ -138,7 +138,7 @@ export const PERSISTED_CMS_DATA: Record<string, unknown> | null = {
     ],
     "layer3Badge": "03 · Specialized Domain Agents",
     "layer3Title": "Layer 03 — Specialized Domain Agents",
-    "layer3Summary": "Five domain agent suites execute natively on the shared SARA spine—eliminating duplicate ERP integrations and siloed point tools.",
+    "layer3Summary": "Specialized agents, built by subject matter experts, run continuously on 100% of system data. They do all the work and line up decisions for your team.",
     "layer3Domains": [
       {
         "id": "procurement",
@@ -192,14 +192,177 @@ export const PERSISTED_CMS_DATA: Record<string, unknown> | null = {
       "0% Data Egress · 0% Customer LLM Training"
     ]
   },
+  "agents": [
+    {
+      "indexBadge": "01",
+      "suite": "PROCUREMENT",
+      "suiteLabel": "Procurement & Supply Chain",
+      "title": "Procurement Cost Leakage",
+      "description": "Monitors 100% of supplier invoices against master contracts, payment terms, commodity indices, and volume-rebate tiers to stop overpayments before disbursement.",
+      "signals": "Signed Contracts · PO & Invoice Line Items · Commodity Indices · Payment Terms",
+      "output": "Pre-payment hold & quantified overcharge recovery pack"
+    },
+    {
+      "indexBadge": "02",
+      "suite": "PROCUREMENT",
+      "suiteLabel": "Procurement & Supply Chain",
+      "title": "Pass-Through Vendor",
+      "description": "Exposes zero-substance intermediaries and trading shells inserting unearned 20–40% markups between your plants and Tier-2 OEM manufacturers.",
+      "signals": "Cross-Plant PO Pricing · Fortifai D7 Substance & Headcount · Tax/HSN Scope",
+      "output": "OEM disintermediation & direct-sourcing savings dossier"
+    },
+    {
+      "indexBadge": "03",
+      "suite": "PROCUREMENT",
+      "suites": [
+        "PROCUREMENT",
+        "COMPLIANCE"
+      ],
+      "suiteLabel": "Procurement · Compliance & Legal",
+      "title": "Third-Party Due Diligence",
+      "description": "Autonomous pure-play external counterparty vetting powered by Fortifai D7 across 11 risk dimensions—delivering a scored onboarding verdict in hours without ERP integration.",
+      "signals": "Global UBO Registries · Sanctions & PEP · Financial Health · Litigation & Adverse Media · ESG",
+      "output": "11-dimension counterparty risk score & onboarding verdict"
+    },
+    {
+      "indexBadge": "04",
+      "suite": "PROCUREMENT",
+      "suites": [
+        "PROCUREMENT",
+        "COMPLIANCE"
+      ],
+      "suiteLabel": "Procurement · Compliance & Legal",
+      "title": "Vendor Risk Monitoring",
+      "description": "Continuous post-onboarding vendor surveillance that triangulates Fortifai D7 external ownership shifts with live ERP spend behavior and employee master records.",
+      "signals": "Fortifai D7 Risk Graph · ERP Vendor Master & Payments · HR/Employee Records",
+      "output": "Undisclosed related-party, employee-conflict & vendor drift alert"
+    },
+    {
+      "indexBadge": "05",
+      "suite": "PROCUREMENT",
+      "suiteLabel": "Procurement & Supply Chain",
+      "title": "Freight & Inventory",
+      "description": "Reconciles weighbridge logs, goods receipts, stock movements, and carrier rate cards to catch phantom deliveries, shrinkage, and duplicate freight billing.",
+      "signals": "Goods Receipts · Weighbridge Logs · Carrier Invoices · Inventory Movements",
+      "output": "Verified logistics recovery & inventory discrepancy report"
+    },
+    {
+      "indexBadge": "06",
+      "suite": "PROCUREMENT",
+      "suiteLabel": "Procurement & Supply Chain",
+      "title": "Tender & Bid Risk",
+      "description": "Screens pre-award RFQs, vendor quotes, and split requisitions to detect bid rotation, specification tailoring, and approval-threshold bypasses before PO award.",
+      "signals": "RFQ Bid Submissions · Purchase Requisitions · Bidder Metadata · Price Spreads",
+      "output": "Pre-award bid integrity & split-order intervention alert"
+    },
+    {
+      "indexBadge": "07",
+      "suite": "PROCUREMENT",
+      "suiteLabel": "Procurement & Supply Chain",
+      "title": "Procurement Controls",
+      "description": "Continuously audits three-way match tolerances, retroactive POs, maverick spend, and segregation-of-duties breaches across every procure-to-pay step.",
+      "signals": "PO-to-GRN-to-Invoice Chains · Tolerance Tables · User Access & Approval Logs",
+      "output": "Real-time P2P control breach & configuration fix pack"
+    },
+    {
+      "indexBadge": "08",
+      "suite": "REVENUE",
+      "suiteLabel": "Revenue & O2C",
+      "title": "Discount & Rebate Abuse",
+      "description": "Tracks manual price overrides, off-policy sales discounts, and unapproved customer rebates eroding gross-to-net margin across regions and reps.",
+      "signals": "Sales Orders · Pricing Condition Overrides · Rebate Accruals · Customer Master",
+      "output": "Gross-to-net margin leakage & pricing governance dossier"
+    },
+    {
+      "indexBadge": "09",
+      "suite": "REVENUE",
+      "suiteLabel": "Revenue & O2C",
+      "title": "Revenue Cut-Off",
+      "description": "Detects quarter-end channel stuffing, unverified proof-of-delivery billings, and post-period credit-memo washes under ASC 606.",
+      "signals": "Period-End Shipments · Proof-of-Delivery Logs · Post-Close Credit Memos & Returns",
+      "output": "ASC 606 cut-off exception & revenue assurance pack"
+    },
+    {
+      "indexBadge": "10",
+      "suite": "REVENUE",
+      "suiteLabel": "Revenue & O2C",
+      "title": "Channel Stuffing Risk",
+      "description": "Isolates artificial quarter-end order spikes, non-binding bookings, and manual allocation overrides that distort S&OP demand baselines.",
+      "signals": "Order Backlog · Modification Logs · Historical Sell-Through · Credit Overrides",
+      "output": "Sanitized true-demand baseline & order-integrity alert"
+    },
+    {
+      "indexBadge": "11",
+      "suite": "FINANCE",
+      "suiteLabel": "Finance & Working Capital",
+      "title": "Working Capital",
+      "description": "Intercepts fuzzy-matched duplicate invoices, early payments ahead of contracted terms, and unapplied vendor credits prior to the payment run.",
+      "signals": "Open AP Subledger · Payment Proposals · Contracted Terms · Vendor Credit Memos",
+      "output": "Pre-payment block queue & DPO cash-release schedule"
+    },
+    {
+      "indexBadge": "12",
+      "suite": "FINANCE",
+      "suiteLabel": "Finance & Working Capital",
+      "title": "Balance Sheet Close",
+      "description": "Auto-triages routine GL account reconciliations while isolating unsubstantiated accruals, aged GR/IR balances, and high-risk top-side manual journal entries.",
+      "signals": "General Ledger Postings · Top-Side Manual JEs · Subledger Tie-Outs · GR/IR Aging",
+      "output": "Auto-cleared reconciliation pack & close anomaly workpaper"
+    },
+    {
+      "indexBadge": "13",
+      "suite": "COMPLIANCE",
+      "suiteLabel": "Compliance & Legal",
+      "title": "Anti-Bribery & Corruption Risk",
+      "description": "Continuously tests 100% of third-party payments, offshore consulting retainers, and employee T&E claims against FCPA, UKBA, and ISO 37001 indicators.",
+      "signals": "Non-PO Disbursements · T&E & Attendee Logs · High-CPI Conduits · Government Tenders",
+      "output": "Privileged legal review signal (\"Signals, Not Verdicts\")"
+    },
+    {
+      "indexBadge": "14",
+      "suite": "COMPLIANCE",
+      "suiteLabel": "Compliance & Legal",
+      "title": "Trade Diversion Risk",
+      "description": "Monitors controlled shipments after initial trade-compliance clearance to catch mid-flight destination flips, transshipment hubs, and front-company masking.",
+      "signals": "Controlled Orders (ECCN) · Post-Clearance Route Edits · Freight Forwarders · Fortifai D7 Screening",
+      "output": "Pre-shipment export hold & BIS/OFAC/EAR evidence file"
+    },
+    {
+      "indexBadge": "15",
+      "suite": "COMPLIANCE",
+      "suiteLabel": "Compliance & Legal",
+      "title": "Forensic Case Investigations",
+      "description": "Clusters multi-rule anomalies and whistleblower tips across ERP chains and entity graphs into court- and regulator-defensible investigation files.",
+      "signals": "Cross-Rule Convergence · Whistleblower Intake · Bank/Address Links · Audit Logs",
+      "output": "Cryptographically sealed forensic investigation dossier"
+    },
+    {
+      "indexBadge": "16",
+      "suite": "AUDIT",
+      "suiteLabel": "Internal Audit",
+      "title": "Continuous Audit & Control",
+      "description": "Replaces 25-row quarterly sampling with continuous 100% population SOX and ICFR control testing mapped to COSO 2013 and PCAOB AS 1105 completeness checks.",
+      "signals": "Full ERP Transaction Population · User Roles & SoD Matrix · System Change Logs",
+      "output": "100% population ICFR workpaper & Audit Committee pack"
+    },
+    {
+      "indexBadge": "17",
+      "suite": "AUDIT",
+      "suiteLabel": "Internal Audit",
+      "title": "Document Forensics",
+      "description": "Screens incoming supplier PDFs, bank-change letters, and supporting vouchers prior to posting for digital tampering, cloned templates, and altered metadata.",
+      "signals": "Invoice & Bank Letter PDFs · Pixel & Font Metadata · Cross-Vendor Document Hashes",
+      "output": "Pre-posting forged document quarantine alert"
+    }
+  ],
   "roi": {
-    "pillLabel": "CFO Business Case · USD ($) Deterministic Value Model",
-    "headline": "Verified Enterprise Impact & USD ROI Simulator",
-    "subtitle": "Model deduplicated annual P&L savings separately from one-time Working Capital cash release across your enterprise transaction volume in USD ($).",
+    "pillLabel": "",
+    "headline": "Potential Financial Impact & ROI Simulator",
+    "subtitle": "",
     "evidenceCards": [
       {
         "metric": "$24.4M",
-        "label": "Verified exposure surfaced in weeks at a $1.5B enterprise"
+        "label": "Verified exposure surfaced  at a $1.5B enterprise"
       },
       {
         "metric": "$146M",
@@ -216,9 +379,9 @@ export const PERSISTED_CMS_DATA: Record<string, unknown> | null = {
     ]
   },
   "faq": {
-    "pillLabel": "EXECUTIVE DUE DILIGENCE · BUYER COMMITTEE FAQ",
-    "headline": "Answers for Finance, Audit, Legal, IT & Procurement",
-    "subtitle": "Direct answers covering SME reliability, customization, engagement models, Private Cloud security, and financial accuracy.",
+    "pillLabel": "",
+    "headline": "FAQ's",
+    "subtitle": "",
     "items": [
       {
         "id": "faq-01-sme-pedigree",
@@ -354,9 +517,9 @@ export const PERSISTED_CMS_DATA: Record<string, unknown> | null = {
       "code": "03",
       "label": "03 · Active Agent Suite",
       "shortSubtitle": "Specialized Agent Catalogue",
-      "utilityEyebrow": "FORTIFAI SARA · SPECIALIZED AGENT CATALOGUE",
+      "utilityEyebrow": "",
       "utilityTitle": "Active Domain Agent Suite",
-      "utilitySubtitle": "Specialized domain agents executing natively inside your private cloud on Fortifai SARA—combining deterministic verification, Fortifai D7 external corroboration, and plain-English audit dossiers.",
+      "utilitySubtitle": "",
       "embedSrc": ""
     },
     {

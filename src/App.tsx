@@ -28,6 +28,7 @@ import {
   saveCmsConfigInstant,
   saveCmsConfigLocal,
 } from './config/briefingConfig';
+import { CanonicalAgent } from './data/canonicalAgents';
 import { isFortifaiEmail, logPortalEvent } from './lib/supabase';
 
 // Lazily loaded ONLY when __AISTUDIO_CMS_ENABLED__ is true (inside Google AI Studio).
@@ -323,6 +324,26 @@ export default function App() {
     }, 650);
   };
 
+  const handleCommitAgentCard = async (
+    indexBadge: string,
+    patch: Partial<CanonicalAgent>
+  ) => {
+    if (!cmsAllowed) return;
+    const current = latestConfigRef.current;
+    const updated: BriefingCmsConfig = {
+      ...current,
+      agents: current.agents.map((agent) =>
+        agent.indexBadge === indexBadge ? { ...agent, ...patch } : agent
+      ),
+    };
+    latestConfigRef.current = updated;
+    setCmsConfig(updated);
+    setHasCustomEdits(true);
+    isDirtyRef.current = true;
+    setIsCmsDirty(true);
+    await handleSaveCmsNow();
+  };
+
   const handleResetCmsDefaults = () => {
     if (!cmsAllowed) return;
     if (syncTimerRef.current !== null) {
@@ -464,7 +485,16 @@ export default function App() {
             )}
 
             {activeTab === 'agents' && (
-              <ActiveAgentSuiteTab tab={agentsTabConfig} />
+              <ActiveAgentSuiteTab
+                tab={agentsTabConfig}
+                agents={cmsConfig.agents}
+                canEditAgents={cmsAllowed}
+                onCommitAgentCard={handleCommitAgentCard}
+                onOpenCmsAgents={() => {
+                  setActiveTab('agents');
+                  setIsCmsOpen(true);
+                }}
+              />
             )}
 
             {activeTab === 'roi' && (
