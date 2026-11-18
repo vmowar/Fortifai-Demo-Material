@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>fortifai · Enterprise AI Agent Suite (15 Specialized Agents)</title>
+<title>fortifai · Enterprise AI Agent Suite</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -12,25 +12,19 @@
 :root {
   --navy: #0D1520;
   --navy-mid: #111F36;
-  --navy-card: #162844;
   --deep: #2E5A8A;
   --brand: #6699CC;
   --teal: #0F766E;
   --teal-bg: #F0FDFA;
-  --olive: #657423;
-  --olive-bg: #F5F7DC;
   --amber: #B45309;
   --amber-bg: #FFFBEB;
   --purple: #4338CA;
   --purple-bg: #EEF2FF;
-  --crit: #C62828;
-  --crit-bg: #FDECEC;
   --charcoal: #1E293B;
   --dg: #334155;
   --mg: #64748B;
-  --lg: #94A3B8;
   --border: #E2E8F0;
-  --bg: #F2F4F7;
+  --bg: #F5F5F7;
   --white: #FFFFFF;
 }
 
@@ -56,63 +50,37 @@ body {
 .hero {
   background: linear-gradient(135deg, #0D1520 0%, #112240 60%, #1B365D 100%);
   color: #FFFFFF;
-  padding: 28px 32px 26px;
+  padding: 26px 32px;
   border-bottom: 1px solid rgba(102, 153, 204, 0.25);
 }
 .hero-inner {
   max-width: 1380px;
   margin: 0 auto;
 }
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: 'DM Mono', monospace;
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #93C5FD;
-  background: rgba(46, 90, 138, 0.35);
-  border: 1px solid rgba(102, 153, 204, 0.35);
-  padding: 4px 11px;
-  border-radius: 4px;
-  margin-bottom: 10px;
-}
 .hero-grid {
   display: grid;
   grid-template-columns: 1.55fr 1fr;
   gap: 32px;
-  align-items: end;
+  align-items: center;
 }
 .hero h1 {
   font-size: 26px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: -0.02em;
   line-height: 1.2;
   margin-bottom: 8px;
 }
 .hero p {
-  font-size: 13px;
+  font-size: 13.5px;
   color: rgba(255, 255, 255, 0.82);
-  line-height: 1.55;
-  max-width: 780px;
+  line-height: 1.5;
+  max-width: 680px;
 }
 .spine-banner {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 8px;
-  padding: 13px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.spine-title {
-  font-family: 'DM Mono', monospace;
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #93C5FD;
+  padding: 14px 16px;
 }
 .spine-metrics {
   display: grid;
@@ -121,7 +89,7 @@ body {
 }
 .sm-item {
   border-left: 2px solid var(--brand);
-  padding-left: 9px;
+  padding-left: 10px;
 }
 .sm-val {
   font-family: 'DM Mono', monospace;
@@ -130,33 +98,26 @@ body {
   color: #FFFFFF;
 }
 .sm-lbl {
-  font-size: 10px;
-  color: rgba(255, 255, 255, 0.68);
+  font-size: 10.5px;
+  color: rgba(255, 255, 255, 0.72);
+  margin-top: 2px;
 }
 
 /* Main Container */
 .container {
   max-width: 1380px;
   margin: 0 auto;
-  padding: 20px 32px 48px;
+  padding: 22px 32px 48px;
 }
 
 /* Suite Architecture Drawers */
 .arch-bar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  justify-content: flex-end;
+  gap: 10px;
   margin-bottom: 14px;
   flex-wrap: wrap;
-}
-.sec-lbl {
-  font-family: 'DM Mono', monospace;
-  font-size: 10.5px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--mg);
 }
 .arch-toggles {
   display: flex;
@@ -196,13 +157,13 @@ body {
   display: block;
 }
 .drawer-title {
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 600;
   color: var(--navy-mid);
   margin-bottom: 4px;
 }
 .drawer-sub {
-  font-size: 11.5px;
+  font-size: 12px;
   color: var(--mg);
   margin-bottom: 14px;
 }
@@ -218,13 +179,6 @@ body {
   border-radius: 6px;
   padding: 12px 13px;
 }
-.il-route {
-  font-family: 'DM Mono', monospace;
-  font-size: 10.5px;
-  font-weight: 500;
-  color: var(--deep);
-  margin-bottom: 5px;
-}
 .il-title {
   font-size: 12px;
   font-weight: 600;
@@ -232,9 +186,9 @@ body {
   margin-bottom: 4px;
 }
 .il-desc {
-  font-size: 11px;
+  font-size: 11.5px;
   color: var(--dg);
-  line-height: 1.5;
+  line-height: 1.48;
 }
 
 /* Suite Pillar Count Cards */
@@ -267,7 +221,7 @@ body {
 }
 .cc-num {
   font-family: 'DM Mono', monospace;
-  font-size: 24px;
+  font-size: 23px;
   font-weight: 500;
   line-height: 1;
 }
@@ -280,7 +234,7 @@ body {
   border-radius: 4px;
 }
 .cc-lbl {
-  font-size: 11.5px;
+  font-size: 12px;
   font-weight: 600;
   margin-top: 6px;
 }
@@ -362,7 +316,7 @@ body {
   border-radius: 6px;
   background: var(--white);
   color: var(--charcoal);
-  width: 230px;
+  width: 220px;
   outline: none;
   user-select: text;
   -webkit-user-select: text;
@@ -374,7 +328,7 @@ body {
 /* Agent Grid */
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(390px, 1fr));
   gap: 14px;
 }
 .product-card {
@@ -395,18 +349,6 @@ body {
 }
 
 /* Badges */
-.labels-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-.badge-group {
-  display: flex;
-  gap: 5px;
-  flex-wrap: wrap;
-}
 .fl {
   display: inline-block;
   font-family: 'DM Mono', monospace;
@@ -414,8 +356,7 @@ body {
   font-weight: 500;
   padding: 2.5px 7px;
   border-radius: 4px;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
 }
 .fl-proc { background: #E8F0F8; color: #1E3A5F; }
 .fl-fin { background: var(--purple-bg); color: var(--purple); }
@@ -426,27 +367,21 @@ body {
   background: #F1F5F9;
   color: #475569;
   border: 1px solid #CBD5E1;
-  text-transform: none;
-}
-.persona-tag {
-  font-family: 'DM Mono', monospace;
-  font-size: 9.5px;
-  color: var(--mg);
 }
 
 /* Card Typography */
 .card-head {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 8px;
 }
 .card-name {
   font-family: 'DM Sans', sans-serif;
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 600;
   color: var(--navy-mid);
-  line-height: 1.15;
+  line-height: 1.2;
 }
 .card-id-prefix {
   font-family: 'DM Mono', monospace;
@@ -455,87 +390,25 @@ body {
   background: #E8F0F8;
   padding: 2px 7px;
   border-radius: 4px;
-}
-.card-obj {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--deep);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  margin-top: 3px;
+  white-space: nowrap;
 }
 .card-tag {
-  font-size: 12.5px;
-  font-weight: 500;
-  color: var(--charcoal);
-  line-height: 1.45;
-}
-
-/* Permit Boundary Box */
-.boundary-strip {
-  background: #F0F7FF;
-  border-left: 3px solid var(--deep);
-  border-radius: 4px;
-  padding: 7px 10px;
-  font-size: 11px;
-  color: #1E3A5F;
-  line-height: 1.45;
-}
-.boundary-lbl {
-  font-family: 'DM Mono', monospace;
-  font-size: 9.5px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--deep);
-  display: block;
-  margin-bottom: 2px;
-}
-
-/* Actionable Artifact Strip */
-.artifact-strip {
-  background: #F8FAFC;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 7px 10px;
-  font-size: 11px;
+  font-size: 13px;
+  font-weight: 400;
   color: var(--dg);
-  display: flex;
-  align-items: baseline;
-  gap: 6px;
-}
-.artifact-lbl {
-  font-family: 'DM Mono', monospace;
-  font-size: 9.5px;
-  font-weight: 500;
-  text-transform: uppercase;
-  color: var(--navy-mid);
-  white-space: nowrap;
+  line-height: 1.5;
 }
 
 .card-div {
   height: 1px;
   background: var(--border);
 }
-.card-desc {
-  font-size: 11.5px;
-  color: var(--dg);
-  line-height: 1.62;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-}
-.card-desc.open {
-  display: block;
-}
 
 /* Expanded Sections */
 .card-extra {
   display: none;
   flex-direction: column;
-  gap: 9px;
-  margin-top: 2px;
+  gap: 8px;
 }
 .card-extra.open {
   display: flex;
@@ -546,15 +419,14 @@ body {
 }
 .xs-lbl {
   font-family: 'DM Mono', monospace;
-  font-size: 9.5px;
+  font-size: 10px;
   font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   margin-bottom: 5px;
 }
 .xs-body {
   font-size: 11.5px;
-  line-height: 1.58;
+  line-height: 1.5;
   color: var(--dg);
 }
 .xs-ben {
@@ -579,8 +451,8 @@ body {
 .feat-list li, .ben-list li {
   font-size: 11.5px;
   color: var(--dg);
-  line-height: 1.52;
-  margin-bottom: 3.5px;
+  line-height: 1.48;
+  margin-bottom: 3px;
 }
 
 .card-foot {
@@ -588,8 +460,7 @@ body {
   align-items: center;
   justify-content: space-between;
   margin-top: auto;
-  padding-top: 4px;
-  gap: 8px;
+  padding-top: 2px;
 }
 .xbtn {
   font-size: 11.5px;
@@ -600,16 +471,9 @@ body {
   cursor: pointer;
   padding: 0;
   font-family: inherit;
-  white-space: nowrap;
 }
 .xbtn:hover {
   text-decoration: underline;
-}
-.sap-lineage {
-  font-family: 'DM Mono', monospace;
-  font-size: 9.5px;
-  color: var(--mg);
-  text-align: right;
 }
 
 /* Executive Matrix View Table */
@@ -629,8 +493,7 @@ body {
   font-family: 'DM Mono', monospace;
   font-size: 10px;
   font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   color: var(--mg);
   text-align: left;
   padding: 11px 14px;
@@ -641,7 +504,7 @@ body {
   border-bottom: 1px solid var(--border);
   vertical-align: top;
   color: var(--dg);
-  line-height: 1.48;
+  line-height: 1.45;
 }
 .matrix-tbl tr:hover td {
   background: #FAFBFD;
@@ -675,22 +538,20 @@ body {
 <!-- Executive Hero Section -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="eyebrow">FORTIFAI ENTERPRISE ARCHITECTURE · 15 SPECIALIZED AI AGENTS</div>
     <div class="hero-grid">
       <div>
         <h1>Fortifai Enterprise AI Agent Suite</h1>
-        <p>A unified system of 15 specialized AI agents operating on a single, zero-egress ERP integration inside your private cloud or on-premises boundary—delivering continuous margin recovery, working capital optimization, and audit-grade regulatory assurance across 100% of transactions.</p>
+        <p>18 specialized AI agents operating on a single, zero-egress ERP integration inside your private cloud—delivering continuous margin recovery, working capital optimization, and audit-grade compliance across 100% of transactions.</p>
       </div>
       <div class="spine-banner">
-        <div class="spine-title">Unified Platform Architecture</div>
         <div class="spine-metrics">
           <div class="sm-item">
-            <div class="sm-val">16 Agents</div>
+            <div class="sm-val">18 Agents</div>
             <div class="sm-lbl">Zero Functional Overlap</div>
           </div>
           <div class="sm-item">
             <div class="sm-val">100% Txns</div>
-            <div class="sm-lbl">Continuous Full-Population</div>
+            <div class="sm-lbl">Full-Population Coverage</div>
           </div>
           <div class="sm-item">
             <div class="sm-val">Zero Egress</div>
@@ -713,42 +574,19 @@ body {
     }
   });
 
-  // Standard Platform Capabilities inherited by every Fortifai Agent
+  // Concise Platform Guardrails
   var SF = [
-    "Stage 0 Commercial Conditioning & IPE Data Gate: Reconciles subledgers to the General Ledger and normalizes units of measure, payment terms, Incoterms, and currencies before rules execute",
-    "Consume, Do Not Reproduce: Treats existing ERP controls, trade screening tools, and 3-way match tolerances as permit boundaries—surfacing only post-clearance and commercial risks they do not test",
-    "100% Deterministic Financial Math + Behavioral Pattern AI: Combines forensic accounting rules with non-parametric statistical and network-graph models—with zero LLM calculation guesswork",
-    "4-Rung Economic Precedence Waterfall: Deduplicates overlapping findings at the transaction line-item level so two agents never double-count the same dollar of savings or exposure",
-    "Objective Signals, Not Legal Verdicts: Uses non-conclusive evidentiary framing mapped to COSO 2013 internal control principles and Fraud Triangle indicators to protect legal privilege",
-    "Strict Maker-Checker Segregation of Duties (SoD): Enforces two-person review integrity (Escalating Analyst != Confirming Reviewer) with cryptographic case locking",
-    "Conversational AI Copilot (QuantumQuery): Read-only, AST-validated natural-language querying across governed findings with full ERP document traceability",
-    "Self-Learning Exception Memory with Drift Tripwires: Suppresses recurring false positives while automatically re-opening entities if banking, ownership, or commodity scopes change"
+    "Reconciles subledgers to the General Ledger and normalizes units, payment terms, and currencies before rules run",
+    "Builds on existing ERP and screening controls—surfacing post-clearance and commercial risks they do not test",
+    "100% deterministic financial math paired with behavioral pattern AI—zero LLM calculation guesswork",
+    "4-Rung Economic Precedence Waterfall deduplicates overlapping findings so two agents never double-count savings",
+    "Objective evidentiary framing mapped to COSO 2013 and two-person Maker-Checker approval with sealed audit logs",
+    "QuantumQuery copilot for read-only natural-language Q&A plus self-learning false-positive memory"
   ];
 
-  // Consolidated 15-Agent Enterprise Portfolio (Customer & Partner Facing)
+  // Consolidated 18-Agent Enterprise Portfolio (No Eyebrows, Plain-English Copy)
   var PRODUCTS = [
-    
-    {
-      id: "custos",
-      prefix: "Third-Party Risk",
-      name: "Custos",
-      absorbs: "Continuous Counterparty Monitoring & ERP Exposure Triangulation",
-      suite: ["audit", "proc"],
-      persona: "CCO · CPO · General Counsel",
-      lineage: "SAP LFA1 / KNA1 · EKKO / RBKP · VBAK / VBRK · BSEG Special GL · D7 Spine",
-      objective: "Continuous Third-Party Risk Monitoring & Live ERP Exposure Triangulation",
-      tagline: "Monitor every onboarded supplier, JV, and customer continuously across sanctions, UBO shifts, and live ERP transactions.",
-      boundary: "Point-in-time onboarding checks expire after approval; Custos continuously re-rates counterparties and triangulates Medium/High/Severe risk against live SAP Purchases, Sales, Advances, and Loans.",
-      artifact: "ERP Exposure Triangulation Matrix · In-Flight F110 Hold Queue · Embedded D7 Dossiers",
-      desc: "Continuously tracks 100% of your active third-party book and triangulates Medium, High, and Severe entities against SAP P2P purchases, O2C sales, vendor advances, and inter-corporate loans.",
-      us: "DOJ ECCP Continuous Monitoring · FCPA / UKBA / Sapin II SOE & KMP Attribution · OFAC 50% Rule & FATF UBO Traceability · Read-only SELECT ingestion (Consume, Do Not Reproduce)",
-      benefits: [
-        "Continuously monitors 100% of active suppliers, JVs, LLCs, and customers with automated hard-gate overrides and floor rules",
-        "Triangulates Medium, High, and Severe counterparties against live ERP Purchases, Sales, Advances, and Loans/ICDs",
-        "Flags dual-role counterparties (Vendor + Customer), state-owned/sanctioned UBO chains, and pre-payout F110 holds"
-      ]
-    },
-// ── 0. EXECUTIVE CONTROL TOWER SPINE (1) ──────────────────
+    // ── 0. EXECUTIVE CONTROL TOWER SPINE (1) ──────────────────
     {
       id: "sara-apex",
       prefix: "Control Tower",
@@ -756,19 +594,16 @@ body {
       absorbs: "Apex Value Engine & QuantumQuery Copilot",
       suite: ["tower"],
       persona: "CEO · CFO · CPO · CAE",
-      lineage: "General Ledger · Subledgers · Cross-Agent Insights Store",
-      objective: "Enterprise Risk & Financial Value Synthesis",
-      tagline: "Every agent finding monetized. Every cross-functional risk prioritized in one executive cockpit.",
-      boundary: "Individual ERP modules report local subledger exceptions; SARA synthesizes cross-functional financial exposure and enforces platform-wide savings deduplication.",
-      artifact: "Prioritized Pre-Payment Hold Queue · 30/60/90-Day EBITDA Waterfall · IPE Data Reliability Scorecard",
-      desc: "SARA Control Tower (powered by the Apex value engine) is the cross-functional executive spine that unifies findings across all active Fortifai domain agents. It runs continuous Procure-to-Pay and Order-to-Cash Data Reliability Audits (benchmarking primary-key integrity, 3-way match linkage, and master-data hygiene across core ERP domains) and converts every platform detection into four mutually exclusive monetized buckets: Cost Savings (unpaid procurement efficiency leakage), Risk Prevention (stoppable pre-disbursement payment queue), Financial Recovery (post-payment debit-note set-offs against open payables), and Regulatory Exposure (FCPA, SOX, and export-control posture).",
-      us: "Directly supports CFO/CEO obligations to quantify and report material financial risks and internal control weaknesses under SEC Regulation S-K Items 303 and 305 (MD&A) and SOX Sections 302, 404, and 13(b). Provides PCAOB AS 1105 Information Produced by the Entity (IPE) subledger-to-GL completeness reconciliation.",
+      lineage: "General Ledger · Subledgers · Cross-Agent Insights",
+      tagline: "Unifies every agent finding into one boardroom cockpit—ranking stoppable cash leakage and EBITDA recovery by dollar exposure.",
+      boundary: " syntheses cross-functional financial exposure across ERP domains and enforces platform-wide savings deduplication.",
+      artifact: "Prioritized Pre-Payment Hold Queue · 30/60/90-Day EBITDA Waterfall · Data Reliability Scorecard",
+      us: "Supports SEC MD&A risk reporting, SOX 302/404 internal control assertions, and PCAOB AS 1105 completeness verification.",
       benefits: [
-        "Consolidates all domain agents into a single executive view of stoppable cash leakage and net hard EBITDA recovery",
-        "Prioritizes the pre-disbursement Risk Prevention payment queue by dollar exposure before automated ERP payment runs execute",
-        "Audits underlying ERP data reliability across core transaction and master domains (tracking completeness, linkage, and hygiene)",
-        "Tracks Financial Recovery aging from detection to debit-memo set-off with responsible owner SLA accountability",
-        "Includes enterprise-wide QuantumQuery conversational AI for instant, read-only executive Q&A over governed findings"
+        "Consolidates all domain agents into one view of stoppable cash leakage and net hard EBITDA recovery",
+        "Prioritizes pre-disbursement payment holds by dollar exposure before payment runs execute",
+        "Continuously audits underlying ERP data completeness, linkage, and master-data hygiene",
+        "Includes QuantumQuery for instant, read-only natural-language Q&A across all governed findings"
       ]
     },
 
@@ -777,22 +612,19 @@ body {
       id: "kuber",
       prefix: "Procurement ROI",
       name: "Kuber",
-      absorbs: "Variance (COGS PPV) & Surplus (Excess PO Intercept)",
+      absorbs: "Price Variance & Surplus Stock Intercept",
       suite: ["proc", "fin"],
       persona: "CPO · CFO · Sourcing CoE",
-      lineage: "Purchase Orders · Invoices · Inventory Valuation · Commodity Indices",
-      objective: "Procurement Cost, Margin & Demand Optimization",
-      tagline: "Turn hidden price variance, commodity index lags, tail fragmentation, and redundant ordering into hard EBITDA.",
-      boundary: "ERP 3-Way Match verifies PO-to-Invoice arithmetic within tolerance; Kuber detects commercial overpayment against commodity indices, credit terms, sister-plant rates, and existing stock.",
+      lineage: "Purchase Orders · Invoices · Inventory · Commodity Indices",
+      tagline: "Turns hidden price variance, commodity index lags, tail fragmentation, and redundant ordering into hard EBITDA.",
+      boundary: "Goes beyond standard 3-way match tolerances to catch commercial overpayment against commodity indices, credit terms, and sister-plant stock.",
       artifact: "Pre-Drafted Debit Memos · Supplier Renegotiation Briefs · Inter-Plant Stock Transfer Queue",
-      desc: "Kuber is Fortifai's flagship procurement cost and margin intelligence agent—incorporating the Variance (buy-side purchase price variance) and Surplus (excess procurement intercept) engines. Stage 0 normalizes every PO and invoice into a Terms-Adjusted Effective Price, stripping out credit-term carry, Incoterm freight, and unit-of-measure conversions while suppressing operational noise. Kuber executes a 4-Rung Economic Precedence Waterfall across 14 Opportunity Packets: Rung 1 catches invoice-to-PO overbilling and unplanned delivery costs; Rung 2 catches contract non-utilization and sister-plant rate arbitrage; Rung 3 catches 'Rocket-and-Feather' commodity index lags (LME/ICIS); and Rung 4 consolidates fragmented tail spend, converts synthetic sole-source awards, and intercepts open POs where surplus stock already sits in sister plants.",
-      us: "Supports management assertions on Cost of Goods Sold (COGS) accuracy and inventory valuation under ASC 330 and ASC 420. Addresses SEC MD&A margin disclosure scrutiny and DOJ Truth in Negotiations Act (TINA) / FAR Part 45 cost-pricing integrity.",
+      us: "Supports COGS accuracy and inventory valuation under ASC 330 and SEC MD&A margin governance.",
       benefits: [
         "Delivers 3.5% to 5.0% addressable spend opportunity (typically 2% to 3% net hard EBITDA impact)",
-        "Eliminates buyer pushback via apples-to-apples Terms-Adjusted Effective Price and plant-landed commodity index bridges",
-        "Checks open unpaid AP balances automatically and pre-drafts vendor debit memos for immediate set-off recovery",
-        "Intercepts redundant purchase orders prior to vendor dispatch where unrestricted stock is available via inter-plant transfer",
-        "Provides a live 0–100 Procurement Health Score across Price, Consolidation, Contract Coverage, and Process Discipline"
+        "Normalizes credit terms, freight, and units into an apples-to-apples effective price",
+        "Checks open unpaid supplier balances and pre-drafts debit memos for immediate set-off recovery",
+        "Intercepts redundant purchase orders where surplus stock already sits in sister plants"
       ]
     },
     {
@@ -802,41 +634,35 @@ body {
       absorbs: "Pass-Through & Channel Arbitrage Engine",
       suite: ["proc", "audit"],
       persona: "CPO · General Counsel · CCO",
-      lineage: "Vendor Master · PO & Invoice History · D7 Statutory Registry",
-      objective: "Pass-Through Vendor & Trader Interposition",
-      tagline: "Unmask zero-substance middlemen and capture the direct-to-OEM margin spread.",
-      boundary: "Vendor Onboarding & D7 verify that a counterparty legally exists; Conduit detects whether an approved vendor behaves like a zero-substance pass-through intermediary.",
+      lineage: "Vendor Master · PO & Invoice History · D7 Registry",
+      tagline: "Unmasks zero-substance middlemen and captures the direct-to-manufacturer margin spread.",
+      boundary: "Goes beyond legal entity onboarding to detect approved vendors acting as zero-substance pass-through traders.",
       artifact: "Audited Re-Pricing Quantum · 5-Stage Convergence Shortlist · Direct-to-OEM Pairing Brief",
-      desc: "Conduit detects vendor pass-through and commercial interposition where zero-substance traders or shell intermediaries sit between the enterprise and genuine Tier-1 manufacturers. Using a two-axis model that combines internal ERP behavior with external D7 statutory screening, Conduit correlates Zero Inventory Dwell (rapid turnaround between goods receipt and invoice), narrow single-account re-billing concentration, bypassed RFQ gates, and shared bank/address identifiers against statutory substance (zero factory headcount, mismatched tax/commodity registration scope). Conduit pairs the flagged intermediary with the verified OEM already supplying peer plants and computes the exact Audited Re-Pricing Exposure.",
-      us: "Mitigates FCPA third-party intermediary markup exposure (15 U.S.C. §78m) and DOJ Evaluation of Corporate Compliance Programs (ECCP) supply-chain integrity expectations. Enforces PCAOB AS 1105 IPE completeness.",
+      us: "Mitigates FCPA third-party intermediary markup exposure and aligns with DOJ supply-chain integrity standards.",
       benefits: [
-        "Sizes the exact dollar spread between interposed traders and direct OEMs for immediate disintermediation RFQs",
-        "Eliminates alert fatigue via a 5-stage De-Noising Convergence Funnel (narrowing thousands of vendors to high-conviction leads)",
-        "Cost-aware two-tier screening: computes behavioral signals across 100% of vendors and triggers deep due diligence on survivors",
-        "Preserves Exception Memory for legitimate authorized distributors while maintaining active tripwires for bank or category drift",
-        "Detects single-buyer sponsorship concentration (>85% PO volume routed by one buyer to sole-source intermediaries)"
+        "Sizes the exact dollar spread between interposed traders and direct manufacturers for immediate RFQs",
+        "Correlates zero inventory dwell and shared bank/address links against statutory factory headcount",
+        "Pairs flagged intermediaries with verified OEMs already supplying peer plants",
+        "Retains exception memory for authorized distributors with tripwires for bank or scope drift"
       ]
     },
     {
       id: "vantage",
       prefix: "P2P Governance",
       name: "Vantage",
-      absorbs: "Arbiter (Split-PO) · Tender (RFP) · Provenance (Vendor Master)",
+      absorbs: "Split-PO · RFP Bid Integrity · Vendor Master Guard",
       suite: ["proc", "audit"],
       persona: "CPO · AP Head · Internal Audit",
-      lineage: "Requisitions · Purchase Orders · Vendor Master & Bank Change Logs",
-      objective: "Procurement Process, Bid & Master-Data Guard",
-      tagline: "Enforce procurement discipline across split POs, maverick spend, bid rotation, and pre-payment bank flips.",
-      boundary: "ERP Release Strategies enforce static PO approval limits; Vantage detects split-PO structuring, retroactive POs, bid-rigging rings, and pre-payment bank flips that circumvent those limits.",
-      artifact: "Split-PO Cluster Evidence · RFP Bid-Ring Graph · Pre-Payment Bank-Flip Alert · ERP Control Fix List",
-      desc: "Vantage (unifying the Arbiter, Tender, and Provenance modules) continuously monitors Procure-to-Pay process integrity and vendor master hygiene. It detects split requisitions and purchase orders structured just below approval thresholds, retroactive PO creation after invoice receipt, direct non-PO maverick invoicing, post-release PO price amendments, RFP bid-rotation rings, rapid vendor onboarding-to-PO velocity (<14 days), and sensitive vendor bank account changes occurring shortly before payment runs.",
-      us: "Supports FAR and DFARS procurement compliance for government contractors, mitigating False Claims Act exposure (31 U.S.C. §3729), Anti-Kickback Act violations (41 U.S.C. §8702), and OFAC sanctions screening (31 C.F.R. Parts 500–598).",
+      lineage: "Requisitions · Purchase Orders · Vendor Master & Bank Logs",
+      tagline: "Enforces procurement discipline across split orders, maverick spend, bid rotation, and pre-payment bank changes.",
+      boundary: "Catches split-order structuring, retroactive orders, bid rings, and bank flips that bypass static approval limits.",
+      artifact: "Split-PO Cluster Evidence · RFP Bid-Ring Graph · Pre-Payment Bank-Flip Alert",
+      us: "Supports public and commercial procurement compliance, False Claims Act defenses, and OFAC screening.",
       benefits: [
-        "Intercepts split-PO schemes designed to bypass approval hierarchies before vendor payments clear",
-        "Flags pre-payment vendor bank account modifications (<10 days before payment run) to prevent BEC and payee diversion",
+        "Intercepts split purchase orders structured just below approval thresholds before payment clears",
+        "Flags vendor bank account modifications within 10 days of a payment run to prevent payee diversion",
         "Quantifies non-PO maverick spend and off-contract call-offs by plant, category, and buyer",
-        "Identifies RFP bid rigging, retrofitted quotes submitted after PO release, and synthetic sole-source justifications",
-        "Recommends exact ERP procurement and tolerance configuration fixes to close recurring control gaps"
+        "Identifies RFP bid rotation and retrofitted quotes submitted after order release"
       ]
     },
     {
@@ -846,18 +672,16 @@ body {
       absorbs: "Inbound Logistics, Weighbridge & Movement Integrity",
       suite: ["proc", "fin"],
       persona: "COO · Supply Chain & Logistics Head",
-      lineage: "Material Movements · Goods Receipts · TMS / Weighbridge / GPS Feeds",
-      objective: "Logistics, Weighbridge & Inventory Integrity",
-      tagline: "Reconcile every physical weighbridge slip, freight bill, and material movement against ERP records.",
-      boundary: "ERP Goods Receipt records the quantity typed at the gate; Manifest reconciles ERP receipts against physical weighbridge tare weights, GPS trips, and lane tariffs.",
-      artifact: "Weighbridge-to-Receipt Discrepancy Log · Lane Tariff (USD/MT-Km) Benchmark · Short-Supply Claim Pack",
-      desc: "Manifest bridges physical supply-chain telemetry (weighbridge logs, lorry receipts, e-Way bills, GPS trip masters) with ERP financial postings (Goods Receipts, inventory ledger movements, and freight invoices). It detects short-supply overbilling, systematic tare-weight manipulation, phantom goods receipts posted without physical vehicle arrival, contracted carrier default cascades to spot-broker rings, and inter-plant stock-transfer tolerance shaving.",
-      us: "Supports ASC 330 inventory existence and completeness assertions and PCAOB audit inspection priorities on physical receipt verification and movement-type override controls.",
+      lineage: "Material Movements · Goods Receipts · Weighbridge / GPS Feeds",
+      tagline: "Reconciles every physical weighbridge slip, freight bill, and material movement against ERP records.",
+      boundary: "Cross-checks gate receipt entries against physical weighbridge tare weights, GPS trips, and contracted lane tariffs.",
+      artifact: "Weighbridge Discrepancy Log · Lane Tariff Benchmark · Short-Supply Claim Pack",
+      us: "Supports ASC 330 inventory existence assertions and physical receipt verification controls.",
       benefits: [
-        "Stops short-supply and phantom goods receipt leakage by reconciling physical net weight against billed ERP quantities",
-        "Benchmarks freight corridor tariffs (cost per MT-Km) across carriers to eliminate detention, accessorial, and routing overcharges",
-        "Unmasks contracted primary carriers defaulting on routes so spot-market sister entities can bill at 30%+ premiums",
-        "Pre-stages short-supply vendor debit claims backed by timestamped weighbridge and gate-entry logs"
+        "Stops short-supply and phantom receipt leakage by matching physical net weight against billed quantities",
+        "Benchmarks freight corridor tariffs across carriers to eliminate routing and detention overcharges",
+        "Detects contracted primary carriers defaulting on lanes so spot-market affiliates bill at a premium",
+        "Pre-stages short-supply vendor debit claims backed by timestamped weighbridge logs"
       ]
     },
 
@@ -866,44 +690,38 @@ body {
       id: "crystal",
       prefix: "Close & R2R",
       name: "Crystal",
-      absorbs: "Erosion (Inventory Shrinkage, Scrap & ASC 330 NRV)",
+      absorbs: "Balance Sheet Reconciliations & Inventory Reserve Guard",
       suite: ["fin", "audit"],
       persona: "CFO · Corporate Controller · R2R Lead",
-      lineage: "General Ledger · Manual Journal Entries · Trial Balance · Inventory Subledger",
-      objective: "Balance Sheet Close, Top-Side JE & Reserve Integrity",
-      tagline: "Auto-triage routine account reconciliations and isolate top-side close adjustments and inventory write-off risk.",
-      boundary: "Reconciliation workflows verify subledger totals match; Crystal detects unbilled top-side manual journal overrides, reserve manipulation, and unprovided inventory shrinkage.",
-      artifact: "Auto-Cleared Low-Risk Account Pack · Top-Side Manual JE Forensic Queue · ASC 330 NRV Provisioning Pack",
-      desc: "Crystal transforms the period-end financial close from a manual spreadsheet bottleneck into a risk-prioritized assurance workflow. It continuously evaluates every balance-sheet GL account reconciliation—auto-clearing routine, low-risk accounts while isolating breached tolerances, aged open items, unsubstantiated accrual reversals, and executive top-side manual journal entries posted directly to revenue or reserve accounts without underlying subledger documents. Incorporating the Erosion module, Crystal also audits inventory valuation, unauthorized scrap write-offs, and slow-moving/obsolete (SLOB) Lower-of-Cost-or-NRV provision adequacy during close.",
-      us: "Directly supports SOX Section 302 and 404 financial close and journal-entry controls, PCAOB AS 2401 management override of controls testing, and ASC 330 Lower-of-Cost-or-NRV inventory reserve assertions.",
+      lineage: "General Ledger · Manual Journals · Trial Balance · Inventory",
+      tagline: "Auto-clears routine account reconciliations and isolates top-side close adjustments and inventory write-off risk.",
+      boundary: "Detects unbilled top-side manual journal overrides, reserve manipulation, and unprovided inventory shrinkage.",
+      artifact: "Auto-Cleared Account Pack · Top-Side Journal Forensic Queue · NRV Provisioning Pack",
+      us: "Directly supports SOX 302/404 financial close controls, PCAOB AS 2401 journal testing, and ASC 330 inventory reserves.",
       benefits: [
         "Cuts period-end close review effort by 40%+ by auto-clearing routine, low-risk account reconciliations",
-        "Isolates high-risk manual top-side journal entries, weekend/after-hours postings, and split threshold entries",
-        "Enforces a strict architectural boundary with Surge: Surge monitors O2C subledger billing; Crystal catches unbilled GL revenue adjustments",
-        "Identifies unprovided slow-moving/obsolete stock and unauthorized scrap write-offs before external audit adjustments",
-        "Tracks real-time Close Health status and breached account dollar exposure with immutable General Ledger lineage"
+        "Isolates high-risk manual top-side journals, weekend postings, and split threshold entries",
+        "Identifies unprovided slow-moving stock and unauthorized scrap write-offs before external audit",
+        "Tracks real-time close health and breached account exposure with full ledger lineage"
       ]
     },
     {
       id: "moneta",
       prefix: "AP & Cash Flow",
       name: "Moneta",
-      absorbs: "Sentinel (AP Disbursement & Duplicate Payment Guard)",
+      absorbs: "AP Disbursement & Duplicate Payment Guard",
       suite: ["fin", "proc"],
-      persona: "CFO · Group Treasurer · Shared Services / AP Head",
-      lineage: "Payment Run Proposals · Open & Cleared AP Subledgers · Payment Terms Master",
-      objective: "AP Disbursement & Working Capital Optimization",
-      tagline: "Stop early payments, duplicate disbursements, and missed discounts before cash clears the bank.",
-      boundary: "Automated payment runs select cleared invoices for disbursement; Moneta intercepts premature payments ahead of due dates, cross-entity fuzzy duplicates, and unadjusted vendor advances.",
-      artifact: "Pre-Payment Early-Settlement Hold Queue · Duplicate Recovery Dossier · DPO Yield Optimization Brief",
-      desc: "Moneta (incorporating the Sentinel payment guard) monitors every outgoing disbursement and working-capital lever across all business units. It detects invoices scheduled for payment ahead of contracted due dates without capturing early-settlement cash discounts, exact and fuzzy duplicate vendor invoices across company codes, unadjusted vendor advances sitting open while new invoices are paid in full, and payment routing anomalies—quantifying the exact cost-of-capital loss and recovery pipeline.",
-      us: "Addresses SOX Section 13(b) internal controls over cash disbursements and FCPA books-and-records accuracy (15 U.S.C. §78m) regarding improper or duplicate vendor disbursements.",
+      persona: "CFO · Group Treasurer · AP Head",
+      lineage: "Payment Run Proposals · Open & Cleared Payables · Terms Master",
+      tagline: "Stops early payments, duplicate disbursements, and missed cash discounts before funds leave the bank.",
+      boundary: "Intercepts premature payments ahead of contracted due dates, cross-entity fuzzy duplicates, and unadjusted vendor advances.",
+      artifact: "Early-Settlement Hold Queue · Duplicate Recovery Dossier · DPO Yield Optimization Brief",
+      us: "Addresses SOX Section 13(b) cash disbursement controls and FCPA books-and-records accuracy.",
       benefits: [
-        "Halts premature supplier payments before disbursement runs execute",
-        "Captures forfeited early-payment cash discounts and extends effective Days Payable Outstanding (DPO) toward 60+ day benchmarks",
-        "Catches cross-entity and fuzzy-matched duplicate invoices (e.g., 'INV-104' vs 'INV/104') before settlement clears the bank",
-        "Attributes early-payment overrides to specific user IDs and vendor clusters with COSO root-cause explanations",
-        "Strictly segregates Working Capital Cash Release (DPO) from P&L EBITDA savings to preserve financial reporting integrity"
+        "Halts premature supplier payments before automated payment runs execute",
+        "Captures forfeited early-payment cash discounts and extends effective Days Payable Outstanding (DPO)",
+        "Catches cross-entity and fuzzy-matched duplicate invoices before settlement clears the bank",
+        "Segregates working-capital cash release cleanly from P&L EBITDA savings"
       ]
     },
     {
@@ -913,106 +731,147 @@ body {
       absorbs: "Receivables Aging, Short-Payment & Credit-Risk Guard",
       suite: ["fin", "sales"],
       persona: "CFO · Credit Controller · Treasurer",
-      lineage: "Open & Cleared AR Subledgers · Customer Credit Limits · Order Change Logs",
-      objective: "AR Collection, Short-Payment & DSO Optimization",
-      tagline: "Outstanding receivables are not revenue realization until collected in cash.",
-      boundary: "Standard AR aging tracks overdue days; Tenor correlates customer receivables with credit-limit overrides and deduction codes to stop unauthorized releases and habitual short-payments.",
-      artifact: "Habitual Short-Payment Recovery Queue · CECL Provisioning Stress-Test · Credit-Block Override Log",
-      desc: "Tenor monitors accounts receivable collection quality using open and cleared customer line items alongside enterprise credit management and order credit-block change logs. It tracks DSO drift by customer segment, habitual short-payment deductions disguised as commercial disputes, payment-blocked invoices, debtor concentration risk, and unauthorized credit-block releases on delinquent accounts.",
-      us: "Supports ASC 310 receivables disclosures and ASC 326 Current Expected Credit Losses (CECL) provisioning reliability, as well as debt-covenant working-capital representations.",
+      lineage: "Open & Cleared Receivables · Credit Limits · Order Change Logs",
+      tagline: "Protects cash realization by catching habitual customer short-payments and unauthorized credit-block overrides.",
+      boundary: "Correlates customer receivables with credit-limit overrides and deduction codes to stop unauthorized order releases.",
+      artifact: "Short-Payment Recovery Queue · Bad-Debt Provisioning Stress-Test · Credit Override Log",
+      us: "Supports ASC 310 receivables disclosures and ASC 326 Current Expected Credit Losses (CECL) accuracy.",
       benefits: [
-        "Recovers systematic customer short-payments and unauthorized deduction write-offs across distributor networks",
-        "Flags sales orders released to customers with overdue balances or manual credit-block overrides",
-        "Improves Days Sales Outstanding (DSO) and strengthens ASC 326 CECL bad-debt reserve accuracy"
+        "Recovers systematic customer short-payments and unauthorized deduction write-offs",
+        "Flags sales orders released to delinquent customers via manual credit-block overrides",
+        "Improves Days Sales Outstanding (DSO) and strengthens bad-debt reserve accuracy"
       ]
     },
 
-    // ── 3. SALES & REVENUE ASSURANCE SUITE (3) ────────────────
+    // ── 3. SALES & REVENUE ASSURANCE SUITE (5) ────────────────
     {
       id: "surge",
       prefix: "Revenue Integrity",
       name: "Surge",
-      absorbs: "Ledger (Unbilled POD Cut-Off) & Reversal (Credit-Memo Washes)",
+      absorbs: "Channel Stuffing, Cut-Off & Returns Integrity",
       suite: ["sales", "audit"],
       persona: "CRO · CFO · Corporate Controller · Audit Committee",
-      lineage: "Sales Orders · Billing Documents · Delivery & POD Logs · Returns & Credit Memos",
-      objective: "Dual-Grain Channel Stuffing, Cut-Off & Returns Integrity",
-      tagline: "Unmask bottom-up rep quota stuffing, top-down subsidiary overrides, cut-off breaches, and returnless credit washes.",
-      boundary: "Order management verifies an order can be billed; Surge detects period-end quota stuffing, subsidiary credit-block overrides, unbilled deliveries, and post-period credit-memo washes.",
-      artifact: "Scheme-Matched Stuffing Dossier · Corporate-Routed SoD Override Alert · Incentive Clawback & Cut-Off Pack",
-      desc: "Surge is a dual-grain Order-to-Cash revenue integrity agent (incorporating the Ledger and Reversal modules) that requires zero downstream dealer sell-through data. Track A (Sales Rep × Period grain) catches sales-perpetrated stuffing across 5 behavioral signals: final-3-day period-end billing acceleration, unpaid AR withholding on stuffed orders, quota-hurdle commission correlation, post-period returns/cancel-rebill washes, and premature invoicing without Proof of Delivery. Track B (Business Unit × Period grain) catches top-down subsidiary management overrides: mass credit-block releases, holding posting periods open after quarter-end, 3PL overflow warehouse parking, and returnless value-only credit memos.",
-      us: "Anchored to ASC 606-10-32-5 through 32-14 (Constraint on Variable Consideration and Implicit Rights of Return), SEC SAB 99 qualitative materiality (catching small pull-forwards that flip an AOP/consensus target miss into a beat), and SEC Dodd-Frank Rule 10D-1 executive compensation clawbacks.",
+      lineage: "Sales Orders · Billing Documents · Delivery Logs · Credit Memos",
+      tagline: "Unmasks period-end rep quota stuffing, subsidiary overrides, unbilled deliveries, and returnless credit washes.",
+      boundary: "Detects quarter-end pull-forwards, credit-block overrides, shipped-but-unbilled deliveries, and post-period credit washes.",
+      artifact: "Channel Stuffing Dossier · Corporate-Routed Override Alert · Cut-Off & Clawback Pack",
+      us: "Anchored to ASC 606 revenue recognition rules, SEC SAB 99 materiality, and executive compensation clawback governance.",
       benefits: [
-        "Isolates premature revenue recognition and cut-off errors before period-end financial close",
-        "Operates on a Dual-Grain Architecture catching both rogue sales reps (Track A) and colluding subsidiary management (Track B)",
-        "Enforces Corporate-Routed SoD on Track B cases—quarantining subsidiary management overrides directly to Corporate Internal Audit",
-        "Recovers earned revenue from shipped-but-unbilled deliveries (Ledger module) and stops returnless credit notes (Reversal module)",
-        "Generates 4 board-ready reports: Audit Committee Stuffing Pack, CFO Revenue Quality & GTN Impact, SoD Log, and CHRO Clawback Report"
+        "Isolates premature revenue recognition and cut-off errors before period-end close",
+        "Catches both rep-level quarter-end stuffing and subsidiary-level credit-block overrides",
+        "Recovers earned revenue from shipped-but-unbilled deliveries and stops returnless credit notes",
+        "Routes sensitive subsidiary management overrides directly to Corporate Internal Audit"
+      ]
+    },
+    {
+      id: "pricing-integrity",
+      prefix: "Commercial Pricing",
+      name: "Pricing Integrity Agent",
+      absorbs: "List-Price Realization, Surcharge & Contract Rate Guard",
+      suite: ["sales", "fin"],
+      persona: "CRO · VP Commercial Finance · Pricing CoE",
+      lineage: "Billing Documents · Pricing Condition Records · Master Price Lists",
+      tagline: "Ensures every customer invoice honors contracted rate cards, index escalators, and freight surcharges.",
+      boundary: "Audits live billing conditions against executed customer contracts and cost bases to prevent silent price erosion.",
+      artifact: "Contract Price-Drift Ledger · Deleted Surcharge Alert Queue · Below-Cost Billing Report",
+      us: "Supports ASC 606 transaction-price accuracy and gross-margin reporting governance.",
+      benefits: [
+        "Catches unbilled contractual price escalators, index pass-throughs, and minimum-order surcharges",
+        "Flags manual price overrides and deleted freight or fuel conditions at invoice creation",
+        "Alerts commercial finance immediately when net invoice realization drops below standard product cost"
+      ]
+    },
+    {
+      id: "discounting-risk",
+      prefix: "Commercial Governance",
+      name: "Discounting Risk Agent",
+      absorbs: "Off-Policy Discounting, Rebate Stacking & Side-Deal Guard",
+      suite: ["sales", "audit"],
+      persona: "CRO · CFO · Internal Audit",
+      lineage: "Sales Orders · Discount Conditions · Rebate Accruals · Credit Notes",
+      tagline: "Stops unauthorized discount stacking, split-order threshold gaming, and retroactive off-invoice rebates.",
+      boundary: "Detects multi-layer discount stacking, approval-limit splitting, and post-sale rebate giveaways missed by static price checks.",
+      artifact: "Rep Discount Waterfall · Stacked Rebate Leakage Report · Approval-Bypass Audit Log",
+      us: "Supports ASC 606 variable-consideration constraints and gross-to-net revenue governance.",
+      benefits: [
+        "Prevents double-dipping where promotional discounts stack on top of contracted tier rebates",
+        "Detects orders split across lines or dates to stay below commercial discount approval limits",
+        "Quantifies gross-to-net margin leakage by sales rep, distributor tier, and region"
       ]
     },
     {
       id: "horizon",
       prefix: "Demand & S&OP",
       name: "Horizon",
-      absorbs: "Clean-Baseline Demand & S&OP Predictability Engine",
+      absorbs: "Clean-Baseline Demand & Revenue Predictability",
       suite: ["sales"],
-      persona: "CRO · Commercial Finance · S&OP / Demand Planning",
-      lineage: "Sales Order Backlog · Delivery Schedules · Macro & Commodity Feeds",
-      objective: "Clean-Baseline Demand & Revenue Predictability",
-      tagline: "Strip artificial sales distortions from your order book to deliver risk-adjusted revenue forecasts.",
-      boundary: "Standard CRM/ERP forecasts extrapolate raw historical billings; Horizon strips out Surge-flagged channel stuffing and cancel-rebill noise to forecast true underlying demand.",
-      artifact: "Sanitized True-Demand Baseline · Silent Customer Churn Alert · Commodity Pass-Through Pricing Model",
-      desc: "Conventional forecasting models fail because they train on polluted historical ERP order books distorted by quarter-end channel stuffing, cancel-and-rebill rollovers, and one-off promotional spikes. Horizon consumes Surge's revenue integrity flags to strip artificial pull-forwards out of historical sales, monitors delivery schedule slippage and silent customer order-cadence decay, and correlates order books with external macro and commodity indices to give the CRO and CFO a true, risk-adjusted 12-month revenue and S&OP forecast.",
-      us: "Supports reliability of forward-looking MD&A revenue guidance, backlog disclosures under ASC 606, and working-capital inventory planning.",
+      persona: "CRO · Commercial Finance · S&OP Lead",
+      lineage: "Order Backlog · Delivery Schedules · Macro & Commodity Feeds",
+      tagline: "Strips artificial sales distortions from your order book to deliver risk-adjusted revenue forecasts.",
+      boundary: "Removes Surge-flagged channel stuffing and cancel-rebill spikes from historical billings to reveal true underlying demand.",
+      artifact: "Sanitized Demand Baseline · Silent Customer Churn Alert · Commodity Pass-Through Model",
+      us: "Supports forward-looking revenue guidance reliability, ASC 606 backlog disclosures, and inventory planning.",
       benefits: [
-        "Eliminates the 'bullwhip effect' in S&OP production planning by removing stuffed and subsequently reversed orders from the baseline",
-        "Provides early warning on silent customer churn when distributor ordering cadence decays relative to historical rhythm",
-        "Models commodity index pass-through elasticity to protect sell-side gross margin during raw-material volatility",
-        "Reconciles sales backlog and schedule-line delivery slippage against plant capacity before quarter-end bottlenecks occur"
+        "Eliminates S&OP bullwhip distortions by stripping stuffed and reversed orders from the baseline",
+        "Provides early warning on silent customer churn when distributor order cadence decays",
+        "Models commodity index pass-through elasticity to protect gross margin during cost swings"
       ]
     },
     {
       id: "margin",
-      prefix: "Commercial Pricing",
+      prefix: "Gross-to-Net",
       name: "Margin",
-      absorbs: "Sell-Side Price, Discount Waterfall & Gross-to-Net Guard",
+      absorbs: "Sell-Side Realization & Pocket-Margin Analytics",
       suite: ["sales", "fin"],
-      persona: "CRO · VP Commercial Finance · Pricing CoE",
-      lineage: "Billing Documents · Pricing Condition Records · Master Price Lists · Material Cost",
-      objective: "Sell-Side Price, Discount & Margin Integrity",
-      tagline: "Protect gross-to-net realization across manual price overrides, off-policy discounts, and below-cost sales.",
-      boundary: "ERP pricing procedures compute invoice net values; Margin detects manual condition overrides, unapproved rebate stacking, and sales billed below standard material cost.",
-      artifact: "Below-Cost Sale Alert Queue · Rep Discount Waterfall · Gross-to-Net (GTN) Leakage Attribution",
-      desc: "Margin monitors sell-side pricing condition integrity across every billing document using ERP pricing condition records and master price tables. It compares actual invoiced net prices against approved master price lists and customer contract rates, flags manual pricing overrides, deleted freight/surcharge conditions, and stacked off-invoice rebates, and identifies below-cost selling where net billing value falls below standard or moving-average material cost.",
-      us: "Supports ASC 606 transaction-price determination, gross-to-net revenue disclosures, and SEC comment-letter scrutiny on non-GAAP gross margin representations.",
+      persona: "CRO · VP Commercial Finance · CFO",
+      lineage: "Billing Documents · Rebate & Freight Conditions · Standard Cost",
+      tagline: "Tracks pocket-margin realization from list price down to net collected cash across every customer and SKU.",
+      boundary: "Unifies invoice pricing, off-invoice rebates, freight absorption, and payment terms into a single pocket-margin view.",
+      artifact: "Pocket-Margin Waterfall · Negative-Margin SKU Queue · Customer Profitability Matrix",
+      us: "Supports gross-to-net revenue disclosures and commercial margin accountability.",
       benefits: [
-        "Stops unauthorized manual discount overrides and deleted surcharge conditions at the sales-rep and regional level",
-        "Flags negative contribution-margin (below-cost) transactions immediately at billing creation",
-        "Quantifies total gross-to-net (GTN) discount and rebate leakage for commercial governance and rep performance reviews"
+        "Exposes unprofitable customer-SKU combinations hidden behind high top-line volume",
+        "Quantifies freight, extended credit terms, and promotional allowances eroding pocket margin",
+        "Ranks commercial recovery actions by immediate gross-margin lift"
       ]
     },
 
-    // ── 4. AUDIT, RISK & COMPLIANCE SUITE (5) ─────────────────
+    // ── 4. AUDIT, RISK & COMPLIANCE SUITE (6) ─────────────────
+    {
+      id: "custos",
+      prefix: "Third-Party Risk",
+      name: "Custos",
+      absorbs: "Continuous Counterparty Monitoring & ERP Exposure Triangulation",
+      suite: ["audit", "proc"],
+      persona: "CCO · CPO · General Counsel",
+      lineage: "Vendor & Customer Masters · Purchases · Sales · Advances & Loans",
+      tagline: "Monitors every active supplier, JV, and customer continuously across sanctions, ownership shifts, and live ERP exposure.",
+      boundary: "Replaces point-in-time onboarding checks with continuous risk re-rating triangulated against live purchases, sales, advances, and loans.",
+      artifact: "ERP Exposure Triangulation Matrix · In-Flight Payment Hold Queue · Counterparty Risk Dossiers",
+      us: "Supports DOJ continuous monitoring expectations, FCPA/UKBA ownership attribution, and OFAC 50% rule compliance.",
+      benefits: [
+        "Continuously monitors 100% of active suppliers, JVs, and customers with automated hard-gate risk overrides",
+        "Triangulates Medium, High, and Severe counterparties against live purchases, sales, advances, and loans",
+        "Flags dual-role entities (Vendor + Customer), state-owned UBO chains, and pre-payout holds"
+      ]
+    },
     {
       id: "aegis",
       prefix: "Trade Compliance",
       name: "Aegis",
       absorbs: "Post-Clearance Export Control & Trade Diversion Sentinel",
       suite: ["audit"],
-      persona: "General Counsel · Chief Compliance Officer · Trade Compliance",
-      lineage: "Sales Orders · Export Shipping Logs · Partner Addresses · Trade Screening · D7",
-      objective: "Post-Clearance Export Control & Trade Diversion",
-      tagline: "Trade screening blocks impermissible sales at order entry; Aegis detects diversion indicators on permitted sales.",
-      boundary: "Point-of-sale trade screening decides order permissibility; Aegis detects post-clearance routing divergence, mid-flight country flips, and transshipment networks on permitted sales.",
-      artifact: "FIPS 140-3 HMAC Sealed Diversion Dossier · Transshipment Network Graph · BIS/OFAC Counsel Pack",
-      desc: "Aegis is the reference implementation of Fortifai's 'Consume, Do Not Reproduce' architecture. It sits downstream of point-of-sale trade compliance and screening tools, gating on export-controlled items (ECCN, dual-use, and defense articles). Aegis monitors post-clearance behavioral evasion across deterministic lifecycle rules and statistical/graph patterns: post-confirmation Ship-To country modifications, transshipment hub routing spikes, freight-forwarder masking where intermediate consignees act as final destinations, Incoterm/delivery mismatches, and multi-account front networks.",
-      us: "Supports US Export Administration Regulations (EAR, 15 C.F.R. Parts 730–774), ITAR (22 C.F.R. Parts 120–130), OFAC sanctions evasion guidance, and BIS Red Flag indicators. Engineered for sovereign and government cloud (FedRAMP High / CMMC 2.0 Level 2) zero-egress boundaries.",
+      persona: "General Counsel · CCO · Trade Compliance",
+      lineage: "Sales Orders · Export Shipping Logs · Partner Addresses · D7",
+      tagline: "Monitors permitted export orders after initial screening to catch mid-flight routing flips and transshipment diversion.",
+      boundary: "Sits downstream of point-of-sale trade screening to detect post-clearance Ship-To modifications and transshipment rings.",
+      artifact: "Sealed Diversion Evidence Dossier · Transshipment Network Graph · Counsel Review Pack",
+      us: "Supports US EAR, ITAR, OFAC sanctions evasion controls, and BIS Red Flag compliance inside zero-egress boundaries.",
       benefits: [
-        "Closes the post-clearance blind spot after point-of-sale trade screening tools stamp an order 'Permitted'",
-        "Detects mid-flight Ship-To address and country modifications in ERP change logs before shipment departure",
-        "Maps multi-customer transshipment hub rings and shared freight-forwarder drops using dynamic network graph lineage",
-        "Enforces Dual-Key Maker-Checker sign-off and seals confirmed risk packages with FIPS 140-3 HMAC cryptographic hashes",
-        "Maintains strict 'Objective Signals, Not Verdicts' framing to protect legal privilege prior to voluntary self-disclosure (VSD) review"
+        "Closes the post-clearance blind spot after point-of-sale screening stamps an order permitted",
+        "Detects mid-flight Ship-To address and country modifications before shipment departure",
+        "Maps multi-account transshipment hub rings and shared freight-forwarder drops",
+        "Routes escalations under two-person Maker-Checker approval with cryptographically sealed dossiers"
       ]
     },
     {
@@ -1021,40 +880,36 @@ body {
       name: "Veritas",
       absorbs: "Global Anti-Bribery, FCPA & T&E Corruption Surveillance",
       suite: ["audit"],
-      persona: "General Counsel · Chief Compliance Officer · Audit Committee",
-      lineage: "Vendor Payments · Manual GL Journals · T&E Expense Feeds · D7 PEP/Sanctions",
-      objective: "Global Bribery, FCPA & Corruption Risk",
-      tagline: "Continuous surveillance across third-party intermediaries, high-risk corridors, and books-and-records red flags.",
-      boundary: "Third-party onboarding screens static PEP/sanctions lists; Veritas correlates live ERP disbursements, manual GL journals, and T&E hospitality around tender award timelines.",
-      artifact: "Jurisdiction-Mapped ABAC Risk Register · DOJ ECCP Cooperation Evidence Pack · Third-Party Red-Flag Dossier",
-      desc: "Veritas monitors the full spectrum of bribery, kickback, and corruption indicators across ERP Procure-to-Pay, Order-to-Cash, manual journals, and employee T&E expenses. Using calibrated Strong/Weak indicator tiering and a 0–100 composite confidence score (engineered to eliminate false-positive drift), Veritas detects disproportionate consulting/success fees in high-risk jurisdictions, round-sum PO-exempt invoices ('liaison/facilitation services'), T&E gifts and hospitality spikes clustering around government tender award dates, and undisclosed Politically Exposed Person (PEP) or state-owned enterprise (SOE) linkages.",
-      us: "Maps directly to the DOJ & SEC FCPA Resource Guide (15 U.S.C. §78dd-1 / §78m books-and-records and internal accounting controls), the DOJ Corporate Enforcement and Voluntary Self-Disclosure Policy, the DOJ Evaluation of Corporate Compliance Programs (ECCP), UK Bribery Act Section 7, and ISO 37001.",
+      persona: "General Counsel · CCO · Audit Committee",
+      lineage: "Vendor Payments · Manual Journals · T&E Expenses · D7 PEP/Sanctions",
+      tagline: "Surveils third-party intermediaries, high-risk corridors, and T&E hospitality for bribery and corruption red flags.",
+      boundary: "Correlates live disbursements, manual journals, and T&E hospitality around tender award dates and PEP links.",
+      artifact: "ABAC Risk Register · Counsel Investigation Evidence Pack · Third-Party Red-Flag Dossier",
+      us: "Maps directly to FCPA anti-bribery and books-and-records provisions, UK Bribery Act, DOJ ECCP, and ISO 37001.",
       benefits: [
-        "Correlates vendor payments, manual GL postings, and T&E hospitality against tender award timelines in one engine",
-        "Eliminates alert fatigue via Strong/Weak indicator tiering and entity-level composite scoring",
-        "Produces prosecution-grade, attorney-client privileged investigation dossiers supporting DOJ/SEC declination and cooperation credit",
-        "Monitors charitable donations, sponsorships, and customs/logistics broker markups across high-risk geographies"
+        "Correlates vendor payments, manual journals, and T&E hospitality against tender award timelines",
+        "Eliminates alert fatigue via calibrated indicator tiering and composite entity risk scoring",
+        "Assembles attorney-client privileged investigation dossiers supporting regulatory cooperation",
+        "Monitors sponsorships, donations, and customs broker markups across high-risk jurisdictions"
       ]
     },
     {
       id: "argus",
       prefix: "Forensics",
       name: "Argus",
-      absorbs: "Cipher (Multi-Process Fraud Clustering & Whistleblower Intake)",
+      absorbs: "Multi-Process Fraud Clustering & Whistleblower Workbench",
       suite: ["audit", "proc"],
-      persona: "CAE · Head of Internal Audit · Forensics & Ethics Lead",
-      lineage: "Full 8-Dimension Forensic Spine · HR Master · Vendor Master · Change Logs",
-      objective: "AI-Powered Internal Investigations & Collusion",
-      tagline: "From whistleblower tip or multi-signal anomaly to a court-ready forensic dossier in one click.",
-      boundary: "Whistleblower hotlines log unstructured allegations; Argus deterministically resolves employee-vendor identity links across HR and ERP records to assemble an immutable dossier.",
-      artifact: "5-Section Forensic Investigation Report (Word/PDF) · Employee-Vendor Collusion Graph · 3-Bucket ROI Waterfall",
-      desc: "Argus (incorporating the Cipher fraud-clustering engine) is Fortifai's internal investigation and cross-stage collusion workbench. It interrogates 8 core forensic dimensions (Transaction Integrity, Vendor Identity, Banking, Procurement, Goods Receipt, Invoice Verification, Payment Execution, and People/HR Change Logs). Argus cross-references HR master records against vendor masters to expose employee-vendor bank, address, and phone collisions, cross-stage Segregation of Duties (SoD) violations, and repeat buyer-vendor favoritism—synthesizing findings into a 3-bucket Value Realization Waterfall (Direct Recovery, In-Flight Loss Prevention, and 12-Month Structural Avoidance).",
-      us: "Aligned with AICPA Statement on Standards for Forensic Services (SSFS No. 1), PCAOB AS 1105 evidentiary standards, SOX 301 whistleblower investigation mandates, and DOJ ECCP internal investigation effectiveness criteria.",
+      persona: "CAE · Head of Internal Audit · Forensics Lead",
+      lineage: "Full 8-Dimension Forensic Spine · HR Master · Vendor Master",
+      tagline: "Turns whistleblower tips and multi-signal anomalies into court-ready forensic investigation dossiers in one click.",
+      boundary: "Deterministically resolves employee-vendor identity links across HR and ERP records to assemble immutable case files.",
+      artifact: "Forensic Investigation Report (Word/PDF) · Employee-Vendor Collusion Graph · ROI Waterfall",
+      us: "Aligned with AICPA forensic standards, PCAOB evidentiary rules, SOX 301 whistleblower mandates, and DOJ criteria.",
       benefits: [
-        "Auto-generates 5-section Forensic Explanation Reports mapping COSO root causes and Fraud Triangle indicators (1-click Word/PDF export)",
-        "Traces every flagged item across a visual 6-stage Procure-to-Pay chain (PO -> Receipt -> Invoice -> GL Posting -> Payment -> Vendor Master)",
-        "Monetizes investigation outcomes across Direct AP Set-Off Recovery, In-Flight Payment Blocks, and Rate-Card Resets",
-        "Preserves strict whistleblower anonymity while testing allegations against millions of ERP records in seconds"
+        "Auto-generates structured forensic reports mapping COSO root causes and Fraud Triangle indicators",
+        "Exposes employee-vendor bank, address, and phone collisions across HR and vendor records",
+        "Traces flagged items end-to-end from purchase order through goods receipt, invoice, and payment",
+        "Preserves whistleblower anonymity while testing allegations against millions of records in seconds"
       ]
     },
     {
@@ -1063,40 +918,36 @@ body {
       name: "D7",
       absorbs: "8-Dimension Counterparty & Statutory Substance Engine",
       suite: ["audit", "proc"],
-      persona: "CCO · CPO · Third-Party Risk Management (TPRM)",
-      lineage: "Signed Statutory, Tax, Factory Headcount, Sanctions, UBO & Litigation Feeds",
-      objective: "8-Dimension Counterparty & Statutory Due Diligence",
-      tagline: "Outside-in counterparty substance intelligence—powering onboarding and every Fortifai agent.",
-      boundary: "Conventional KYC portals dump raw registry PDFs; D7 delivers a scored 8-dimension substance verdict and feeds structured statutory attributes into Kuber, Conduit, Aegis, and Veritas.",
-      artifact: "8-Dimension Counterparty Verdict Report · Statutory Substance & Operating Headcount Certificate",
-      desc: "D7 is Fortifai's autonomous external counterparty intelligence engine. It evaluates vendors, customers, logistics partners, and M&A targets across 8 simultaneous risk dimensions: Financial Health & Net Worth, Statutory & Factory Substance (verified employee headcount and tax/commodity scope registrations), AML & Sanctions (OFAC/UN/EU), Regulatory Compliance, Litigation & Court Records, Global Adverse Media, Beneficial Ownership / PEP Networks, and Geopolitical Risk. For zero-egress deployments, D7 is delivered as a signed encrypted ingress bundle inside the customer VPC so vendor lists never leak externally.",
-      us: "Supports OFAC sanctions compliance (31 C.F.R. Parts 500–598), DOJ third-party due diligence expectations, SEC Regulation S-K Item 103 litigation checks, and FAR 52.209 contractor debarment screening.",
+      persona: "CCO · CPO · Third-Party Risk Management",
+      lineage: "Statutory, Tax, Factory Headcount, Sanctions, UBO & Litigation Feeds",
+      tagline: "Delivers outside-in counterparty substance intelligence—powering onboarding and every Fortifai agent.",
+      boundary: "Delivers scored 8-dimension substance verdicts inside your VPC via signed encrypted bundles so vendor lists never leave.",
+      artifact: "8-Dimension Counterparty Verdict Report · Statutory Substance Certificate",
+      us: "Supports OFAC sanctions compliance, DOJ third-party diligence standards, and litigation screening.",
       benefits: [
-        "Delivers a weighted, scored 8-dimension counterparty verdict and board-ready report in hours rather than weeks",
-        "Exposes 'paper vendors' by verifying statutory employee headcount, tax scope, and physical operating substance",
-        "Feeds structured Outside-In intelligence directly into Kuber, Conduit, Aegis, and Veritas via signed in-VPC snapshots",
-        "Continuously monitors onboarded third parties and triggers automated re-assessment when adverse litigation or ownership changes occur"
+        "Delivers a scored 8-dimension counterparty verdict in hours rather than weeks",
+        "Exposes shell vendors by verifying statutory employee headcount, tax scope, and physical operations",
+        "Feeds structured external intelligence locally into Kuber, Conduit, Custos, Aegis, and Veritas",
+        "Triggers automated re-assessment when adverse litigation or ownership changes occur"
       ]
     },
     {
       id: "pulse",
       prefix: "Continuous Audit",
       name: "Pulse (Vigil & Codex)",
-      absorbs: "Vigil (100% Audit Automation) · Codex (Pre-Posting Document Forensics) · Pegstone (PE QoE)",
+      absorbs: "100% SOX Control Automation & Pre-Posting PDF Forensics",
       suite: ["audit", "fin"],
-      persona: "CAE · Chief Risk Officer · SOX Director · PE Deal Teams",
+      persona: "CAE · Chief Risk Officer · SOX Director",
       lineage: "170+ Enterprise Control Models · Incoming Invoice & Bid PDF Streams",
-      objective: "100% Population Continuous Control & Document Forensics",
-      tagline: "Replace quarterly audit sampling with always-on, 100% population testing across 170+ SOX controls and pre-posting PDF forensics.",
-      boundary: "Traditional audit tests 25-row quarterly samples post-facto; Pulse tests 100% of transactions continuously and screens incoming PDFs for metadata tampering before ERP posting.",
-      artifact: "COSO 2013 Control Breach Register · Big-4 Audit Reliance Pack · PDF Metadata Tampering & PE QoE Pack",
-      desc: "Pulse (unifying Vigil 100% Audit Automation, Codex Pre-Posting Document Forensics, and Pegstone M&A Diligence) moves internal audit and SOX compliance from periodic sample testing to continuous 100% population assurance across P2P, O2C, Inventory, and Record-to-Report. Housing Fortifai's library of 170+ deterministic control and fraud models, every breach is classified by control failure type (Absent, Bypassed, Operating, Mixed) and mapped to COSO 2013. Upstream of the ERP, the Codex module screens incoming vendor invoices and RFQ bid PDFs for shared creator machine IDs and font tampering before posting.",
-      us: "Aligns with COSO 2013 Internal Control Integrated Framework, SOX Sections 302 and 404, SEC Rules 13a-15 / 15d-15, PCAOB AS 2201 integrated audit reliance standards, and DOJ M&A Safe Harbor forensic diligence.",
+      tagline: "Replaces quarterly audit sampling with continuous 100% population testing across 170+ SOX controls and PDF forensics.",
+      boundary: "Tests 100% of transactions continuously and screens incoming invoice and bid PDFs for tampering before ERP posting.",
+      artifact: "COSO 2013 Control Breach Register · Audit Reliance Pack · PDF Tampering & M&A Diligence Pack",
+      us: "Aligns with COSO 2013, SOX 302/404, PCAOB AS 2201 audit reliance standards, and M&A forensic diligence.",
       benefits: [
-        "Tests 100% of the ERP transaction population continuously—eliminating sampling risk across P2P, O2C, Inventory, and GL",
-        "Reduces external audit substantive testing hours and fees by providing documented, repeatable control-reliance evidence",
-        "Blocks fabricated vendor invoices and collusive RFQ bids sharing identical PDF creator machine IDs before ERP posting (Codex)",
-        "Accelerates Private Equity M&A Quality of Earnings (QoE), working-capital peg, and FCPA successor-liability diligence (Pegstone)"
+        "Tests 100% of transactions continuously—eliminating sampling gaps across P2P, O2C, Inventory, and GL",
+        "Reduces external audit substantive testing hours with documented, repeatable control evidence",
+        "Blocks fabricated invoices and collusive bids sharing identical PDF metadata before ERP posting",
+        "Accelerates M&A Quality of Earnings (QoE) and successor-liability forensic diligence"
       ]
     }
   ];
@@ -1130,8 +981,6 @@ body {
         p.name.toLowerCase().indexOf(sq) > -1 ||
         p.absorbs.toLowerCase().indexOf(sq) > -1 ||
         p.tagline.toLowerCase().indexOf(sq) > -1 ||
-        p.objective.toLowerCase().indexOf(sq) > -1 ||
-        p.desc.toLowerCase().indexOf(sq) > -1 ||
         p.persona.toLowerCase().indexOf(sq) > -1 ||
         p.lineage.toLowerCase().indexOf(sq) > -1 ||
         p.artifact.toLowerCase().indexOf(sq) > -1;
@@ -1164,9 +1013,8 @@ body {
     var vis = getFiltered();
     var buf = [];
 
-    // Top Architecture Bar & Interactive Drawers
+    // Top Interactive Drawers
     buf.push('<div class="arch-bar">');
-    buf.push('<div class="sec-lbl">Consolidated 15-Agent Suite · Unified Zero-Egress Data Spine</div>');
     buf.push('<div class="arch-toggles">');
     buf.push('<button class="arch-btn' + (activeDrawer === 'interlock' ? ' on' : '') + '" data-drawer="interlock">⇄ Cross-Agent Interlock Map</button>');
     buf.push('<button class="arch-btn' + (activeDrawer === 'waterfall' ? ' on' : '') + '" data-drawer="waterfall">▤ 4-Rung Economic Precedence Waterfall</button>');
@@ -1177,12 +1025,12 @@ body {
     if (activeDrawer === 'interlock') {
       buf.push('<div class="arch-drawer open">');
       buf.push('<div class="drawer-title">How Fortifai Agents Interlock on the Unified Data Spine</div>');
-      buf.push('<div class="drawer-sub">Agents are not siloed point tools. Every agent reads and writes to the shared Case &amp; Insights Store so downstream commercial recommendations automatically respect upstream compliance and risk flags:</div>');
+      buf.push('<div class="drawer-sub">Every agent reads and writes to the shared Case &amp; Insights Store so commercial recommendations automatically respect upstream compliance and risk flags:</div>');
       buf.push('<div class="interlock-grid">');
-      buf.push('<div class="il-card"><div class="il-route">1 · CONDUIT + VERITAS ──► KUBER</div><div class="il-title">Sourcing Award Veto Gate</div><div class="il-desc">Before <strong>Kuber</strong> recommends awarding consolidated volume to a supplier, it checks the shared Insights Store to verify the vendor is not flagged as a zero-substance pass-through trader in <strong>Conduit</strong> or an ABAC/FCPA risk in <strong>Veritas</strong>.</div></div>');
-      buf.push('<div class="il-card"><div class="il-route">2 · SURGE ──► HORIZON</div><div class="il-title">Clean-Demand Baseline Sanitization</div><div class="il-desc"><strong>Horizon</strong> automatically ingests <strong>Surge\'s</strong> channel-stuffing and cancel-rebill flags and strips those artificial quarter-end spikes out of historical sales before running S&amp;OP demand forecasts.</div></div>');
-      buf.push('<div class="il-card"><div class="il-route">3 · SURGE ◄──► CRYSTAL</div><div class="il-title">Dual Revenue Assurance Boundary</div><div class="il-desc"><strong>Surge</strong> monitors billed Order-to-Cash subledger revenue, while <strong>Crystal</strong> monitors unbilled top-side manual General Ledger journal entries—guaranteeing 100% revenue coverage with zero overlap.</div></div>');
-      buf.push('<div class="il-card"><div class="il-route">4 · D7 ──► ALL DOMAIN AGENTS</div><div class="il-title">Signed In-VPC Counterparty Enrichment</div><div class="il-desc"><strong>D7</strong> delivers signed encrypted statutory snapshots (operating headcount, tax scope, PEP/sanctions, UBO graphs) directly inside the client VPC—consumed locally by <strong>Kuber, Conduit, Aegis, Veritas, and Argus</strong> with zero data egress.</div></div>');
+      buf.push('<div class="il-card"><div class="il-title">1 · Sourcing Award Veto Gate</div><div class="il-desc">Before <strong>Kuber</strong> recommends awarding volume to a supplier, it verifies the vendor is not flagged as a shell trader in <strong>Conduit</strong>, a high-risk entity in <strong>Custos</strong>, or a bribery risk in <strong>Veritas</strong>.</div></div>');
+      buf.push('<div class="il-card"><div class="il-title">2 · Clean-Demand Sanitization</div><div class="il-desc"><strong>Horizon</strong> ingests <strong>Surge\'s</strong> channel-stuffing and cancel-rebill flags and strips those quarter-end spikes out of historical sales before running demand forecasts.</div></div>');
+      buf.push('<div class="il-card"><div class="il-title">3 · Dual Revenue Assurance Boundary</div><div class="il-desc"><strong>Surge</strong>, <strong>Pricing Integrity</strong>, and <strong>Discounting Risk</strong> guard order-to-cash billing, while <strong>Crystal</strong> catches top-side manual ledger adjustments—ensuring 100% revenue coverage.</div></div>');
+      buf.push('<div class="il-card"><div class="il-title">4 · Signed In-VPC Enrichment</div><div class="il-desc"><strong>D7</strong> delivers signed statutory snapshots (factory headcount, tax scope, sanctions, UBO graphs) inside your VPC—consumed locally by <strong>Kuber, Conduit, Custos, Aegis, and Veritas</strong>.</div></div>');
       buf.push('</div></div>');
     }
 
@@ -1190,23 +1038,23 @@ body {
     if (activeDrawer === 'waterfall') {
       buf.push('<div class="arch-drawer open">');
       buf.push('<div class="drawer-title">The 4-Rung Economic Precedence Waterfall (Zero Double-Counted Savings)</div>');
-      buf.push('<div class="drawer-sub">When multiple Procurement and Finance agents flag the same purchase order or invoice line, Fortifai applies a strict 4-step precedence waterfall so total claimed value never exceeds the physical price delta:</div>');
+      buf.push('<div class="drawer-sub">When multiple Procurement and Finance agents flag the same transaction line, Fortifai applies a strict 4-step precedence waterfall so claimed savings never overlap:</div>');
       buf.push('<div class="interlock-grid">');
-      buf.push('<div class="il-card"><div class="il-route">RUNG 1 · MONETA + MANIFEST + KUBER</div><div class="il-title">Disbursement &amp; Invoice-to-PO Clawback</div><div class="il-desc">Claims duplicate invoices (<strong>Moneta</strong>), physical weighbridge short-supply breaks (<strong>Manifest</strong>), and invoice-above-PO price variance (<strong>Kuber</strong>: <em>Invoice Price &minus; PO Price</em>) first via immediate debit-memo set-off.</div></div>');
-      buf.push('<div class="il-card"><div class="il-route">RUNG 2 · CONDUIT + KUBER</div><div class="il-title">Contract &amp; OEM Disintermediation</div><div class="il-desc">On the remaining valid PO price, claims the pass-through trader markup down to the verified direct OEM rate (<strong>Conduit</strong>) or active master contract / sister-plant rate (<strong>Kuber</strong>: <em>PO Price &minus; Contract/OEM Rate</em>).</div></div>');
-      buf.push('<div class="il-card"><div class="il-route">RUNG 3 · KUBER</div><div class="il-title">Market Commodity Index Reset</div><div class="il-desc">On uncontracted direct spend, claims the spread between the terms-adjusted PO price and the plant-landed LME/ICIS/Platts commodity benchmark (<strong>Kuber</strong>: <em>Effective Price &minus; Landed Benchmark</em>).</div></div>');
-      buf.push('<div class="il-card"><div class="il-route">RUNG 4 · KUBER + MONETA</div><div class="il-title">Volume Consolidation &amp; DPO Yield</div><div class="il-desc">Applies tail consolidation and sole-source RFQ discounts (<strong>Kuber</strong>) strictly to the <em>residual un-benchmarked spend pool</em>, while <strong>Moneta</strong> tracks working-capital DPO cash release separately from P&amp;L EBITDA.</div></div>');
+      buf.push('<div class="il-card"><div class="il-title">1 · Disbursement &amp; Invoice Clawback</div><div class="il-desc">Claims duplicate invoices (<strong>Moneta</strong>), weighbridge short-supply breaks (<strong>Manifest</strong>), and invoice-above-PO overbilling (<strong>Kuber</strong>) first via debit-memo set-off.</div></div>');
+      buf.push('<div class="il-card"><div class="il-title">2 · Contract &amp; OEM Disintermediation</div><div class="il-desc">On the remaining valid order price, claims pass-through trader markup down to the direct manufacturer rate (<strong>Conduit</strong>) or active contract rate (<strong>Kuber</strong>).</div></div>');
+      buf.push('<div class="il-card"><div class="il-title">3 · Commodity Index Reset</div><div class="il-desc">On uncontracted direct spend, claims the spread between terms-adjusted order price and landed commodity benchmarks (<strong>Kuber</strong>).</div></div>');
+      buf.push('<div class="il-card"><div class="il-title">4 · Volume Consolidation &amp; DPO Yield</div><div class="il-desc">Applies tail consolidation and RFQ discounts (<strong>Kuber</strong>) strictly to residual un-benchmarked spend, while <strong>Moneta</strong> tracks working-capital DPO release separately.</div></div>');
       buf.push('</div></div>');
     }
 
-    // 5 Brochure Suite Pillar Cards
+    // 5 Suite Pillar Cards
     buf.push('<div class="count-grid">');
     var ccDefs = [
       { k: 'proc',  c: 'cc-proc',  p: 'CPO · COO',        l: 'Procurement & Supply Chain', s: 'Kuber · Conduit · Vantage · Manifest' },
-      { k: 'fin',   c: 'cc-fin',   p: 'CFO · Controller', l: 'Finance & Working Capital',  s: 'Crystal · Moneta · Tenor (+ Cross-Links)' },
-      { k: 'sales', c: 'cc-sales', p: 'CRO · Comm Fin',   l: 'Sales & Revenue Assurance',  s: 'Surge · Horizon · Margin' },
-      { k: 'audit', c: 'cc-audit', p: 'CAE · GC · CCO',   l: 'Audit, Risk & Compliance',   s: 'Aegis · Veritas · Argus · D7 · Pulse' },
-      { k: 'tower', c: 'cc-tower', p: 'CEO · Board',      l: 'Executive Control Tower',    s: 'SARA Control Tower · Apex · QuantumQuery' }
+      { k: 'fin',   c: 'cc-fin',   p: 'CFO · Controller', l: 'Finance & Working Capital',  s: 'Crystal · Moneta · Tenor' },
+      { k: 'sales', c: 'cc-sales', p: 'CRO · Comm Fin',   l: 'Sales & Revenue (O2C)',      s: 'Surge · Pricing · Discounting · Horizon · Margin' },
+      { k: 'audit', c: 'cc-audit', p: 'CAE · GC · CCO',   l: 'Audit, Risk & Compliance',   s: 'Custos · Aegis · Veritas · Argus · D7 · Pulse' },
+      { k: 'tower', c: 'cc-tower', p: 'CEO · Board',      l: 'Executive Control Tower',    s: 'SARA Control Tower · QuantumQuery' }
     ];
     ccDefs.forEach(function(d) {
       var sel = cf === d.k ? ' sel' : '';
@@ -1221,7 +1069,7 @@ body {
     // Filter Bar
     buf.push('<div class="filterbar">');
     var filters = [
-      { f: 'all',   l: 'All 16 Consolidated Agents' },
+      { f: 'all',   l: 'All 18 Agents' },
       { f: 'proc',  l: 'Procurement & Supply Chain' },
       { f: 'fin',   l: 'Finance & Working Capital' },
       { f: 'sales', l: 'Sales & Revenue (O2C)' },
@@ -1246,12 +1094,12 @@ body {
       buf.push('<div class="empty">No AI agents match this filter or search query.</div>');
     } else if (viewMode === 'matrix') {
       buf.push('<div class="matrix-wrap"><table class="matrix-tbl">');
-      buf.push('<thead><tr><th>Agent &amp; Focus</th><th>Suite &amp; Absorbed Modules</th><th>Permit Boundary Thesis (Consume, Do Not Reproduce)</th><th>Enterprise Data Domains</th><th>Last-Mile Execution Deliverables</th></tr></thead><tbody>');
+      buf.push('<thead><tr><th>Agent &amp; Focus</th><th>Suite &amp; Scope</th><th>What It Catches Beyond Standard Controls</th><th>Data Domains</th><th>Key Deliverables</th></tr></thead><tbody>');
       vis.forEach(function(p) {
         var badges = p.suite.map(function(s) { return SUITE_HTML[s] || ''; }).join(' ');
         buf.push('<tr>');
         buf.push('<td><div class="m-agent">' + esc(p.name) + '</div><div style="font-family:\'DM Mono\',monospace;font-size:10px;color:var(--mg);margin-top:2px">' + esc(p.prefix) + ' · ' + esc(p.persona) + '</div></td>');
-        buf.push('<td><div style="margin-bottom:4px">' + badges + '</div><span class="fl fl-absorbs">Includes: ' + esc(p.absorbs) + '</span></td>');
+        buf.push('<td><div style="margin-bottom:4px">' + badges + '</div><span class="fl fl-absorbs">' + esc(p.absorbs) + '</span></td>');
         buf.push('<td>' + esc(p.boundary) + '</td>');
         buf.push('<td style="font-family:\'DM Mono\',monospace;font-size:10.5px">' + esc(p.lineage) + '</td>');
         buf.push('<td>' + esc(p.artifact) + '</td>');
@@ -1263,26 +1111,22 @@ body {
       buf.push('<div class="product-grid">');
       vis.forEach(function(p) {
         var isOpen = !!expanded[p.id];
-        var badges = p.suite.map(function(s) { return SUITE_HTML[s] || ''; }).join(' ');
         buf.push('<div class="product-card' + (isOpen ? ' expanded' : '') + '" id="card-' + p.id + '">');
-        buf.push('<div>');
         buf.push('<div class="card-head"><div class="card-name">' + esc(p.name) + '</div><span class="card-id-prefix">' + esc(p.prefix) + '</span></div>');
-        buf.push('<div class="card-obj">' + esc(p.objective) + '</div>');
-        buf.push('</div>');
         buf.push('<div class="card-tag">' + esc(p.tagline) + '</div>');
         buf.push('<div class="card-div"></div>');
 
         if (isOpen) {
           var benHtml = p.benefits.map(function(b) { return '<li>' + esc(b) + '</li>'; }).join('');
           buf.push('<div class="card-extra open">');
-          buf.push('<div class="xs xs-ben"><div class="xs-lbl">Quantified Commercial &amp; Governance Outcomes</div><ul class="ben-list">' + benHtml + '</ul></div>');
-          buf.push('<div class="xs xs-us"><div class="xs-lbl">Regulatory, Accounting &amp; Audit Alignment</div><div class="xs-body">' + esc(p.us) + '</div></div>');
-          buf.push('<div class="xs xs-feat"><div class="xs-lbl">Inherited Fortifai Platform Guardrails</div><ul class="feat-list">' + featHtml + '</ul></div>');
+          buf.push('<div class="xs xs-ben"><div class="xs-lbl">Key Outcomes</div><ul class="ben-list">' + benHtml + '</ul></div>');
+          buf.push('<div class="xs xs-us"><div class="xs-lbl">Regulatory &amp; Audit Alignment</div><div class="xs-body">' + esc(p.us) + '</div></div>');
+          buf.push('<div class="xs xs-feat"><div class="xs-lbl">Built-In Platform Guardrails</div><ul class="feat-list">' + featHtml + '</ul></div>');
           buf.push('</div>');
         }
 
         buf.push('<div class="card-foot">');
-        buf.push('<button class="xbtn" data-toggle="' + p.id + '">' + (isOpen ? '▲ Hide full specification' : '▼ Outcomes, regulatory basis &amp; guardrails') + '</button>');
+        buf.push('<button class="xbtn" data-toggle="' + p.id + '">' + (isOpen ? '▲ Hide details' : '▼ Outcomes &amp; guardrails') + '</button>');
         buf.push('</div>');
         buf.push('</div>');
       });
